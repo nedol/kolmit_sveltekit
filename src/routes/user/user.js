@@ -19359,7 +19359,8 @@ var app = (function () {
             this.dataProgress = document.getElementById('dataProgress')?document.getElementById('dataProgress'):'';
                     
             (async ()=>{
-                this.host = (await (await fetch('https://nedol.ru/assets/host.json')).json());
+                // this.host = (await (await fetch('https://nedol.ru/assets/host.json')).json());
+                this.host = (await (await fetch('../assets/host.json')).json());
                     
                 if(!this.signch) {
                     this.signch = new SignalingChannel(this.host.host_ws);

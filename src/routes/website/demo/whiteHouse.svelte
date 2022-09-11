@@ -6,7 +6,7 @@
           <div style="position:absolute;text-align: center;">
               <img src="https://nedol.ru/assets/user/biden.png" title='' alt=''  style="height:180px"/>
               <iframe class="kolmit" 
-              src="https://nedol.ru/assets/user/iframe.svelte?em=biden@wh.com&abonent=white@house.usa" 
+              src="../src/routes/user/iframe.svelte?em=biden@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  
               on:load={OnLoad}>
               </iframe>
@@ -20,7 +20,7 @@
           <div style="position:absolute;text-align: center;">
               <img src="https://nedol.ru/assets/user/trump.png" title='' alt=''  style="height:180px"/>
               <iframe class="kolmit" 
-              src="https://nedol.ru/assets/user/iframe.svelte?em=trump@wh.com&abonent=white@house.usa" 
+              src="../src/routes/user/iframe.svelte?em=trump@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  on:load={OnLoad}>
               </iframe>
               <div>
@@ -33,7 +33,7 @@
           <div style="position:absolute;text-align: center;">
               <img src="https://nedol.ru/assets/user/obama.png" title='' alt=''  style="height:180px" />
               <iframe class="kolmit" 
-              src="https://nedol.ru/assets/user/iframe.svelte?em=obama@wh.com&abonent=white@house.usa" 
+              src="../src/routes/user/iframe.svelte?em=obama@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  
               on:load={OnLoad}>
               </iframe>
