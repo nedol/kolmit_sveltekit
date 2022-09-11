@@ -4,7 +4,7 @@
   <div style="display:flex;justify-content: space-between;height:220px; margin:20px;">
       <div style="flex:0 0 4%">
           <div style="position:absolute;text-align: center;">
-              <img src="../src/routes/assets/biden.png" title='' alt=''  style="height:180px"/>
+              <img src="https://nedol.ru/assets/biden.png" title='' alt=''  style="height:180px"/>
               <iframe class="kolmit" 
               src="../src/routes/user/iframe.svelte?em=biden@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  
@@ -18,7 +18,7 @@
 
       <div style="flex:0 0 0%">
           <div style="position:absolute;text-align: center;">
-              <img src="../src/routes/assets/trump.png" title='' alt=''  style="height:180px"/>
+              <img src="https://nedol.ru/assets/trump.png" title='' alt=''  style="height:180px"/>
               <iframe class="kolmit" 
               src="../src/routes/user/iframe.svelte?em=trump@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  on:load={OnLoad}>
@@ -31,7 +31,7 @@
 
       <div style="flex:0 0 20%">
           <div style="position:absolute;text-align: center;">
-              <img src="../src/routes/assets/obama.png" title='' alt=''  style="height:180px" />
+              <img src="https://nedol.ru/assets/obama.png" title='' alt=''  style="height:180px" />
               <iframe class="kolmit" 
               src="../src/routes/user/iframe.svelte?em=obama@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  
