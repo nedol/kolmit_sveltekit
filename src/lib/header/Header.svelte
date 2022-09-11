@@ -30,7 +30,7 @@
 		</svg>
 		<ul>
 			<li class:active={$page.url.pathname === '/'}><a sveltekit:prefetch href="/">{home}</a></li>
-			<li>
+			<li class:active={$page.url.pathname === '/website/demo'}>
 				<a sveltekit:prefetch href="/website/demo">{demo}</a>
 			</li>
 			<li class:active={$page.url.pathname === '/website/about'}>
