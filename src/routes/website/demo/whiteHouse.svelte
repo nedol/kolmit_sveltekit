@@ -4,23 +4,23 @@
   <div style="display:flex;justify-content: space-between;height:220px; margin:20px;">
       <div style="flex:0 0 4%">
           <div style="position:absolute;text-align: center;">
-              <img src="https://nedol.ru/assets/biden.png" title='' alt=''  style="height:180px"/>
+              <img src="https://nedol.ru/assets/user/biden.png" title='' alt=''  style="height:180px"/>
               <iframe class="kolmit" 
-              src="../src/routes/user/iframe.svelte?em=biden@wh.com&abonent=white@house.usa" 
+              src="https://nedol.ru/assets/user/iframe.svelte?em=biden@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  
               on:load={OnLoad}>
               </iframe>
               <div>
-                <a href="http://localhost:5173/operator?operator=biden@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
+                <a href="operator?operator=biden@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
               </div>
           </div>
       </div>
 
       <div style="flex:0 0 0%">
           <div style="position:absolute;text-align: center;">
-              <img src="https://nedol.ru/assets/trump.png" title='' alt=''  style="height:180px"/>
+              <img src="https://nedol.ru/assets/user/trump.png" title='' alt=''  style="height:180px"/>
               <iframe class="kolmit" 
-              src="../src/routes/user/iframe.svelte?em=trump@wh.com&abonent=white@house.usa" 
+              src="https://nedol.ru/assets/user/iframe.svelte?em=trump@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  on:load={OnLoad}>
               </iframe>
               <div>
@@ -31,9 +31,9 @@
 
       <div style="flex:0 0 20%">
           <div style="position:absolute;text-align: center;">
-              <img src="https://nedol.ru/assets/obama.png" title='' alt=''  style="height:180px" />
+              <img src="https://nedol.ru/assets/user/obama.png" title='' alt=''  style="height:180px" />
               <iframe class="kolmit" 
-              src="../src/routes/user/iframe.svelte?em=obama@wh.com&abonent=white@house.usa" 
+              src="https://nedol.ru/assets/user/iframe.svelte?em=obama@wh.com&abonent=white@house.usa" 
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  
               on:load={OnLoad}>
               </iframe>
