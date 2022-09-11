@@ -9,7 +9,7 @@ import { page } from "$app/stores"
 /** @type {import('./$types').PageLoad} */
 export const load = async ({params})=>{
     // console.log(String(params))
-    const res =  fetch("http://nedol.ru/assets/dict/dict.json");
+    const res =  fetch("https://nedol.ru/assets/dict/dict.json");
 
     console.log(page)
 

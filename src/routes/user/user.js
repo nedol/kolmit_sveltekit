@@ -20093,7 +20093,7 @@ var app = (function () {
     let dicts = writable();
 
     (async ()=>{   
-        let dict = (await (await fetch('http://nedol.ru/assets/dict/dict.json')).json());
+        let dict = (await (await fetch('https://nedol.ru/assets/dict/dict.json')).json());
         dicts.set( new Dict(dict));
     })();
 
