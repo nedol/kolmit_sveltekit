@@ -1,4 +1,4 @@
-export const prerender = false;
+
 import { error } from '@sveltejs/kit';
 import { pool } from '$lib/db/mysql';
 import md5 from 'md5'

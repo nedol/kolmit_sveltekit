@@ -7,9 +7,10 @@ export const handle = async ({ event, resolve }) => {
 
 	let response = await resolve(event, {
 
-		ssr: false,//ssr: event.url.pathname =='/' ? false:true  //ssr: false,///put from ssr into spa mode 
+		ssr: event.url.pathname =='/operator' ? false:true  //ssr: false,///put from ssr into spa mode ssr: false,
 	});
 
+	console.log(event.url.pathname)
 
 	if (!cookies['userid']) {
 		// if this is the first time the user has visited this app,
