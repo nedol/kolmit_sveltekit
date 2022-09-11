@@ -11,7 +11,7 @@
               on:load={OnLoad}>
               </iframe>
               <div>
-                <a href="operator?operator=biden@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
+                <a href="../operator?operator=biden@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
               </div>
           </div>
       </div>
@@ -24,7 +24,7 @@
               scrolling="no" frameBorder="0" style="position: absolute;height:30px; width:100%;top:0;left:0;" title=''  on:load={OnLoad}>
               </iframe>
               <div>
-                <a href="http://localhost:5173/operator?operator=trump@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
+                <a href="../operator?operator=trump@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
               </div>
           </div>
       </div>
@@ -38,7 +38,7 @@
               on:load={OnLoad}>
               </iframe>
               <div>
-                <a href="http://localhost:5173/operator?operator=obama@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
+                <a href="../operator?operator=obama@wh.com&abonent=white@house.usa&psw=demo&lan={lang}" target="_blank">Click to open operator</a>
               </div>
           </div>
       </div>

@@ -4,8 +4,7 @@ var app = (function () {
 
     function noop() { }
     const identity = x => x;
-    function assign(tar, src) {
-        // @ts-ignore
+    function assign(tar, src) {        // @ts-ignore
         for (const k in src)
             tar[k] = src[k];
         return tar;
@@ -19187,7 +19186,7 @@ var app = (function () {
 
             let that = this;
 
-            this.conf = (await (await fetch('../assets/ice_conf.json')).json());
+            this.conf = (await (await fetch('https://nedol.ru/assets/ice_conf.json')).json());
         //    try{
         //         this.conf = (await (await fetch(this.host.host_server+'users/'+this.em+'ice_conf.json')).json());
         //     }catch(ex){
@@ -19360,7 +19359,7 @@ var app = (function () {
             this.dataProgress = document.getElementById('dataProgress')?document.getElementById('dataProgress'):'';
                     
             (async ()=>{
-                this.host = (await (await fetch('../assets/host.json')).json());
+                this.host = (await (await fetch('https://nedol.ru/assets/host.json')).json());
                     
                 if(!this.signch) {
                     this.signch = new SignalingChannel(this.host.host_ws);
@@ -25154,7 +25153,7 @@ var app = (function () {
     			audio = element("audio");
     			audio.innerHTML = `<track kind="captions"/>`;
     			attr(audio, "id", "localSound");
-    			if (!src_url_equal(audio.src, audio_src_value = "../assets/mp3/call.mp3")) attr(audio, "src", audio_src_value);
+    			if (!src_url_equal(audio.src, audio_src_value = "https://nedol.ru/assets/mp3/call.mp3")) attr(audio, "src", audio_src_value);
     			audio.autoplay = true;
     		},
     		m(target, anchor) {
