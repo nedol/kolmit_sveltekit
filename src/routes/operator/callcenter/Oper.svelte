@@ -26,7 +26,7 @@
       {#if user.email && operator.email !== user.email}
         <iframe
           class="user_frame"
-          src= './src/routes/user/iframe.svelte?em={user.email}&abonent={operator.abonent}' 
+          src= './src/lib/user/iframe.svelte?em={user.email}&abonent={operator.abonent}' 
           scrolling="no"
           frameBorder="0"
           style="position: absolute;width:100%;top:0;left:0"

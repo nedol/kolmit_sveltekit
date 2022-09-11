@@ -202,8 +202,8 @@ onMount(async () => {
 
         url = new URL(window.location.href);
 
-        host  = (await (await fetch('https://nedol.ru/assets/host.json')).json());
-        // host  = (await (await fetch('../assets/host.json')).json());
+        // host  = (await (await fetch('https://nedol.ru/assets/host.json')).json());
+        host  = (await (await fetch('../src/routes/assets/host.json')).json());
 
         let sch = new SignalingChannel(host);    
 
