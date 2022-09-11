@@ -16,10 +16,10 @@
 
 	// console.log($page.url)
 
-	// operator.abonent = $page.url.searchParams.get('abonent')
-	// operator.email =  $page.url.searchParams.get('operator')
-	// operator.psw =  md5($page.url.searchParams.get('psw'))
-	// operator.lang = $page.url.searchParams.get('lan')
+	operator.abonent = $page.url.searchParams.get('abonent')
+	operator.email =  $page.url.searchParams.get('operator')
+	operator.psw =  md5($page.url.searchParams.get('psw'))
+	operator.lang = $page.url.searchParams.get('lan')
 
 	onMount(async () => { 
 		if(document.cookie){
