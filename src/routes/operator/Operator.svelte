@@ -121,7 +121,7 @@ import "../assets/icofont/icofont.min.css";
 import Callcenter from './callcenter/Callcenter.svelte';
 let callcenter;
 import Landpage from './callcenter/Landpage.svelte';
-import {RTCOperator} from './js/RTCOperator.js';
+import {RTCOperator} from '../../lib/rtc/RTCOperator.js';
 import * as cookie from 'cookie';
 
 import CallButton from './callbutton/CallButtonOperator.svelte'
@@ -170,7 +170,7 @@ import {langs} from '$lib/js/stores.js'
 operator.lang = $langs;
 let lang = $langs;
 
-import {SignalingChannel}  from './js/signalingChannel.js'
+import {SignalingChannel}  from '../../lib/rtc/signalingChannel.js'
 
 import {msg_1} from '$lib/js/stores.js'
 const us_msg_1 = msg_1.subscribe((data) => {
@@ -182,7 +182,7 @@ const us_msg_1 = msg_1.subscribe((data) => {
 });
 
 
-import {dc_msg} from './js/DataChannelOperator.js'
+import {dc_msg} from '../../lib/rtc/DataChannelOperator.js'
 const us_dcmsg = dc_msg.subscribe((data) => {
         if(data)
                 OnMessage(data);
