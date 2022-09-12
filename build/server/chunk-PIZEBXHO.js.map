@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../.svelte-kit/adapter-node/chunks/index2.js"],
+  "sourcesContent": ["class HttpError {\n  name = \"HttpError\";\n  stack = void 0;\n  constructor(status, message) {\n    this.status = status;\n    this.message = message ?? `Error: ${status}`;\n  }\n  toString() {\n    return this.message;\n  }\n}\nclass Redirect {\n  constructor(status, location) {\n    this.status = status;\n    this.location = location;\n  }\n}\nfunction error(status, message) {\n  return new HttpError(status, message);\n}\nfunction json(data, init) {\n  const headers = new Headers(init == null ? void 0 : init.headers);\n  if (!headers.has(\"content-type\")) {\n    headers.set(\"content-type\", \"application/json\");\n  }\n  return new Response(JSON.stringify(data), {\n    ...init,\n    headers\n  });\n}\nexport {\n  HttpError as H,\n  Redirect as R,\n  error as e,\n  json as j\n};\n"],
+  "mappings": ";AAAA,IAAM,YAAN,MAAgB;AAAA,EACd,OAAO;AAAA,EACP,QAAQ;AAAA,EACR,YAAY,QAAQ,SAAS;AAC3B,SAAK,SAAS;AACd,SAAK,UAAU,WAAW,UAAU;AAAA,EACtC;AAAA,EACA,WAAW;AACT,WAAO,KAAK;AAAA,EACd;AACF;AACA,IAAM,WAAN,MAAe;AAAA,EACb,YAAY,QAAQ,UAAU;AAC5B,SAAK,SAAS;AACd,SAAK,WAAW;AAAA,EAClB;AACF;AACA,SAAS,MAAM,QAAQ,SAAS;AAC9B,SAAO,IAAI,UAAU,QAAQ,OAAO;AACtC;AACA,SAAS,KAAK,MAAM,MAAM;AACxB,QAAM,UAAU,IAAI,QAAQ,QAAQ,OAAO,SAAS,KAAK,OAAO;AAChE,MAAI,CAAC,QAAQ,IAAI,cAAc,GAAG;AAChC,YAAQ,IAAI,gBAAgB,kBAAkB;AAAA,EAChD;AACA,SAAO,IAAI,SAAS,KAAK,UAAU,IAAI,GAAG;AAAA,IACxC,GAAG;AAAA,IACH;AAAA,EACF,CAAC;AACH;",
+  "names": []
+}
