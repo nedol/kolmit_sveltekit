@@ -2373,7 +2373,7 @@ var Server = class {
     const pub = Object.fromEntries(entries.filter(([k]) => k.startsWith("PUBLIC_")));
     this.options.public_env = pub;
     if (!this.options.hooks) {
-      const module = await import("./hooks-ZZEUR7ND.js");
+      const module = await import("./hooks-LTGX36CV.js");
       this.options.hooks = {
         handle: module.handle || (({ event, resolve: resolve2 }) => resolve2(event)),
         handleError: module.handleError || (({ error: error2 }) => console.error(error2.stack)),

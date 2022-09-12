@@ -1685,7 +1685,7 @@ async function respond(request, options, state) {
   const event = {
     getClientAddress: state.getClientAddress || (() => {
       throw new Error(
-        `${"@sveltejs/adapter-auto"} does not specify getClientAddress. Please raise an issue`
+        `${"@sveltejs/adapter-node"} does not specify getClientAddress. Please raise an issue`
       );
     }),
     locals: {},

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../.svelte-kit/adapter-node/chunks/hooks.js"],
-  "sourcesContent": ["import * as cookie from \"cookie\";\nconst handle = async ({ event, resolve }) => {\n  const cookies = cookie.parse(event.request.headers.get(\"cookie\") || \"\");\n  event.locals.userid = cookies[\"userid\"] || crypto.randomUUID();\n  let response = await resolve(event, {});\n  console.log(event.url.pathname);\n  if (!cookies[\"userid\"]) {\n    response.headers.set(\n      \"set-cookie\",\n      cookie.serialize(\"userid\", event.locals.userid, {\n        path: \"/\",\n        httpOnly: true\n      })\n    );\n  }\n  return response;\n};\nasync function externalFetch(request) {\n  if (request.url.startsWith(\"https://api.yourapp.com/\")) {\n    request = new Request(\n      request.url.replace(\"https://api.yourapp.com/\", \"http://localhost:9999/\"),\n      request\n    );\n  }\n  return fetch(request);\n}\nexport {\n  externalFetch,\n  handle\n};\n"],
-  "mappings": ";;;;;;;;AAAA,aAAwB;AACxB,IAAM,SAAS,OAAO,EAAE,OAAO,QAAQ,MAAM;AAC3C,QAAM,UAAiB,aAAM,MAAM,QAAQ,QAAQ,IAAI,QAAQ,KAAK,EAAE;AACtE,QAAM,OAAO,SAAS,QAAQ,aAAa,OAAO,WAAW;AAC7D,MAAI,WAAW,MAAM,QAAQ,OAAO,CAAC,CAAC;AACtC,UAAQ,IAAI,MAAM,IAAI,QAAQ;AAC9B,MAAI,CAAC,QAAQ,WAAW;AACtB,aAAS,QAAQ;AAAA,MACf;AAAA,MACO,iBAAU,UAAU,MAAM,OAAO,QAAQ;AAAA,QAC9C,MAAM;AAAA,QACN,UAAU;AAAA,MACZ,CAAC;AAAA,IACH;AAAA,EACF;AACA,SAAO;AACT;AACA,eAAe,cAAc,SAAS;AACpC,MAAI,QAAQ,IAAI,WAAW,0BAA0B,GAAG;AACtD,cAAU,IAAI;AAAA,MACZ,QAAQ,IAAI,QAAQ,4BAA4B,wBAAwB;AAAA,MACxE;AAAA,IACF;AAAA,EACF;AACA,SAAO,MAAM,OAAO;AACtB;",
-  "names": []
-}

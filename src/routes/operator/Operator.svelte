@@ -203,7 +203,7 @@ onMount(async () => {
         url = new URL(window.location.href);
 
         // host  = (await (await fetch('https://nedol.ru/assets/host.json')).json());
-        host  = (await (await fetch('../src/routes/assets/host.json')).json());
+        host  = (await (await fetch('https://nedol.ru/kolmit/host.json')).json());
 
         let sch = new SignalingChannel(host);    
 

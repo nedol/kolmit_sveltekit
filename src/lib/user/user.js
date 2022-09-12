@@ -19360,7 +19360,7 @@ var app = (function () {
                     
             (async ()=>{
                 // this.host = (await (await fetch('https://nedol.ru/assets/host.json')).json());
-                this.host = (await (await fetch('../user/host.json')).json());
+                this.host = (await (await fetch('https://nedol.ru/kolmit/host.json')).json());
                     
                 if(!this.signch) {
                     this.signch = new SignalingChannel(this.host.host_ws);
