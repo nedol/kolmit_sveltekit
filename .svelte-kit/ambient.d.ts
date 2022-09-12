@@ -219,6 +219,7 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies__types_blueimp_load_image: string;
 	export const npm_package_devDependencies__types_bootstrap: string;
 	export const npm_package_devDependencies__types_cookie: string;
+	export const npm_package_engines_node: string;
 	export const npm_package_gitHead: string;
 	export const npm_package_name: string;
 	export const npm_package_readmeFilename: string;
@@ -228,6 +229,7 @@ declare module '$env/static/private' {
 	export const npm_package_scripts_lint: string;
 	export const npm_package_scripts_package: string;
 	export const npm_package_scripts_preview: string;
+	export const npm_package_scripts_start: string;
 	export const npm_package_scripts_test: string;
 	export const npm_package_type: string;
 	export const npm_package_version: string;
@@ -491,6 +493,7 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies__types_blueimp_load_image: string;
 		npm_package_devDependencies__types_bootstrap: string;
 		npm_package_devDependencies__types_cookie: string;
+		npm_package_engines_node: string;
 		npm_package_gitHead: string;
 		npm_package_name: string;
 		npm_package_readmeFilename: string;
@@ -500,6 +503,7 @@ declare module '$env/dynamic/private' {
 		npm_package_scripts_lint: string;
 		npm_package_scripts_package: string;
 		npm_package_scripts_preview: string;
+		npm_package_scripts_start: string;
 		npm_package_scripts_test: string;
 		npm_package_type: string;
 		npm_package_version: string;

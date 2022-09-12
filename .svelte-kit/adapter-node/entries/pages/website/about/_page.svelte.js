@@ -1,7 +1,7 @@
 import { c as create_ssr_component, e as escape } from "../../../../chunks/index.js";
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
-  code: ".content.svelte-1sfqw64{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
+  code: ".content.svelte-cf77e8{width:100%;max-width:var(--column-width);margin:var(--column-margin-top) auto 0 auto}",
   map: null
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -11,7 +11,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css);
   return `${$$result.head += `${$$result.title = `<title>About</title>`, ""}<meta name="${"description"}" content="${"About this app"}" data-svelte="svelte-1ds1qyu">`, ""}
 
-<div class="${"content svelte-1sfqw64"}"><h1>${escape(data.message)}</h1>
+<div class="${"content svelte-cf77e8"}"><h1>${escape(data.message)}</h1>
 
 	<p>This is a <a href="${"https://kit.svelte.dev"}">SvelteKit</a> app. You can make your own by typing the
 		following into your command line and following the prompts:

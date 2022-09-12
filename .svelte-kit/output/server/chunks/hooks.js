@@ -2,9 +2,7 @@ import * as cookie from "cookie";
 const handle = async ({ event, resolve }) => {
   const cookies = cookie.parse(event.request.headers.get("cookie") || "");
   event.locals.userid = cookies["userid"] || crypto.randomUUID();
-  let response = await resolve(event, {
-    ssr: false
-  });
+  let response = await resolve(event, {});
   console.log(event.url.pathname);
   if (!cookies["userid"]) {
     response.headers.set(

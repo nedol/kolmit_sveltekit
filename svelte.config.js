@@ -1,6 +1,6 @@
-// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-auto';
 // import adapter from '@sveltejs/adapter-static'
-import adapter from '@sveltejs/adapter-node'
+// import adapter from '@sveltejs/adapter-node'
 import preprocess from "svelte-preprocess";
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -14,11 +14,11 @@ const config = {
 		// }
 		),
 	},
-	preprocess: [
-		preprocess({
-		  postcss: true,
-		}),
-	  ],
+	// preprocess: [
+	// 	preprocess({
+	// 	  postcss: true,
+	// 	}),
+	//   ],
 
 	// kit: {
 	// 	// target: '#svelte',
@@ -27,10 +27,10 @@ const config = {
 	// 		assets: 'build',  // path to public directory
 	// 		fallback: null,
 	// 	}),
-		prerender: {
-		    // This can be false if you're using a fallback (i.e. SPA mode)
-		    default: false
-		}
+		// prerender: {
+		//     // This can be false if you're using a fallback (i.e. SPA mode)
+		//     default: false
+		// }
     // }
 
 }

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../.svelte-kit/adapter-node/nodes/2.js"],
+  "sourcesContent": ["\n\nexport const index = 2;\nexport const component = async () => (await import('../entries/pages/website/_layout.svelte.js')).default;\nexport const file = '_app/immutable/components/pages/website/_layout.svelte-8a6eb247.js';\nexport const imports = [\"_app/immutable/components/pages/website/_layout.svelte-8a6eb247.js\",\"_app/immutable/chunks/index-49fb8ea3.js\",\"_app/immutable/chunks/app-9cb3380c.js\",\"_app/immutable/chunks/stores-c9271dbf.js\",\"_app/immutable/chunks/singletons-7ec10d91.js\",\"_app/immutable/chunks/index-1b6a2f9b.js\"];\nexport const stylesheets = [\"_app/immutable/assets/_layout-fc1f9720.css\",\"_app/immutable/assets/app-fa19de04.css\"];\n"],
+  "mappings": ";;;AAEO,IAAM,QAAQ;AACd,IAAM,YAAY,aAAa,MAAM,OAAO,iCAA+C;AAC3F,IAAM,OAAO;AACb,IAAM,UAAU,CAAC,sEAAqE,2CAA0C,yCAAwC,4CAA2C,gDAA+C,yCAAyC;AAC3S,IAAM,cAAc,CAAC,8CAA6C,wCAAwC;",
+  "names": []
+}
