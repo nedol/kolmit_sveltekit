@@ -7,7 +7,7 @@ export const handle = async ({ event, resolve }) => {
 
 	let response = await resolve(event, {
 
-		//ssr: false,//ssr: event.url.pathname =='/operator' ? false:true  //ssr: false,///put from ssr into spa mode 
+		ssr: false,//ssr: event.url.pathname =='/operator' ? false:true  //ssr: false,///put from ssr into spa mode 
 	});
 
 	console.log(event.url.pathname)

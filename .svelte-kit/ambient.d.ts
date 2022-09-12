@@ -48,7 +48,6 @@ declare module '$env/static/private' {
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
 	export const NODE: string;
-	export const NODE_ENV: string;
 	export const NODE_EXE: string;
 	export const NODE_OPTIONS: string;
 	export const NPM_CLI_JS: string;
@@ -178,6 +177,7 @@ declare module '$env/static/private' {
 	export const npm_config_version: string;
 	export const npm_config_versions: string;
 	export const npm_config_viewer: string;
+	export const npm_config_w: string;
 	export const npm_execpath: string;
 	export const npm_lifecycle_event: string;
 	export const npm_lifecycle_script: string;
@@ -219,7 +219,6 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies__types_blueimp_load_image: string;
 	export const npm_package_devDependencies__types_bootstrap: string;
 	export const npm_package_devDependencies__types_cookie: string;
-	export const npm_package_engines_node: string;
 	export const npm_package_gitHead: string;
 	export const npm_package_name: string;
 	export const npm_package_readmeFilename: string;
@@ -322,7 +321,6 @@ declare module '$env/dynamic/private' {
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
 		NODE: string;
-		NODE_ENV: string;
 		NODE_EXE: string;
 		NODE_OPTIONS: string;
 		NPM_CLI_JS: string;
@@ -452,6 +450,7 @@ declare module '$env/dynamic/private' {
 		npm_config_version: string;
 		npm_config_versions: string;
 		npm_config_viewer: string;
+		npm_config_w: string;
 		npm_execpath: string;
 		npm_lifecycle_event: string;
 		npm_lifecycle_script: string;
@@ -493,7 +492,6 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies__types_blueimp_load_image: string;
 		npm_package_devDependencies__types_bootstrap: string;
 		npm_package_devDependencies__types_cookie: string;
-		npm_package_engines_node: string;
 		npm_package_gitHead: string;
 		npm_package_name: string;
 		npm_package_readmeFilename: string;
