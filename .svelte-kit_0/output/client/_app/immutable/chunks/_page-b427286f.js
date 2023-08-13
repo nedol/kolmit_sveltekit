@@ -1,1 +1,0 @@
-import{e}from"./index-56c348ce.js";function t({params:o}){if(o.slug==="hello-world")return{title:"Hello world!",content:"Welcome to our blog. Lorem ipsum dolor sit amet..."};throw e(404,"Not found")}const l=Object.freeze(Object.defineProperty({__proto__:null,load:t},Symbol.toStringTag,{value:"Module"}));export{l as _,t as l};
