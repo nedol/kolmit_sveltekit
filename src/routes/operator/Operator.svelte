@@ -95,7 +95,7 @@
                         {/if}   
                 {/if}
                 
-                {#if operator.email!==operator.abonent } 
+                {#if dict && operator.email!==operator.abonent } 
                         <h5 on:click="{()=>{window.location = '/'}}">{dict['Create my own net'][lang]}</h5> 
                 {/if}   
 
@@ -114,6 +114,7 @@
 <script>
 
 import { onDestroy } from 'svelte';
+import { page } from "$app/stores"
 import { onMount, getContext, setContext } from 'svelte';
 import "../assets/icofont/icofont.min.css";
 
@@ -137,9 +138,8 @@ import RecordedVideo from './RecordedVideo.svelte';
 
 let window = globalThis;
 
-export let data_dict;// +page.js ->
-let dict = data_dict;
-setContext('dict', dict);
+import {dicts} from '$lib/js/stores.js'
+let dict = $dicts;
 
 // console.log(globalThis.location)
 

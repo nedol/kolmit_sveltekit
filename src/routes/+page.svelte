@@ -1,98 +1,59 @@
-
-<Modal>
-	<Content bind:showDialog={showDialog} bind/>     
-</Modal>
-
-<Header />
-
-{#if operator.email}
-
-<div></div>
-
-
-{:else}
-
-	<div>
-		<Login>
-			<!-- <slot></slot> -->
-		</Login>
-	</div>
-{/if}
-
-
-
 <script>
+	import Counter from './Counter.svelte';
+	import welcome from '$lib/images/svelte-welcome.webp';
+	import welcome_fallback from '$lib/images/svelte-welcome.png';
+</script>
 
+<svelte:head>
+	<title>Home</title>
+	<meta name="description" content="Svelte demo app" />
+</svelte:head>
 
-	import { page } from "$app/stores"
-	import Header from '$lib/header/Header.svelte';
-	import '../app.css';
+<section>
+	<h1>
+		<span class="welcome">
+			<picture>
+				<source srcset={welcome} type="image/webp" />
+				<img src={welcome_fallback} alt="Welcome" />
+			</picture>
+		</span>
 
-	import Login from './website/login.svelte'
-	import { onMount, onDestroy,getContext, setContext } from 'svelte';
+		to your new<br />SvelteKit app
+	</h1>
 
-	import Content from './site/modal/Content.svelte';
-	import Modal from 'svelte-simple-modal';
+	<h2>
+		try editing <strong>src/routes/+page.svelte</strong>
+	</h2>
 
-	/** @type {import('./$types').PageData} */
-	export let data;
-	let dict = JSON.parse(data.dict);
+	<Counter />
+</section>
 
-	let showDialog;
-
-	let operator = {},  abonent = "";
-
-	let url = ''
-
-	import {langs} from '$lib/js/stores.js'
-	let lang = $langs;
-
-
-	async function OnSubmit(event) {
-
-		const inputs = document.getElementById('inputs').getElementsByTagName('input');
-		let vals = {};
-		for(let el in inputs){
-			if(inputs[el].attributes)
-				vals[inputs[el].attributes[0].nodeValue] = inputs[el].value;
-		}
-		
-		// localStorage.setItem('kolmit', JSON.stringify({psw:md5(vals['password']),email:vals['email']}))
-		
-		let par = {};
-		par.proj = 'kolmit';
-		par.func = 'operator';
-		par.send_mail = vals['email']
-		par.psw = vals['password'];
-		par.lang = lang;
-		// SendEmail(par);
-		// const res = await fetch("/api/post");
-		// console.log(res)
-		const res = fetch("./login",{
-            method:'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify(
-                {
-					par:par
-            	})
-        });   
-         const data = await (await res).json();
-		
-        // console.log(data);
-
-		if(data.err && data.err.errno===1062){
-				console.log(data.err.message);
-				return;
-		}else{
-			operator.email = data.rows[0].operator;	
-			// window.user = JSON.stringify({operator:operator.email})		
-			window.location.assign( data.location);//+"/hello-world"
-
-			return;
-		}
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		flex: 0.6;
 	}
 
-</script>
+	h1 {
+		width: 100%;
+	}
+
+	.welcome {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 0;
+		padding: 0 0 calc(100% * 495 / 2048) 0;
+	}
+
+	.welcome img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		display: block;
+	}
+</style>

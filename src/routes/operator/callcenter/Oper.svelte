@@ -1,5 +1,235 @@
-<div bind:this={oper_admin_div} style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding:4px">
+<script>
+  import { onMount, onDestroy, getContext } from 'svelte';
+
+  import loadImage from 'blueimp-load-image/js/load-image.js';
+  import 'blueimp-load-image/js/load-image-scale.js';
+
+  import Forward from './Forward.svelte';
+  import FileTransfer from './FileTransfer.svelte';
+  import _ from 'lodash';
+
+  import { langs } from '$lib/js/stores.js';
+  let lang = $langs;
+
+  export let operator;
+  export let id;
+  export let dep;
+  export let user;
+
+  let files,
+    user_status,
+    placeholder_name,
+    placeholder_email,
+    placeholder_desc,
+    upload;
+
+  import { dicts } from '$lib/js/stores.js';
+  let dict = $dicts;
+
+  if (dict) {
+    placeholder_name = dict['input operator name'][lang];
+    placeholder_email = dict['input operator email'][lang];
+    placeholder_desc = dict['input description'][lang];
+  }
+
+  import { statust } from '$lib/js/stores.js';
+  let status = ''; //$statust;
+  const status_us = statust.subscribe((data) => {
+    status = data;
+  });
+
+  import { signal } from '$lib/js/stores.js';
+  let signalch = $signal;
+
+  import { pswd } from '$lib/js/stores.js';
+  let psw = $pswd;
+
+  export let edited_display;
+  let readonlyOper = true;
+  let readonlyAdm = true;
+
+  import { editable } from '$lib/js/stores.js';
+  const us_edit = editable.subscribe((data) => {
+    edited_display = data;
+    readonlyOper = !edited_display;
+    readonlyAdm = !edited_display;
+  });
+
+  onDestroy(us_edit);
+
+  // $: if (readonly) {
+  //   readonlyOper = readonly;
+
+  //   if (dep.id === "0" && user.role === "admin") {
+  //     readonlyAdm = true;
+  //   } else {
+  //     readonlyAdm = readonly;
+  //   }
+  // } else {
+  //   if (dep.id !== "0") {
+  //     readonlyAdm = readonly;
+  //   }
+  // }
+
+  user.email = user.email ? user.email : '';
+
+  const titleize = (s) =>
+    s ? s.replace(/^([a-z])/, (_, r) => r.toUpperCase()) : '';
+
+  user.name = titleize(user.name);
+
+  import { posterst } from '$lib/js/stores.js';
+  let oper_admin_div;
+
+  onMount(() => {
+    if (user.email && operator.email === user.email) {
+      posterst.set(oper_admin_div);
+    }
+  });
+
+  //status changed postMessage from iframe
+  function OnMessage(params) {
+    if (params.data.status) user_status = params.data.status;
+  }
+
+  function OnClickUpload(ev) {
+    let event = new MouseEvent('click', {
+      bubbles: false,
+      cancelable: true,
+      view: window,
+    });
+
+    if (upload) upload.dispatchEvent(event);
+  }
+
+  let width, height;
+  function OnChangeFile(e) {
+    try {
+      loadImage(
+        e.target.files[0],
+        function (img, data) {
+          if (img.type === 'error') {
+            console.error('Error loading image ');
+          } else {
+            width = img.width;
+            height = img.height;
+            user.picture.medium = img.toDataURL();
+            OnChange();
+          }
+        },
+        {
+          orientation: true,
+          maxWidth: 100,
+          maxHeight: 100,
+          minWidth: 50,
+          minHeight: 50,
+          canvas: true,
+        }
+      );
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  async function OnChange(ev) {
+    let par = {};
+    par.proj = 'kolmit';
+    par.func = 'changeoper';
+    par.abonent = operator.abonent;
+    par.em = operator.email;
+    par.dep_id = dep.id;
+    par.psw = psw;
+    par.data = user;
+    par.lang = lang;
+
+    const res = fetch('/api/edit_cc/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        par: par,
+      }),
+    });
+  }
+
+  async function OnRemoveOper(u) {
+    let user = dep.staff[id];
+    if (!user) {
+      return;
+    }
+
+    if (confirm('Delete ' + user.name)) {
+      let par = {};
+      par.proj = 'kolmit';
+      par.func = 'remoper';
+      par.em = operator.email;
+      par.id = user.id;
+      par.dep = dep.id;
+      par.lang = lang;
+      par.abonent = operator.abonent;
+      par.psw = psw;
+
+      const res = fetch('/api/edit_cc/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          par: par,
+        }),
+      });
+
+      const data = await (await res).json();
+      dep.staff = data.dep.staff;
+    }
+  }
+
+  function OnLoad(ev) {
+    let iframe = ev.currentTarget;
+    const rect = iframe.previousElementSibling.getBoundingClientRect();
+    // if (iframe && iframe.previousElementSibling) {
+    //   if (iframe.previousElementSibling.tagName.toLowerCase() === "img") {
+    //     iframe.style.width = iframe.previousElementSibling.width + "px";
+    //     iframe.style.height = iframe.previousElementSibling.height + "px";
+    //     // iframe.style.top =  rect.top + window.scrollY +'px';
+    //     iframe.style.left = "0px";
+    //   } else if (
+    //     iframe.previousElementSibling.tagName.toLowerCase() === "svg"
+    //   ) {
+    //     iframe.style.width =
+    //       iframe.previousElementSibling.width.baseVal.valueAsString + "px";
+    //     iframe.style.height =
+    //       iframe.previousElementSibling.height.baseVal.valueAsString + "px";
+    //     iframe.style.top = rect.top + window.scrollY + "px";
+    //     iframe.style.left = rect.left + window.scrollX + "px";
+    //   } else {
+    //     iframe.style.maxWidth = "100px";
+    //     iframe.style.maxHeight = "100px";
+    //   }
+    // }
+
+    iframe.contentWindow.postMessage(
+      JSON.stringify({ message: 'this should be delivered to an iframe' })
+    );
+
+    if (iframe.contentWindow.addEventListener) {
+      iframe.contentWindow.addEventListener('message', OnMessage);
+    } else {
+      // IE8
+      iframe.contentWindow.attachEvent('onmessage', OnMessage);
+    }
+  }
+</script>
+
+<div
+  bind:this={oper_admin_div}
+  style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding:4px"
+>
   <div class="user_pic_div" style="position:relative; width: 100px;">
+    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <img
       class="user_pic is-rounded"
       src={user.picture.medium}
@@ -23,23 +253,23 @@
 
     <!-- src="/kolmit/user/iframe.html?em=oper@komi&abonent={user.email}" -->
     <!-- {#if edited_display} -->
-      {#if user.email && operator.email !== user.email}
-        <iframe
-          class="user_frame"
-          src= './src/lib/user/iframe.svelte?em={user.email}&abonent={operator.abonent}' 
-          scrolling="no"
-          frameBorder="0"
-          style="position: absolute;width:100%;top:0;left:0"
-          on:load = {OnLoad}
-          title=""
-        />
-      {/if}
+    {#if user.email && operator.email !== user.email}
+      <iframe
+        class="user_frame"
+        src="https://nedol.ru/kolmit/user/iframe.html?em={user.email}&abonent={operator.abonent}"
+        scrolling="no"
+        frameBorder="0"
+        style="position: absolute;width:100%;top:0;left:0"
+        title=""
+      />
+    {/if}
     <!-- {/if} -->
 
     {#if edited_display}
-      {#if (dep.admin.email === operator.email && operator.email!==user.email && user.role === "operator")}
+      {#if dep.admin.email === operator.email && operator.email !== user.email && user.role === 'operator'}
         <svg
-          height="30" width="30"
+          height="30"
+          width="30"
           on:click={OnRemoveOper(user)}
           style="position: absolute;bottom: -15px;left: -9px;"
         >
@@ -68,7 +298,7 @@
         placeholder={placeholder_name}
         on:change={OnChange}
         bind:value={user.name}
-        readonly  = {readonlyOper}
+        readonly={readonlyOper}
         style="width:80%;"
       />
       <input
@@ -77,7 +307,7 @@
         placeholder={placeholder_email}
         on:change={OnChange}
         bind:value={user.email}
-        readonly = {readonlyAdm}
+        readonly={readonlyAdm}
         style="width:100%; max-height: 100px;"
       />
     {/if}
@@ -88,14 +318,15 @@
       placeholder={placeholder_desc}
       on:change={OnChange}
       bind:value={user.desc}
-      readonly  = {readonlyOper}
+      readonly={readonlyOper}
       style="width:85%;overflow:auto;max-height: 100px;resize:none"
     />
   </div>
 
-  <div style="display: flex;flex-flow: row nowrap; align-items: flex-start;flex-direction: column;">
-
-    {#if status === "talk" && (user_status === "active")  && user.email !== operator.email}
+  <div
+    style="display: flex;flex-flow: row nowrap; align-items: flex-start;flex-direction: column;"
+  >
+    {#if status === 'talk' && user_status === 'active' && user.email !== operator.email}
       <Forward bind:status operator={user.email}>
         <img
           src="./src/routes/assets/call-forward.svg"
@@ -105,13 +336,13 @@
         />
       </Forward>
     {/if}
-    {#if  user_status === "talk" || (status === "talk" && user.email === operator.email)}
+    {#if user_status === 'talk' || (status === 'talk' && user.email === operator.email)}
       <FileTransfer {status} operator={user.email}>
         <img
-        src="./src/routes/assets/file-transfer.svg"
-        alt="file-transfer"
-        width="30px"
-        height="30px"
+          src="./src/routes/assets/file-transfer.svg"
+          alt="file-transfer"
+          width="30px"
+          height="30px"
         />
       </FileTransfer>
     {/if}
@@ -141,246 +372,6 @@
     outline-offset: 0;
     box-shadow: none;
     padding: 0;
-    font-size: .7em;
+    font-size: 0.7em;
   }
 </style>
-
-
-<script>
-  import { onMount, onDestroy, getContext } from "svelte";	
-
-  import {Dict} from '$lib/js/dict.js'
-  import loadImage from "blueimp-load-image/js/load-image.js";
-  import  "blueimp-load-image/js/load-image-scale.js"
-
-  import Forward from "./Forward.svelte";
-  import FileTransfer from "./FileTransfer.svelte"
-  import _ from "lodash";
-
-  import { langs } from "$lib/js/stores.js";
-  let lang = $langs;
-
-  export let operator;
-  export let id;
-  export let dep;
-  export let user;
-
-
-  let files,
-    user_status,
-    placeholder_name,
-    placeholder_email,
-    placeholder_desc,
-    upload;
-
-	let dict  = getContext('dict');
-  dict = new Dict(dict)
-
-  if (dict) {
-    placeholder_name = dict.getValByKey(lang, "input operator name");
-    placeholder_email = dict.getValByKey(lang, "input operator email");
-    placeholder_desc = dict.getValByKey(lang, "input description");
-  }
-
-  import {statust} from '$lib/js/stores.js'
-  let status = '';//$statust;
-  const status_us = statust.subscribe((data) => {
-    status = data;
-  });
-
-  import { signal } from "$lib/js/stores.js";
-  let signalch = $signal;
-
-  import { pswd } from "$lib/js/stores.js";
-  let psw = $pswd
-    
-  export let edited_display;
-  let readonlyOper = true;
-  let readonlyAdm = true;
-
-  import {editable} from '$lib/js/stores.js'
-  const us_edit = editable.subscribe((data) => {
-      edited_display = data;
-      readonlyOper = !edited_display;  
-      readonlyAdm = !edited_display;   
-  });
-
-  
-  onDestroy( us_edit );
-
-  // $: if (readonly) {
-  //   readonlyOper = readonly;
-
-  //   if (dep.id === "0" && user.role === "admin") {
-  //     readonlyAdm = true;
-  //   } else {
-  //     readonlyAdm = readonly;
-  //   }
-  // } else {
-  //   if (dep.id !== "0") {
-  //     readonlyAdm = readonly;
-  //   }
-  // }
-
-  user.email = user.email ? user.email : "";
-
-  const titleize = (s) =>
-    s ? s.replace(/^([a-z])/, (_, r) => r.toUpperCase()) : "";
-
-  user.name = titleize(user.name);
-
-  import {posterst} from '$lib/js/stores.js'
-  let oper_admin_div;
-
-  onMount(() => {
-
-    if(user.email && operator.email === user.email){
-      posterst.set(oper_admin_div)
-    }
-
-  });
-
-   //status changed postMessage from iframe
-  function OnMessage(params) {
-    if(params.data.status)
-      user_status = params.data.status;
-  }
-
-  function OnClickUpload(ev) {
-    let event = new MouseEvent("click", {
-      bubbles: false,
-      cancelable: true,
-      view: window,
-    });
-
-    if(upload)
-      upload.dispatchEvent(event);
-  }
-
-  let width, height;
-  function OnChangeFile(e) {
-    try {
-      loadImage(
-        e.target.files[0],
-        function (img, data) {
-          if (img.type === "error") {
-            console.error("Error loading image ");
-          } else {
-            width = img.width;
-            height = img.height;
-            user.picture.medium = img.toDataURL();
-            OnChange();
-          }
-        },
-        {
-          orientation: true,
-          maxWidth: 100,
-          maxHeight: 100,
-          minWidth: 50,
-          minHeight: 50,
-          canvas: true,
-        }
-      );
-    } catch (ex) {
-      console.log(ex)
-    }
-  }
-
-  async function OnChange(ev) {
-    let par = {};
-    par.proj = "kolmit";
-    par.func = "changeoper";
-    par.abonent = operator.abonent;
-    par.em = operator.email;
-    par.dep_id = dep.id;
-    par.psw = psw;
-    par.data = user;
-    par.lang = lang;
-
-
-    const res = fetch("/api/edit_cc/",{
-        method:'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(
-          {
-          par:par
-          }
-        )
-      });   
-  }
-
-  async function OnRemoveOper(u) {
-    let user = dep.staff[id];
-    if (!user) {
-      return;
-    }
-
-    if (confirm("Delete " + user.name)) {
-      let par = {};
-      par.proj = "kolmit";
-      par.func = "remoper";
-      par.em = operator.email;
-      par.id = user.id;
-      par.dep = dep.id;
-      par.lang = lang;
-      par.abonent = operator.abonent;
-      par.psw = psw;
-
-      const res = fetch("/api/edit_cc/",{
-        method:'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(
-          {
-          par:par
-          }
-        )
-      });   
-
-      const data = await (await res).json();
-      dep.staff = data.dep.staff;
-
-    }
-  }
-
-  function OnLoad(ev) {
-    let iframe = ev.currentTarget;
-    const rect = iframe.previousElementSibling.getBoundingClientRect();
-    // if (iframe && iframe.previousElementSibling) {
-    //   if (iframe.previousElementSibling.tagName.toLowerCase() === "img") {
-    //     iframe.style.width = iframe.previousElementSibling.width + "px";
-    //     iframe.style.height = iframe.previousElementSibling.height + "px";
-    //     // iframe.style.top =  rect.top + window.scrollY +'px';
-    //     iframe.style.left = "0px";
-    //   } else if (
-    //     iframe.previousElementSibling.tagName.toLowerCase() === "svg"
-    //   ) {
-    //     iframe.style.width =
-    //       iframe.previousElementSibling.width.baseVal.valueAsString + "px";
-    //     iframe.style.height =
-    //       iframe.previousElementSibling.height.baseVal.valueAsString + "px";
-    //     iframe.style.top = rect.top + window.scrollY + "px";
-    //     iframe.style.left = rect.left + window.scrollX + "px";
-    //   } else {
-    //     iframe.style.maxWidth = "100px";
-    //     iframe.style.maxHeight = "100px";
-    //   }
-    // }
-
-    iframe.contentWindow.postMessage(
-      JSON.stringify({ message: "this should be delivered to an iframe" })
-    );
-
-    if (iframe.contentWindow.addEventListener) {
-      iframe.contentWindow.addEventListener("message", OnMessage);
-    } else {
-      // IE8
-      iframe.contentWindow.attachEvent("onmessage", OnMessage);
-    }
-  }
-</script>

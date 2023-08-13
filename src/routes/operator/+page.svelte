@@ -1,95 +1,95 @@
 <script>
-	import { page } from "$app/stores"
-	import {users} from '$lib/js/stores.js'
-	import { onMount,  setContext } from 'svelte';
-	import * as cookie from 'cookie';
-	import Operator from './Operator.svelte'
-	import md5 from 'md5'
+  import { page } from '$app/stores';
+  import { users } from '$lib/js/stores.js';
+  import { onMount, setContext } from 'svelte';
+  import * as cookie from 'cookie';
+  import Operator from './Operator.svelte';
+  import md5 from 'md5';
 
-	/** @type {import('./$types').PageData} */
-	export let data;
-	let data_dict = data.dict;
+  export let data;
+  let data_dict = data.dict;
 
-	let tarif = ''
-	let operator = {}, kolmit
-	let usrs = []
+  import { dicts } from '$lib/js/stores.js';
+  dicts.set(data_dict);
 
-	// console.log($page.url)
+  let tarif = '';
+  let operator = {};
+  let kolmit;
+  let usrs = [];
 
-	operator.abonent = $page.url.searchParams.get('abonent')
-	operator.email =  $page.url.searchParams.get('operator')
-	operator.psw =  md5($page.url.searchParams.get('psw'))
-	operator.lang = $page.url.searchParams.get('lan')
+  // console.log($page.url)
 
-	onMount(async () => { 
-		if(document.cookie){
-			if(cookie.parse(document.cookie)[operator.abonent]){
-				const cook = JSON.parse(cookie.parse(document.cookie)[operator.abonent]);
-				operator.psw = cook.psw;
-				operator.lang = cook.lang;
-			}else{			
-				const keys = Object.keys(cookie.parse(document.cookie));
-				const cook = JSON.parse(cookie.parse(document.cookie)[keys[0]]);
-				operator.psw = cook.psw;
-				operator.lang = cook.lang;
-				document.cookie = operator.abonent+'='+JSON.stringify(operator)
-			}
-		}else{
+  operator.abonent = $page.url.searchParams.get('abonent');
+  operator.email = $page.url.searchParams.get('operator');
+  operator.psw = $page.url.searchParams.get('psw')
+    ? md5($page.url.searchParams.get('psw'))
+    : '';
+  operator.lang = $page.url.searchParams.get('lang');
 
-		}
+  import { langs } from '$lib/js/stores.js';
+  langs.set(operator.lang);
 
-		
-		if(!operator.psw){
-			operator.psw = md5(prompt('Введите пароль'));
-			operator.lang  = 'en'
-		}
+  onMount(async () => {
+    if (document.cookie) {
+      if (cookie.parse(document.cookie)[operator.abonent]) {
+        const cook = JSON.parse(
+          cookie.parse(document.cookie)[operator.abonent]
+        );
+        operator.psw = cook.psw;
+        operator.lang = cook.lang;
+      } else {
+        const keys = Object.keys(cookie.parse(document.cookie));
+        const cook = JSON.parse(cookie.parse(document.cookie)[keys[0]]);
+        operator.psw = cook.psw;
+        operator.lang = cook.lang;
+        document.cookie = operator.abonent + '=' + JSON.stringify(operator);
+      }
+    } else {
+    }
 
-		GetUsers();
-	})
-    
+    // if (!operator.psw) {
+    //   operator.psw = md5(prompt('Введите пароль'));
+    //   operator.lang = 'en';
+    // }
+  });
 
-	export async function GetUsers() {
-		let par = {};
-		par.proj = 'kolmit';
-		par.func = 'getusers';
+  export async function GetUsers() {
+    let par = {};
+    par.proj = 'kolmit';
+    par.func = 'getusers';
 
-		par.abonent =  operator.abonent;
-		par.em = operator.email;
-		par.psw = operator.psw;
+    par.abonent = operator.abonent;
+    par.em = operator.email;
+    par.psw = operator.psw;
 
-		fetch("/api/edit_cc/",{
-			method:'POST',
-			headers: {
-			'Content-Type': 'application/json'
-			// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			body: JSON.stringify(
-				{
-				par:par
-				}
-			)
-		}).then(async (res) => {
+    // const json = await (await fetch('/operator/api/edit_cc/')).json();
 
-			const data = await res;
-			const json = await data.json() 
+    const response = await fetch('/operator/api/edit_cc/', {
+      method: 'POST',
+      body: JSON.stringify({
+        par: par,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
 
-			console.log('data');
+    let json = await response.json();
 
-			// tarif = json.rows.tarif;
+    console.log('data');
 
-			users.set(json.rows.users);
+    // tarif = json.rows.tarif;
 
-			usrs = json.rows.users;
-		}
-		); 
-	}
+    users.set(json.rows.users);
 
+    usrs = json.rows.users;
+  }
 </script>
-<div>
-	{#if usrs.length>0}
-	<div>
-		<Operator {operator} {tarif} {data_dict}></Operator>
-	</div>
-	{/if}
 
+<div>
+  {#if usrs.length > 0}
+    <div>
+      <Operator {operator} {tarif} {data_dict} />
+    </div>
+  {/if}
 </div>

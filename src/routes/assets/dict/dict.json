@@ -204,6 +204,13 @@
     "en":"How to introduce you?",
     "ru":"Как вас представить?",
     "fr":"Comment puis-je vous présenter?"
-  }
+  },
+  
+    "Create my own net":{
+      "en":"Create my own net",
+      "ru":"Создать свою подсеть",
+      "fr":"Comment puis-je vous présenter?"
+    }
+
   
 }
