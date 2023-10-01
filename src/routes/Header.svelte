@@ -10,7 +10,7 @@
 
 	import { dicts } from '$lib/js/stores.js';
 	$: if ($dicts) {
-		console.log($dicts);
+		// console.log($dicts);
 	}
 
 	$view = 'cc';
