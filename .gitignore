@@ -5,5 +5,5 @@ build/client
 .env
 .env.*
 !.env.example
-
+.svelte-kit
 .vercel
