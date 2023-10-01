@@ -16,7 +16,6 @@
 
 	import { signal } from '$lib/js/stores.js';
 
-	import _ from 'lodash-es';
 	import './lib/icofont/icofont.min.css';
 
 	import { msg_signal_user } from '$lib/js/stores.js';

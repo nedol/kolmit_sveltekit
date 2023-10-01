@@ -3,7 +3,6 @@
 	// import { getContext } from 'svelte';
 	import { onMount } from 'svelte';
 	import Dep from './Dep.svelte';
-	import _ from 'lodash-es';
 
 	import { signal } from '$lib/js/stores.js';
 	export let operator;

@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { CreateOperator, CheckOperator } from '$lib/server/db.js'; //src\lib\server\server.db.js
-import _ from 'lodash-es';
+
 import { Email } from 'nodemailer';
 import md5 from 'md5';
 

@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import translate from 'translate';
-	import _ from 'lodash-es';
+
 	import { langs } from '$lib/js/stores.js';
 	export let text, woorden;
 	let trans = 'trans';

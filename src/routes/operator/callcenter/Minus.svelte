@@ -1,6 +1,4 @@
 <script>
-	import _ from 'lodash-es';
-
 	function OnRemoveOper(ev) {
 		let attr = ev.target.attributes['email'];
 		//   var evens = _.remove(users, function(n) {

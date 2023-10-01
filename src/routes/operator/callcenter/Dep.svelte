@@ -6,7 +6,6 @@
 	// import { Button, Col, Row } from 'sveltestrap';
 
 	import Oper from './Oper.svelte';
-	import _ from 'lodash-es';
 
 	export let dep;
 	export let owner;
