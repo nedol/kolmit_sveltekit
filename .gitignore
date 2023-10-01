@@ -6,3 +6,4 @@ build/client
 .env.*
 !.env.example
 
+.vercel

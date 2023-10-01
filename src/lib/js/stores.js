@@ -1,9 +1,10 @@
-
 import { writable } from 'svelte/store';
 
 // export let window = window;//{location:{href:'http://nedol.ru'}};
 
 export let editable = writable(false);
+
+export let view = writable();
 
 export let langs = writable();
 
@@ -11,10 +12,10 @@ export let pswd = writable();
 
 let lang = 'en';
 const us_lang = langs.subscribe((data) => {
-        lang = data;
+	lang = data;
 });
-	
-export let psw = '';
+
+// export let psw = '';
 
 // (async () => {
 // 	try {
@@ -29,7 +30,9 @@ export let psw = '';
 
 export let posterst = writable();
 
-export let msg_1 = writable();
+export let msg_signal_user = writable();
+
+export let msg_signal_oper = writable();
 
 export let signal = writable();
 
@@ -40,3 +43,7 @@ export let credentials = writable();
 export let users = writable();
 
 export let statust = writable();
+
+export let ice_conf = writable();
+
+export let pool = writable();

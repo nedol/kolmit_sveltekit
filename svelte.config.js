@@ -8,12 +8,18 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	kit: {
 		adapter: adapter()
+		// serviceWorker: {
+		// 	register: false
+		// }
 		// 	{
 		// 	pages:'build_pages',
 		// 	assets: 'build_assets',  // path to public directory
 		// 	fallback: null,
 		// }
 	}
+	// files: {
+	// 	serviceWorker: 'sw.js' // or `src/my-sw.ts`
+	// }
 	// preprocess: [
 	// 	preprocess({
 	// 	  postcss: true,
