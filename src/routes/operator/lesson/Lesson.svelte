@@ -1,5 +1,4 @@
 <script>
-	import { Button } from 'sveltestrap';
 	import Quiz from './quiz/Quiz.svelte';
 	export let data;
 

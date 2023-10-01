@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Offcanvas, Icon } from 'sveltestrap';
+	// import { Button, Offcanvas, Icon } from 'sveltestrap';
 	import 'bootstrap/dist/css/bootstrap.min.css';
 	export let bottomOpen = false;
 	const toggleBottom = () => (bottomOpen = !bottomOpen);
@@ -9,10 +9,7 @@
 <!-- <Offcanvas isOpen={bottomOpen} toggle={toggleBottom} placement="bottom"> -->
 <div class="flex_container">
 	<!-- <div style="display: flex; justify-content: center;"> -->
-	<Button color="danger" outline on:click={onContinueClick}>>></Button>
-	<h1>
-		<Icon name="bi-globe2" />
-	</h1>
+	<button color="danger" on:click={onContinueClick}>>></button>
 </div>
 
 <!-- </div> -->
