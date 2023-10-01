@@ -1,7 +1,7 @@
 // import { page, navigating, updated } from '$app/stores';
 
 import { moment } from 'moment';
-import { _ } from 'lodash';
+
 import md5 from 'md5';
 import { writable } from 'svelte/store';
 

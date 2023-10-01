@@ -3,7 +3,9 @@
 	// import { getContext } from 'svelte';
 	import { onMount } from 'svelte';
 	import Dep from './Dep.svelte';
-	import { forEach, findIndex } from 'lodash-es';
+
+	import pkg from 'lodash';
+	const { forEach, findIndex } = pkg;
 
 	import { signal } from '$lib/js/stores.js';
 	export let operator;

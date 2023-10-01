@@ -16,7 +16,9 @@
 
 	import { signal } from '$lib/js/stores.js';
 
-	import { groupBy, find } from 'lodash-es';
+	import pkg from 'lodash';
+	const { groupBy, find } = pkg;
+
 	import './lib/icofont/icofont.min.css';
 
 	import { msg_signal_user } from '$lib/js/stores.js';
