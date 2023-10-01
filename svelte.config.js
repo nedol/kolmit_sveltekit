@@ -7,7 +7,18 @@ import preprocess from 'svelte-preprocess';
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		prerender: {
+			handleHttpError: ({ path, referrer, message }) => {
+				// ignore deliberate link to shiny 404 page
+				if (path === '/not-found' && referrer === '/blog/how-we-built-our-404-page') {
+					return;
+				}
+
+				// otherwise fail the build
+				throw new Error(message);
+			}
+		}
 		// serviceWorker: {
 		// 	register: false
 		// }
@@ -25,19 +36,6 @@ const config = {
 	// 	  postcss: true,
 	// 	}),
 	//   ],
-
-	// kit: {
-	// 	// target: '#svelte',
-	// 	adapter: adapter({
-	// 		pages: 'build',  // path to public directory
-	// 		assets: 'build',  // path to public directory
-	// 		fallback: null,
-	// 	}),
-	// prerender: {
-	//     // This can be false if you're using a fallback (i.e. SPA mode)
-	//     default: false
-	// }
-	// }
 };
 
 export default config;
