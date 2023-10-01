@@ -8,7 +8,7 @@
 
 	import Forward from './Forward.svelte';
 	import FileTransfer from './FileTransfer.svelte';
-	import _ from 'lodash';
+	import _ from 'lodash-es';
 
 	import { langs } from '$lib/js/stores.js';
 

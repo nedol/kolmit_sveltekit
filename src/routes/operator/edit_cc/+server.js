@@ -2,8 +2,8 @@ import * as cookie from 'cookie';
 import pkg_e from 'nodemailer';
 const { Email } = pkg_e;
 import stringHash from 'string-hash';
-import pkg_l from 'lodash';
-const { _ } = pkg_l;
+import _ from 'lodash-es';
+
 global.rtcPull = { user: {}, operator: {} };
 
 import {
