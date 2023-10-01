@@ -3,6 +3,7 @@
 	// import { getContext } from 'svelte';
 	import { onMount } from 'svelte';
 	import Dep from './Dep.svelte';
+	import { forEach, findIndex } from 'lodash-es';
 
 	import { signal } from '$lib/js/stores.js';
 	export let operator;
@@ -35,7 +36,7 @@
 	export let tarif;
 
 	$: if (cc_data && cc_data.length > 0) {
-		_.forEach(cc_data, (dep, k) => {
+		forEach(cc_data, (dep, k) => {
 			if (dep.admin && dep.admin.email === operator.email) {
 				operator.role = dep.admin.role;
 			}
@@ -73,7 +74,7 @@
 	}
 
 	async function RemoveDep(id) {
-		let ind = _.findIndex(cc_data, { id: id });
+		let ind = findIndex(cc_data, { id: id });
 		if (confirm('Delete Dep ' + (cc_data[ind].alias ? cc_data[ind].alias : '') + '?')) {
 			let par = {};
 			par.proj = 'kolmit';

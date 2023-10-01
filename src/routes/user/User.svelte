@@ -16,6 +16,7 @@
 
 	import { signal } from '$lib/js/stores.js';
 
+	import { groupBy, find } from 'lodash-es';
 	import './lib/icofont/icofont.min.css';
 
 	import { msg_signal_user } from '$lib/js/stores.js';
@@ -47,7 +48,7 @@
 	import { users } from '$lib/js/stores.js';
 
 	$: if (status) {
-		let user = _.find($users[0].staff, { email: em });
+		let user = find($users[0].staff, { email: em });
 		if (user) user.status = status;
 	}
 
@@ -178,7 +179,7 @@
 
 	function OnMessage(data) {
 		if (data.operators && data.operators[em]) {
-			let res = _.groupBy(data.operators[em], 'status');
+			let res = groupBy(data.operators[em], 'status');
 			try {
 				if (res && res['offer']) {
 					if (status !== 'call' && status !== 'wait') {
