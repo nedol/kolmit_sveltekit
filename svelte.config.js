@@ -1,6 +1,6 @@
-import adapter from '@sveltejs/adapter-auto';
-// import netlifyAdapter from '@sveltejs/adapter-netlify';
-// import adapter from '@sveltejs/adapter-vercel';
+// import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/adapter-vercel';
 // import adapter from '@sveltejs/adapter-node';
 // import adapter from 'svelte-preprocess';
 
@@ -20,6 +20,12 @@ const config = {
 				if (path === '/not-found' && referrer === '/site') {
 					return;
 				}
+
+				// if (path === '/site') {
+				// 	return;
+				// }
+
+				// return;
 				// otherwise fail the build
 				throw new Error(message);
 			}
