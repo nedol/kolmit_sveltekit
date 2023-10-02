@@ -14,19 +14,6 @@ export async function load({ fetch, cookies, route, url }) {
 	let abonent = url.searchParams.get('abonent');
 	// let lang = url.searchParams.get('lang');
 
-	// cookies.set(
-	// 	'kolmit',
-	// 	JSON.stringify({
-	// 		operator: operator,
-	// 		abonent: abonent,
-	// 		psw: md5('demo'),
-	// 		lang: 'en'
-	// 	}),
-	// 	{
-	// 		path: '/site'
-	// 	}
-	// );
-
 	CreatePool();
 
 	let res;

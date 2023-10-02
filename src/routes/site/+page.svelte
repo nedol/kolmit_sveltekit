@@ -4,4 +4,3 @@
 </script>
 
 <Site {data} />
-2
