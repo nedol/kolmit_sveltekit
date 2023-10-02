@@ -1,13 +1,15 @@
-import adapter from '@sveltejs/adapter-vercel';
-// import adapter from '@sveltejs/adapter-auto';
-// import adapter from '@sveltejs/adapter-static'
-// import adapter from '@sveltejs/adapter-node'
-// import preprocess from 'svelte-preprocess';
+import autoAdapter from '@sveltejs/adapter-auto';
+// import netlifyAdapter from '@sveltejs/adapter-netlify';
+import vercelAdapter from '@sveltejs/adapter-vercel';
+import nodeAdapter from '@sveltejs/adapter-node';
+import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	// preprocess: preprocess(),
 	kit: {
-		adapter: adapter(),
+		adapter: vercelAdapter(),
+
 		prerender: {
 			// prerender: {
 			//     // This can be false if you're using a fallback (i.e. SPA mode)
@@ -22,6 +24,11 @@ const config = {
 				throw new Error(message);
 			}
 		}
+		// vite: {
+		// 	define: {
+		// 		global: {}
+		// 	}
+		// }
 		// serviceWorker: {
 		// 	register: false
 		// }
@@ -36,9 +43,9 @@ const config = {
 	// }
 	// preprocess: [
 	// 	preprocess({
-	// 	  postcss: true,
-	// 	}),
-	//   ],
+	// 		postcss: true
+	// 	})
+	// ]
 };
 
 export default config;
