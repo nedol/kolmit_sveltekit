@@ -56,7 +56,7 @@
 			par.abonent = operator.abonent;
 			par.id = cnt;
 
-			const res = fetch('/operator/edit_cc/', {
+			const res = fetch('/operator/rtc/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -88,7 +88,7 @@
 			par.abonent = operator.abonent;
 			par.uid = operator.uid;
 
-			const res = fetch('/edit_cc/', {
+			const res = fetch('/operator/rtc/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

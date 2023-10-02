@@ -133,7 +133,7 @@
 		par.data = user;
 		par.lang = $langs;
 
-		const res = fetch('/operator/edit_cc/', {
+		const res = fetch('/operator/rtc/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -162,7 +162,7 @@
 			par.abonent = operator.abonent;
 			// par.psw = psw;
 
-			const res = fetch('/operator/edit_cc/', {
+			const res = fetch('/operator/rtc/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
