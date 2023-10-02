@@ -17,7 +17,7 @@ export class SignalingChannel {
 		par.operator = this.operator;
 		let response;
 		try {
-			response = await fetch('./site', {
+			response = await fetch('/site', {
 				method: 'POST',
 				body: JSON.stringify({ par }),
 				headers: {

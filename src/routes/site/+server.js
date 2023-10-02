@@ -4,6 +4,9 @@ import { CreateOperator, CheckOperator } from '$lib/server/db.js'; //src\lib\ser
 import { Email } from 'nodemailer';
 import md5 from 'md5';
 
+import pkg from 'lodash';
+const { find, findKey } = pkg;
+
 // /** @type {import('./$types').RequestHandler} */
 // export async function POST(event) {
 // 	const body = await event.request.body;
@@ -257,7 +260,7 @@ function BroadcastOperatorStatus(q, status) {
 				continue;
 			for (let uid in global.rtcPull[type][q.abonent][em]) {
 				let item = global.rtcPull[type][q.abonent][em][uid];
-				let offer = _.find(operators[q.em], { status: 'offer' });
+				let offer = find(operators[q.em], { status: 'offer' });
 				if (
 					offer &&
 					// && item.abonent === q.em
@@ -356,10 +359,10 @@ async function HandleCall(q) {
 		} else {
 			let item = rtcPull['user'][q.abonent][q.em][q.uid];
 			if (item) {
-				let oper_check = _.findKey(rtcPull['operator'][q.abonent][q.em], {
+				let oper_check = findKey(rtcPull['operator'][q.abonent][q.em], {
 					status: 'check'
 				});
-				let oper_offer_key = _.findKey(rtcPull['operator'][q.abonent][q.em], {
+				let oper_offer_key = findKey(rtcPull['operator'][q.abonent][q.em], {
 					status: 'offer'
 				});
 
