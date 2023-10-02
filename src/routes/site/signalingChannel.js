@@ -27,7 +27,7 @@ export class SignalingChannel {
 		} catch (ex) {}
 
 		const { resp } = await response.json();
-		//console.log(resp);
+		console.log(resp);
 		if (cb) cb(resp);
 	}
 

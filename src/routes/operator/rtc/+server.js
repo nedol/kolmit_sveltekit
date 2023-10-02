@@ -39,7 +39,7 @@ export async function POST(event) {
 	// console.log(resp);
 	// if (resp.em === q.em)
 	resp = JSON.stringify(resp);
-	return json({ resp });
+	return new Response({ resp });
 }
 
 function CallWaiting(q, resolve) {

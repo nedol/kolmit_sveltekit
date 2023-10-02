@@ -25,7 +25,7 @@ export async function POST(event) {
 
 	// if (resp.em === q.em) {
 	resp = JSON.stringify(resp);
-	return json({ resp });
+	return new Response({ resp });
 	// }
 	// } else {
 	// 	resp = '{}';

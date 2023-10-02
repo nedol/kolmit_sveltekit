@@ -139,7 +139,7 @@ export async function POST({ request, cookies, url }) {
 			break;
 	}
 
-	return json({ resp });
+	return new Response(JSON.stringify({ resp }));
 }
 
 function SendEmail(q, new_email) {
