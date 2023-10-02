@@ -15,9 +15,9 @@ const config = {
 			// }
 			handleHttpError: ({ path, referrer, message }) => {
 				// ignore deliberate link to shiny 404 page
-				// if (path === '/not-found' && referrer === '/site') {
-				// 	return;
-				// }
+				if (path === '/not-found' && referrer === '/site') {
+					return;
+				}
 				// otherwise fail the build
 				throw new Error(message);
 			}
