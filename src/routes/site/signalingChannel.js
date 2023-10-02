@@ -27,7 +27,7 @@ export class SignalingChannel {
 		} catch (ex) {}
 
 		const { resp } = await response.json();
-		console.log(resp);
+		// console.log(resp);
 		if (cb) cb(resp);
 	}
 
@@ -42,7 +42,7 @@ export class SignalingChannel {
 		});
 
 		const { resp } = await response.json();
-		let remAr = JSON.parse(resp);
+		let remAr = resp;
 		if (Array.isArray(remAr)) {
 			remAr.map((resp) => {
 				msg_signal_oper.set(resp);
@@ -63,16 +63,19 @@ export class SignalingChannel {
 			}
 		});
 
-		const { resp } = await response.json();
+		try {
+			const { resp } = await response.json();
 
-		//console.log(resp);
-		let remAr = JSON.parse(resp);
-		if (Array.isArray(remAr)) {
-			remAr.map((resp) => {
-				msg_signal_user.set(resp);
-			});
-		} else {
-			msg_signal_user.set(remAr);
+			let remAr = resp;
+			if (Array.isArray(remAr)) {
+				remAr.map((resp) => {
+					msg_signal_user.set(resp);
+				});
+			} else {
+				msg_signal_user.set(remAr);
+			}
+		} catch (ex) {
+			console.log(ex);
 		}
 
 		this.OperatorWaiting(par);

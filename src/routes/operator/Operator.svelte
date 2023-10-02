@@ -433,7 +433,7 @@
 	</div>
 
 	<BurgerMenu padding={'25px'}>
-		{@debug $langs}
+		<!-- {@debug $langs} -->
 		{$dicts['Language Select'][$langs]}:
 
 		<div style="display: flex; margin-bottom:20px">

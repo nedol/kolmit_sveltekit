@@ -24,8 +24,8 @@ export async function POST(event) {
 	}
 
 	// if (resp.em === q.em) {
-	resp = JSON.stringify(resp);
-	return new Response({ resp });
+	// resp = JSON.stringify(resp);
+	return new Response(JSON.stringify({ resp }));
 	// }
 	// } else {
 	// 	resp = '{}';
