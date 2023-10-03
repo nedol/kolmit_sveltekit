@@ -63,8 +63,9 @@ export default class RTCUser extends RTCBase {
 				par.abonent = this.abonent.toLowerCase();
 				par.em = this.em.toLowerCase();
 				par.uid = this.uid;
-				this.signal.SendMessage(par);
-				this.status = 'call';
+				this.signal.SendMessage(par, () => {
+					this.status = 'call';
+				});
 			});
 		});
 	}

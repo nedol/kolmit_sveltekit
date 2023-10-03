@@ -78,6 +78,10 @@
 		OnMessage($dc_msg);
 	}
 
+	$: if (remote.text.msg) {
+		console.log(remote.text.msg);
+	}
+
 	let container;
 
 	import { posterst } from '$lib/js/stores.js';
@@ -329,7 +333,7 @@
 			remote.text.display = 'block';
 
 			if (data.profile) {
-				let profile = JSON.parse(data.profile);
+				let profile = data.profile;
 				let avatar = profile.src;
 				remote.video.poster = avatar;
 				if (avatar) remote.video.display = 'block';
@@ -374,7 +378,7 @@
 			class="remote_text_display"
 			style="display:{remote.text.display};
                                 position: absolute;
-                                z-index: 10;
+                                z-index: 21;
                                 background-color: rgba(125, 125, 125, 0.8);
                                 top: 90px;
                                 left: 2px;"

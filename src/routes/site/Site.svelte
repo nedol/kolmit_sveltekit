@@ -45,11 +45,13 @@
 
 	$signal = new SignalingChannel(email);
 
-	onMount(async () => {});
+	onMount(async () => {
+		window.$('[data-bs-toggle="tooltip"]').tooltip();
+	});
 </script>
 
 {#if checked}
-	<Operator {email} {abonent} />
+	<!-- <Operator {email} {abonent} /> -->
 {:else}
 	<SelectMenu bind:$langs />
 	<Login {abonent} {user_pic} lang={$langs} bind:checked />

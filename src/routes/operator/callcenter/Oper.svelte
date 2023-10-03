@@ -184,129 +184,131 @@
 	style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding-bottom:20px"
 >
 	<!-- {@debug operator, user} -->
-	<!-- {#if user.email !== operator.em} -->
-	<div class="user_pic_div" style="position:relative; width: 100px; height:100px">
-		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<video
-			id="localVideo"
-			class="user_pic is-rounded"
-			poster={user_pic}
-			autoplay
-			playsinline
-			muted
-			on:click={OnClickUpload}
-			style="display: block; position:absolute; top:0px; width:100px; height: 100px;"
-		/>
-		<!-- <img
+	{#if user.email !== operator.em}
+		<div class="user_pic_div" style="position:relative; width: 100px; height:100px">
+			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<video
+				id="localVideo"
+				class="user_pic is-rounded"
+				poster={user_pic}
+				autoplay
+				playsinline
+				muted
+				on:click={OnClickUpload}
+				style="display: block; position:absolute; top:0px; width:100px; height: 100px;"
+			/>
+			<!-- <img
 			class="user_pic is-rounded"
 			src={user_pic}
 			alt=""
 			on:click={OnClickUpload}
 			style="border-radius: 5px; float:right; max-width:100%"
 		/> -->
-		{#if edited_display}
-			<input
-				bind:this={upload}
-				class="file-upload"
-				on:change={OnChangeFile}
-				accept="image/png, image/jpeg"
-				bind:files
-				id="avatar"
-				name="avatar"
-				type="file"
-				style="display: none"
-			/>
-		{/if}
-
-		<!-- src="/kolmit/user/iframe.html?em=oper@komi&abonent={user.email}" -->
-		<!-- {#if edited_display} -->
-		<!-- {@debug dep, user} -->
-		<!-- {#if user.email && operator.em !== user.email} -->
-		<!-- {@debug user} -->
-		<User em={user.email} operator={operator.em} abonent={user.abonent} />
-		<!-- {/if} -->
-		<!-- {/if} -->
-
-		{#if edited_display}
-			{#if dep.admin.email === operator.email && operator.email !== user.email && user.role === 'operator'}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<svg
-					height="30"
-					width="30"
-					on:click={OnRemoveOper(user)}
-					style="position: absolute;bottom: -15px;left: -9px;"
-				>
-					<glyph glyph-name="minus-circle" unicode="&#xefc0;" horiz-adv-x="50" />
-					<g class="currentLayer">
-						<path
-							d="M500.2 62.5c-241.8 0-437.7 195.89999999999998-437.7 437.3 0 241.8 195.89999999999998 437.7 437.7 437.7 241.40000000000003 0 437.3-195.89999999999998 437.3-437.7 0-241.40000000000003-195.89999999999998-437.3-437.3-437.3z m301.59999999999997 466.5c-0.6999999999999318 9-2.199999999999932 19.100000000000023-4.699999999999932 30.299999999999955h-593.9000000000001c-2.499999999999943-11.199999999999932-4.299999999999926-21.699999999999932-5.0999999999999375-31.399999999999977-0.6999999999999886-9.699999999999932-1.0999999999999943-19.799999999999955-1.0999999999999943-30.299999999999955 0-9 0.4000000000000057-18 1.0999999999999943-26.700000000000045 0.700000000000017-9 2.5-19.099999999999966 5.099999999999994-30.299999999999955h593.9000000000001c2.4999999999998863 11.199999999999989 3.9999999999998863 21.599999999999966 4.699999999999818 31.399999999999977 1.1000000000000227 9.699999999999989 1.400000000000091 19.80000000000001 1.400000000000091 30.30000000000001 0.09999999999990905 9.099999999999966-0.3000000000000682 17.69999999999999-1.400000000000091 26.69999999999999z"
-							transform="scale(.03)"
-							style="fill:lightgrey; stroke:black; stroke-width:20px"
-						/>
-					</g>
-				</svg>
+			{#if edited_display}
+				<input
+					bind:this={upload}
+					class="file-upload"
+					on:change={OnChangeFile}
+					accept="image/png, image/jpeg"
+					bind:files
+					id="avatar"
+					name="avatar"
+					type="file"
+					style="display: none"
+				/>
 			{/if}
-		{/if}
-	</div>
 
-	<div style="flex:1; margin-left:10px">
-		{#if dict}
-			<input
+			<!-- src="/kolmit/user/iframe.html?em=oper@komi&abonent={user.email}" -->
+			<!-- {#if edited_display} -->
+			<!-- {@debug dep, user} -->
+			<!-- {#if user.email && operator.em !== user.email} -->
+			<!-- {@debug user} -->
+			<User em={user.email} operator={operator.em} abonent={user.abonent} />
+			<!-- {/if} -->
+			<!-- {/if} -->
+
+			{#if edited_display}
+				{#if dep.admin.email === operator.email && operator.email !== user.email && user.role === 'operator'}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y-no-static-element-interactions -->
+					<svg
+						height="30"
+						width="30"
+						on:click={OnRemoveOper(user)}
+						style="position: absolute;bottom: -15px;left: -9px;"
+					>
+						<glyph glyph-name="minus-circle" unicode="&#xefc0;" horiz-adv-x="50" />
+						<g class="currentLayer">
+							<path
+								d="M500.2 62.5c-241.8 0-437.7 195.89999999999998-437.7 437.3 0 241.8 195.89999999999998 437.7 437.7 437.7 241.40000000000003 0 437.3-195.89999999999998 437.3-437.7 0-241.40000000000003-195.89999999999998-437.3-437.3-437.3z m301.59999999999997 466.5c-0.6999999999999318 9-2.199999999999932 19.100000000000023-4.699999999999932 30.299999999999955h-593.9000000000001c-2.499999999999943-11.199999999999932-4.299999999999926-21.699999999999932-5.0999999999999375-31.399999999999977-0.6999999999999886-9.699999999999932-1.0999999999999943-19.799999999999955-1.0999999999999943-30.299999999999955 0-9 0.4000000000000057-18 1.0999999999999943-26.700000000000045 0.700000000000017-9 2.5-19.099999999999966 5.099999999999994-30.299999999999955h593.9000000000001c2.4999999999998863 11.199999999999989 3.9999999999998863 21.599999999999966 4.699999999999818 31.399999999999977 1.1000000000000227 9.699999999999989 1.400000000000091 19.80000000000001 1.400000000000091 30.30000000000001 0.09999999999990905 9.099999999999966-0.3000000000000682 17.69999999999999-1.400000000000091 26.69999999999999z"
+								transform="scale(.03)"
+								style="fill:lightgrey; stroke:black; stroke-width:20px"
+							/>
+						</g>
+					</svg>
+				{/if}
+			{/if}
+		</div>
+
+		<div style="flex:1; margin-left:10px">
+			{#if dict}
+				<input
+					type="text"
+					class="user_name"
+					placeholder={placeholder_name}
+					on:change={OnChange}
+					bind:value={user.name}
+					readonly={readonlyOper}
+					style="width:80%;"
+				/>
+				<input
+					type="text"
+					class="user_email"
+					placeholder={placeholder_email}
+					on:change={OnChange}
+					bind:value={user.email}
+					readonly={readonlyAdm}
+					style="width:100%; max-height: 100px;"
+				/>
+			{/if}
+			<textarea
 				type="text"
-				class="user_name"
-				placeholder={placeholder_name}
+				rows="3"
+				class="user_desc"
+				placeholder={placeholder_desc}
 				on:change={OnChange}
-				bind:value={user.name}
+				bind:value={user.desc}
 				readonly={readonlyOper}
-				style="width:80%;"
+				style="width:85%;overflow:auto;max-height: 100px;resize:none"
 			/>
-			<input
-				type="text"
-				class="user_email"
-				placeholder={placeholder_email}
-				on:change={OnChange}
-				bind:value={user.email}
-				readonly={readonlyAdm}
-				style="width:100%; max-height: 100px;"
-			/>
-		{/if}
-		<textarea
-			type="text"
-			rows="3"
-			class="user_desc"
-			placeholder={placeholder_desc}
-			on:change={OnChange}
-			bind:value={user.desc}
-			readonly={readonlyOper}
-			style="width:85%;overflow:auto;max-height: 100px;resize:none"
-		/>
-	</div>
+		</div>
 
-	<div style="display: flex;flex-flow: row nowrap; align-items: flex-start;flex-direction: column;">
-		{#if $statust === 'talk' && user_status === 'active' && user.email !== operator.email}
-			<Forward bind:$statust operator={user.email}>
-				<img
-					src="./src/routes/assets/call-forward.svg"
-					alt="call-forward"
-					width="30px"
-					height="30px"
-				/>
-			</Forward>
-		{/if}
-		{#if user_status === 'talk' || ($statust === 'talk' && user.email === operator.email)}
-			<FileTransfer {$statust} operator={user.email}>
-				<img
-					src="./src/routes/assets/file-transfer.svg"
-					alt="file-transfer"
-					width="30px"
-					height="30px"
-				/>
-			</FileTransfer>
-		{/if}
-	</div>
-	<!-- {/if} -->
+		<div
+			style="display: flex;flex-flow: row nowrap; align-items: flex-start;flex-direction: column;"
+		>
+			{#if $statust === 'talk' && user_status === 'active' && user.email !== operator.email}
+				<Forward bind:$statust operator={user.email}>
+					<img
+						src="./src/routes/assets/call-forward.svg"
+						alt="call-forward"
+						width="30px"
+						height="30px"
+					/>
+				</Forward>
+			{/if}
+			{#if user_status === 'talk' || ($statust === 'talk' && user.email === operator.email)}
+				<FileTransfer {$statust} operator={user.email}>
+					<img
+						src="./src/routes/assets/file-transfer.svg"
+						alt="file-transfer"
+						width="30px"
+						height="30px"
+					/>
+				</FileTransfer>
+			{/if}
+		</div>
+	{/if}
 </div>
 
 <style>

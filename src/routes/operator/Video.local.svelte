@@ -24,7 +24,6 @@
 	}
 </script>
 
-{@debug $posterst}
 <video
 	bind:this={lv}
 	poster={$posterst}
