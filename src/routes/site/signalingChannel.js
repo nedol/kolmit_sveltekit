@@ -1,11 +1,14 @@
-'use strict';
+// 'use strict';
 
 // import {log} from './utils'
 
 import { msg_signal_oper, msg_signal_user } from '$lib/js/stores.js';
 
+let server = '';
 import { server_path } from '$lib/js/stores.js';
-
+server_path.subscribe((data) => {
+	server = data;
+});
 // export const msg = writable('');
 
 export class SignalingChannel {
@@ -19,7 +22,7 @@ export class SignalingChannel {
 		par.operator = this.operator;
 		let response;
 
-		response = await fetch($server_path + '/site', {
+		response = await fetch(server + '/site', {
 			method: 'POST',
 			body: JSON.stringify({ par }),
 			headers: {
@@ -34,7 +37,7 @@ export class SignalingChannel {
 
 	async CallWaiting(par) {
 		par.func = 'callwaiting';
-		const response = await fetch($server_path + '/operator/rtc/', {
+		const response = await fetch(server + '/operator/rtc/', {
 			method: 'POST',
 			body: JSON.stringify({ par }),
 			headers: {
@@ -56,7 +59,7 @@ export class SignalingChannel {
 	}
 
 	async OperatorWaiting(par) {
-		const response = await fetch($server_path + '/user/rtc/', {
+		const response = await fetch(server + '/user/rtc/', {
 			method: 'POST',
 			body: JSON.stringify({ par }),
 			headers: {
