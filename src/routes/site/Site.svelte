@@ -11,11 +11,13 @@
 
 	export let data;
 
-	// const us_global_test = global_test.subscribe((data) => {
-	// 	if (data) {
-	// 		console.log(data);
-	// 	}
-	// });
+	import { server_path } from '$lib/js/stores.js';
+
+	$:if(data.hostname==='nedol'){
+		$server_path = ''
+	}else{
+		$server_path = 'https://kolmit-sveltekit.vercel.app'
+	}
 
 	let checked = data.check;
 	let tarif;

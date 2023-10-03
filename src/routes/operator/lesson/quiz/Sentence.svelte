@@ -3,11 +3,13 @@
 
 	import Word from './Word.svelte';
 
+	import { server_path } from '$lib/js/stores.js';
+
 	export let text;
 	let textAr, keys;
 	let woorden, focus;
 
-	fetch('/operator/lesson?path=woorden.1_2.json')
+	fetch($server_path+'/operator/lesson?path=woorden.1_2.json')
 		.then((response) => response.json())
 		.then((data) => {
 			woorden = JSON.parse(data.data);

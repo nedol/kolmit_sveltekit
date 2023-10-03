@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import md5 from 'md5';
+	import {path} from "$lib/js/server.path.js"
 
 	import Sentence from './Sentence.svelte';
 	import Control from './Control.svelte';
@@ -19,7 +20,7 @@
 
 	let bottomOpen = true;
 
-	fetch('/operator/lesson?path=' + data.path)
+	fetch(path+'/operator/lesson?path=' + data.path)
 		.then((response) => response.text())
 		.then((data) => {
 			//data = data.replace(/(?:\\[rn])+/g, '<br>'); //.replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;');
@@ -48,7 +49,7 @@
 			return;
 		}
 		if (text[cnt]) {
-			fetch('/operator/lesson?key=' + md5(text[cnt]))
+			fetch(path+'/operator/lesson?key=' + md5(text[cnt]))
 				.then((response) => response.text())
 				.then((data) => {
 					if (JSON.parse(data).audio) {
@@ -81,7 +82,7 @@
 				let key = md5(text[cnt]);
 				audio_data[key] = data;
 
-				fetch('/operator/lesson/', {
+				fetch(path+'/operator/lesson/', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'

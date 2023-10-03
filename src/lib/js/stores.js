@@ -15,18 +15,7 @@ const us_lang = langs.subscribe((data) => {
 	lang = data;
 });
 
-// export let psw = '';
-
-// (async () => {
-// 	try {
-// 		lang = JSON.parse(localStorage.getItem('kolmit'))['lang'];
-// 		psw = JSON.parse(localStorage.getItem('kolmit'))['psw'];
-// 	} catch (ex) {
-// 		localStorage.setItem('kolmit', JSON.stringify({ lang: lang }));
-// 	}
-// 	langs.set(lang);
-// 	pswd.set(psw);
-// })();
+export let server_path = writable();
 
 export let posterst = writable();
 

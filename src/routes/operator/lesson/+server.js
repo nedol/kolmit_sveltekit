@@ -1,5 +1,6 @@
 import { json } from '@sveltejs/kit';
 import fs from 'fs';
+import { path } from '$lib/js/server.path.js';
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url, fetch }) {

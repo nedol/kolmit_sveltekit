@@ -1,6 +1,7 @@
 import md5 from 'md5';
 import { dict } from '$lib/dict/dict';
 import { ice_conf } from '$lib/ice_conf';
+import os from 'os';
 
 global.rtcPull = { user: {}, operator: {} };
 
@@ -49,8 +50,11 @@ export async function load({ fetch, cookies, route, url }) {
 		return resp;
 	}
 
+	let hn = os.hostname();
+
 	return {
 		check: true,
+		hostname: hn,
 		operator: kolmit.operator,
 		abonent: abonent,
 		lang: kolmit.lang,

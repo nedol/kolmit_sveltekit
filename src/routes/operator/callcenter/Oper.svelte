@@ -11,6 +11,10 @@
 
 	import { langs } from '$lib/js/stores.js';
 
+
+	import { server_path } from '$lib/js/stores.js';
+
+
 	export let operator;
 	export let id;
 	export let dep;
@@ -133,7 +137,7 @@
 		par.data = user;
 		par.lang = $langs;
 
-		const res = fetch('/operator/rtc/', {
+		const res = fetch($server_path+'/operator/rtc/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -162,7 +166,7 @@
 			par.abonent = operator.abonent;
 			// par.psw = psw;
 
-			const res = fetch('/operator/rtc/', {
+			const res = fetch($server_path+'/operator/rtc/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
