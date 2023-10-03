@@ -1,1 +1,3 @@
-export { default as component } from "../../../../src/routes/operator/lesson/+layout.svelte";
+import * as universal from "../../../../src/routes/+page.js";
+export { universal };
+export { default as component } from "../../../../src/routes/+page.svelte";
