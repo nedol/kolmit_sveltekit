@@ -46,7 +46,7 @@
 	$signal = new SignalingChannel(email);
 
 	onMount(async () => {
-		// window.$('[data-bs-toggle="tooltip"]').tooltip();
+
 	});
 </script>
 
