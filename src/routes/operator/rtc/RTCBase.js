@@ -17,6 +17,7 @@ export class RTCBase {
 		this.em = operator.em;
 		this.role = operator.role;
 		this.uid = uid;
+		this.status;
 
 		this.pcPull = {};
 		this.main_pc;
@@ -44,7 +45,7 @@ export class RTCBase {
 		par.uid = this.uid;
 		// par.abonent = this.abonent.toLowerCase();
 		this.signal.SendMessage(par, (resp) => {
-			this.status = resp.check;
+			this.status = 'check';
 		});
 	}
 
