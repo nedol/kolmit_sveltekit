@@ -1,6 +1,6 @@
 <script>
-	import Site from './Site.svelte';
+	// import Site from './Site.svelte';
 	export let data;
 </script>
 
-<Site {data} />
+<!-- <Site {data} /> -->

@@ -51,7 +51,7 @@
 </script>
 
 {#if checked}
-	<!-- <Operator {email} {abonent} /> -->
+	<Operator {email} {abonent} />
 {:else}
 	<SelectMenu bind:$langs />
 	<Login {abonent} {user_pic} lang={$langs} bind:checked />
