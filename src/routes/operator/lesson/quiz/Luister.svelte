@@ -81,7 +81,7 @@
 				let key = md5(text[cnt]);
 				audio_data[key] = data;
 
-				fetch('/operator/lesson', {
+				fetch('/operator/lesson/', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'

@@ -222,10 +222,10 @@
 		<!-- src="/kolmit/user/iframe.html?em=oper@komi&abonent={user.email}" -->
 		<!-- {#if edited_display} -->
 		<!-- {@debug dep, user} -->
-		{#if user.email && operator.em !== user.email}
-			<!-- {@debug user} -->
-			<User em={user.email} operator={operator.em} abonent={user.abonent} />
-		{/if}
+		<!-- {#if user.email && operator.em !== user.email} -->
+		<!-- {@debug user} -->
+		<User em={user.email} operator={operator.em} abonent={user.abonent} />
+		<!-- {/if} -->
 		<!-- {/if} -->
 
 		{#if edited_display}

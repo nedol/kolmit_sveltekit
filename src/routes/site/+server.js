@@ -7,18 +7,6 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
-// /** @type {import('./$types').RequestHandler} */
-// export async function POST(event) {
-// 	const body = await event.request.body;
-
-// 	// log all fields
-// 	console.log([...body]);
-
-// 	return json({
-// 		// get a specific field's value
-// 		name: body.get('name') ?? 'world'
-// 	});
-// }
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies, url }) {
 	let abonent = url.searchParams.get('abonent');
