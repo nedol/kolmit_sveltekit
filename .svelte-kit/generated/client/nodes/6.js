@@ -1,3 +1,3 @@
-import * as universal from "../../../../src/routes/site/+page.js";
+import * as universal from "../../../../src/routes/sverdle/how-to-play/+page.js";
 export { universal };
-export { default as component } from "../../../../src/routes/site/+page.svelte";
+export { default as component } from "../../../../src/routes/sverdle/how-to-play/+page.svelte";
