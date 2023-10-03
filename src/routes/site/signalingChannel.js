@@ -16,15 +16,14 @@ export class SignalingChannel {
 	async SendMessage(par, cb) {
 		par.operator = this.operator;
 		let response;
-		try {
-			response = await fetch('/site', {
-				method: 'POST',
-				body: JSON.stringify({ par }),
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-		} catch (ex) {}
+
+		response = await fetch('/site', {
+			method: 'POST',
+			body: JSON.stringify({ par }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
 
 		const { resp } = await response.json();
 		// console.log(resp);
@@ -33,7 +32,7 @@ export class SignalingChannel {
 
 	async CallWaiting(par) {
 		par.func = 'callwaiting';
-		const response = await fetch('/operator/rtc', {
+		const response = await fetch('/operator/rtc/', {
 			method: 'POST',
 			body: JSON.stringify({ par }),
 			headers: {
@@ -55,7 +54,7 @@ export class SignalingChannel {
 	}
 
 	async OperatorWaiting(par) {
-		const response = await fetch('/user/rtc', {
+		const response = await fetch('/user/rtc/', {
 			method: 'POST',
 			body: JSON.stringify({ par }),
 			headers: {
@@ -63,19 +62,15 @@ export class SignalingChannel {
 			}
 		});
 
-		try {
-			const { resp } = await response.json();
+		const { resp } = await response.json();
 
-			let remAr = resp;
-			if (Array.isArray(remAr)) {
-				remAr.map((resp) => {
-					msg_signal_user.set(resp);
-				});
-			} else {
-				msg_signal_user.set(remAr);
-			}
-		} catch (ex) {
-			console.log(ex);
+		let remAr = resp;
+		if (Array.isArray(remAr)) {
+			remAr.map((resp) => {
+				msg_signal_user.set(resp);
+			});
+		} else {
+			msg_signal_user.set(remAr);
 		}
 
 		this.OperatorWaiting(par);
