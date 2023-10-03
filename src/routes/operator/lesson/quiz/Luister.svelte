@@ -126,7 +126,7 @@
 	});
 
 	function onPlay() {
-		selected_sentence.style.fontWeight = 500;
+		if (selected_sentence) selected_sentence.style.fontWeight = 500;
 	}
 	function onClickSentence(ev) {
 		speech = '';

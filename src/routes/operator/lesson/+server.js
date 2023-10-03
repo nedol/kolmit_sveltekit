@@ -1,6 +1,7 @@
 import { json } from '@sveltejs/kit';
 import fs from 'fs';
 
+/** @type {import('./$types').RequestHandler} */
 export async function GET({ url, fetch }) {
 	const path = url.searchParams.get('path');
 	const key = url.searchParams.get('key');

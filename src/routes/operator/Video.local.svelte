@@ -1,14 +1,16 @@
 <script>
 	import { onMount } from 'svelte';
 
-	export let display = 'block';
+	let display = 'block';
 	export let srcObject = '';
 	let lv;
 
-	// import { posterst } from '$lib/js/stores.js';
+	import { posterst } from '$lib/js/stores.js';
+	$: if ($posterst) {
+	}
 
 	onMount(async () => {
-		lv = document.getElementById('localVideo');
+		// lv = document.getElementById('localVideo');
 	});
 
 	$: if (lv && srcObject) {
@@ -22,15 +24,17 @@
 	}
 </script>
 
+{@debug $posterst}
 <video
-	id="localVideo"
+	bind:this={lv}
+	poster={$posterst}
 	autoplay
 	playsinline
 	muted
 	style="
         display: {display};
         position:absolute;
-        top:25px;
+        top:-15px;
         width:100px;
         height: 100px;
         z-index: 20;"

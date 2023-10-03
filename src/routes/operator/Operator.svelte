@@ -81,10 +81,10 @@
 	let container;
 
 	import { posterst } from '$lib/js/stores.js';
-	$: if (container && $posterst) {
-		// console.log($posterst);
-		container.appendChild($posterst);
-	}
+	// $: if (container && $posterst) {
+	// 	// console.log($posterst);
+	// 	// container.appendChild($posterst);
+	// }
 
 	onMount(async () => {
 		try {
@@ -371,6 +371,7 @@
 			>
 		</CallButton>
 		<div
+			class="remote_text_display"
 			style="display:{remote.text.display};
                                 position: absolute;
                                 z-index: 10;
@@ -378,7 +379,10 @@
                                 top: 90px;
                                 left: 2px;"
 		>
-			<p style="font-size: .7em; white-space: nowrap; color:white;margin:auto;text-align: center;">
+			<p
+				class="remote_msg"
+				style="font-size: .7em; white-space: nowrap; color:white;margin:auto;text-align: center;"
+			>
 				{remote.text.msg} <br />
 				{remote.text.name}
 			</p>

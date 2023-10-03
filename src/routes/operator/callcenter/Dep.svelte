@@ -200,11 +200,11 @@
 	{/if}
 	{#if dep.staff}
 		{#each dep.staff as user, u}
-			<!-- {#if /*user.email !== operator.em ||!user.email && owner === operator.em*/ } -->
-			<!-- {user_status.push({ user: status })} -->
-			<Oper bind:status {operator} bind:dep bind:user {update} {readonly} />
-			<!-- <br /> -->
-			<!-- {/if} -->
+			{#if user.email !== operator.em || (!user.email && owner === operator.em)}
+				<!-- {user_status.push({ user: status })} -->
+				<Oper bind:status {operator} bind:dep bind:user {update} {readonly} />
+				<!-- <br /> -->
+			{/if}
 		{/each}
 	{/if}
 	{#if edited_display}

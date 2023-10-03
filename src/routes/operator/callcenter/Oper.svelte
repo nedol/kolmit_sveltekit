@@ -3,7 +3,7 @@
 
 	import loadImage from 'blueimp-load-image/js/load-image.js';
 	import 'blueimp-load-image/js/load-image-scale.js';
-
+	import VideoLocal from '../Video.local.svelte';
 	import User from '../../user/User.svelte';
 
 	import Forward from './Forward.svelte';
@@ -76,7 +76,7 @@
 
 	$: if (user.email && operator.em === user.email) {
 		console.log(operator.em + ' ' + user.email);
-		$posterst = oper_admin_div;
+		$posterst = user_pic; //oper_admin_div;
 	}
 
 	onMount(() => {});
