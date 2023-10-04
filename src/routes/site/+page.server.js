@@ -17,6 +17,8 @@ export async function load({ fetch, cookies, route, url }) {
 
 	CreatePool();
 
+	let hn = os.hostname();
+
 	let res;
 	let resp = {
 		dict: dict,
@@ -30,6 +32,7 @@ export async function load({ fetch, cookies, route, url }) {
 			resp.check = false;
 			resp.abonent = abonent;
 			resp.users = '{}';
+			resp.hostname = hn;
 			return resp;
 		}
 	} catch (ex) {
@@ -49,8 +52,6 @@ export async function load({ fetch, cookies, route, url }) {
 		resp.users = '{}';
 		return resp;
 	}
-
-	let hn = os.hostname();
 
 	return {
 		check: true,

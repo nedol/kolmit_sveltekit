@@ -8,28 +8,30 @@ import adapter from '@sveltejs/adapter-vercel';
 const config = {
 	// preprocess: preprocess(),
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			runtime: 'nodejs18.x'
+		})
 
-		prerender: {
-			// prerender: {
-			//     // This can be false if you're using a fallback (i.e. SPA mode)
-			// default: false
-			// }
-			handleHttpError: ({ path, referrer, message }) => {
-				// ignore deliberate link to shiny 404 page
-				if (path === '/not-found' && referrer === '/site') {
-					return;
-				}
+		// prerender: {
+		// 	// prerender: {
+		// 	//     // This can be false if you're using a fallback (i.e. SPA mode)
+		// 	// default: false
+		// 	// }
+		// 	handleHttpError: ({ path, referrer, message }) => {
+		// 		// ignore deliberate link to shiny 404 page
+		// 		if (path === '/not-found' && referrer === '/site') {
+		// 			return;
+		// 		}
 
-				// if (path === '/site') {
-				// 	return;
-				// }
+		// 		// if (path === '/site') {
+		// 		// 	return;
+		// 		// }
 
-				// return;
-				// otherwise fail the build
-				throw new Error(message);
-			}
-		}
+		// 		// return;
+		// 		// otherwise fail the build
+		// 		throw new Error(message);
+		// 	}
+		// }
 
 		// serviceWorker: {
 		// 	register: false

@@ -27,14 +27,16 @@ export async function POST({ request, cookies, url }) {
 			if (q.email && q.psw) {
 				if (CreateOperator(q)) {
 					cookies.set(
-						// 'abonent:' + q.abonent,
+						'abonent:' + q.abonent,
 						JSON.stringify({
 							operator: q.email,
 							abonent: q.abonent,
 							psw: q.psw,
 							lang: q.lang
-						})
+						}),
+						{ maxAge: 60 * 60 * 24 * 30 }
 					);
+
 					resp = JSON.stringify({
 						func: par.func,
 						operator: q.email,

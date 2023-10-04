@@ -6,7 +6,7 @@
 
 	export let user_name, user_pic;
 
-	export let lang, checked, abonent, upload, files;
+	export let lang = 'en', checked, abonent, upload, files;
 	let email = '',
 		psw = '',
 		psw_2 = '';

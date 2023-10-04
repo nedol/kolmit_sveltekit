@@ -2,6 +2,9 @@
 
 import { moment } from 'moment';
 
+import pkg from 'lodash';
+const { find, remove, findIndex } = pkg;
+
 import md5 from 'md5';
 import { writable } from 'svelte/store';
 
@@ -16,6 +19,13 @@ const { Email } = pkg_e;
 
 // import { pool } from 'svelte/store';
 let pool = '';
+
+export async function CreatePool() {
+	pool = createPool({
+		connectionString:
+			'postgres://default:VAkLCRpUw1H0@ep-noisy-cell-09055546-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb'
+	});
+}
 
 function getHash(par) {
 	return md5(par + par);
@@ -58,16 +68,31 @@ function SendEmail(q, new_email) {
 
 export async function CreateOperator(par) {
 	try {
-		let res = await pool.sql`
-		SELECT operators.operator as operator, users.users as users FROM operators
-		INNER JOIN users ON (operators.abonent = users.operator)
-		WHERE operators.psw = ${par.psw} AND operators.operator=${par.email} AND operators.abonent =${par.abonent}`;
+		let res =
+			await pool.sql`SELECT operators.operator as operator, users.users as users FROM operators
+		INNER JOIN users ON (users.operator = operators.abonent)
+		WHERE operators.psw = ${par.psw} AND operators.operator=${par.email} 
+		AND operators.abonent =${par.abonent}`;
 		if (res.rows[0]) {
 			let users = JSON.parse(res.rows[0].users);
 			par.dep_id = '0';
-			par.data = _.find(users[0], { email: par.email });
-			par.data.picture = { medium: par.img };
-			return ChangeOperator(par);
+			let oper = find(users[0].staff, { email: par.email });
+			if (!oper) {
+				oper = {
+					id: 0,
+					role: 'operator',
+					email: par.email,
+					picture: {
+						medium: par.img
+					}
+				};
+
+				users[0].staff.push(oper);
+			} else {
+				oper.picture = { medium: par.img };
+			}
+
+			updateUsers(users, par);
 		} else {
 			return AddOperator(par);
 		}
@@ -76,11 +101,15 @@ export async function CreateOperator(par) {
 	}
 }
 
-export async function CreatePool() {
-	pool = createPool({
-		connectionString:
-			'postgres://default:VAkLCRpUw1H0@ep-noisy-cell-09055546-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb'
-	});
+async function updateUsers(users, q) {
+	let usrs = JSON.stringify(users);
+
+	let res = await pool.sql`UPDATE users SET
+		users=${usrs}, 
+		last=CURRENT_TIMESTAMP, 
+		editor=${q.abonent || q.email}
+		WHERE  operator=${q.abonent || q.email}`;
+	return JSON.stringify({ func: q.func, dep: users[0] });
 }
 
 export async function GetUsers(par) {
@@ -142,41 +171,49 @@ export async function CheckOperator(q) {
 	}
 }
 
-async function updateUsers(users, q) {
+async function insertUsers(users, q) {
 	let usrs = JSON.stringify(users);
 
-	let res = await pool.sql`UPDATE users SET
-		users=${usrs}, 
-		last=CURRENT_TIMESTAMP, 
-		editor=${q.abonent || q.em}
-		WHERE  operator=${q.abonent || q.em}`;
-	return JSON.stringify({ func: q.func, dep: users[0] });
+	let res = await pool.sql`INSERT INTO users
+		(operator, users, last, editor) VALUES (${q.email},
+		${usrs}, CURRENT_TIMESTAMP, ${q.email})`;
+
+	return JSON.stringify({ func: q.func, res: res });
 }
 
 export async function AddOperator(q) {
-	let res = await pool.sql` 
-		SELECT *, (SELECT users FROM users WHERE operator=?) as users
-		FROM  operators as oper 
-		WHERE oper.operator=?  AND abonent=? AND psw=?
-	`;
-	let users = [];
+	let res = await pool.sql`SELECT users 
+	FROM users 
+	INNER JOIN operators ON (operators.abonent = users.operator)
+	WHERE operators.abonent=${q.abonent}`;
+
+	let users = {};
 	if (res.rows[0]) {
-		users = JSON.parse(res.rows[0].users);
-		let dep = _.find(users, { id: q.dep_id });
-
-		let item = {
-			id: dep.staff.length + 1,
-			desc: '',
-			name: '',
-			role: 'operator',
-			email: '',
-			picture: { medium: { user_pic } }
-		};
-
-		dep.staff.push(item);
-
-		return updateUsers(users, q);
+		users = res.rows[0].users;
 	}
+
+	await pool.sql`BEGIN;`;
+
+	try {
+		let res = await pool.sql`UPDATE users SET
+		users=${users}, 
+		last=CURRENT_TIMESTAMP, 
+		editor=${q.email}
+		WHERE  operator=${q.abonent}`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+	try {
+		let res = await pool.sql`INSERT INTO operators
+		(operator, abonent, psw, tarif) VALUES (${q.email}, ${q.abonent}, ${q.psw},'free')`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+
+	await pool.sql`COMMIT;`;
+	return JSON.stringify({ func: q.func, dep: users });
 }
 
 export async function ChangeDep(q) {
@@ -187,7 +224,7 @@ export async function ChangeDep(q) {
 
 	if (res.rows[0]) {
 		let users = JSON.parse(res.rows[0].users);
-		let ind = _.findIndex(users, { id: String(q.dep.id) });
+		let ind = findIndex(users, { id: String(q.dep.id) });
 		if (ind === -1) return;
 		users[ind] = q.dep;
 
@@ -206,7 +243,7 @@ export async function AddDep(q) {
 		let users = [];
 		if (res.rows[0]) {
 			users = JSON.parse(res.rows[0].users);
-			let ind = _.findIndex(users, { id: String(q.id) });
+			let ind = findIndex(users, { id: String(q.id) });
 			if (ind === -1) return;
 			users[q.id + 1] = {
 				id: String(q.id + 1),
@@ -234,7 +271,7 @@ export async function RemDep(q) {
 
 	if (res.rows[0]) {
 		let users = JSON.parse(res.rows[0].users);
-		_.remove(users, (n) => {
+		remove(users, (n) => {
 			return n.id === q.dep;
 		});
 		return updateUsers(users, q);
@@ -249,25 +286,27 @@ export async function ChangeOperator(q) {
 		WHERE oper.operator=${q.abonent || q.em}  AND abonent=${q.abonent} AND psw=${q.psw}`;
 
 	if (res.rows[0]) {
-		let users = [];
-		users = JSON.parse(res.rows[0].users);
-		let dep = _.find(users, { id: q.dep_id });
-		let user;
-		if (q.data.role === 'admin') {
-			user = dep['admin'];
-		} else {
-			let ind = _.findIndex(dep.staff, { id: q.data.id });
-			user = dep.staff[ind];
-		}
+		try {
+			let users = [];
+			users = JSON.parse(res.rows[0].users);
+			let dep = find(users, { id: q.dep_id });
+			let user;
+			if (q.data.role === 'admin') {
+				user = dep['admin'];
+			} else {
+				let ind = findIndex(dep.staff, { id: q.data.id });
+				user = dep.staff[ind];
+			}
 
-		if (q.data.alias) user.alias = q.data.alias;
-		if (q.data.picture) user.picture = q.data.picture;
-		if (q.data.email) {
-			if (q.data.email !== user.email) SendEmail(q, q.data.email);
-			user.email = q.data.email;
-		}
-		if (q.data.name) user.name = q.data.name;
-		if (q.data.desc) user.desc = q.data.desc;
+			if (q.data.alias) user.alias = q.data.alias;
+			if (q.data.picture) user.picture = q.data.picture;
+			if (q.data.email) {
+				if (q.data.email !== user.email) SendEmail(q, q.data.email);
+				user.email = q.data.email;
+			}
+			if (q.data.name) user.name = q.data.name;
+			if (q.data.desc) user.desc = q.data.desc;
+		} catch (ex) {}
 
 		return updateUsers(users, q);
 	}
@@ -281,8 +320,8 @@ export async function RemoveOperator(q) {
 		let users = [];
 		if (res.rows[0]) {
 			users = JSON.parse(res.rows[0].users);
-			let dep = _.find(users, { id: q.dep });
-			let ind = _.findIndex(dep.staff, { id: q.id });
+			let dep = find(users, { id: q.dep });
+			let ind = findIndex(dep.staff, { id: q.id });
 			dep.staff.splice(ind, 1);
 
 			return updateUsers(users, q);

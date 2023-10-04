@@ -24,6 +24,7 @@ export class SignalingChannel {
 
 		response = await fetch(server + '/site', {
 			method: 'POST',
+			mode: 'no-cors',
 			body: JSON.stringify({ par }),
 			headers: {
 				'Content-Type': 'application/json'
@@ -39,6 +40,7 @@ export class SignalingChannel {
 		par.func = 'callwaiting';
 		const response = await fetch(server + '/operator/rtc/', {
 			method: 'POST',
+			mode: 'no-cors',
 			body: JSON.stringify({ par }),
 			headers: {
 				'Content-Type': 'application/json'
@@ -61,6 +63,7 @@ export class SignalingChannel {
 	async OperatorWaiting(par) {
 		const response = await fetch(server + '/user/rtc/', {
 			method: 'POST',
+			mode: 'no-cors',
 			body: JSON.stringify({ par }),
 			headers: {
 				'Content-Type': 'application/json'
