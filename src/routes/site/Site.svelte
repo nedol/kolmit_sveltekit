@@ -16,8 +16,8 @@
 	$:if(data.hostname==='nedol'){
 		$server_path = 'http://localhost:5173'
 	}else{
-		// $server_path = 'https://kolmit-sveltekit.vercel.app'
-		$server_path = 'http://localhost:5173'
+		$server_path = 'https://kolmit-sveltekit.vercel.app'
+		// $server_path = 'http://localhost:5173'
 	}
 
 	let checked = data.check;
