@@ -11,14 +11,6 @@
 
 	export let data;
 
-	import { server_path } from '$lib/js/stores.js';
-
-	$:if(data.hostname==='nedol'){
-		$server_path = 'http://localhost:5173'
-	}else{
-		$server_path = 'https://kolmit-sveltekit.vercel.app'
-		// $server_path = 'http://localhost:5173'
-	}
 
 	let checked = data.check;
 	let tarif;
@@ -29,9 +21,16 @@
 		abonent = data.abonent;
 	let hash = null;
 
-	import { SignalingChannel } from './signalingChannel';
 
+	import { SignalingChannel } from './signalingChannel.js';
 	import { signal } from '$lib/js/stores.js';
+	$signal = new SignalingChannel(email);
+
+	import { server_path } from '$lib/js/stores.js';
+
+	$server_path = data.host;
+
+
 
 	import { langs } from '$lib/js/stores.js';
 	$langs = data.lang;
@@ -46,7 +45,6 @@
 	$users = JSON.parse(data.users);
 	setContext('users', $users);
 
-	$signal = new SignalingChannel(email);
 
 	onMount(async () => {
 
@@ -54,10 +52,10 @@
 </script>
 
 {#if checked}
-	<!-- <Operator {email} {abonent} /> -->
+	<Operator {email} {abonent} />
 {:else}
 	<SelectMenu bind:$langs />
-	<Login {abonent} {user_pic} lang={$langs} bind:checked />
+	<Login data-sveltekit-prefetch {abonent} {user_pic} lang={$langs} bind:checked />
 {/if}
 
 <style>

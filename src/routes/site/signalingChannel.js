@@ -7,7 +7,7 @@ import { msg_signal_oper, msg_signal_user } from '$lib/js/stores.js';
 let server = '';
 import { server_path } from '$lib/js/stores.js';
 server_path.subscribe((data) => {
-	server = data;
+	if (data) server = data;
 });
 // export const msg = writable('');
 
@@ -21,7 +21,7 @@ export class SignalingChannel {
 	async SendMessage(par, cb) {
 		par.operator = this.operator;
 		let response;
-
+		console.log('server:' + server);
 		response = await fetch(server + '/site', {
 			method: 'POST',
 			mode: 'no-cors',
@@ -38,7 +38,7 @@ export class SignalingChannel {
 
 	async CallWaiting(par) {
 		par.func = 'callwaiting';
-		const response = await fetch(server + '/operator/rtc/', {
+		const response = await fetch(server + '/operator/', {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),
@@ -61,7 +61,7 @@ export class SignalingChannel {
 	}
 
 	async OperatorWaiting(par) {
-		const response = await fetch(server + '/user/rtc/', {
+		const response = await fetch(server + '/user/', {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),

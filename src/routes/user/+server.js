@@ -33,9 +33,10 @@ export async function POST(event) {
 }
 function OperatorWaiting(q, resolve) {
 	try {
-		if (!rtcPull[q.type][q.abonent]) rtcPull[q.type][q.abonent] = {};
-		if (!rtcPull[q.type][q.abonent][q.em]) rtcPull[q.type][q.abonent][q.em] = { resolve: '' };
-		rtcPull[q.type][q.abonent][q.em].resolve = resolve;
+		if (!global.rtcPull[q.type][q.abonent]) global.rtcPull[q.type][q.abonent] = {};
+		if (!global.rtcPull[q.type][q.abonent][q.em])
+			global.rtcPull[q.type][q.abonent][q.em] = { resolve: '' };
+		global.rtcPull[q.type][q.abonent][q.em].resolve = resolve;
 	} catch (ex) {
 		console.log();
 	}

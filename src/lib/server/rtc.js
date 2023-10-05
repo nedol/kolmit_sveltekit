@@ -3,17 +3,17 @@ export function SetParams(q) {
 		rtcPull[q.type][q.abonent] = {};
 	}
 
-	if (!rtcPull[q.type][q.abonent][q.operator]) rtcPull[q.type][q.abonent][q.operator] = [];
+	if (!rtcPull[q.type][q.abonent][q.operator]) global.rtcPull[q.type][q.abonent][q.operator] = [];
 
 	let item;
 	if (q.type === 'user') {
 		item = _.find(rtcPull[q.type][q.abonent][q.operator], { uid: q.uid });
-	} else item = rtcPull[q.type][q.abonent][q.operator][0];
+	} else item = global.rtcPull[q.type][q.abonent][q.operator][0];
 
 	if (!item) {
 		item = {};
 		item.cand = [];
-		rtcPull[q.type][q.abonent][q.operator].push(item);
+		global.rtcPull[q.type][q.abonent][q.operator].push(item);
 	}
 
 	item.uid = q.uid;
@@ -50,5 +50,5 @@ export function SetParams(q) {
 	// };
 }
 export function CallWaiting(q, resolve) {
-	rtcPull[q.type][q.abonent][q.operator].resolve = resolve;
+	global.rtcPull[q.type][q.abonent][q.operator].resolve = resolve;
 }

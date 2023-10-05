@@ -137,7 +137,7 @@
 		par.data = user;
 		par.lang = $langs;
 
-		const res = fetch($server_path+'/operator/rtc/', {
+		const res = fetch($server_path+'/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -166,7 +166,7 @@
 			par.abonent = operator.abonent;
 			// par.psw = psw;
 
-			const res = fetch($server_path+'/operator/rtc/', {
+			const res = fetch($server_path+'/operator/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

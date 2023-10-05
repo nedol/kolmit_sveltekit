@@ -19,12 +19,13 @@ const { Email } = pkg_e;
 
 // import { pool } from 'svelte/store';
 let pool = '';
+let conStr = {
+	connectionString:
+		'postgres://default:VAkLCRpUw1H0@ep-noisy-cell-09055546-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb'
+};
 
 export async function CreatePool() {
-	pool = createPool({
-		connectionString:
-			'postgres://default:VAkLCRpUw1H0@ep-noisy-cell-09055546-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb'
-	});
+	pool = await createPool(conStr);
 }
 
 function getHash(par) {
@@ -116,17 +117,15 @@ export async function GetUsers(par) {
 	let users = '';
 
 	if (par.abonent) {
-		users = await pool.sql` 
-			SELECT tarif, users
+		users = await pool.sql`SELECT tarif, users
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator)
-			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  AND operators.psw=${par.psw}`;
+			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  AND operators.psw=${par.psw};`;
 	} else {
-		users = await pool.sql`
-			SELECT tarif, users 
+		users = await pool.sql`SELECT tarif, users 
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator = operators.operator) 
-			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} AND operators.psw=${par.psw}`;
+			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} AND operators.psw=${par.psw};`;
 	}
 
 	return users.rows[0];
@@ -134,20 +133,25 @@ export async function GetUsers(par) {
 
 export async function CheckOperator(q) {
 	let result;
+
+	console.log(pool.sql);
+
 	if (q.psw && q.hash && getHash(q.em) === q.hash) {
-		await pool.sql`INSERT INTO operators (psw, operator, abonent, tarif) VALUES(${q.psw}, ${
-			q.em
-		}, ${q.abonent}, ${JSON.stringify({ name: 'free' })})`;
+		await pool.sql`
+		INSERT INTO operators (psw, operator, abonent, tarif) VALUES(${q.psw}, ${q.em}, ${
+			q.abonent
+		}, ${JSON.stringify({ name: 'free' })})`;
 	}
 
 	if (q.em) {
 		if (q.abonent) {
-			result =
-				await pool.sql`SELECT *, (SELECT tarif FROM operators WHERE operator=${q.abonent} AND abonent=operator) as tarif 
+			result = await pool.sql`
+				SELECT *, (SELECT tarif FROM operators WHERE operator=${q.abonent} AND abonent=operator) as tarif 
 			FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
 		} else {
 			result = result.rows;
-			await pool.sql`SELECT * FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
+			await pool.sql`
+			SELECT * FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
 		}
 
 		result = result.rows;
@@ -165,7 +169,8 @@ export async function CheckOperator(q) {
 			return JSON.stringify({ func: q.func, check: false });
 		}
 	} else {
-		result = await pool.sql`SELECT * FROM  operators WHERE operator=${q.em}`;
+		result = await pool.sql`
+		SELECT * FROM  operators WHERE operator=${q.em}`;
 
 		return result.rows;
 	}

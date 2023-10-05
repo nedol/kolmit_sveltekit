@@ -17,7 +17,7 @@ export async function load({ fetch, cookies, route, url }) {
 
 	CreatePool();
 
-	let hn = os.hostname();
+	let host = 'http://localhost:3000'; //
 
 	let res;
 	let resp = {
@@ -55,7 +55,7 @@ export async function load({ fetch, cookies, route, url }) {
 
 	return {
 		check: true,
-		hostname: hn,
+		host: host,
 		operator: kolmit.operator,
 		abonent: abonent,
 		lang: kolmit.lang,

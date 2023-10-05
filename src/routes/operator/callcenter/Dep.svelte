@@ -88,7 +88,7 @@
 		par.em = operator.email;
 		par.dep = dep;
 
-		const res = fetch($server_path+'/operator/rtc/', {
+		const res = fetch($server_path+'/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -114,7 +114,7 @@
 		par.lang = $langs;
 		par.dep_id = dep.id;
 
-		const res = fetch($server_path+'/operator/rtc/', {
+		const res = fetch($server_path+'/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
