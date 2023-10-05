@@ -17,7 +17,7 @@ export async function load({ fetch, cookies, route, url }) {
 
 	CreatePool();
 
-	let host = 'http://localhost:3000'; //
+	let host = url.origin;
 
 	let res;
 	let resp = {
