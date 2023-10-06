@@ -11,6 +11,12 @@ server_path.subscribe((data) => {
 });
 // export const msg = writable('');
 
+const token = 'CPkJ1MYWC7DMlvw6MvtV0yBw';
+const headers = {
+	'Content-Type': 'application/json',
+	Authorization: `Bearer ${token}`
+};
+
 export class SignalingChannel {
 	constructor(operator) {
 		this.msg_signal_oper = msg_signal_oper;
@@ -26,9 +32,7 @@ export class SignalingChannel {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),
-			headers: {
-				'Content-Type': 'application/json'
-			}
+			headers: { headers }
 		});
 
 		const { resp } = await response.json();
@@ -42,9 +46,7 @@ export class SignalingChannel {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),
-			headers: {
-				'Content-Type': 'application/json'
-			}
+			headers: { headers }
 		});
 
 		const { resp } = await response.json();
@@ -65,9 +67,7 @@ export class SignalingChannel {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),
-			headers: {
-				'Content-Type': 'application/json'
-			}
+			headers: { headers }
 		});
 
 		const { resp } = await response.json();
