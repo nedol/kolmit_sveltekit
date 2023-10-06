@@ -21,7 +21,7 @@ export async function load({ fetch, cookies, route, url }) {
 
 	let pool = await prom;
 
-	let host = 'http://localhost:3000'; //url.origin; //'https://kolmit-sveltekit-nedol.vercel.app'; //
+	let host = url.origin; //'http://localhost:3000'; //'https://kolmit-sveltekit-nedol.vercel.app'; //
 
 	let res;
 	let resp = {
