@@ -15,7 +15,11 @@ export async function load({ fetch, cookies, route, url }) {
 	let abonent = url.searchParams.get('abonent');
 	// let lang = url.searchParams.get('lang');
 
-	CreatePool();
+	let prom = new Promise((resolve, reject) => {
+		CreatePool(resolve);
+	});
+
+	let pool = await prom;
 
 	let host = url.origin;
 

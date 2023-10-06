@@ -24,8 +24,9 @@ let conStr = {
 		'postgres://default:VAkLCRpUw1H0@ep-noisy-cell-09055546-pooler.eu-central-1.postgres.vercel-storage.com:5432/verceldb'
 };
 
-export async function CreatePool() {
+export async function CreatePool(resolve) {
 	pool = await createPool(conStr);
+	resolve(pool);
 }
 
 function getHash(par) {
