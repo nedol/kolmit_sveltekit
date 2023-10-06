@@ -21,7 +21,7 @@ export async function load({ fetch, cookies, route, url }) {
 
 	let pool = await prom;
 
-	let host = url.origin;
+	let host = 'http://localhost:3000'; //url.origin; //'https://kolmit-sveltekit-nedol.vercel.app'; //
 
 	let res;
 	let resp = {
@@ -36,7 +36,7 @@ export async function load({ fetch, cookies, route, url }) {
 			resp.check = false;
 			resp.abonent = abonent;
 			resp.users = '{}';
-			resp.hostname = hn;
+			resp.host = host;
 			return resp;
 		}
 	} catch (ex) {
@@ -51,11 +51,11 @@ export async function load({ fetch, cookies, route, url }) {
 
 	res = await GetUsers(params);
 
-	if (!res) {
-		(resp.operator = kolmit.operator), (resp.abonent = kolmit.abonent), (resp.check = true);
-		resp.users = '{}';
-		return resp;
-	}
+	// if (!res) {
+	// 	(resp.operator = kolmit.operator), (resp.abonent = kolmit.abonent), (resp.check = true);
+	// 	resp.users = '{}';
+	// 	return resp;
+	// }
 
 	return {
 		check: true,

@@ -11,7 +11,6 @@
 
 	export let data;
 
-
 	let checked = data.check;
 	let tarif;
 
@@ -21,7 +20,6 @@
 		abonent = data.abonent;
 	let hash = null;
 
-
 	import { SignalingChannel } from './signalingChannel.js';
 	import { signal } from '$lib/js/stores.js';
 	$signal = new SignalingChannel(email);
@@ -29,8 +27,6 @@
 	import { server_path } from '$lib/js/stores.js';
 
 	$server_path = data.host;
-
-
 
 	import { langs } from '$lib/js/stores.js';
 	$langs = data.lang;
@@ -45,10 +41,7 @@
 	$users = JSON.parse(data.users);
 	setContext('users', $users);
 
-
-	onMount(async () => {
-
-	});
+	onMount(async () => {});
 </script>
 
 {#if checked}
