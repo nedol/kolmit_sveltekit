@@ -10,7 +10,10 @@ const config = {
 	kit: {
 		adapter: adapter({
 			runtime: 'nodejs18.x'
-		})
+		}),
+		csrf: {
+			checkOrigin: false
+		}
 
 		// prerender: {
 		// 	// prerender: {
