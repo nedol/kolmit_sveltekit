@@ -14,10 +14,10 @@ export const nodes = [
 export const server_loads = [0];
 
 export const dictionary = {
-		"/about": [3],
-		"/operator": [~4],
-		"/operator/lesson/luister": [5,[2]],
-		"/site": [~6],
+		"/": [~3],
+		"/about": [4],
+		"/lesson": [~5,[2]],
+		"/lesson/luister": [6,[2]],
 		"/user": [~7]
 	};
 

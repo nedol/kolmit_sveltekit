@@ -336,3 +336,60 @@ export async function RemoveOperator(q) {
 		return;
 	}
 }
+
+export async function GetText(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`SELECT text FROM texts
+		WHERE level= ${q.level} AND theme=${q.theme} AND owner=${q.owner}`;
+		//debugger;
+		return res.rows[0].text;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+}
+
+export async function GetDict(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`SELECT words FROM dicts
+		WHERE type=${q.type} AND level= ${q.level} AND theme=${q.theme} AND owner=${q.owner}`;
+		//debugger;
+		return res.rows[0].words;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		debugger;
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+}
+
+export async function WriteSpeech(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`INSERT INTO speech
+		(admin,key, data) VALUES (${q.admin}, ${q.key}, ${q.data})`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+	await pool.sql`COMMIT;`;
+}
+
+export async function ReadSpeech(q) {
+	//debugger;
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`SELECT data FROM speech
+		WHERE key= ${q.key}`;
+		if (res.rows[0]) {
+			return res.rows[0].data;
+		}
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify('');
+	}
+}

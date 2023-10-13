@@ -4,7 +4,6 @@
 	import { onMount } from 'svelte';
 	import Dep from './Dep.svelte';
 
-
 	import pkg from 'lodash';
 	const { forEach, findIndex } = pkg;
 
@@ -22,7 +21,6 @@
 	let cnt;
 
 	import { server_path } from '$lib/js/stores.js';
-
 
 	import { langs } from '$lib/js/stores.js';
 	let lang = $langs;
@@ -57,7 +55,7 @@
 			par.abonent = operator.abonent;
 			par.id = cnt;
 
-			const res = fetch($server_path+'/operator/', {
+			const res = fetch('/operator/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -89,7 +87,7 @@
 			par.abonent = operator.abonent;
 			par.uid = operator.uid;
 
-			const res = fetch($server_path+'/operator/', {
+			const res = fetch('/operator/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

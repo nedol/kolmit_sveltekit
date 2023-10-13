@@ -27,8 +27,8 @@ export class SignalingChannel {
 	async SendMessage(par, cb) {
 		par.operator = this.operator;
 		let response;
-		console.log('server:' + server);
-		response = await fetch(server + '/site', {
+
+		response = await fetch('/site', {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),
@@ -42,7 +42,7 @@ export class SignalingChannel {
 
 	async CallWaiting(par) {
 		par.func = 'callwaiting';
-		const response = await fetch(server + '/operator/', {
+		const response = await fetch('/operator/', {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),
@@ -63,7 +63,7 @@ export class SignalingChannel {
 	}
 
 	async OperatorWaiting(par) {
-		const response = await fetch(server + '/user/', {
+		const response = await fetch('/user/', {
 			method: 'POST',
 			mode: 'no-cors',
 			body: JSON.stringify({ par }),

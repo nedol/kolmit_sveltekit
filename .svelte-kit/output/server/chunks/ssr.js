@@ -22,6 +22,10 @@ function subscribe(store, ...callbacks) {
   const unsub = store.subscribe(...callbacks);
   return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
 }
+function set_store_value(store, ret, value) {
+  store.set(value);
+  return ret;
+}
 let current_component;
 function set_current_component(component) {
   current_component = component;
@@ -30,9 +34,6 @@ function get_current_component() {
   if (!current_component)
     throw new Error("Function called outside component initialization");
   return current_component;
-}
-function onDestroy(fn) {
-  get_current_component().$$.on_destroy.push(fn);
 }
 function setContext(key, context) {
   get_current_component().$$.context.set(key, context);
@@ -126,15 +127,15 @@ function add_attribute(name, value, boolean) {
 }
 export {
   subscribe as a,
-  add_attribute as b,
+  set_store_value as b,
   create_ssr_component as c,
-  each as d,
+  add_attribute as d,
   escape as e,
-  safe_not_equal as f,
+  each as f,
   getContext as g,
+  safe_not_equal as h,
   missing_component as m,
   noop as n,
-  onDestroy as o,
   setContext as s,
   validate_component as v
 };

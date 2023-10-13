@@ -11,9 +11,7 @@
 
 	import { langs } from '$lib/js/stores.js';
 
-
 	import { server_path } from '$lib/js/stores.js';
-
 
 	export let operator;
 	export let id;
@@ -137,7 +135,7 @@
 		par.data = user;
 		par.lang = $langs;
 
-		const res = fetch($server_path+'/operator/', {
+		const res = fetch('/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -166,7 +164,7 @@
 			par.abonent = operator.abonent;
 			// par.psw = psw;
 
-			const res = fetch($server_path+'/operator/', {
+			const res = fetch('/operator/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

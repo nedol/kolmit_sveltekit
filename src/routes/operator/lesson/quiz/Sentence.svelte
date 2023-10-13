@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import Word from './Word.svelte';
+	import Word from '../luister/Word.svelte';
 
 	import { server_path } from '$lib/js/stores.js';
 
@@ -9,7 +9,7 @@
 	let textAr, keys;
 	let woorden, focus;
 
-	fetch($server_path+'/operator/lesson?path=woorden.1_2.json')
+	fetch('/operator/lesson?path=woorden.1_2.json')
 		.then((response) => response.json())
 		.then((data) => {
 			woorden = JSON.parse(data.data);
@@ -49,7 +49,7 @@
 	}
 
 	onMount(() => {
-		focus.scrollIntoView();
+		// focus.scrollIntoView();
 	});
 </script>
 

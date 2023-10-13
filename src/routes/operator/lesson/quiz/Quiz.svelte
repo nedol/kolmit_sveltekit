@@ -1,7 +1,7 @@
 <script>
 	import Volgorde from './Volgorde.svelte';
 	import Paar from './Paar.svelte';
-	import Luister from './Luister.svelte';
+	import Text from '../text/Text.svelte';
 
 	export let data;
 	const quiz = data.quiz;
@@ -9,10 +9,10 @@
 
 <div />
 <!-- {@debug quiz} -->
-{#if quiz === 'volgorde'}
+{#if quiz === 'sequence'}
 	<Volgorde data={data.zinnen} />
-{:else if quiz === 'paar'}
+{:else if quiz === 'pair'}
 	<Paar />
 {:else}
-	<Luister {data} />
+	<Text {data} />
 {/if}

@@ -7,6 +7,15 @@
     "isEntry": true,
     "src": ".svelte-kit/generated/server/internal.js"
   },
+  "_db.js": {
+    "file": "chunks/db.js",
+    "imports": [
+      "_index.js"
+    ]
+  },
+  "_dict.js": {
+    "file": "chunks/dict.js"
+  },
   "_index.js": {
     "file": "chunks/index.js"
   },
@@ -32,6 +41,12 @@
     "file": "chunks/stores.js",
     "imports": [
       "_ssr.js"
+    ]
+  },
+  "_stores2.js": {
+    "file": "chunks/stores2.js",
+    "imports": [
+      "_index2.js"
     ]
   },
   "node_modules/@fontsource/fira-mono/files/fira-mono-all-400-normal.woff": {
@@ -86,21 +101,25 @@
     "file": "_app/immutable/assets/github.1ea8d62e.svg",
     "src": "src/lib/images/github.svg"
   },
+  "src/lib/images/operator.svg": {
+    "file": "_app/immutable/assets/operator.7238a518.svg",
+    "src": "src/lib/images/operator.svg"
+  },
   "src/lib/images/svelte-logo.svg": {
     "file": "_app/immutable/assets/svelte-logo.87df40b8.svg",
     "src": "src/lib/images/svelte-logo.svg"
   },
-  "src/lib/images/svelte-welcome.png": {
-    "file": "_app/immutable/assets/svelte-welcome.6c300099.png",
-    "src": "src/lib/images/svelte-welcome.png"
-  },
-  "src/lib/images/svelte-welcome.webp": {
-    "file": "_app/immutable/assets/svelte-welcome.c18bcf5a.webp",
-    "src": "src/lib/images/svelte-welcome.webp"
-  },
   "src/routes/+layout.css": {
-    "file": "_app/immutable/assets/_layout.43c3669c.css",
+    "file": "_app/immutable/assets/_layout.dbe33460.css",
     "src": "src/routes/+layout.css"
+  },
+  "src/routes/+layout.server.js": {
+    "file": "entries/pages/_layout.server.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.server.js"
   },
   "src/routes/+layout.svelte": {
     "assets": [
@@ -113,18 +132,19 @@
       "_app/immutable/assets/fira-mono-latin-400-normal.e43b3538.woff2"
     ],
     "css": [
-      "_app/immutable/assets/_layout.43c3669c.css"
+      "_app/immutable/assets/_layout.dbe33460.css"
     ],
     "file": "entries/pages/_layout.svelte.js",
     "imports": [
       "_ssr.js",
-      "_stores.js"
+      "_stores.js",
+      "_stores2.js"
     ],
     "isEntry": true,
     "src": "src/routes/+layout.svelte"
   },
   "src/routes/+page.css": {
-    "file": "_app/immutable/assets/_page.265a38f0.css",
+    "file": "_app/immutable/assets/_page.957123ce.css",
     "src": "src/routes/+page.css"
   },
   "src/routes/+page.js": {
@@ -132,21 +152,41 @@
     "isEntry": true,
     "src": "src/routes/+page.js"
   },
+  "src/routes/+page.server.js": {
+    "file": "entries/pages/_page.server.js",
+    "imports": [
+      "_dict.js",
+      "_db.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.server.js"
+  },
   "src/routes/+page.svelte": {
     "assets": [
-      "_app/immutable/assets/svelte-welcome.c18bcf5a.webp",
-      "_app/immutable/assets/svelte-welcome.6c300099.png"
+      "_app/immutable/assets/operator.7238a518.svg",
+      "_app/immutable/assets/icofont.242e5428.woff2",
+      "_app/immutable/assets/icofont.53bbbda5.woff"
     ],
     "css": [
-      "_app/immutable/assets/_page.265a38f0.css"
+      "_app/immutable/assets/_page.957123ce.css"
     ],
     "file": "entries/pages/_page.svelte.js",
     "imports": [
       "_ssr.js",
+      "_stores2.js",
       "_index2.js"
     ],
     "isEntry": true,
     "src": "src/routes/+page.svelte"
+  },
+  "src/routes/+server.js": {
+    "file": "entries/endpoints/_server.js",
+    "imports": [
+      "_index.js",
+      "_db.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+server.js"
   },
   "src/routes/about/+page.js": {
     "file": "entries/pages/about/_page.js",
@@ -172,38 +212,73 @@
     "file": "_app/immutable/assets/icofont.242e5428.woff2",
     "src": "src/routes/assets/icofont/fonts/icofont.woff2"
   },
-  "src/routes/operator/+page.css": {
-    "file": "_app/immutable/assets/_page.ba269bad.css",
-    "src": "src/routes/operator/+page.css"
+  "src/routes/lesson/+layout.css": {
+    "file": "_app/immutable/assets/_layout.2dc3ccd2.css",
+    "src": "src/routes/lesson/+layout.css"
   },
-  "src/routes/operator/+page.server.js": {
-    "file": "entries/pages/operator/_page.server.js",
+  "src/routes/lesson/+layout.svelte": {
+    "css": [
+      "_app/immutable/assets/_layout.2dc3ccd2.css"
+    ],
+    "file": "entries/pages/lesson/_layout.svelte.js",
+    "imports": [
+      "_ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/lesson/+layout.svelte"
+  },
+  "src/routes/lesson/+page.server.js": {
+    "file": "entries/pages/lesson/_page.server.js",
+    "imports": [
+      "_dict.js",
+      "_db.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/lesson/+page.server.js"
+  },
+  "src/routes/lesson/+server.js": {
+    "file": "entries/endpoints/lesson/_server.js",
     "imports": [
       "_index.js"
     ],
     "isEntry": true,
-    "src": "src/routes/operator/+page.server.js"
+    "src": "src/routes/lesson/+server.js"
   },
-  "src/routes/operator/+page.svelte": {
-    "assets": [
-      "_app/immutable/assets/icofont.242e5428.woff2",
-      "_app/immutable/assets/icofont.53bbbda5.woff"
-    ],
+  "src/routes/lesson/luister/+page.css": {
+    "file": "_app/immutable/assets/_page.50bc23ef.css",
+    "src": "src/routes/lesson/luister/+page.css"
+  },
+  "src/routes/lesson/luister/+page.svelte": {
     "css": [
-      "_app/immutable/assets/_page.ba269bad.css"
+      "_app/immutable/assets/_page.50bc23ef.css"
     ],
-    "file": "entries/pages/operator/_page.svelte.js",
+    "file": "entries/pages/lesson/luister/_page.svelte.js",
     "imports": [
       "_ssr.js",
-      "_stores.js",
-      "_index2.js"
+      "_stores2.js"
     ],
     "isEntry": true,
-    "src": "src/routes/operator/+page.svelte"
+    "src": "src/routes/lesson/luister/+page.svelte"
   },
-  "src/routes/operator/api/edit_cc/+server.js": {
-    "file": "entries/endpoints/operator/api/edit_cc/_server.js",
+  "src/routes/operator/+server.js": {
+    "file": "entries/endpoints/operator/_server.js",
+    "imports": [
+      "_index.js"
+    ],
     "isEntry": true,
-    "src": "src/routes/operator/api/edit_cc/+server.js"
+    "src": "src/routes/operator/+server.js"
+  },
+  "src/routes/user/+page.server.js": {
+    "file": "entries/pages/user/_page.server.js",
+    "isEntry": true,
+    "src": "src/routes/user/+page.server.js"
+  },
+  "src/routes/user/+server.js": {
+    "file": "entries/endpoints/user/_server.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/user/+server.js"
   }
 }

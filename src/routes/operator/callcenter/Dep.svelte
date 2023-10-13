@@ -7,7 +7,6 @@
 
 	import Oper from './Oper.svelte';
 
-
 	export let dep;
 	export let owner;
 	export let operator;
@@ -18,7 +17,6 @@
 	let isAddOper = 'none';
 
 	import { server_path } from '$lib/js/stores.js';
-
 
 	import { signal } from '$lib/js/stores.js';
 	const signalch = $signal;
@@ -88,7 +86,7 @@
 		par.em = operator.email;
 		par.dep = dep;
 
-		const res = fetch($server_path+'/operator/', {
+		const res = fetch('/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -114,7 +112,7 @@
 		par.lang = $langs;
 		par.dep_id = dep.id;
 
-		const res = fetch($server_path+'/operator/', {
+		const res = fetch('/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

@@ -1,15 +1,21 @@
-// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-auto';
 // import adapter from '@sveltejs/adapter-netlify';
-import adapter from '@sveltejs/adapter-vercel';
+// import adapter from '@sveltejs/adapter-vercel';
 // import adapter from '@sveltejs/adapter-node';
-// import adapter from 'svelte-preprocess';
+import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// preprocess: preprocess(),
+	compilerOptions: {
+		enableSourcemap: true
+	},
+	preprocess: preprocess({
+		sourceMap: true
+	}),
 	kit: {
 		adapter: adapter({
-			runtime: 'nodejs18.x'
+			runtime: 'nodejs18.x',
+			target: '#svelte'
 		}),
 		csrf: {
 			checkOrigin: false

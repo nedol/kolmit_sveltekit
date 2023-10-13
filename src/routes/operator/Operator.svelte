@@ -161,7 +161,7 @@
 				break;
 		}
 
-	setContext('operator', { getOperator: () => this });
+	setContext('abonent', abonent);
 
 	// const SendToComponent = OnMessage;
 
