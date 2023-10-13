@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	// import { Button, Offcanvas, Icon } from 'sveltestrap';
 	import 'bootstrap/dist/css/bootstrap.min.css';
 	export let bottomOpen = false;
