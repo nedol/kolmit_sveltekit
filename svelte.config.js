@@ -1,4 +1,5 @@
-import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static';
 // import adapter from '@sveltejs/adapter-netlify';
 // import adapter from '@sveltejs/adapter-vercel';
 // import adapter from '@sveltejs/adapter-node';
@@ -13,14 +14,15 @@ const config = {
 		sourceMap: true
 	}),
 	kit: {
-		adapter: adapter(),
-		// target: '#svelte',
-		// csp: {
-		// 	mode: 'auto',
-		// 	directives: {
-		// 		'script-src': ['self']
-		// 	}
-		// },
+		adapter: adapter({
+			// default options are shown. On some platforms
+			// these options are set automatically — see below
+			pages: 'build',
+			assets: 'build',
+			fallback: undefined,
+			precompress: false,
+			strict: true
+		}),
 		csrf: {
 			checkOrigin: false
 		}

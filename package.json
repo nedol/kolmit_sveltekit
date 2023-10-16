@@ -33,6 +33,7 @@
 	"dependencies": {
 		"@aws-sdk/client-polly": "^3.296.0",
 		"@google-cloud/text-to-speech": "^5.0.1",
+		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/adapter-vercel": "^3.0.3",
 		"@vercel/postgres": "^0.4.2",
 		"autoprefixer": "^10.4.14",
