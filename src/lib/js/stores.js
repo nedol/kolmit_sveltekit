@@ -38,3 +38,4 @@ export let ice_conf = writable();
 export let pool = writable();
 
 export let rtcPool_st = writable();
+rtcPool_st.set({ user: {}, operator: {} });

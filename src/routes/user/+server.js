@@ -1,11 +1,10 @@
 import { json } from '@sveltejs/kit';
 // import { OperatorWaiting } from '$lib/server/db.js'; //src\lib\server\server.db.js
-import { get, set } from 'node-global-storage';
 
-let rtcPool;
+global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
 rtcPool_st.subscribe((data) => {
-	rtcPool = data;
+	global.rtcPool = data;
 });
 
 export const config = {
@@ -24,15 +23,14 @@ export async function GET(event) {
 
 	let resp;
 
-	// let rtcPool = get('rtcPool');
+	// let global.rtcPool = get('global.rtcPool');
 
 	try {
 		let promise = new Promise((resolve, reject) => {
 			try {
 				OperatorWaiting(q, resolve);
-				set('rtcPool', rtcPool);
-				rtcPool_st.set(rtcPool);
-				console.log('user rtcPool' + JSON.stringify(rtcPool));
+				// console.log('user global.rtcPool' + JSON.stringify(global.rtcPool));
+				rtcPool_st.set(global.rtcPool);
 			} catch (ex) {
 				console.log(ex);
 			}
@@ -42,7 +40,7 @@ export async function GET(event) {
 
 		// console.log(resp);
 	} catch (ex) {
-		console.log(q.func + ex);
+		console.log(ex);
 	}
 
 	let response = new Response(JSON.stringify({ resp }));
@@ -60,7 +58,7 @@ export async function POST(event) {
 		let promise = new Promise((resolve, reject) => {
 			try {
 				OperatorWaiting(q, resolve);
-				set('rtcPool', rtcPool);
+				set('global.rtcPool', global.rtcPool);
 			} catch (ex) {
 				console.log(ex);
 			}
@@ -79,10 +77,11 @@ export async function POST(event) {
 }
 function OperatorWaiting(q, resolve) {
 	try {
-		if (!rtcPool[q.type][q.abonent]) rtcPool[q.type][q.abonent] = {};
-		if (!rtcPool[q.type][q.abonent][q.em]) rtcPool[q.type][q.abonent][q.em] = { resolve: '' };
-		rtcPool[q.type][q.abonent][q.em].resolve = resolve;
+		if (!global.rtcPool[q.type][q.abonent]) global.rtcPool[q.type][q.abonent] = {};
+		if (!global.rtcPool[q.type][q.abonent][q.em])
+			global.rtcPool[q.type][q.abonent][q.em] = { resolve: '' };
+		global.rtcPool[q.type][q.abonent][q.em].resolve = resolve;
 	} catch (ex) {
-		console.log();
+		console.log('OperatorWaiting ex:' + ex);
 	}
 }

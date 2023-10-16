@@ -97,7 +97,7 @@
 
 		fetch(
 			$server_path +
-				`/api/operator?func=${par.func}&uid=${par.uid}&role=${par.role}&abonent=${par.abonent}&em=${par.em}&type=${par.type}`
+				`/operator?func=${par.func}&uid=${par.uid}&role=${par.role}&abonent=${par.abonent}&em=${par.em}&type=${par.type}`
 		)
 			// , {
 			// 	method: 'POST',

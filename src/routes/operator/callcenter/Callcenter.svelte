@@ -35,7 +35,7 @@
 	};
 
 	async function OperatorWaiting(par) {
-		fetch(`/api/user?abonent=${par.abonent}&em=${par.em}&type=${par.type}`)
+		fetch(`/user?abonent=${par.abonent}&em=${par.em}&type=${par.type}`)
 			// , {
 			// 	method: 'GET',
 			// 	// mode: 'no-cors',
@@ -87,7 +87,7 @@
 			par.abonent = operator.abonent;
 			par.id = cnt;
 
-			const res = fetch($server_path + '/api/operator', {
+			const res = fetch($server_path + '/operator', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -119,7 +119,7 @@
 			par.abonent = operator.abonent;
 			par.uid = operator.uid;
 
-			const res = fetch($server_path + '/api/operator', {
+			const res = fetch($server_path + '/operator', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

@@ -21,7 +21,7 @@ export class SignalingChannel {
 
 	async SendMessage(par, cb) {
 		par.operator = this.operator;
-		fetch(server + '/api', {
+		fetch(server + '/', {
 			method: 'POST',
 			// mode: 'no-cors',
 			body: JSON.stringify({ par }),

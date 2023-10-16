@@ -7,18 +7,17 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
-import { get, set } from 'node-global-storage';
-// set('rtcPool', { user: {}, operator: {} });
+// import { get, set } from 'node-global-storage';
+// set('global.rtcPool', { user: {}, operator: {} });
 
-let rtcPool;
+global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
 rtcPool_st.subscribe((data) => {
-	rtcPool = data;
+	global.rtcPool = data;
 });
-rtcPool_st.set({ user: {}, operator: {} });
 
 export const config = {
-	runtime: 'edge'
+	// runtime: 'edge'
 	// isr: {
 	// 	expiration: false // 10
 	// }
@@ -26,7 +25,7 @@ export const config = {
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url, fetch, cookies }) {
-	// let rtcPool = get('rtcPool');
+	// let global.rtcPool = get('global.rtcPool');
 	const abonent = url.searchParams.get('abonent');
 	const text = url.searchParams.get('text');
 	const dict = url.searchParams.get('dict');
@@ -84,7 +83,7 @@ export async function POST({ request, url, fetch, cookies }) {
 		kolmit = { psw: md5('demo') };
 	}
 
-	// rtcPool = get('rtcPool');
+	// global.rtcPool = get('global.rtcPool');
 
 	switch (par.func) {
 		case 'operator':
@@ -116,13 +115,13 @@ export async function POST({ request, url, fetch, cookies }) {
 
 			if (q.type === 'user') {
 				let cnt_queue = 0;
-				let item = rtcPool[q.type][q.abonent][q.em][q.uid];
+				let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
 				// try {
-				// 	// for (let uid in rtcPool[q.type][q.abonent]) {
-				// 	//     if (rtcPool[q.type][q.abonent][q.em][uid])
-				// 	//         if (rtcPool[q.type][q.abonent][q.em][uid].status === 'call' ||
-				// 	//             rtcPool[q.type][q.abonent][q.em][uid].status === 'wait')
-				// 	//             if (rtcPool[q.type][q.abonent][q.em][uid].uid === q.uid) {
+				// 	// for (let uid in global.rtcPool[q.type][q.abonent]) {
+				// 	//     if (global.rtcPool[q.type][q.abonent][q.em][uid])
+				// 	//         if (global.rtcPool[q.type][q.abonent][q.em][uid].status === 'call' ||
+				// 	//             global.rtcPool[q.type][q.abonent][q.em][uid].status === 'wait')
+				// 	//             if (global.rtcPool[q.type][q.abonent][q.em][uid].uid === q.uid) {
 				// 	//                 cnt_queue++;
 				// 	//             }
 				// 	// }
@@ -144,7 +143,7 @@ export async function POST({ request, url, fetch, cookies }) {
 
 				SendOperatorStatus(q);
 
-				set('rtcPool', rtcPool);
+				// set('global.rtcPool', global.rtcPool);
 
 				return new Response(JSON.stringify({ resp }));
 			} else if (q.type === 'operator') {
@@ -173,16 +172,16 @@ export async function POST({ request, url, fetch, cookies }) {
 		case 'status':
 			if (q.status === 'call') {
 				if (q.type === 'operator') {
-					let item = rtcPool[q.type][q.abonent][q.em][q.uid];
+					let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
 					if (item) item.status = 'busy';
 					BroadcastOperatorStatus(q, 'busy');
-					// rtcPool['operator'][q.abonent][q.em].shift();
+					// global.rtcPool['operator'][q.abonent][q.em].shift();
 				}
 				break;
 			}
 			if (q.status === 'close') {
 				try {
-					let item = rtcPool[q.type][q.abonent][q.em][q.uid];
+					let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
 					if (item) {
 						item.status = q.status;
 						if (q.type === 'operator') BroadcastOperatorStatus(q, 'close');
@@ -197,8 +196,8 @@ export async function POST({ request, url, fetch, cookies }) {
 			break;
 	}
 
-	// set('rtcPool', rtcPool);
-	rtcPool_st.set(rtcPool);
+	// set('global.rtcPool', global.rtcPool);
+	rtcPool_st.set(global.rtcPool);
 
 	let response = new Response(JSON.stringify({ resp }));
 	response.headers.append('Access-Control-Allow-Origin', `*`);
@@ -241,21 +240,21 @@ function SendEmail(q, new_email) {
 }
 
 function SetParams(q) {
-	if (!rtcPool[q.type][q.abonent]) {
-		rtcPool[q.type][q.abonent] = {};
+	if (!global.rtcPool[q.type][q.abonent]) {
+		global.rtcPool[q.type][q.abonent] = {};
 	}
 
-	if (!rtcPool[q.type][q.abonent][q.em]) rtcPool[q.type][q.abonent][q.em] = [];
+	if (!global.rtcPool[q.type][q.abonent][q.em]) global.rtcPool[q.type][q.abonent][q.em] = [];
 
 	let item;
 	if (q.type === 'user') {
-		item = rtcPool[q.type][q.abonent][q.em][q.uid];
-	} else item = rtcPool[q.type][q.abonent][q.em][0];
+		item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
+	} else item = global.rtcPool[q.type][q.abonent][q.em][0];
 
 	if (!item) {
 		item = {};
 		item.cand = [];
-		rtcPool[q.type][q.abonent][q.em][q.uid] = item;
+		global.rtcPool[q.type][q.abonent][q.em][q.uid] = item;
 	}
 
 	item.uid = q.uid;
@@ -272,22 +271,22 @@ function SetParams(q) {
 
 	// ws.onclose = function (ev) {
 	// 	if (q.type === 'operator') {
-	// 		let item = _.find(rtcPool[q.type][q.abonent][q.em], {
+	// 		let item = _.find(global.rtcPool[q.type][q.abonent][q.em], {
 	// 			uid: q.uid
 	// 		});
 	// 		if (item) item.status = 'close';
 	// 		that.BroadcastOperatorStatus(q, 'close');
-	// 		const ind = _.findIndex(rtcPool[q.type][q.abonent][q.em], {
+	// 		const ind = _.findIndex(global.rtcPool[q.type][q.abonent][q.em], {
 	// 			uid: q.uid
 	// 		});
-	// 		rtcPool[q.type][q.abonent][q.em].splice(ind, 1);
+	// 		global.rtcPool[q.type][q.abonent][q.em].splice(ind, 1);
 	// 	} else if ((q.type = 'user')) {
-	// 		if (rtcPool[q.type][q.abonent]) {
+	// 		if (global.rtcPool[q.type][q.abonent]) {
 	// 			that.SendUserStatus(q);
-	// 			const index = _.findIndex(rtcPool[q.type][q.abonent][q.em], {
+	// 			const index = _.findIndex(global.rtcPool[q.type][q.abonent][q.em], {
 	// 				uid: q.uid
 	// 			});
-	// 			rtcPool[q.type][q.abonent][q.em].splice(index, 1);
+	// 			global.rtcPool[q.type][q.abonent][q.em].splice(index, 1);
 	// 		}
 	// 	}
 	// };
@@ -296,33 +295,33 @@ function SetParams(q) {
 function BroadcastOperatorStatus(q, status) {
 	try {
 		let queue = 0;
-		if (!rtcPool['user'][q.abonent]) return;
-		for (let uid in rtcPool['user'][q.abonent][q.em]) {
-			if (q.uid && rtcPool['user'][q.abonent][q.em][uid]) {
+		if (!global.rtcPool['user'][q.abonent]) return;
+		for (let uid in global.rtcPool['user'][q.abonent][q.em]) {
+			if (q.uid && global.rtcPool['user'][q.abonent][q.em][uid]) {
 				queue++;
 			}
 		}
 		let type = q.type === 'operator' ? 'user' : 'operator';
 
 		let operators = { [q.em]: {} };
-		for (let uid in rtcPool['operator'][q.abonent][q.em]) {
+		for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
 			if (uid !== 'resolve')
 				operators[q.em][uid] = {
 					type: q.type,
 					abonent: q.abonent,
 					em: q.em,
 					uid: q.uid,
-					status: rtcPool['operator'][q.abonent][q.em][uid].status,
+					status: global.rtcPool['operator'][q.abonent][q.em][uid].status,
 					queue: queue
 				};
 		}
 
-		for (let em in rtcPool[type][q.abonent]) {
+		for (let em in global.rtcPool[type][q.abonent]) {
 			if (em === q.em && q.status === 'call')
 				//not to send to yourself
 				continue;
-			for (let uid in rtcPool[type][q.abonent][em]) {
-				let item = rtcPool[type][q.abonent][em][uid];
+			for (let uid in global.rtcPool[type][q.abonent][em]) {
+				let item = global.rtcPool[type][q.abonent][em][uid];
 				let offer = find(operators[q.em], { status: 'offer' });
 				if (
 					offer &&
@@ -330,7 +329,7 @@ function BroadcastOperatorStatus(q, status) {
 					item.uid !== q.uid
 				) {
 					if (item.status === 'wait') {
-						let oper = rtcPool['operator'][q.abonent][q.em][q.uid];
+						let oper = global.rtcPool['operator'][q.abonent][q.em][q.uid];
 
 						let remAr = {
 							func: q.func,
@@ -340,10 +339,11 @@ function BroadcastOperatorStatus(q, status) {
 							desc: oper.desc,
 							cand: oper.cand
 						};
-						if (rtcPool[type][q.abonent][em].resolve) rtcPool[type][q.abonent][em].resolve(remAr);
+						if (global.rtcPool[type][q.abonent][em].resolve)
+							global.rtcPool[type][q.abonent][em].resolve(remAr);
 					} else {
-						if (rtcPool[type][q.abonent][em].resolve)
-							rtcPool[type][q.abonent][em].resolve({
+						if (global.rtcPool[type][q.abonent][em].resolve)
+							global.rtcPool[type][q.abonent][em].resolve({
 								func: q.func,
 								type: type,
 								abonent: q.abonent,
@@ -353,8 +353,8 @@ function BroadcastOperatorStatus(q, status) {
 							});
 					}
 				} else {
-					if (rtcPool[type][q.abonent][em].resolve)
-						rtcPool[type][q.abonent][em].resolve({
+					if (global.rtcPool[type][q.abonent][em].resolve)
+						global.rtcPool[type][q.abonent][em].resolve({
 							func: q.func,
 							type: type,
 							abonent: q.abonent,
@@ -374,25 +374,25 @@ function BroadcastOperatorStatus(q, status) {
 
 function SendOperatorStatus(q) {
 	if (
-		rtcPool['operator'] &&
-		rtcPool['operator'][q.abonent] &&
-		rtcPool['operator'][q.abonent][q.em]
+		global.rtcPool['operator'] &&
+		global.rtcPool['operator'][q.abonent] &&
+		global.rtcPool['operator'][q.abonent][q.em]
 	) {
-		for (let uid in rtcPool['operator'][q.abonent][q.em]) {
-			if (rtcPool['operator'][q.abonent][q.em][uid].status === 'offer') {
+		for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+			if (global.rtcPool['operator'][q.abonent][q.em][uid].status === 'offer') {
 				let operator = {
 					abonent: q.abonent,
 					em: q.em,
 					uid: uid,
-					status: rtcPool['operator'][q.abonent][q.em][uid].status,
-					desc: rtcPool['operator'][q.abonent][q.em][uid].desc,
-					cand: rtcPool['operator'][q.abonent][q.em][uid].cand
+					status: global.rtcPool['operator'][q.abonent][q.em][uid].status,
+					desc: global.rtcPool['operator'][q.abonent][q.em][uid].desc,
+					cand: global.rtcPool['operator'][q.abonent][q.em][uid].cand
 				};
 
 				if (q.type === 'user') {
-					let item = rtcPool['user'][q.abonent][q.em][q.uid];
+					let item = global.rtcPool['user'][q.abonent][q.em][q.uid];
 
-					rtcPool['user'][q.abonent][q.em].resolve({ operator: operator });
+					global.rtcPool['user'][q.abonent][q.em].resolve({ operator: operator });
 				}
 			}
 		}
@@ -411,24 +411,24 @@ async function HandleCall(q) {
 				user: q.em
 				// "abonent": q.em
 			});
-			let item = rtcPool['operator'][q.abonent][q.em][q.oper_uid];
+			let item = global.rtcPool['operator'][q.abonent][q.em][q.oper_uid];
 
 			if (item) {
-				await rtcPool['operator'][q.abonent][q.em].promise;
-				rtcPool['operator'][q.abonent][q.em].resolve(remAr);
+				await global.rtcPool['operator'][q.abonent][q.em].promise;
+				global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
 				remAr = [];
 			}
 		} else {
-			let item = rtcPool['user'][q.abonent][q.em][q.uid];
+			let item = global.rtcPool['user'][q.abonent][q.em][q.uid];
 			if (item) {
-				let oper_check = findKey(rtcPool['operator'][q.abonent][q.em], {
+				let oper_check = findKey(global.rtcPool['operator'][q.abonent][q.em], {
 					status: 'check'
 				});
-				let oper_offer_key = findKey(rtcPool['operator'][q.abonent][q.em], {
+				let oper_offer_key = findKey(global.rtcPool['operator'][q.abonent][q.em], {
 					status: 'offer'
 				});
 
-				let oper_offer = rtcPool['operator'][q.abonent][q.em][oper_offer_key];
+				let oper_offer = global.rtcPool['operator'][q.abonent][q.em][oper_offer_key];
 
 				if (oper_offer) {
 					remAr.push({
@@ -439,8 +439,8 @@ async function HandleCall(q) {
 						desc: oper_offer.desc,
 						cand: oper_offer.cand
 					});
-					await rtcPool['operator'][q.abonent][q.em].promise;
-					rtcPool['user'][q.abonent][q.operator].resolve(remAr);
+					await global.rtcPool['operator'][q.abonent][q.em].promise;
+					global.rtcPool['user'][q.abonent][q.operator].resolve(remAr);
 					//console.log('after HandleCall:user '+JSON.stringify(remAr));
 					remAr = [];
 				} else {
@@ -450,8 +450,8 @@ async function HandleCall(q) {
 						abonent: q.abonent,
 						status: 'wait'
 					});
-					await rtcPool['operator'][q.abonent][q.em].promise;
-					rtcPool['user'][q.abonent][q.em].resolve(remAr);
+					await global.rtcPool['operator'][q.abonent][q.em].promise;
+					global.rtcPool['user'][q.abonent][q.em].resolve(remAr);
 
 					if (oper_check && oper_check.resolve) {
 						let remAr = {

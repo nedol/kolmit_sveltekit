@@ -8,7 +8,7 @@ import pkg from 'lodash';
 const { find, findKey } = pkg;
 
 export const config = {
-	runtime: 'edge'
+	// runtime: 'edge'
 	// isr: {
 	// 	expiration: false // 10
 	// }
