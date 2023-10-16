@@ -1,9 +1,7 @@
-import "../../../../chunks/index.js";
-import { set } from "node-global-storage";
-import { r as rtcPool_st } from "../../../../chunks/stores.js";
-let rtcPool;
+import "../../../chunks/index.js";
+import { r as rtcPool_st } from "../../../chunks/stores.js";
 rtcPool_st.subscribe((data) => {
-  rtcPool = data;
+  global.rtcPool = data;
 });
 const config = {
   // runtime: 'edge'
@@ -21,16 +19,14 @@ async function GET(event) {
     let promise = new Promise((resolve, reject) => {
       try {
         OperatorWaiting(q, resolve);
-        set("rtcPool", rtcPool);
-        rtcPool_st.set(rtcPool);
-        console.log("user rtcPool" + JSON.stringify(rtcPool));
+        rtcPool_st.set(global.rtcPool);
       } catch (ex) {
         console.log(ex);
       }
     });
     resp = await promise;
   } catch (ex) {
-    console.log(q.func + ex);
+    console.log(ex);
   }
   let response = new Response(JSON.stringify({ resp }));
   response.headers.append("Access-Control-Allow-Origin", `*`);
@@ -44,7 +40,7 @@ async function POST(event) {
     let promise = new Promise((resolve, reject) => {
       try {
         OperatorWaiting(q, resolve);
-        set("rtcPool", rtcPool);
+        set("global.rtcPool", global.rtcPool);
       } catch (ex) {
         console.log(ex);
       }
@@ -59,13 +55,13 @@ async function POST(event) {
 }
 function OperatorWaiting(q, resolve) {
   try {
-    if (!rtcPool[q.type][q.abonent])
-      rtcPool[q.type][q.abonent] = {};
-    if (!rtcPool[q.type][q.abonent][q.em])
-      rtcPool[q.type][q.abonent][q.em] = { resolve: "" };
-    rtcPool[q.type][q.abonent][q.em].resolve = resolve;
+    if (!global.rtcPool[q.type][q.abonent])
+      global.rtcPool[q.type][q.abonent] = {};
+    if (!global.rtcPool[q.type][q.abonent][q.em])
+      global.rtcPool[q.type][q.abonent][q.em] = { resolve: "" };
+    global.rtcPool[q.type][q.abonent][q.em].resolve = resolve;
   } catch (ex) {
-    console.log();
+    console.log("OperatorWaiting ex:" + ex);
   }
 }
 export {

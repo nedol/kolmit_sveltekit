@@ -14,6 +14,7 @@ let users = writable();
 let statust = writable();
 let ice_conf = writable();
 let rtcPool_st = writable();
+rtcPool_st.set({ user: {}, operator: {} });
 export {
   server_path as a,
   statust as b,

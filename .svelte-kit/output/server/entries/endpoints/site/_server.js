@@ -5,7 +5,7 @@ import md5 from "md5";
 import pkg from "lodash";
 const { find, findKey } = pkg;
 const config = {
-  runtime: "edge"
+  // runtime: 'edge'
   // isr: {
   // 	expiration: false // 10
   // }

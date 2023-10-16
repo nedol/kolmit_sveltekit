@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.b904c634.js","app":"_app/immutable/entry/app.c5bb3eb2.js","imports":["_app/immutable/entry/start.b904c634.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.996d308e.js","_app/immutable/chunks/paths.d27590c6.js","_app/immutable/entry/app.c5bb3eb2.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.12ed92ae.js","app":"_app/immutable/entry/app.6b25ceff.js","imports":["_app/immutable/entry/start.12ed92ae.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.d491858a.js","_app/immutable/chunks/paths.9fdcc288.js","_app/immutable/entry/app.6b25ceff.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -27,35 +27,14 @@ return {
 				pattern: /^\/$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 3 },
-				endpoint: null
-			},
-			{
-				id: "/api",
-				pattern: /^\/api\/?$/,
-				params: [],
-				page: null,
-				endpoint: __memo(() => import('./entries/endpoints/api/_server.js'))
-			},
-			{
-				id: "/api/operator",
-				pattern: /^\/api\/operator\/?$/,
-				params: [],
-				page: null,
-				endpoint: __memo(() => import('./entries/endpoints/api/operator/_server.js'))
-			},
-			{
-				id: "/api/user",
-				pattern: /^\/api\/user\/?$/,
-				params: [],
-				page: null,
-				endpoint: __memo(() => import('./entries/endpoints/api/user/_server.js'))
+				endpoint: __memo(() => import('./entries/endpoints/_server.js'))
 			},
 			{
 				id: "/operator",
 				pattern: /^\/operator\/?$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 4 },
-				endpoint: null
+				endpoint: __memo(() => import('./entries/endpoints/operator/_server.js'))
 			},
 			{
 				id: "/operator/lesson",
@@ -77,6 +56,13 @@ return {
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 7 },
 				endpoint: null
+			},
+			{
+				id: "/user",
+				pattern: /^\/user\/?$/,
+				params: [],
+				page: null,
+				endpoint: __memo(() => import('./entries/endpoints/user/_server.js'))
 			}
 		],
 		matchers: async () => {

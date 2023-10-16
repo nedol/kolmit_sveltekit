@@ -351,7 +351,7 @@ const Dep = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     par.em = operator.email;
     par.lang = $langs;
     par.dep_id = dep.id;
-    const res = fetch("/api/operator/", {
+    const res = fetch("/operator/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -492,7 +492,7 @@ const Callcenter = create_ssr_component(($$result, $$props, $$bindings, slots) =
       par.lang = lang;
       par.abonent = operator.abonent;
       par.uid = operator.uid;
-      const res = fetch($server_path + "/api/operator", {
+      const res = fetch($server_path + "/operator", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -1161,7 +1161,7 @@ class SignalingChannel {
   }
   async SendMessage(par, cb) {
     par.operator = this.operator;
-    fetch(server + "/api", {
+    fetch(server + "/", {
       method: "POST",
       // mode: 'no-cors',
       body: JSON.stringify({ par }),

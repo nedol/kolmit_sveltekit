@@ -1,18 +1,15 @@
-import "../../../chunks/index.js";
-import { C as CheckOperator, a as CreateOperator } from "../../../chunks/db.js";
+import "../../chunks/index.js";
+import { C as CheckOperator, a as CreateOperator } from "../../chunks/db.js";
 import "nodemailer";
 import md5 from "md5";
 import pkg from "lodash";
-import { set } from "node-global-storage";
-import { r as rtcPool_st } from "../../../chunks/stores.js";
+import { r as rtcPool_st } from "../../chunks/stores.js";
 const { find, findKey } = pkg;
-let rtcPool;
 rtcPool_st.subscribe((data) => {
-  rtcPool = data;
+  global.rtcPool = data;
 });
-rtcPool_st.set({ user: {}, operator: {} });
 const config = {
-  runtime: "edge"
+  // runtime: 'edge'
   // isr: {
   // 	expiration: false // 10
   // }
@@ -85,7 +82,7 @@ async function POST({ request, url, fetch, cookies }) {
       SetParams(q);
       if (q.type === "user") {
         let cnt_queue = 0;
-        rtcPool[q.type][q.abonent][q.em][q.uid];
+        global.rtcPool[q.type][q.abonent][q.em][q.uid];
         resp = {
           func: q.func,
           type: q.type,
@@ -93,7 +90,6 @@ async function POST({ request, url, fetch, cookies }) {
           queue: String(cnt_queue)
         };
         SendOperatorStatus(q);
-        set("rtcPool", rtcPool);
         return new Response(JSON.stringify({ resp }));
       } else if (q.type === "operator") {
         q.psw = kolmit.psw;
@@ -115,7 +111,7 @@ async function POST({ request, url, fetch, cookies }) {
     case "status":
       if (q.status === "call") {
         if (q.type === "operator") {
-          let item = rtcPool[q.type][q.abonent][q.em][q.uid];
+          let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
           if (item)
             item.status = "busy";
           BroadcastOperatorStatus(q);
@@ -124,7 +120,7 @@ async function POST({ request, url, fetch, cookies }) {
       }
       if (q.status === "close") {
         try {
-          let item = rtcPool[q.type][q.abonent][q.em][q.uid];
+          let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
           if (item) {
             item.status = q.status;
             if (q.type === "operator")
@@ -137,26 +133,26 @@ async function POST({ request, url, fetch, cookies }) {
       SetParams(q);
       break;
   }
-  rtcPool_st.set(rtcPool);
+  rtcPool_st.set(global.rtcPool);
   let response = new Response(JSON.stringify({ resp }));
   response.headers.append("Access-Control-Allow-Origin", `*`);
   return response;
 }
 function SetParams(q) {
-  if (!rtcPool[q.type][q.abonent]) {
-    rtcPool[q.type][q.abonent] = {};
+  if (!global.rtcPool[q.type][q.abonent]) {
+    global.rtcPool[q.type][q.abonent] = {};
   }
-  if (!rtcPool[q.type][q.abonent][q.em])
-    rtcPool[q.type][q.abonent][q.em] = [];
+  if (!global.rtcPool[q.type][q.abonent][q.em])
+    global.rtcPool[q.type][q.abonent][q.em] = [];
   let item;
   if (q.type === "user") {
-    item = rtcPool[q.type][q.abonent][q.em][q.uid];
+    item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
   } else
-    item = rtcPool[q.type][q.abonent][q.em][0];
+    item = global.rtcPool[q.type][q.abonent][q.em][0];
   if (!item) {
     item = {};
     item.cand = [];
-    rtcPool[q.type][q.abonent][q.em][q.uid] = item;
+    global.rtcPool[q.type][q.abonent][q.em][q.uid] = item;
   }
   item.uid = q.uid;
   item.status = q.status;
@@ -174,36 +170,36 @@ function SetParams(q) {
 function BroadcastOperatorStatus(q, status) {
   try {
     let queue = 0;
-    if (!rtcPool["user"][q.abonent])
+    if (!global.rtcPool["user"][q.abonent])
       return;
-    for (let uid in rtcPool["user"][q.abonent][q.em]) {
-      if (q.uid && rtcPool["user"][q.abonent][q.em][uid]) {
+    for (let uid in global.rtcPool["user"][q.abonent][q.em]) {
+      if (q.uid && global.rtcPool["user"][q.abonent][q.em][uid]) {
         queue++;
       }
     }
     let type = q.type === "operator" ? "user" : "operator";
     let operators = { [q.em]: {} };
-    for (let uid in rtcPool["operator"][q.abonent][q.em]) {
+    for (let uid in global.rtcPool["operator"][q.abonent][q.em]) {
       if (uid !== "resolve")
         operators[q.em][uid] = {
           type: q.type,
           abonent: q.abonent,
           em: q.em,
           uid: q.uid,
-          status: rtcPool["operator"][q.abonent][q.em][uid].status,
+          status: global.rtcPool["operator"][q.abonent][q.em][uid].status,
           queue
         };
     }
-    for (let em in rtcPool[type][q.abonent]) {
+    for (let em in global.rtcPool[type][q.abonent]) {
       if (em === q.em && q.status === "call")
         continue;
-      for (let uid in rtcPool[type][q.abonent][em]) {
-        let item = rtcPool[type][q.abonent][em][uid];
+      for (let uid in global.rtcPool[type][q.abonent][em]) {
+        let item = global.rtcPool[type][q.abonent][em][uid];
         let offer = find(operators[q.em], { status: "offer" });
         if (offer && // && item.abonent === q.em
         item.uid !== q.uid) {
           if (item.status === "wait") {
-            let oper = rtcPool["operator"][q.abonent][q.em][q.uid];
+            let oper = global.rtcPool["operator"][q.abonent][q.em][q.uid];
             let remAr2 = {
               func: q.func,
               type,
@@ -212,11 +208,11 @@ function BroadcastOperatorStatus(q, status) {
               desc: oper.desc,
               cand: oper.cand
             };
-            if (rtcPool[type][q.abonent][em].resolve)
-              rtcPool[type][q.abonent][em].resolve(remAr2);
+            if (global.rtcPool[type][q.abonent][em].resolve)
+              global.rtcPool[type][q.abonent][em].resolve(remAr2);
           } else {
-            if (rtcPool[type][q.abonent][em].resolve)
-              rtcPool[type][q.abonent][em].resolve({
+            if (global.rtcPool[type][q.abonent][em].resolve)
+              global.rtcPool[type][q.abonent][em].resolve({
                 func: q.func,
                 type,
                 abonent: q.abonent,
@@ -226,8 +222,8 @@ function BroadcastOperatorStatus(q, status) {
               });
           }
         } else {
-          if (rtcPool[type][q.abonent][em].resolve)
-            rtcPool[type][q.abonent][em].resolve({
+          if (global.rtcPool[type][q.abonent][em].resolve)
+            global.rtcPool[type][q.abonent][em].resolve({
               func: q.func,
               type,
               abonent: q.abonent,
@@ -244,20 +240,20 @@ function BroadcastOperatorStatus(q, status) {
   }
 }
 function SendOperatorStatus(q) {
-  if (rtcPool["operator"] && rtcPool["operator"][q.abonent] && rtcPool["operator"][q.abonent][q.em]) {
-    for (let uid in rtcPool["operator"][q.abonent][q.em]) {
-      if (rtcPool["operator"][q.abonent][q.em][uid].status === "offer") {
+  if (global.rtcPool["operator"] && global.rtcPool["operator"][q.abonent] && global.rtcPool["operator"][q.abonent][q.em]) {
+    for (let uid in global.rtcPool["operator"][q.abonent][q.em]) {
+      if (global.rtcPool["operator"][q.abonent][q.em][uid].status === "offer") {
         let operator = {
           abonent: q.abonent,
           em: q.em,
           uid,
-          status: rtcPool["operator"][q.abonent][q.em][uid].status,
-          desc: rtcPool["operator"][q.abonent][q.em][uid].desc,
-          cand: rtcPool["operator"][q.abonent][q.em][uid].cand
+          status: global.rtcPool["operator"][q.abonent][q.em][uid].status,
+          desc: global.rtcPool["operator"][q.abonent][q.em][uid].desc,
+          cand: global.rtcPool["operator"][q.abonent][q.em][uid].cand
         };
         if (q.type === "user") {
-          rtcPool["user"][q.abonent][q.em][q.uid];
-          rtcPool["user"][q.abonent][q.em].resolve({ operator });
+          global.rtcPool["user"][q.abonent][q.em][q.uid];
+          global.rtcPool["user"][q.abonent][q.em].resolve({ operator });
         }
       }
     }
@@ -275,22 +271,22 @@ async function HandleCall(q) {
         user: q.em
         // "abonent": q.em
       });
-      let item = rtcPool["operator"][q.abonent][q.em][q.oper_uid];
+      let item = global.rtcPool["operator"][q.abonent][q.em][q.oper_uid];
       if (item) {
-        await rtcPool["operator"][q.abonent][q.em].promise;
-        rtcPool["operator"][q.abonent][q.em].resolve(remAr);
+        await global.rtcPool["operator"][q.abonent][q.em].promise;
+        global.rtcPool["operator"][q.abonent][q.em].resolve(remAr);
         remAr = [];
       }
     } else {
-      let item = rtcPool["user"][q.abonent][q.em][q.uid];
+      let item = global.rtcPool["user"][q.abonent][q.em][q.uid];
       if (item) {
-        let oper_check = findKey(rtcPool["operator"][q.abonent][q.em], {
+        let oper_check = findKey(global.rtcPool["operator"][q.abonent][q.em], {
           status: "check"
         });
-        let oper_offer_key = findKey(rtcPool["operator"][q.abonent][q.em], {
+        let oper_offer_key = findKey(global.rtcPool["operator"][q.abonent][q.em], {
           status: "offer"
         });
-        let oper_offer = rtcPool["operator"][q.abonent][q.em][oper_offer_key];
+        let oper_offer = global.rtcPool["operator"][q.abonent][q.em][oper_offer_key];
         if (oper_offer) {
           remAr.push({
             func: q.func,
@@ -300,8 +296,8 @@ async function HandleCall(q) {
             desc: oper_offer.desc,
             cand: oper_offer.cand
           });
-          await rtcPool["operator"][q.abonent][q.em].promise;
-          rtcPool["user"][q.abonent][q.operator].resolve(remAr);
+          await global.rtcPool["operator"][q.abonent][q.em].promise;
+          global.rtcPool["user"][q.abonent][q.operator].resolve(remAr);
           remAr = [];
         } else {
           item.status = "wait";
@@ -310,8 +306,8 @@ async function HandleCall(q) {
             abonent: q.abonent,
             status: "wait"
           });
-          await rtcPool["operator"][q.abonent][q.em].promise;
-          rtcPool["user"][q.abonent][q.em].resolve(remAr);
+          await global.rtcPool["operator"][q.abonent][q.em].promise;
+          global.rtcPool["user"][q.abonent][q.em].resolve(remAr);
           if (oper_check && oper_check.resolve) {
             let remAr2 = {
               func: q.func,
