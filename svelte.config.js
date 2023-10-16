@@ -1,7 +1,7 @@
 // import adapter from '@sveltejs/adapter-auto';
-// import adapter from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/adapter-netlify';
 // import adapter from '@sveltejs/adapter-vercel';
-import adapter from 'svelte-adapter-firebase';
+// import adapter from 'svelte-adapter-firebase';
 
 // import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
