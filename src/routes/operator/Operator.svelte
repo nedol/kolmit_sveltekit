@@ -38,6 +38,8 @@
 		OnMessage($msg_signal_oper);
 	}
 
+	import { server_path } from '$lib/js/stores.js';
+
 	let rtc;
 
 	import { view } from '$lib/js/stores.js';
@@ -84,18 +86,48 @@
 
 	let container;
 
-	import { posterst } from '$lib/js/stores.js';
-	// $: if (container && $posterst) {
-	// 	// console.log($posterst);
-	// 	// container.appendChild($posterst);
-	// }
+	const token = 'CPkJ1MYWC7DMlvw6MvtV0yBw';
+	const headers = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${token}`
+	};
+
+	async function CallWaiting(par) {
+		par.func = 'callwaiting';
+
+		fetch(
+			$server_path +
+				`/api/operator?func=${par.func}&uid=${par.uid}&role=${par.role}&abonent=${par.abonent}&em=${par.em}&type=${par.type}`
+		)
+			// , {
+			// 	method: 'POST',
+			// 	// mode: 'no-cors',
+			// 	body: JSON.stringify({ par }),
+			// 	headers: { headers }
+			// })
+			.then((response) => response.json())
+			.then((data) => {
+				if (Array.isArray(data.resp)) {
+					data.resp.map((resp) => {
+						$msg_signal_oper = resp;
+					});
+				} else {
+					$msg_signal_oper = data.resp;
+				}
+				CallWaiting(par);
+			})
+			.catch((error) => {
+				console.log(error);
+				return [];
+			});
+	}
 
 	onMount(async () => {
 		try {
 			rtc = new RTCOperator(operator, uid, $signal);
 			initRTC();
 			rtc.SendCheck();
-			$signal.CallWaiting(operator);
+			CallWaiting(operator);
 		} catch (ex) {
 			console.log();
 		}

@@ -9,3 +9,7 @@ node_modules
 .output
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.env*.local
+
+# Local Netlify folder
+.netlify

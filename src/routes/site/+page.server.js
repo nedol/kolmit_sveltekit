@@ -3,8 +3,6 @@ import { dict } from '$lib/dict/dict';
 import { ice_conf } from '$lib/ice_conf';
 import os from 'os';
 
-global.rtcPull = { user: {}, operator: {} };
-
 import { CreatePool, GetUsers } from '$lib/server/db.js'; //src\lib\server\server.db.js
 
 let kolmit;

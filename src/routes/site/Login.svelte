@@ -1,4 +1,5 @@
 <script>
+	import { onMount, setContext } from 'svelte';
 	import md5 from 'md5';
 	import loadImage from 'blueimp-load-image/js/load-image.js';
 	import 'blueimp-load-image/js/load-image-scale.js';
@@ -12,8 +13,8 @@
 		upload,
 		files;
 	let email = '',
-		psw = '',
-		psw_2 = '';
+		psw = 'demo',
+		psw_2 = 'demo';
 
 	let width, height;
 
@@ -22,6 +23,8 @@
 	if (!user_pic) {
 		user_pic = operator_svg;
 	}
+
+	onMount(async () => {});
 
 	async function OnEmail(params) {
 		let par = {};
@@ -33,6 +36,7 @@
 		par.img = user_pic;
 		// par.tarif = 'free';
 		par.lang = lang;
+
 		let promise = new Promise((resolve, reject) => {
 			$signal.SendMessage(par, (data) => {
 				resolve(data);
@@ -86,7 +90,13 @@
 <form>
 	<div id="inputs">
 		<input type="email" placeholder="input your email" bind:value={email} required />
-		<input type="text" placeholder="input your name" bind:value={user_name} required />
+		<input
+			type="text"
+			placeholder="input your name"
+			bind:value={user_name}
+			required
+			on:change={OnEmail}
+		/>
 		<input
 			bind:this={upload}
 			class="file-upload"

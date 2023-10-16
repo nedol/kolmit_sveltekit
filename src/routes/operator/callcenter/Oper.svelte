@@ -135,7 +135,7 @@
 		par.data = user;
 		par.lang = $langs;
 
-		const res = fetch('/operator/', {
+		const res = fetch('/api/operator/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

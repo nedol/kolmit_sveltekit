@@ -23,12 +23,12 @@
 	const abonent = getContext('abonent');
 
 	fetch(`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&abonent=${abonent}`)
-		.then((response) => response.text())
+		.then((response) => response.json())
 		.then((data) => {
 			//data = data.replace(/(?:\\[rn])+/g, '<br>'); //.replace('    ', '&nbsp;&nbsp;&nbsp;&nbsp;');
 			// print = JSON.parse(data).text;
 
-			text = JSON.parse(data).text;
+			text = data.obj.text;
 			// .replace(/^\s+|\s+$/gm, '')
 			text = text.replaceAll('\r\n', '');
 			text = text.replaceAll('.', '..');
@@ -57,9 +57,12 @@
 					spanAr.push(text[cnt]);
 					spanAr = spanAr;
 					fetchText(cnt++);
-					// if (JSON.parse(data).audio) {
-					// speech = JSON.parse(data).audio;
-					audio_data[md5(text[cnt])] = JSON.parse(data).audio;
+
+					try {
+						// if (JSON.parse(data).audio) {
+						// speech = JSON.parse(data).audio;
+						audio_data[md5(text[cnt])] = JSON.parse(data).audio;
+					} catch (ex) {}
 					// 	spanAr.push(text[cnt]);
 					// 	spanAr = spanAr; //
 					// } else {
@@ -141,7 +144,7 @@
 		selected_sentence.style.fontWeight = 100;
 		let this_cnt = parseInt(ev.currentTarget.attributes.cnt.nodeValue);
 		ev.currentTarget.style.fontWeight = 500;
-		speech = audio_data[md5(text[this_cnt + 1])];
+		if (text[this_cnt]) speech = audio_data[md5(text[this_cnt])];
 		selected_sentence = ev.currentTarget;
 	}
 

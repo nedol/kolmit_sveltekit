@@ -1,16 +1,17 @@
 import "md5";
 import { d as dict, i as ice_conf } from "../../chunks/dict.js";
 import "os";
-import { b as CreatePool, G as GetUsers } from "../../chunks/db.js";
+import { c as CreatePool, d as GetUsers } from "../../chunks/db.js";
 global.rtcPull = { user: {}, operator: {} };
 let kolmit;
-async function load({ fetch, cookies, route, url }) {
+async function load({ fetch, cookies, route, url, stuff }) {
   let abonent = url.searchParams.get("abonent");
   let prom = new Promise((resolve, reject) => {
     CreatePool(resolve);
   });
   await prom;
   let host = url.origin;
+  console.log();
   let res;
   let resp = {
     dict,

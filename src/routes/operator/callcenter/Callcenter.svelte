@@ -7,7 +7,7 @@
 	import pkg from 'lodash';
 	const { forEach, findIndex } = pkg;
 
-	import { signal } from '$lib/js/stores.js';
+	import { msg_signal_oper, msg_signal_user } from '$lib/js/stores.js';
 	export let operator;
 
 	export let view;
@@ -28,8 +28,40 @@
 	import { users } from '$lib/js/stores.js';
 	let cc_data = $users;
 
+	const token = 'CPkJ1MYWC7DMlvw6MvtV0yBw';
+	const headers = {
+		'Content-Type': 'application/json'
+		// Authorization: `Bearer ${token}`
+	};
+
+	async function OperatorWaiting(par) {
+		fetch(`/api/user?abonent=${par.abonent}&em=${par.em}&type=${par.type}`)
+			// , {
+			// 	method: 'GET',
+			// 	// mode: 'no-cors',
+			// 	// body: JSON.stringify({ par }),
+			// 	headers: { headers }
+			// })
+			.then((response) => response.json())
+			.then((data) => {
+				if (Array.isArray(data.resp)) {
+					data.resp.map((resp) => {
+						$msg_signal_user = resp;
+					});
+				} else {
+					$msg_signal_user = data.resp;
+				}
+
+				OperatorWaiting(par);
+			})
+			.catch((error) => {
+				console.log(error);
+				return [];
+			});
+	}
+
 	onMount(async () => {
-		$signal.OperatorWaiting({ type: 'user', abonent: operator.abonent, em: operator.em });
+		OperatorWaiting({ type: 'user', abonent: operator.abonent, em: operator.em });
 	});
 
 	let edited_display = false;
@@ -55,7 +87,7 @@
 			par.abonent = operator.abonent;
 			par.id = cnt;
 
-			const res = fetch('/operator/', {
+			const res = fetch($server_path + '/api/operator', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -87,7 +119,7 @@
 			par.abonent = operator.abonent;
 			par.uid = operator.uid;
 
-			const res = fetch('/operator/', {
+			const res = fetch($server_path + '/api/operator', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

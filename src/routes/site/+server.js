@@ -7,6 +7,13 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
+export const config = {
+	// runtime: 'edge'
+	isr: {
+		expiration: false // 10
+	}
+};
+
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, cookies, url }) {
 	let abonent = url.searchParams.get('abonent');
@@ -80,7 +87,7 @@ export async function POST({ request, cookies, url }) {
 
 				SendOperatorStatus(q);
 
-				return json({ resp });
+				return new Response(JSON.stringify({ resp }));
 			} else if (q.type === 'operator') {
 				q.psw = kolmit.psw;
 				// console.log(q.em)
@@ -129,8 +136,9 @@ export async function POST({ request, cookies, url }) {
 			break;
 	}
 
-	// resp = q;
-	return new Response(JSON.stringify({ resp }));
+	let response = new Response(JSON.stringify({ resp }));
+	response.headers.append('Access-Control-Allow-Origin', `*`);
+	return response;
 }
 
 function SendEmail(q, new_email) {

@@ -1,27 +1,23 @@
-import { c as create_ssr_component, a as subscribe, b as set_store_value, d as add_attribute, e as escape, v as validate_component } from "../../chunks/ssr.js";
-import { p as page } from "../../chunks/stores.js";
-import { v as view, d as dicts, l as langs } from "../../chunks/stores2.js";
+import { c as create_ssr_component, a as subscribe, b as set_store_value, e as escape, v as validate_component } from "../../chunks/ssr.js";
+import { v as view, d as dicts, l as langs } from "../../chunks/stores.js";
 const Header_svelte_svelte_type_style_lang = "";
 const css$1 = {
-  code: "header.svelte-kp5x5i.svelte-kp5x5i{display:flex;justify-content:space-between}.corner.svelte-kp5x5i.svelte-kp5x5i{width:3em;height:3em}nav.svelte-kp5x5i.svelte-kp5x5i{display:flex;justify-content:center;--background:rgba(255, 255, 255, 0.7)}svg.svelte-kp5x5i.svelte-kp5x5i{width:2em;height:3em;display:block}path.svelte-kp5x5i.svelte-kp5x5i{fill:var(--background)}ul.svelte-kp5x5i.svelte-kp5x5i{position:relative;padding:0;margin:0;height:3em;display:flex;justify-content:center;align-items:center;list-style:none;background:var(--background);background-size:contain}li.svelte-kp5x5i.svelte-kp5x5i{position:relative;height:100%}li[aria-current='page'].svelte-kp5x5i.svelte-kp5x5i::before{--size:6px;content:'';width:0;height:0;position:absolute;top:0;left:calc(50% - var(--size));border:var(--size) solid transparent;border-top:var(--size) solid var(--color-theme-1)}nav.svelte-kp5x5i a.svelte-kp5x5i{display:flex;height:100%;align-items:center;padding:0 0.5rem;color:var(--color-text);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;transition:color 0.2s linear}a.svelte-kp5x5i.svelte-kp5x5i:hover{color:var(--color-theme-1)}",
+  code: "header.svelte-kp5x5i.svelte-kp5x5i{display:flex;justify-content:space-between}.corner.svelte-kp5x5i.svelte-kp5x5i{width:3em;height:3em}nav.svelte-kp5x5i.svelte-kp5x5i{display:flex;justify-content:center;--background:rgba(255, 255, 255, 0.7)}svg.svelte-kp5x5i.svelte-kp5x5i{width:2em;height:3em;display:block}path.svelte-kp5x5i.svelte-kp5x5i{fill:var(--background)}ul.svelte-kp5x5i.svelte-kp5x5i{position:relative;padding:0;margin:0;height:3em;display:flex;justify-content:center;align-items:center;list-style:none;background:var(--background);background-size:contain}li.svelte-kp5x5i.svelte-kp5x5i{position:relative;height:100%}nav.svelte-kp5x5i a.svelte-kp5x5i{display:flex;height:100%;align-items:center;padding:0 0.5rem;color:var(--color-text);font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;transition:color 0.2s linear}a.svelte-kp5x5i.svelte-kp5x5i:hover{color:var(--color-theme-1)}",
   map: null
 };
 const Header = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $view, $$unsubscribe_view;
   let $dicts, $$unsubscribe_dicts;
-  let $page, $$unsubscribe_page;
   let $langs, $$unsubscribe_langs;
   $$unsubscribe_view = subscribe(view, (value) => $view = value);
   $$unsubscribe_dicts = subscribe(dicts, (value) => $dicts = value);
-  $$unsubscribe_page = subscribe(page, (value) => $page = value);
   $$unsubscribe_langs = subscribe(langs, (value) => $langs = value);
   set_store_value(view, $view = "cc", $view);
   $$result.css.add(css$1);
   $$unsubscribe_view();
   $$unsubscribe_dicts();
-  $$unsubscribe_page();
   $$unsubscribe_langs();
-  return `<header class="svelte-kp5x5i"><div class="corner svelte-kp5x5i" data-svelte-h="svelte-1qgbnqr"></div> <nav class="svelte-kp5x5i"><svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-kp5x5i"><path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" class="svelte-kp5x5i"></path></svg> <ul class="svelte-kp5x5i"><li${add_attribute("aria-current", $page.url.pathname === "/" ? "page" : void 0, 0)} class="svelte-kp5x5i"><a href="/" class="svelte-kp5x5i">${escape($dicts ? $dicts["CLASS"][$langs] : "CLASS")}</a></li> <li${add_attribute("aria-current", $page.url.pathname === "/lesson" ? "page" : void 0, 0)} class="svelte-kp5x5i"><a href="/" class="svelte-kp5x5i">${escape($dicts ? $dicts["LESSON"][$langs] : "LESSON")}</a></li>   </ul> <svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-kp5x5i"><path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" class="svelte-kp5x5i"></path></svg></nav> <div class="corner svelte-kp5x5i" data-svelte-h="svelte-vel7td"></div> </header>`;
+  return `<header class="svelte-kp5x5i"><div class="corner svelte-kp5x5i" data-svelte-h="svelte-1qgbnqr"></div> <nav class="svelte-kp5x5i"><svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-kp5x5i"><path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" class="svelte-kp5x5i"></path></svg> <ul class="svelte-kp5x5i">  <a href="#" target="_self" class="svelte-kp5x5i">${escape($dicts ? $dicts["CLASS"][$langs] : "CLASS")}</a> <li class="svelte-kp5x5i"><a href="#" target="_self" class="svelte-kp5x5i">${escape($dicts ? $dicts["LESSON"][$langs] : "LESSON")}</a></li></ul> <svg viewBox="0 0 2 3" aria-hidden="true" class="svelte-kp5x5i"><path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" class="svelte-kp5x5i"></path></svg></nav> <div class="corner svelte-kp5x5i" data-svelte-h="svelte-vel7td"></div> </header>`;
 });
 const styles = "";
 const _layout_svelte_svelte_type_style_lang = "";

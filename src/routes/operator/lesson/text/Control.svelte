@@ -1,6 +1,4 @@
 <script>
-	// import { Button, Offcanvas, Icon } from 'sveltestrap';
-	import 'bootstrap/dist/css/bootstrap.min.css';
 	export let bottomOpen = false;
 	const toggleBottom = () => (bottomOpen = !bottomOpen);
 	export let onContinueClick;

@@ -22,11 +22,9 @@
 	import './lib/icofont/icofont.min.css';
 
 	import { msg_signal_user } from '$lib/js/stores.js';
-	msg_signal_user.subscribe((data) => {
-		if (data) {
-			OnMessage(data);
-		}
-	});
+	$: if ($msg_signal_user) {
+		OnMessage($msg_signal_user);
+	}
 	// $: if (msg['user']) {
 	// 	OnMessage(msg['user']);
 	// }
@@ -126,41 +124,6 @@
 
 	function OnLongPress() {
 		select.display = true;
-	}
-
-	// async function SendCheck() {
-	// 	let par = {};
-	// 	par.proj = 'kolmit';
-	// 	par.func = 'check';
-	// 	par.status = 'check';
-	// 	par.type = 'user';
-	// 	par.abonent = abonent;
-	// 	par.em = em;
-	// 	par.uid = uid;
-
-	// 	const description = par;
-
-	// 	$signal.SendMessage(par, (resp) => {
-	// 		checked = resp.check;
-	// 	});
-	// }
-
-	function Call() {
-		rtc.Call();
-
-		// let par = {};
-		// par.proj = 'kolmit';
-		// par.func = 'call';
-		// par.status = 'check';
-		// par.type = 'user';
-		// par.abonent = abonent;
-		// par.operator = operator;
-		// par.em = em;
-		// par.uid = uid;
-
-		// const description = par;
-
-		// $signal.SendMessage(par);
 	}
 
 	function OnMute() {
@@ -293,7 +256,7 @@
 				break;
 			case 'active':
 				function call() {
-					Call();
+					rtc.Call();
 					status = 'call';
 					remote.video.srcObject = null;
 				}
@@ -330,7 +293,7 @@
 				video_button_display = 'none';
 				break;
 			case 'busy':
-				Call();
+				rtc.Call();
 				status = 'wait';
 				break;
 			default:

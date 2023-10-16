@@ -38,9 +38,12 @@
 </script>
 
 <!-- <div on:click={onClickSentence} style="display: inline;position:relative"> -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <span class="a" on:click|preventDefault|stopPropagation={onClickWord}
-	><sup class="trans">{trans}</sup>{text}</span
->
+	><sup class="trans">{trans}</sup>
+	{text}
+</span>
 
 <!-- </div> -->
 

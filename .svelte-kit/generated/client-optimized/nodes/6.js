@@ -1,1 +1,2 @@
-export { default as component } from "../../../../src/routes/lesson/luister/+page.svelte";
+import * as universal from "../../../../src/routes/operator/lesson/+page.js";
+export { universal };

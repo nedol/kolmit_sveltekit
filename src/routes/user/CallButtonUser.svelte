@@ -4,7 +4,6 @@
 	// import 'long-press-event';
 
 	export let status = 'inactive';
-	export let em;
 	export let OnLongPress;
 </script>
 

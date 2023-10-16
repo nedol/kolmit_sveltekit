@@ -20,13 +20,12 @@
 		abonent = data.abonent;
 	let hash = null;
 
-	import { SignalingChannel } from './signalingChannel.js';
+	import { SignalingChannel } from '../signalingChannel.js';
 	import { signal } from '$lib/js/stores.js';
 	$signal = new SignalingChannel(email);
 
 	import { server_path } from '$lib/js/stores.js';
-
-	$server_path = data.host;
+	$server_path = data.host.includes('http://[::1]') ? 'http://localhost:3000' : data.host;
 
 	import { langs } from '$lib/js/stores.js';
 	$langs = data.lang;
@@ -48,7 +47,7 @@
 	<Operator {email} {abonent} />
 {:else}
 	<SelectMenu bind:$langs />
-	<Login data-sveltekit-prefetch {abonent} {user_pic} lang={$langs} bind:checked />
+	<Login {abonent} {user_pic} lang={$langs} bind:checked />
 {/if}
 
 <style>
