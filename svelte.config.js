@@ -7,21 +7,17 @@ import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	compilerOptions: {
-		enableSourcemap: true
-	},
-	preprocess: preprocess({
-		sourceMap: true
-	}),
+	preprocess: [
+		preprocess({
+			scss: {
+				prependData: "@import 'src/lib/styles/variables.scss';"
+			}
+		})
+	],
 	kit: {
-		adapter: adapter({
-			adapter: adapter({
-				fallback: '200.html' // may differ from host to host
-			})
-		}),
-		csrf: {
-			checkOrigin: false
-		}
+		adapter: adapter()
+		// hydrate the <div id="svelte"> element in src/app.html
+		// target: '#svelte'
 	}
 };
 
