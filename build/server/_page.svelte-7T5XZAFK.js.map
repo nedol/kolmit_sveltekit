@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../.svelte-kit/adapter-node/entries/pages/operator/_slug_/_page.svelte.js"],
-  "sourcesContent": ["import { c as create_ssr_component, e as escape } from \"../../../../chunks/index.js\";\nconst Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {\n  let { data } = $$props;\n  if ($$props.data === void 0 && $$bindings.data && data !== void 0)\n    $$bindings.data(data);\n  return `<h1>${escape(data.title)}</h1>\n  <div><!-- HTML_TAG_START -->${data.content}<!-- HTML_TAG_END --></div>`;\n});\nexport {\n  Page as default\n};\n"],
-  "mappings": ";;;;;;;AACA,IAAM,OAAO,qBAAqB,CAAC,UAAU,SAAS,YAAY,UAAU;AAC1E,MAAI,EAAE,KAAK,IAAI;AACf,MAAI,QAAQ,SAAS,UAAU,WAAW,QAAQ,SAAS;AACzD,eAAW,KAAK,IAAI;AACtB,SAAO,OAAO,OAAO,KAAK,KAAK;AAAA,gCACD,KAAK;AACrC,CAAC;",
-  "names": []
-}

@@ -2440,7 +2440,7 @@ async function respond(request, options2, manifest, state) {
     fetch: null,
     getClientAddress: state.getClientAddress || (() => {
       throw new Error(
-        `${"svelte-adapter-firebase"} does not specify getClientAddress. Please raise an issue`
+        `${"@sveltejs/adapter-vercel"} does not specify getClientAddress. Please raise an issue`
       );
     }),
     locals: {},

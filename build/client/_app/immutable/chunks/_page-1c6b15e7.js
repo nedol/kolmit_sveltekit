@@ -1,1 +1,0 @@
-const t=async({params:a})=>({dict:await(await fetch("https://nedol.ru/assets/dict/dict.json")).json()}),r=Object.freeze(Object.defineProperty({__proto__:null,load:t},Symbol.toStringTag,{value:"Module"}));export{r as _,t as l};

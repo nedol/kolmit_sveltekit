@@ -8,10 +8,10 @@ import pkg from 'lodash';
 const { find, findKey } = pkg;
 
 export const config = {
-	// runtime: 'edge'
-	isr: {
-		expiration: false // 10
-	}
+	runtime: 'edge'
+	// isr: {
+	// 	expiration: false // 10
+	// }
 };
 
 /** @type {import('./$types').RequestHandler} */
@@ -391,7 +391,7 @@ async function HandleCall(q) {
 					global.rtcPull['user'][q.abonent][q.em].resolve(remAr);
 
 					if (oper_check && oper_check.resolve) {
-						const remAr = {
+						let remAr = {
 							func: q.func,
 							abonent: q.abonent,
 							user_uid: item.uid,

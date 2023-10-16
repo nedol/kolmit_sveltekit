@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.cdf219a4.js","app":"_app/immutable/entry/app.6b29089a.js","imports":["_app/immutable/entry/start.cdf219a4.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.d1ba9556.js","_app/immutable/chunks/paths.cfd1fb76.js","_app/immutable/entry/app.6b29089a.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.b904c634.js","app":"_app/immutable/entry/app.c5bb3eb2.js","imports":["_app/immutable/entry/start.b904c634.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.996d308e.js","_app/immutable/chunks/paths.d27590c6.js","_app/immutable/entry/app.c5bb3eb2.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -27,13 +27,6 @@ return {
 				pattern: /^\/$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 3 },
-				endpoint: null
-			},
-			{
-				id: "/about",
-				pattern: /^\/about\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 4 },
 				endpoint: null
 			},
 			{
@@ -61,22 +54,29 @@ return {
 				id: "/operator",
 				pattern: /^\/operator\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 5 },
+				page: { layouts: [0,], errors: [1,], leaf: 4 },
 				endpoint: null
 			},
 			{
 				id: "/operator/lesson",
 				pattern: /^\/operator\/lesson\/?$/,
 				params: [],
-				page: { layouts: [0,2,], errors: [1,,], leaf: 6 },
+				page: { layouts: [0,2,], errors: [1,,], leaf: 5 },
 				endpoint: __memo(() => import('./entries/endpoints/operator/lesson/_server.js'))
 			},
 			{
 				id: "/site",
 				pattern: /^\/site\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 7 },
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: __memo(() => import('./entries/endpoints/site/_server.js'))
+			},
+			{
+				id: "/site/about",
+				pattern: /^\/site\/about\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 7 },
+				endpoint: null
 			}
 		],
 		matchers: async () => {

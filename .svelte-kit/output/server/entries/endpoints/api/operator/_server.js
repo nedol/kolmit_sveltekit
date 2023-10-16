@@ -1,5 +1,10 @@
 import "../../../../chunks/index.js";
-import { get, set } from "node-global-storage";
+import "node-global-storage";
+import { r as rtcPool_st } from "../../../../chunks/stores.js";
+let rtcPool;
+rtcPool_st.subscribe((data) => {
+  rtcPool = data;
+});
 const config = {
   // runtime: 'edge'
   // isr: {
@@ -7,7 +12,6 @@ const config = {
   // }
 };
 async function GET(event) {
-  let rtcPull2 = get("rtcPull");
   let q = {};
   q.func = event.url.searchParams.get("func");
   q.role = event.url.searchParams.get("role");
@@ -20,16 +24,16 @@ async function GET(event) {
     case "callwaiting":
       try {
         let promise = new Promise((resolve, reject) => {
-          console.log("oper rtcPull" + JSON.stringify(get("rtcPull")));
+          console.log("oper rtcPool" + JSON.stringify(rtcPool));
           CallWaiting(q, resolve);
-          if (rtcPull2[q.type][q.abonent][q.em].resolve_post)
-            rtcPull2[q.type][q.abonent][q.em].resolve_post();
-          set("rtcPull", rtcPull2);
+          if (rtcPool[q.type][q.abonent][q.em].resolve_post)
+            rtcPool[q.type][q.abonent][q.em].resolve_post();
+          rtcPool_st.set(rtcPool);
         });
         resp = await promise;
-        rtcPull2[q.type][q.abonent][q.em].promise = new Promise((resolve, reject) => {
-          rtcPull2[q.type][q.abonent][q.em].resolve_post = resolve;
-          set("rtcPull", rtcPull2);
+        rtcPool[q.type][q.abonent][q.em].promise = new Promise((resolve, reject) => {
+          rtcPool[q.type][q.abonent][q.em].resolve_post = resolve;
+          rtcPool_st.set(rtcPool);
         });
       } catch (ex) {
         console.log("callwaiting" + ex);
@@ -49,12 +53,12 @@ async function POST(event) {
       try {
         let promise = new Promise((resolve, reject) => {
           CallWaiting(q, resolve);
-          if (rtcPull[q.type][q.abonent][q.em].resolve_post)
-            rtcPull[q.type][q.abonent][q.em].resolve_post();
+          if (rtcPool[q.type][q.abonent][q.em].resolve_post)
+            rtcPool[q.type][q.abonent][q.em].resolve_post();
         });
         resp = await promise;
-        rtcPull[q.type][q.abonent][q.em].promise = new Promise((resolve, reject) => {
-          rtcPull[q.type][q.abonent][q.em].resolve_post = resolve;
+        rtcPool[q.type][q.abonent][q.em].promise = new Promise((resolve, reject) => {
+          rtcPool[q.type][q.abonent][q.em].resolve_post = resolve;
         });
       } catch (ex) {
         console.log("callwaiting" + ex);
@@ -67,11 +71,11 @@ async function POST(event) {
 }
 function CallWaiting(q, resolve) {
   try {
-    if (!rtcPull[q.type][q.abonent])
-      rtcPull[q.type][q.abonent] = {};
-    if (!rtcPull[q.type][q.abonent][q.em])
-      rtcPull[q.type][q.abonent][q.em] = { resolve: "" };
-    rtcPull[q.type][q.abonent][q.em].resolve = resolve;
+    if (!rtcPool[q.type][q.abonent])
+      rtcPool[q.type][q.abonent] = {};
+    if (!rtcPool[q.type][q.abonent][q.em])
+      rtcPool[q.type][q.abonent][q.em] = { resolve: "" };
+    rtcPool[q.type][q.abonent][q.em].resolve = resolve;
   } catch (e) {
     console.log();
   }

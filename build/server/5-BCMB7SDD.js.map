@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../.svelte-kit/adapter-node/entries/pages/operator/_slug_/_page.js", "../../.svelte-kit/adapter-node/nodes/5.js"],
-  "sourcesContent": ["import { e as error } from \"../../../../chunks/index2.js\";\nfunction load({ params }) {\n  if (params.slug === \"hello-world\") {\n    return {\n      title: \"Hello world!\",\n      content: \"Welcome to our blog. Lorem ipsum dolor sit amet...\"\n    };\n  }\n  throw error(404, \"Not found\");\n}\nexport {\n  load\n};\n", "import * as shared from '../entries/pages/operator/_slug_/_page.js';\n\nexport const index = 5;\nexport const component = async () => (await import('../entries/pages/operator/_slug_/_page.svelte.js')).default;\nexport const file = '_app/immutable/components/pages/operator/_slug_/_page.svelte-2933bb02.js';\nexport { shared };\nexport const imports = [\"_app/immutable/components/pages/operator/_slug_/_page.svelte-2933bb02.js\",\"_app/immutable/chunks/index-49fb8ea3.js\",\"_app/immutable/modules/pages/operator/_slug_/_page.js-d6fb70f3.js\",\"_app/immutable/chunks/index-56c348ce.js\",\"_app/immutable/chunks/_page-b427286f.js\"];\nexport const stylesheets = [];\n"],
-  "mappings": ";;;;;;;;AAAA;AAAA;AAAA;AAAA;AACA,SAAS,KAAK,EAAE,OAAO,GAAG;AACxB,MAAI,OAAO,SAAS,eAAe;AACjC,WAAO;AAAA,MACL,OAAO;AAAA,MACP,SAAS;AAAA,IACX;AAAA,EACF;AACA,QAAM,MAAM,KAAK,WAAW;AAC9B;;;ACPO,IAAM,QAAQ;AACd,IAAM,YAAY,aAAa,MAAM,OAAO,+BAAqD;AACjG,IAAM,OAAO;AAEb,IAAM,UAAU,CAAC,4EAA2E,2CAA0C,qEAAoE,2CAA0C,yCAAyC;AAC7R,IAAM,cAAc,CAAC;",
-  "names": []
-}

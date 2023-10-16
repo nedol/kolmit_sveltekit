@@ -1,4 +1,5 @@
-import { c as create_ssr_component, a as subscribe, b as set_store_value, e as escape, v as validate_component } from "../../chunks/ssr.js";
+import { c as create_ssr_component, e as escape, v as validate_component } from "../../chunks/ssr.js";
+import { s as subscribe, a as set_store_value } from "../../chunks/utils.js";
 import { v as view, d as dicts, l as langs } from "../../chunks/stores.js";
 const Header_svelte_svelte_type_style_lang = "";
 const css$1 = {

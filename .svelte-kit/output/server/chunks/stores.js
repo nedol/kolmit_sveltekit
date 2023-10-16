@@ -13,6 +13,7 @@ let dicts = writable();
 let users = writable();
 let statust = writable();
 let ice_conf = writable();
+let rtcPool_st = writable();
 export {
   server_path as a,
   statust as b,
@@ -23,6 +24,7 @@ export {
   langs as l,
   msg_signal_user as m,
   posterst as p,
+  rtcPool_st as r,
   signal as s,
   users as u,
   view as v

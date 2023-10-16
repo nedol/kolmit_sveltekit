@@ -2,6 +2,12 @@ import { json } from '@sveltejs/kit';
 // import { OperatorWaiting } from '$lib/server/db.js'; //src\lib\server\server.db.js
 import { get, set } from 'node-global-storage';
 
+let rtcPool;
+import { rtcPool_st } from '$lib/js/stores.js';
+rtcPool_st.subscribe((data) => {
+	rtcPool = data;
+});
+
 export const config = {
 	// runtime: 'edge'
 	// isr: {
@@ -18,14 +24,15 @@ export async function GET(event) {
 
 	let resp;
 
-	let rtcPull = get('rtcPull');
+	// let rtcPool = get('rtcPool');
 
 	try {
 		let promise = new Promise((resolve, reject) => {
 			try {
 				OperatorWaiting(q, resolve);
-				set('rtcPull', rtcPull);
-				console.log('user rtcPull' + JSON.stringify(rtcPull));
+				set('rtcPool', rtcPool);
+				rtcPool_st.set(rtcPool);
+				console.log('user rtcPool' + JSON.stringify(rtcPool));
 			} catch (ex) {
 				console.log(ex);
 			}
@@ -53,7 +60,7 @@ export async function POST(event) {
 		let promise = new Promise((resolve, reject) => {
 			try {
 				OperatorWaiting(q, resolve);
-				set('rtcPull', rtcPull);
+				set('rtcPool', rtcPool);
 			} catch (ex) {
 				console.log(ex);
 			}
@@ -72,9 +79,9 @@ export async function POST(event) {
 }
 function OperatorWaiting(q, resolve) {
 	try {
-		if (!rtcPull[q.type][q.abonent]) rtcPull[q.type][q.abonent] = {};
-		if (!rtcPull[q.type][q.abonent][q.em]) rtcPull[q.type][q.abonent][q.em] = { resolve: '' };
-		rtcPull[q.type][q.abonent][q.em].resolve = resolve;
+		if (!rtcPool[q.type][q.abonent]) rtcPool[q.type][q.abonent] = {};
+		if (!rtcPool[q.type][q.abonent][q.em]) rtcPool[q.type][q.abonent][q.em] = { resolve: '' };
+		rtcPool[q.type][q.abonent][q.em].resolve = resolve;
 	} catch (ex) {
 		console.log();
 	}

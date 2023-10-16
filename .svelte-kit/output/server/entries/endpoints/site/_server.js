@@ -5,11 +5,10 @@ import md5 from "md5";
 import pkg from "lodash";
 const { find, findKey } = pkg;
 const config = {
-  // runtime: 'edge'
-  isr: {
-    expiration: false
-    // 10
-  }
+  runtime: "edge"
+  // isr: {
+  // 	expiration: false // 10
+  // }
 };
 async function POST({ request, cookies, url }) {
   let abonent = url.searchParams.get("abonent");
@@ -276,7 +275,7 @@ async function HandleCall(q) {
           await global.rtcPull["operator"][q.abonent][q.em].promise;
           global.rtcPull["user"][q.abonent][q.em].resolve(remAr);
           if (oper_check && oper_check.resolve) {
-            const remAr2 = {
+            let remAr2 = {
               func: q.func,
               abonent: q.abonent,
               user_uid: item.uid,

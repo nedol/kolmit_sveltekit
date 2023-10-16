@@ -1,8 +1,8 @@
-import * as server from '../entries/pages/operator/_page.server.js';
+import * as universal from '../entries/pages/operator/lesson/_page.js';
 
 export const index = 5;
-export { server };
-export const server_id = "src/routes/operator/+page.server.js";
-export const imports = [];
+export { universal };
+export const universal_id = "src/routes/operator/lesson/+page.js";
+export const imports = ["_app/immutable/nodes/5.22e74a52.js"];
 export const stylesheets = [];
 export const fonts = [];

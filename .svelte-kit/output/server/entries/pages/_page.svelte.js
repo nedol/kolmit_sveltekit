@@ -1,4 +1,5 @@
-import { c as create_ssr_component, a as subscribe, b as set_store_value, s as setContext, v as validate_component } from "../../chunks/ssr.js";
+import { s as subscribe, a as set_store_value } from "../../chunks/utils.js";
+import { c as create_ssr_component, s as setContext, v as validate_component } from "../../chunks/ssr.js";
 import { S as SignalingChannel, O as Operator, a as SelectMenu, L as Login } from "../../chunks/signalingChannel.js";
 import { l as langs, d as dicts, i as ice_conf, u as users, s as signal } from "../../chunks/stores.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {

@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../.svelte-kit/adapter-node/chunks/mysql.js"],
-  "sourcesContent": ["import mysql from \"mysql2/promise\";\nconst pool = mysql.createPool({\n  connectionLimit: 100,\n  host: \"193.200.74.37\",\n  user: \"nedol_kolmit\",\n  password: \"Nissan@386\",\n  database: \"nedol_kolmit\"\n});\nexport {\n  pool as p\n};\n"],
-  "mappings": ";AAAA,OAAO,WAAW;AAClB,IAAM,OAAO,MAAM,WAAW;AAAA,EAC5B,iBAAiB;AAAA,EACjB,MAAM;AAAA,EACN,MAAM;AAAA,EACN,UAAU;AAAA,EACV,UAAU;AACZ,CAAC;",
-  "names": []
-}

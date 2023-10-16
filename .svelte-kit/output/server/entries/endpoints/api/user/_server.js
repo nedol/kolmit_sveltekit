@@ -1,5 +1,10 @@
 import "../../../../chunks/index.js";
-import { get, set } from "node-global-storage";
+import { set } from "node-global-storage";
+import { r as rtcPool_st } from "../../../../chunks/stores.js";
+let rtcPool;
+rtcPool_st.subscribe((data) => {
+  rtcPool = data;
+});
 const config = {
   // runtime: 'edge'
   // isr: {
@@ -12,13 +17,13 @@ async function GET(event) {
   q.type = event.url.searchParams.get("type");
   q.em = event.url.searchParams.get("em");
   let resp;
-  let rtcPull2 = get("rtcPull");
   try {
     let promise = new Promise((resolve, reject) => {
       try {
         OperatorWaiting(q, resolve);
-        set("rtcPull", rtcPull2);
-        console.log("user rtcPull" + JSON.stringify(rtcPull2));
+        set("rtcPool", rtcPool);
+        rtcPool_st.set(rtcPool);
+        console.log("user rtcPool" + JSON.stringify(rtcPool));
       } catch (ex) {
         console.log(ex);
       }
@@ -39,7 +44,7 @@ async function POST(event) {
     let promise = new Promise((resolve, reject) => {
       try {
         OperatorWaiting(q, resolve);
-        set("rtcPull", rtcPull);
+        set("rtcPool", rtcPool);
       } catch (ex) {
         console.log(ex);
       }
@@ -54,11 +59,11 @@ async function POST(event) {
 }
 function OperatorWaiting(q, resolve) {
   try {
-    if (!rtcPull[q.type][q.abonent])
-      rtcPull[q.type][q.abonent] = {};
-    if (!rtcPull[q.type][q.abonent][q.em])
-      rtcPull[q.type][q.abonent][q.em] = { resolve: "" };
-    rtcPull[q.type][q.abonent][q.em].resolve = resolve;
+    if (!rtcPool[q.type][q.abonent])
+      rtcPool[q.type][q.abonent] = {};
+    if (!rtcPool[q.type][q.abonent][q.em])
+      rtcPool[q.type][q.abonent][q.em] = { resolve: "" };
+    rtcPool[q.type][q.abonent][q.em].resolve = resolve;
   } catch (ex) {
     console.log();
   }

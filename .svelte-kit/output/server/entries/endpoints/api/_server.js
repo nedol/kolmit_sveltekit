@@ -3,18 +3,21 @@ import { C as CheckOperator, a as CreateOperator } from "../../../chunks/db.js";
 import "nodemailer";
 import md5 from "md5";
 import pkg from "lodash";
-import { set, get } from "node-global-storage";
+import { set } from "node-global-storage";
+import { r as rtcPool_st } from "../../../chunks/stores.js";
 const { find, findKey } = pkg;
-set("rtcPull", { user: {}, operator: {} });
+let rtcPool;
+rtcPool_st.subscribe((data) => {
+  rtcPool = data;
+});
+rtcPool_st.set({ user: {}, operator: {} });
 const config = {
-  // runtime: 'edge'
-  isr: {
-    expiration: false
-    // 10
-  }
+  runtime: "edge"
+  // isr: {
+  // 	expiration: false // 10
+  // }
 };
 async function GET({ url, fetch, cookies }) {
-  get("rtcPull");
   const abonent = url.searchParams.get("abonent");
   const text = url.searchParams.get("text");
   const dict = url.searchParams.get("dict");
@@ -55,7 +58,6 @@ async function POST({ request, url, fetch, cookies }) {
   } else {
     kolmit = { psw: md5("demo") };
   }
-  rtcPull = get("rtcPull");
   switch (par.func) {
     case "operator":
       if (q.email && q.psw) {
@@ -83,7 +85,7 @@ async function POST({ request, url, fetch, cookies }) {
       SetParams(q);
       if (q.type === "user") {
         let cnt_queue = 0;
-        rtcPull[q.type][q.abonent][q.em][q.uid];
+        rtcPool[q.type][q.abonent][q.em][q.uid];
         resp = {
           func: q.func,
           type: q.type,
@@ -91,7 +93,7 @@ async function POST({ request, url, fetch, cookies }) {
           queue: String(cnt_queue)
         };
         SendOperatorStatus(q);
-        set("rtcPull", rtcPull);
+        set("rtcPool", rtcPool);
         return new Response(JSON.stringify({ resp }));
       } else if (q.type === "operator") {
         q.psw = kolmit.psw;
@@ -113,7 +115,7 @@ async function POST({ request, url, fetch, cookies }) {
     case "status":
       if (q.status === "call") {
         if (q.type === "operator") {
-          let item = rtcPull[q.type][q.abonent][q.em][q.uid];
+          let item = rtcPool[q.type][q.abonent][q.em][q.uid];
           if (item)
             item.status = "busy";
           BroadcastOperatorStatus(q);
@@ -122,7 +124,7 @@ async function POST({ request, url, fetch, cookies }) {
       }
       if (q.status === "close") {
         try {
-          let item = rtcPull[q.type][q.abonent][q.em][q.uid];
+          let item = rtcPool[q.type][q.abonent][q.em][q.uid];
           if (item) {
             item.status = q.status;
             if (q.type === "operator")
@@ -135,26 +137,26 @@ async function POST({ request, url, fetch, cookies }) {
       SetParams(q);
       break;
   }
-  set("rtcPull", rtcPull);
+  rtcPool_st.set(rtcPool);
   let response = new Response(JSON.stringify({ resp }));
   response.headers.append("Access-Control-Allow-Origin", `*`);
   return response;
 }
 function SetParams(q) {
-  if (!rtcPull[q.type][q.abonent]) {
-    rtcPull[q.type][q.abonent] = {};
+  if (!rtcPool[q.type][q.abonent]) {
+    rtcPool[q.type][q.abonent] = {};
   }
-  if (!rtcPull[q.type][q.abonent][q.em])
-    rtcPull[q.type][q.abonent][q.em] = [];
+  if (!rtcPool[q.type][q.abonent][q.em])
+    rtcPool[q.type][q.abonent][q.em] = [];
   let item;
   if (q.type === "user") {
-    item = rtcPull[q.type][q.abonent][q.em][q.uid];
+    item = rtcPool[q.type][q.abonent][q.em][q.uid];
   } else
-    item = rtcPull[q.type][q.abonent][q.em][0];
+    item = rtcPool[q.type][q.abonent][q.em][0];
   if (!item) {
     item = {};
     item.cand = [];
-    rtcPull[q.type][q.abonent][q.em][q.uid] = item;
+    rtcPool[q.type][q.abonent][q.em][q.uid] = item;
   }
   item.uid = q.uid;
   item.status = q.status;
@@ -172,36 +174,36 @@ function SetParams(q) {
 function BroadcastOperatorStatus(q, status) {
   try {
     let queue = 0;
-    if (!rtcPull["user"][q.abonent])
+    if (!rtcPool["user"][q.abonent])
       return;
-    for (let uid in rtcPull["user"][q.abonent][q.em]) {
-      if (q.uid && rtcPull["user"][q.abonent][q.em][uid]) {
+    for (let uid in rtcPool["user"][q.abonent][q.em]) {
+      if (q.uid && rtcPool["user"][q.abonent][q.em][uid]) {
         queue++;
       }
     }
     let type = q.type === "operator" ? "user" : "operator";
     let operators = { [q.em]: {} };
-    for (let uid in rtcPull["operator"][q.abonent][q.em]) {
+    for (let uid in rtcPool["operator"][q.abonent][q.em]) {
       if (uid !== "resolve")
         operators[q.em][uid] = {
           type: q.type,
           abonent: q.abonent,
           em: q.em,
           uid: q.uid,
-          status: rtcPull["operator"][q.abonent][q.em][uid].status,
+          status: rtcPool["operator"][q.abonent][q.em][uid].status,
           queue
         };
     }
-    for (let em in rtcPull[type][q.abonent]) {
+    for (let em in rtcPool[type][q.abonent]) {
       if (em === q.em && q.status === "call")
         continue;
-      for (let uid in rtcPull[type][q.abonent][em]) {
-        let item = rtcPull[type][q.abonent][em][uid];
+      for (let uid in rtcPool[type][q.abonent][em]) {
+        let item = rtcPool[type][q.abonent][em][uid];
         let offer = find(operators[q.em], { status: "offer" });
         if (offer && // && item.abonent === q.em
         item.uid !== q.uid) {
           if (item.status === "wait") {
-            let oper = rtcPull["operator"][q.abonent][q.em][q.uid];
+            let oper = rtcPool["operator"][q.abonent][q.em][q.uid];
             let remAr2 = {
               func: q.func,
               type,
@@ -210,11 +212,11 @@ function BroadcastOperatorStatus(q, status) {
               desc: oper.desc,
               cand: oper.cand
             };
-            if (rtcPull[type][q.abonent][em].resolve)
-              rtcPull[type][q.abonent][em].resolve(remAr2);
+            if (rtcPool[type][q.abonent][em].resolve)
+              rtcPool[type][q.abonent][em].resolve(remAr2);
           } else {
-            if (rtcPull[type][q.abonent][em].resolve)
-              rtcPull[type][q.abonent][em].resolve({
+            if (rtcPool[type][q.abonent][em].resolve)
+              rtcPool[type][q.abonent][em].resolve({
                 func: q.func,
                 type,
                 abonent: q.abonent,
@@ -224,8 +226,8 @@ function BroadcastOperatorStatus(q, status) {
               });
           }
         } else {
-          if (rtcPull[type][q.abonent][em].resolve)
-            rtcPull[type][q.abonent][em].resolve({
+          if (rtcPool[type][q.abonent][em].resolve)
+            rtcPool[type][q.abonent][em].resolve({
               func: q.func,
               type,
               abonent: q.abonent,
@@ -242,20 +244,20 @@ function BroadcastOperatorStatus(q, status) {
   }
 }
 function SendOperatorStatus(q) {
-  if (rtcPull["operator"] && rtcPull["operator"][q.abonent] && rtcPull["operator"][q.abonent][q.em]) {
-    for (let uid in rtcPull["operator"][q.abonent][q.em]) {
-      if (rtcPull["operator"][q.abonent][q.em][uid].status === "offer") {
+  if (rtcPool["operator"] && rtcPool["operator"][q.abonent] && rtcPool["operator"][q.abonent][q.em]) {
+    for (let uid in rtcPool["operator"][q.abonent][q.em]) {
+      if (rtcPool["operator"][q.abonent][q.em][uid].status === "offer") {
         let operator = {
           abonent: q.abonent,
           em: q.em,
           uid,
-          status: rtcPull["operator"][q.abonent][q.em][uid].status,
-          desc: rtcPull["operator"][q.abonent][q.em][uid].desc,
-          cand: rtcPull["operator"][q.abonent][q.em][uid].cand
+          status: rtcPool["operator"][q.abonent][q.em][uid].status,
+          desc: rtcPool["operator"][q.abonent][q.em][uid].desc,
+          cand: rtcPool["operator"][q.abonent][q.em][uid].cand
         };
         if (q.type === "user") {
-          rtcPull["user"][q.abonent][q.em][q.uid];
-          rtcPull["user"][q.abonent][q.em].resolve({ operator });
+          rtcPool["user"][q.abonent][q.em][q.uid];
+          rtcPool["user"][q.abonent][q.em].resolve({ operator });
         }
       }
     }
@@ -273,22 +275,22 @@ async function HandleCall(q) {
         user: q.em
         // "abonent": q.em
       });
-      let item = rtcPull["operator"][q.abonent][q.em][q.oper_uid];
+      let item = rtcPool["operator"][q.abonent][q.em][q.oper_uid];
       if (item) {
-        await rtcPull["operator"][q.abonent][q.em].promise;
-        rtcPull["operator"][q.abonent][q.em].resolve(remAr);
+        await rtcPool["operator"][q.abonent][q.em].promise;
+        rtcPool["operator"][q.abonent][q.em].resolve(remAr);
         remAr = [];
       }
     } else {
-      let item = rtcPull["user"][q.abonent][q.em][q.uid];
+      let item = rtcPool["user"][q.abonent][q.em][q.uid];
       if (item) {
-        let oper_check = findKey(rtcPull["operator"][q.abonent][q.em], {
+        let oper_check = findKey(rtcPool["operator"][q.abonent][q.em], {
           status: "check"
         });
-        let oper_offer_key = findKey(rtcPull["operator"][q.abonent][q.em], {
+        let oper_offer_key = findKey(rtcPool["operator"][q.abonent][q.em], {
           status: "offer"
         });
-        let oper_offer = rtcPull["operator"][q.abonent][q.em][oper_offer_key];
+        let oper_offer = rtcPool["operator"][q.abonent][q.em][oper_offer_key];
         if (oper_offer) {
           remAr.push({
             func: q.func,
@@ -298,8 +300,8 @@ async function HandleCall(q) {
             desc: oper_offer.desc,
             cand: oper_offer.cand
           });
-          await rtcPull["operator"][q.abonent][q.em].promise;
-          rtcPull["user"][q.abonent][q.operator].resolve(remAr);
+          await rtcPool["operator"][q.abonent][q.em].promise;
+          rtcPool["user"][q.abonent][q.operator].resolve(remAr);
           remAr = [];
         } else {
           item.status = "wait";
@@ -308,10 +310,10 @@ async function HandleCall(q) {
             abonent: q.abonent,
             status: "wait"
           });
-          await rtcPull["operator"][q.abonent][q.em].promise;
-          rtcPull["user"][q.abonent][q.em].resolve(remAr);
+          await rtcPool["operator"][q.abonent][q.em].promise;
+          rtcPool["user"][q.abonent][q.em].resolve(remAr);
           if (oper_check && oper_check.resolve) {
-            const remAr2 = {
+            let remAr2 = {
               func: q.func,
               abonent: q.abonent,
               user_uid: item.uid,
