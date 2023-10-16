@@ -14,7 +14,7 @@ const config = {
 	}),
 	kit: {
 		adapter: adapter(),
-		target: '#svelte',
+		// target: '#svelte',
 		// csp: {
 		// 	mode: 'auto',
 		// 	directives: {
