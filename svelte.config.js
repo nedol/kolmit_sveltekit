@@ -9,9 +9,9 @@ import preprocess from 'svelte-preprocess';
 const config = {
 	preprocess: [
 		preprocess({
-			scss: {
-				prependData: "@import 'src/lib/styles/variables.scss';"
-			}
+			// scss: {
+			// 	prependData: "@import 'src/lib/styles/variables.scss';"
+			// }
 		})
 	],
 	kit: {

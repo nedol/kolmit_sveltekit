@@ -16,7 +16,7 @@ let ice_conf = writable();
 let rtcPool_st = writable();
 rtcPool_st.set({ user: {}, operator: {} });
 export {
-  server_path as a,
+  signal as a,
   statust as b,
   msg_signal_oper as c,
   dicts as d,
@@ -26,7 +26,7 @@ export {
   msg_signal_user as m,
   posterst as p,
   rtcPool_st as r,
-  signal as s,
+  server_path as s,
   users as u,
   view as v
 };
