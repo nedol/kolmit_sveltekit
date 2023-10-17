@@ -15,7 +15,13 @@ const config = {
 		})
 	],
 	kit: {
-		adapter: adapter({ strict: false, target: '#svelte' })
+		adapter: adapter({
+			pages: 'build',
+			assets: 'build',
+			fallback: 'index.html',
+			strict: true,
+			target: '#svelte'
+		})
 		// hydrate the <div id="svelte"> element in src/app.html
 	}
 };

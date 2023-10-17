@@ -10,6 +10,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .env*.local
 firebase.json
+./build
 
 # Local Netlify folder
 .netlify
