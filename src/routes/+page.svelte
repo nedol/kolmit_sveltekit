@@ -27,7 +27,7 @@
 	$signal = new SignalingChannel(email);
 
 	import { server_path } from '$lib/js/stores.js';
-	$server_path = data.host.includes('http://[::1]') ? 'http://localhost:3000' : data.host;
+	$server_path = data.host.includes('http://[::1]') ? 'http://localhost:5173' : data.host;
 
 	import { langs } from '$lib/js/stores.js';
 	$langs = data.lang;

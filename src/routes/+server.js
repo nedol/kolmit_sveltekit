@@ -7,9 +7,6 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
-// import { get, set } from 'node-global-storage';
-// set('global.rtcPool', { user: {}, operator: {} });
-
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
 rtcPool_st.subscribe((data) => {

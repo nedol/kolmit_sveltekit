@@ -10,16 +10,15 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.5e7fe5e9.js","app":"_app/immutable/entry/app.d53dec62.js","imports":["_app/immutable/entry/start.5e7fe5e9.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.36f84b22.js","_app/immutable/chunks/paths.d0ee2dc4.js","_app/immutable/entry/app.d53dec62.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.fa396593.js","app":"_app/immutable/entry/app.f8289e13.js","imports":["_app/immutable/entry/start.fa396593.js","_app/immutable/chunks/scheduler.96a9d009.js","_app/immutable/chunks/singletons.4e9b7f39.js","_app/immutable/chunks/paths.a9cae6bb.js","_app/immutable/entry/app.f8289e13.js","_app/immutable/chunks/scheduler.96a9d009.js","_app/immutable/chunks/index.ee48a681.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
-			__memo(() => import('./chunks/0-713d9319.js')),
-			__memo(() => import('./chunks/1-85223ab5.js')),
-			__memo(() => import('./chunks/2-788567bf.js')),
-			__memo(() => import('./chunks/3-5d7c20be.js')),
+			__memo(() => import('./chunks/0-176ba91a.js')),
+			__memo(() => import('./chunks/1-2a560d3b.js')),
+			__memo(() => import('./chunks/2-0d940101.js')),
+			__memo(() => import('./chunks/3-9ca6ec39.js')),
 			__memo(() => import('./chunks/4-5453f184.js')),
 			__memo(() => import('./chunks/5-d5bf7272.js')),
-			__memo(() => import('./chunks/6-1e509c3e.js')),
-			__memo(() => import('./chunks/7-9dd411b7.js'))
+			__memo(() => import('./chunks/6-834931bf.js'))
 		],
 		routes: [
 			{
@@ -44,17 +43,10 @@ return {
 				endpoint: __memo(() => import('./chunks/_server-26f0a75f.js'))
 			},
 			{
-				id: "/site",
-				pattern: /^\/site\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 6 },
-				endpoint: __memo(() => import('./chunks/_server-a9ba8a25.js'))
-			},
-			{
 				id: "/site/about",
 				pattern: /^\/site\/about\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 7 },
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: null
 			},
 			{

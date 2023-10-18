@@ -1,6 +1,7 @@
 import "md5";
 import "os";
 import { c as CreatePool, d as GetUsers } from "../../chunks/db.js";
+import ipc from "@achrinza/node-ipc";
 const ice_conf = {
   stun: {
     urls: [
@@ -281,6 +282,14 @@ async function load({ fetch, cookies, route, url, stuff }) {
     psw: kolmit.psw
   };
   res = await GetUsers(params);
+  ipc.config.id = "abonent";
+  ipc.config.retry = 1500;
+  ipc.config.silent = true;
+  ipc.serve(
+    () => ipc.server.on("a-unique-message-name", (message) => {
+    })
+  );
+  ipc.server.start();
   return {
     check: true,
     host,

@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.5e7fe5e9.js","app":"_app/immutable/entry/app.d53dec62.js","imports":["_app/immutable/entry/start.5e7fe5e9.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.36f84b22.js","_app/immutable/chunks/paths.d0ee2dc4.js","_app/immutable/entry/app.d53dec62.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.fa396593.js","app":"_app/immutable/entry/app.f8289e13.js","imports":["_app/immutable/entry/start.fa396593.js","_app/immutable/chunks/scheduler.96a9d009.js","_app/immutable/chunks/singletons.4e9b7f39.js","_app/immutable/chunks/paths.a9cae6bb.js","_app/immutable/entry/app.f8289e13.js","_app/immutable/chunks/scheduler.96a9d009.js","_app/immutable/chunks/index.ee48a681.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -18,8 +18,7 @@ return {
 			__memo(() => import('./nodes/3.js')),
 			__memo(() => import('./nodes/4.js')),
 			__memo(() => import('./nodes/5.js')),
-			__memo(() => import('./nodes/6.js')),
-			__memo(() => import('./nodes/7.js'))
+			__memo(() => import('./nodes/6.js'))
 		],
 		routes: [
 			{
@@ -44,17 +43,10 @@ return {
 				endpoint: __memo(() => import('./entries/endpoints/operator/lesson/_server.js'))
 			},
 			{
-				id: "/site",
-				pattern: /^\/site\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 6 },
-				endpoint: __memo(() => import('./entries/endpoints/site/_server.js'))
-			},
-			{
 				id: "/site/about",
 				pattern: /^\/site\/about\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 7 },
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: null
 			},
 			{

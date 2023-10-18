@@ -366,6 +366,32 @@ export async function GetDict(q) {
 	}
 }
 
+export async function GetRtc(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`SELECT rtc FROM users
+		WHERE  users.operator=${q.abonent}`;
+		//debugger;
+		return res.rows[0].rtc;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+}
+
+export async function WriteRtc(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`UPDATE users
+		SET rtc=${q.data} WHERE  users.operator=${q.operator}`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+	await pool.sql`COMMIT;`;
+}
+
 export async function WriteSpeech(q) {
 	await pool.sql`BEGIN;`;
 	try {

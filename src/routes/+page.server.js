@@ -7,6 +7,8 @@ global.rtcPull = { user: {}, operator: {} };
 
 import { CreatePool, GetUsers } from '$lib/server/db.js'; //src\lib\server\server.db.js
 
+import ipc from '@achrinza/node-ipc';
+
 let kolmit;
 
 /** @type {import('./$types').PageServerLoad} */
@@ -19,7 +21,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 		CreatePool(resolve);
 	});
 
-	let pool = await prom;
+	await prom;
 
 	let host = url.origin; //'http://localhost:3000'; //'https://kolmit-sveltekit-nedol.vercel.app'; //
 
@@ -53,6 +55,16 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	};
 
 	res = await GetUsers(params);
+
+	ipc.config.id = 'abonent';
+	ipc.config.retry = 1500;
+	ipc.config.silent = true;
+	ipc.serve(() =>
+		ipc.server.on('a-unique-message-name', (message) => {
+			//console.log(message);
+		})
+	);
+	ipc.server.start();
 
 	// if (!res) {
 	// 	(resp.operator = kolmit.operator), (resp.abonent = kolmit.abonent), (resp.check = true);
