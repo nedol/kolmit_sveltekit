@@ -14,5 +14,6 @@ const config = {
 		// hydrate the <div id="svelte"> element in src/app.html
 	}
 };
+//
 
 export default config;
