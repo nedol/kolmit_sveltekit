@@ -132,6 +132,7 @@
 		position: absolute;
 		right: 0px;
 		padding-right: 25px;
+		padding-left: 10px;
 		top: 50px;
 		max-width: 200px;
 		overflow: hidden;

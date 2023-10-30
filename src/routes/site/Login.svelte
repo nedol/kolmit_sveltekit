@@ -9,6 +9,8 @@
 	import { signal } from '$lib/js/stores.js';
 	import operator_svg from '$lib/images/operator.svg';
 
+	let width, height;
+
 	export let oper_pic;
 	if (!oper_pic) {
 		oper_pic = operator_svg;
@@ -46,7 +48,7 @@
 					} else {
 						width = img.width;
 						height = img.height;
-						user_pic = img.toDataURL();
+						oper_pic = img.toDataURL();
 					}
 				},
 				{
