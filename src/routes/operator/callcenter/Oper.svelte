@@ -183,7 +183,7 @@
 
 <div
 	bind:this={oper_admin_div}
-	style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding-bottom:20px"
+	style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding-bottom:5px"
 >
 	<!-- {@debug operator, user} -->
 	{#if user.email !== operator.em}
@@ -198,7 +198,7 @@
 				playsinline
 				muted
 				on:click={OnClickUpload}
-				style="display: block; position:absolute; top:0px; width:100px; height: 100px;"
+				style="display: block; position:absolute; top:0px; width:60px; height: 100px;"
 			/>
 			<!-- <img
 			class="user_pic is-rounded"

@@ -37,11 +37,8 @@
             display:{display};
             position: absolute;
             height: 105px;
-
             background-color: white;
-
             max-width: 12%;
-
             z-index: 10;
             "
 >

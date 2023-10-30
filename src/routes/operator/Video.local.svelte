@@ -33,9 +33,8 @@
 	style="
         display: {display};
         position:absolute;
-        top:-15px;
-        width:100px;
-        height: 100px;
+        top:-10px;
+        width:60px;
         z-index: 20;"
 />
 <slot name="footer" />

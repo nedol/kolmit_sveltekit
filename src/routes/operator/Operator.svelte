@@ -396,7 +396,7 @@
 	}
 </script>
 
-<div style="display:flex; min-height:100px; flex-wrap: nowrap;justify-content: space-between;">
+<div style="display:flex; min-height:60px; flex-wrap: nowrap;justify-content: space-between;">
 	<div style="flex:1">
 		<VideoRemote {...remote.video} />
 
