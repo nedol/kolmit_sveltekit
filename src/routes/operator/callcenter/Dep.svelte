@@ -10,7 +10,6 @@
 	export let dep;
 	export let owner;
 	export let operator;
-	// export let tarif;
 
 	let button;
 	let user_status = [];

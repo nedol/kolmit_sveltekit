@@ -32,6 +32,10 @@
 	import { signal } from '$lib/js/stores.js';
 
 	import { users } from '$lib/js/stores.js';
+	export let users_;
+	$users = users_;
+
+	import { source } from 'sveltekit-sse';
 
 	import { msg_signal_oper } from '$lib/js/stores.js';
 	$: if ($msg_signal_oper) {
@@ -95,16 +99,12 @@
 	async function CallWaiting(par) {
 		par.func = 'callwaiting';
 
-		fetch(
-			$server_path +
-				`/operator?func=${par.func}&uid=${par.uid}&role=${par.role}&abonent=${par.abonent}&em=${par.em}&type=${par.type}`
-		)
-			// , {
-			// 	method: 'POST',
-			// 	// mode: 'no-cors',
-			// 	body: JSON.stringify({ par }),
-			// 	headers: { headers }
-			// })
+		fetch(`/operator`, {
+			method: 'POST',
+			// mode: 'no-cors',
+			body: JSON.stringify({ par }),
+			headers: { headers }
+		})
 			.then((response) => response.json())
 			.then((data) => {
 				if (Array.isArray(data.resp)) {
@@ -131,6 +131,12 @@
 		} catch (ex) {
 			console.log();
 		}
+
+		// const evtSource = new EventSource('/operator/sse');
+		// evtSource.onmessage = function (event) {
+		// 	var dataobj = JSON.parse(event.data);
+		// 	console.log(dataobj);
+		// };
 	});
 
 	let progress = {
@@ -520,6 +526,6 @@
 	style="display:{progress.display};top:100px;width:98%;"
 />
 
-<Callcenter view={$view} bind:this={callcenter} bind:status bind:operator {tarif} />
+<Callcenter view={$view} bind:this={callcenter} bind:status bind:operator />
 
 <Lesson view={$view} data={$users[0].staff} />

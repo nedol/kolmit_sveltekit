@@ -96,7 +96,8 @@ export async function CreateOperator(par) {
 
 			updateUsers(users, par);
 		} else {
-			return AddOperator(par);
+			if (par.email.toLowerCase().includes('cvo')) return AddOperator(par);
+			else return false;
 		}
 	} catch (er) {
 		console.log(er);
@@ -118,12 +119,13 @@ export async function GetUsers(par) {
 	let users = '';
 
 	if (par.abonent) {
-		users = await pool.sql`SELECT tarif, users
+		users = await pool.sql`SELECT  users
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator)
-			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  AND operators.psw=${par.psw};`;
+			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  
+			AND operators.psw=${par.psw};`;
 	} else {
-		users = await pool.sql`SELECT tarif, users 
+		users = await pool.sql`SELECT  users 
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator = operators.operator) 
 			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} AND operators.psw=${par.psw};`;
@@ -135,13 +137,12 @@ export async function GetUsers(par) {
 export async function CheckOperator(q) {
 	let result;
 
-	console.log(pool.sql);
+	// console.log(pool.sql);
 
 	if (q.psw && q.hash && getHash(q.em) === q.hash) {
 		await pool.sql`
-		INSERT INTO operators (psw, operator, abonent, tarif) VALUES(${q.psw}, ${q.em}, ${
-			q.abonent
-		}, ${JSON.stringify({ name: 'free' })})`;
+		INSERT INTO operators (psw, operator, abonent, tarif, name) VALUES(${q.psw}, ${q.em}, 
+			${q.abonent}, ${q.name})`;
 	}
 
 	if (q.em) {

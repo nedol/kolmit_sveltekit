@@ -3,6 +3,8 @@ import { dict } from '$lib/dict/dict';
 import { ice_conf } from '$lib/ice_conf';
 import os from 'os';
 
+import { CreateOperator, CheckOperator } from '$lib/server/db.js';
+
 global.rtcPull = { user: {}, operator: {} };
 
 import { CreatePool, GetUsers } from '$lib/server/db.js'; //src\lib\server\server.db.js
@@ -54,12 +56,6 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 
 	res = await GetUsers(params);
 
-	// if (!res) {
-	// 	(resp.operator = kolmit.operator), (resp.abonent = kolmit.abonent), (resp.check = true);
-	// 	resp.users = '{}';
-	// 	return resp;
-	// }
-
 	return {
 		check: true,
 		host: host,
@@ -67,8 +63,36 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 		abonent: abonent,
 		lang: kolmit.lang,
 		dict: dict,
-		users: res.users || '',
-		tarif: res.tarif || '',
+		users: res && res.users ? res.users : '',
 		ice_conf: ice_conf
 	};
 }
+
+export const actions = {
+	default: async ({ cookies, request, url }) => {
+		const abonent = url.searchParams.get('abonent');
+		const data = await request.formData();
+		if (data.get('psw') !== data.get('confirmPassword')) return;
+		let q = {
+			abonent: abonent,
+			name: data.get('name'),
+			email: data.get('email'),
+			psw: md5(data.get('psw')),
+			lang: data.get('lang')
+		};
+
+		if (CreateOperator(q)) {
+			cookies.set(
+				'abonent:' + q.abonent,
+				JSON.stringify({
+					name: q.name,
+					operator: q.email,
+					abonent: q.abonent,
+					psw: q.psw,
+					lang: q.lang
+				}),
+				{ maxAge: 60 * 60 * 24 * 30 }
+			);
+		}
+	}
+};

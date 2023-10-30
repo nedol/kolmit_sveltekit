@@ -9,16 +9,11 @@
 
 	// import { page, navigating } from '$app/stores';
 
-	//debugger;
-
 	export let data;
-
-	let checked = data.check;
-	let tarif;
 
 	let user_pic = data.picture ? data.picture.medium : '';
 
-	const email = data.operator,
+	let email = data.operator,
 		abonent = data.abonent;
 	let hash = null;
 
@@ -27,7 +22,7 @@
 	$signal = new SignalingChannel(email);
 
 	import { server_path } from '$lib/js/stores.js';
-	$server_path = data.host.includes('http://[::1]') ? 'http://localhost:3000' : data.host;
+	$server_path = data.host;
 
 	import { langs } from '$lib/js/stores.js';
 	$langs = data.lang;
@@ -39,18 +34,15 @@
 	$ice_conf = data.ice_conf;
 
 	import { users } from '$lib/js/stores.js';
-	$users = JSON.parse(data.users);
-	setContext('users', $users);
+	if (data.users) {
+		$users = JSON.parse(data.users);
+	}
 
 	onMount(async () => {});
 </script>
 
-{#if checked}
-	<Operator {email} {abonent} />
+{#if !email || !data.users}
+	<Login {email} {abonent} {user_pic} />
 {:else}
-	<SelectMenu bind:$langs />
-	<Login data-sveltekit-prefetch {abonent} {user_pic} lang={$langs} bind:checked />
+	<Operator {email} {abonent} users_={$users} />
 {/if}
-
-<style>
-</style>

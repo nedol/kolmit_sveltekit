@@ -34,14 +34,36 @@
 		// Authorization: `Bearer ${token}`
 	};
 
+	async function SendCheck(par) {
+		fetch(`/`, {
+			method: 'POST',
+			// mode: 'no-cors',
+			body: JSON.stringify({ par }),
+			headers: { headers }
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (Array.isArray(data.resp)) {
+					data.resp.map((resp) => {
+						$msg_signal_user = resp;
+					});
+				} else {
+					$msg_signal_user = data.resp;
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+				return [];
+			});
+	}
+
 	async function OperatorWaiting(par) {
-		fetch(`/user?abonent=${par.abonent}&em=${par.em}&type=${par.type}`)
-			// , {
-			// 	method: 'GET',
-			// 	// mode: 'no-cors',
-			// 	// body: JSON.stringify({ par }),
-			// 	headers: { headers }
-			// })
+		fetch(`/user`, {
+			method: 'POST',
+			// mode: 'no-cors',
+			body: JSON.stringify({ par }),
+			headers: { headers }
+		})
 			.then((response) => response.json())
 			.then((data) => {
 				if (Array.isArray(data.resp)) {
@@ -62,11 +84,10 @@
 
 	onMount(async () => {
 		OperatorWaiting({ type: 'user', abonent: operator.abonent, em: operator.em });
+		// SendCheck({ func: 'check', type: 'user', abonent: operator.abonent, em: operator.em });
 	});
 
 	let edited_display = false;
-
-	export let tarif;
 
 	$: if (cc_data && cc_data.length > 0) {
 		forEach(cc_data, (dep, k) => {
@@ -145,7 +166,6 @@
 			<!-- {@debug dep} -->
 			<Dep
 				bind:dep
-				bind:tarif
 				bind:edited_display
 				owner={dep.admin.email}
 				{operator}

@@ -1,8 +1,6 @@
 <script>
 	import { onMount /*, onDestroy, getContext, setContext*/, setContext } from 'svelte';
 	import { page, navigating, updated } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
 
 	import { view } from '$lib/js/stores.js';
 
@@ -10,7 +8,7 @@
 
 	import { dicts } from '$lib/js/stores.js';
 	$: if ($dicts) {
-		// console.log($dicts);
+		console.log($dicts);
 	}
 
 	$view = 'cc';
@@ -18,50 +16,52 @@
 	onMount(async () => {});
 </script>
 
-<header>
-	<div class="corner">
-		<!-- <a href="https://kit.svelte.dev">
+{#if $dicts && $dicts['CLASS'][$langs]}
+	<header>
+		<div class="corner">
+			<!-- <a href="https://kit.svelte.dev">
       <img src={logo} alt="SvelteKit" />
     </a> -->
-	</div>
+		</div>
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<!-- <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+		<nav>
+			<svg viewBox="0 0 2 3" aria-hidden="true">
+				<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
+			</svg>
+			<ul>
+				<!-- <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li> -->
-			<!-- {@debug $dicts} -->
-			<a
-				href="#"
-				target="_self"
-				on:click={() => {
-					$view = 'cc';
-				}}>{$dicts ? $dicts['CLASS'][$langs] : 'CLASS'}</a
-			>
-			<li>
+				<!-- {@debug $dicts} -->
 				<a
 					href="#"
 					target="_self"
 					on:click={() => {
-						$view = 'lesson';
-					}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</a
+						$view = 'cc';
+					}}>{$dicts ? $dicts['CLASS'][$langs] : 'CLASS'}</a
 				>
-			</li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
-	</nav>
+				<li>
+					<a
+						href="#"
+						target="_self"
+						on:click={() => {
+							$view = 'lesson';
+						}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</a
+					>
+				</li>
+			</ul>
+			<svg viewBox="0 0 2 3" aria-hidden="true">
+				<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
+			</svg>
+		</nav>
 
-	<div class="corner">
-		<!-- <a href="https://github.com/sveltejs/kit">
+		<div class="corner">
+			<!-- <a href="https://github.com/sveltejs/kit">
       <img src={github} alt="GitHub" />
     </a> -->
-	</div>
-</header>
+		</div>
+	</header>
+{/if}
 
 <style>
 	header {

@@ -33,6 +33,7 @@ export class RTCBase {
 
 		// this.vr = new VideoRecorder();
 		// this.vr.open();
+		// this.SendCheck();
 	}
 
 	async SendCheck() {

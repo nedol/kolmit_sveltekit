@@ -92,6 +92,7 @@ export async function POST({ request, url, fetch, cookies }) {
 					cookies.set(
 						'abonent:' + q.abonent,
 						JSON.stringify({
+							name: q.name,
 							operator: q.email,
 							abonent: q.abonent,
 							psw: q.psw,
@@ -102,6 +103,7 @@ export async function POST({ request, url, fetch, cookies }) {
 
 					resp = JSON.stringify({
 						func: par.func,
+						name: q.name,
 						operator: q.email,
 						abonent: q.email,
 						lang: q.lang

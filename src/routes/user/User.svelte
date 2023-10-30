@@ -95,6 +95,7 @@
 
 	onMount(async () => {
 		rtc = new RTCUser(user, uid, $signal);
+		rtc.SendCheck();
 
 		rtc.OnOpenDataChannel = () => {
 			console.log('OnOpenDataChannel');

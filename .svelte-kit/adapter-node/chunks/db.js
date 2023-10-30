@@ -73,10 +73,10 @@ async function GetUsers(par) {
 }
 async function CheckOperator(q) {
   let result;
-  console.log(pool.sql);
   if (q.psw && q.hash && getHash(q.em) === q.hash) {
     await pool.sql`
-		INSERT INTO operators (psw, operator, abonent, tarif) VALUES(${q.psw}, ${q.em}, ${q.abonent}, ${JSON.stringify({ name: "free" })})`;
+		INSERT INTO operators (psw, operator, abonent, tarif, name) VALUES(${q.psw}, ${q.em}, 
+			${q.abonent}, ${q.name})`;
   }
   if (q.em) {
     if (q.abonent) {

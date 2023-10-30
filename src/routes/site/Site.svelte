@@ -16,7 +16,7 @@
 
 	let user_pic = data.picture ? data.picture.medium : '';
 
-	const email = data.operator,
+	let email = data.operator,
 		abonent = data.abonent;
 	let hash = null;
 
@@ -25,7 +25,7 @@
 	$signal = new SignalingChannel(email);
 
 	import { server_path } from '$lib/js/stores.js';
-	$server_path = data.host.includes('http://[::1]') ? 'http://localhost:3000' : data.host;
+	$server_path = data.host;
 
 	import { langs } from '$lib/js/stores.js';
 	$langs = data.lang;
@@ -41,14 +41,15 @@
 	setContext('users', $users);
 
 	onMount(async () => {});
+
+	let handleLogin = function (emailValue) {
+		email = emailValue; // Функция для обновления email в Site на основе ввода в Login
+	};
 </script>
 
-{#if checked}
-	<Operator {email} {abonent} />
+{#if email === ''}
+	<Login {email} {handleLogin} />
+	<SelectMenu bind:lang={$langs} {user_pic} {abonent} {email} />
 {:else}
-	<SelectMenu bind:$langs />
-	<Login {abonent} {user_pic} lang={$langs} bind:checked />
+	<Operator />
 {/if}
-
-<style>
-</style>

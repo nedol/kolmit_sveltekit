@@ -58,7 +58,6 @@ export async function POST(event) {
 		let promise = new Promise((resolve, reject) => {
 			try {
 				OperatorWaiting(q, resolve);
-				set('global.rtcPool', global.rtcPool);
 			} catch (ex) {
 				console.log(ex);
 			}

@@ -10,15 +10,16 @@ return {
 	assets: new Set(["favicon.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.fa396593.js","app":"_app/immutable/entry/app.f8289e13.js","imports":["_app/immutable/entry/start.fa396593.js","_app/immutable/chunks/scheduler.96a9d009.js","_app/immutable/chunks/singletons.4e9b7f39.js","_app/immutable/chunks/paths.a9cae6bb.js","_app/immutable/entry/app.f8289e13.js","_app/immutable/chunks/scheduler.96a9d009.js","_app/immutable/chunks/index.ee48a681.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.b1267815.js","app":"_app/immutable/entry/app.5aecf1de.js","imports":["_app/immutable/entry/start.b1267815.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/singletons.4ed6f927.js","_app/immutable/chunks/paths.83b4f003.js","_app/immutable/entry/app.5aecf1de.js","_app/immutable/chunks/scheduler.09e37659.js","_app/immutable/chunks/index.0089bb03.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
-			__memo(() => import('./chunks/0-176ba91a.js')),
-			__memo(() => import('./chunks/1-2a560d3b.js')),
-			__memo(() => import('./chunks/2-0d940101.js')),
-			__memo(() => import('./chunks/3-9ca6ec39.js')),
+			__memo(() => import('./chunks/0-87bc7d9e.js')),
+			__memo(() => import('./chunks/1-b3533d51.js')),
+			__memo(() => import('./chunks/2-788567bf.js')),
+			__memo(() => import('./chunks/3-12b33198.js')),
 			__memo(() => import('./chunks/4-5453f184.js')),
 			__memo(() => import('./chunks/5-d5bf7272.js')),
-			__memo(() => import('./chunks/6-834931bf.js'))
+			__memo(() => import('./chunks/6-e66e34e0.js')),
+			__memo(() => import('./chunks/7-9dd411b7.js'))
 		],
 		routes: [
 			{
@@ -26,7 +27,7 @@ return {
 				pattern: /^\/$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 3 },
-				endpoint: __memo(() => import('./chunks/_server-b20b8784.js'))
+				endpoint: __memo(() => import('./chunks/_server-d30d2d8b.js'))
 			},
 			{
 				id: "/operator",
@@ -40,13 +41,20 @@ return {
 				pattern: /^\/operator\/lesson\/?$/,
 				params: [],
 				page: { layouts: [0,2,], errors: [1,,], leaf: 5 },
-				endpoint: __memo(() => import('./chunks/_server-26f0a75f.js'))
+				endpoint: __memo(() => import('./chunks/_server-0f12edf6.js'))
+			},
+			{
+				id: "/site",
+				pattern: /^\/site\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 6 },
+				endpoint: __memo(() => import('./chunks/_server-1c04598d.js'))
 			},
 			{
 				id: "/site/about",
 				pattern: /^\/site\/about\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 6 },
+				page: { layouts: [0,], errors: [1,], leaf: 7 },
 				endpoint: null
 			},
 			{
@@ -54,7 +62,7 @@ return {
 				pattern: /^\/user\/?$/,
 				params: [],
 				page: null,
-				endpoint: __memo(() => import('./chunks/_server-1ab6e162.js'))
+				endpoint: __memo(() => import('./chunks/_server-6f1b5a54.js'))
 			}
 		],
 		matchers: async () => {

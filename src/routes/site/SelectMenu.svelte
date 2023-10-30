@@ -1,117 +1,142 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	let options;
-	let content;
-	let placeholder = 'Menu';
-	let kolmit = '';
-
 	export let lang = 'en';
+
+	let isListOpen = false; // Добавляем переменную для отслеживания состояния списка
 
 	options = [
 		{
 			id: 0,
 			lang: 'en',
-			src: 'https://www.sic-info.org/wp-content/uploads/2014/01/gb.png',
+			src: 'https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-250.png',
 			alt: 'English'
 		},
 		{
 			id: 1,
-			lang: 'fr',
-			src: 'https://www.sic-info.org/wp-content/uploads/2014/01/fr.png',
-			alt: 'French'
+			lang: 'nl',
+			src: 'https://cdn.countryflags.com/thumbs/netherlands/flag-square-250.png',
+			alt: 'Nederlands'
 		},
 		{
 			id: 2,
-			lang: 'de',
-			src: 'https://www.sic-info.org/wp-content/uploads/2014/01/de.png',
-			alt: 'Deutch'
+			lang: 'fr',
+			src: 'https://cdn.countryflags.com/thumbs/france/flag-square-250.png',
+			alt: 'Français'
 		},
 		{
 			id: 3,
+			lang: 'de',
+			src: 'https://cdn.countryflags.com/thumbs/germany/flag-square-250.png',
+			alt: 'Deutch'
+		},
+		{
+			id: 4,
+			lang: 'uk',
+			src: 'https://cdn.countryflags.com/thumbs/ukraine/flag-square-250.png',
+			alt: 'Український'
+		},
+		{
+			id: 5,
 			lang: 'ru',
-			src: 'https://www.sic-info.org/wp-content/uploads/2014/01/ru.png',
+			src: 'https://cdn.countryflags.com/thumbs/russia_/flag-square-250.png',
 			alt: 'Русский'
 		}
 	];
 
 	let selected = {
 		id: 0,
-		src: 'https://www.sic-info.org/wp-content/uploads/2014/01/gb.png',
+		src: 'https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-250.png',
 		alt: 'English'
 	};
 
 	onMount(() => {
-		kolmit = JSON.parse(localStorage.getItem('kolmi'));
-		if (kolmit) lang = kolmi.lang;
+		document.addEventListener('click', handleDocumentClick);
 	});
 
-	function OnCollClick(ev) {
-		// this.classList.toggle("active");
-		if (content.style.maxHeight) {
-			content.style.maxHeight = null;
-		} else {
-			content.style.maxHeight = content.scrollHeight + 'px';
+	// При уничтожении компонента удаляем обработчик события
+	onDestroy(() => {
+		document.removeEventListener('click', handleDocumentClick);
+	});
+
+	// Добавляем обработчик события на весь документ
+	function handleDocumentClick(event) {
+		const list = document.querySelector('.list');
+		const button = document.querySelector('.collapsible');
+		if (list && button) {
+			if (!list.contains(event.target) && !button.contains(event.target)) {
+				isListOpen = false;
+			}
 		}
 	}
+	function toggleList() {
+		isListOpen = !isListOpen; // Переключаем состояние списка при клике
+	}
 
-	function OnSelect(ev) {
-		selected = options[ev.currentTarget.attributes.value.value];
-		lang = selected.lang;
-		OnCollClick();
+	function onSelect(option) {
+		lang = option.lang;
+		selected = option;
+		isListOpen = false; // Закрываем список после выбора варианта
 	}
 </script>
 
-<button class="button collapsible" on:click={OnCollClick}>
-	<div style="padding:10px"><img src={selected.src} alt="" />{selected.alt}</div>
+<button class="collapsible" on:click={toggleList}>
+	<div style="padding:10px">
+		<img src={selected.src} alt="" />{selected.alt}
+	</div>
 </button>
 
-<div class="content" bind:this={content}>
-	{#if options}
-		{#each options as opt (opt.id)}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-			<div style="padding:10px">
-				<img src={opt.src} alt="" value={opt.id} on:click={OnSelect} />{opt.alt}
-			</div>
+{#if isListOpen}
+	<div class="list">
+		{#each options as option (option.id)}
+			<span class="lang" on:click={() => onSelect(option)}>
+				<img src={option.src} alt="" />
+				{option.alt}
+			</span>
 		{/each}
-	{/if}
-</div>
+	</div>
+{/if}
 
 <style>
 	.collapsible {
 		position: absolute;
-		right: 0;
-		background-color: rgb(158, 158, 158);
-		color: white;
+		right: 0px;
+		width: 140px;
+		top: 0px;
+		display: flex; /* делаем кнопку и изображение горизонтально */
+		align-items: center; /* выравниваем элементы по вертикали */
+		background-color: white;
+		color: rgb(3, 3, 3);
 		cursor: pointer;
-		padding: 1px;
-		max-width: 105px;
+		padding: 5px;
 		border: none;
 		outline: none;
 	}
+	.lang {
+		display: flex; /* добавляем flex для иконки и текста */
+		align-items: center; /* выравниваем элементы по вертикали внутри .lang */
+		padding-top: 15px;
+	}
+	img {
+		width: 15px;
+		/* padding-top: 20px; */
+		margin-right: 5px;
+	}
 
-	.content {
+	.collapsible img {
+		margin-left: 0px;
+	}
+
+	.list {
 		position: absolute;
-		right: 0;
-		padding: 0px 18px;
-		max-width: 100px;
-		max-height: 0;
+		right: 0px;
+		padding-right: 25px;
+		top: 50px;
+		max-width: 200px;
 		overflow: hidden;
 		transition: max-height 0.2s ease-out;
+		color: black;
 		background-color: #f1f1f1;
-	}
-	input,
-	input:hover,
-	input:focus,
-	input:active {
-		background: transparent;
-		border: 0;
-		border-style: none;
-		border-color: transparent;
-		outline: none;
-		outline-offset: 0;
-		box-shadow: none;
-		padding: 0;
 	}
 </style>
