@@ -32,6 +32,38 @@ export const dict = [
 			nl: 'Wachtwoord',
 			de: 'Passwort'
 		},
+		Старт: {
+			en: 'Start',
+			ru: 'Старт',
+			fr: 'Start',
+			uk: 'Старт',
+			nl: 'Start',
+			de: 'Start'
+		},
+		Повторить: {
+			en: 'Repeat',
+			ru: 'Повторить',
+			fr: 'Répéter',
+			uk: 'Повторити',
+			nl: 'Herhaal',
+			de: 'Wiederholen Sie'
+		},
+		Проверить: {
+			en: 'Check',
+			ru: 'Проверить',
+			fr: 'A voir',
+			uk: 'Перевірити',
+			nl: 'Kijk hier',
+			de: 'Überprüfen Sie es'
+		},
+		'Послушай и напиши': {
+			en: 'Listen and type',
+			ru: 'Послушай и напиши',
+			fr: 'Écouter et écrire',
+			uk: 'Перевірити',
+			nl: 'Luisteren en schrijven',
+			de: 'Zuhören und schreiben'
+		},
 		'Повторить пароль': {
 			en: 'Confirm Password',
 			ru: 'Повторить пароль',

@@ -1,17 +1,20 @@
 <script>
 	import { page } from '$app/stores';
 	import { onMount, getContext, setContext } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
 
+	import IconButton, { Icon } from '@smui/icon-button';
+	import { mdiAccountBox } from '@mdi/js';
+	import CircularProgress from '@smui/circular-progress';
 	// import {Dict} from '$lib/js/$dicts'
 	import Callcenter from './callcenter/Callcenter.svelte';
 	let callcenter;
-	import Landpage from './callcenter/Landpage.svelte';
 	import { RTCOperator } from './rtc/RTCOperator.js';
 	import * as cookie from 'cookie';
 
 	import CallButton from './callbutton/CallButtonOperator.svelte';
-	import BurgerMenu from './menu/BurgerMenu.svelte';
+	// import BurgerMenu from './menu/BurgerMenu.svelte';
 	import VideoLocal from './Video.local.svelte';
 	import VideoRemote from './Video.remote.svelte';
 
@@ -25,9 +28,7 @@
 
 	import md5 from 'md5';
 
-	import { dicts } from '$lib/js/stores.js';
-
-	import { langs } from '$lib/js/stores.js';
+	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';
 
@@ -35,54 +36,44 @@
 	export let users_;
 	$users = users_;
 
-	import { source } from 'sveltekit-sse';
+	import { click_call_func } from '$lib/js/stores.js';
 
-	import { msg_signal_oper } from '$lib/js/stores.js';
-	$: if ($msg_signal_oper) {
-		OnMessage($msg_signal_oper);
+	import { msg_user } from '$lib/js/stores.js';
+	$: if ($msg_user) {
+		OnMessage($msg_user);
 	}
 
-	import { server_path } from '$lib/js/stores.js';
-
-	let rtc;
+	import { msg_oper } from '$lib/js/stores.js';
+	$: if ($msg_oper) {
+		OnMessage($msg_oper);
+	}
 
 	import { view } from '$lib/js/stores.js';
 
-	export let tarif;
-
-	// isPaid = false;
-	// if (tarif && tarif.paid) {
-	// 	isPaid = new Date(tarif.paid) > Date.now();
-	// }
-
+	let rtc;
 	let selected;
-	let call_cnt,
-		status = 'inactive',
-		inter;
+	let call_cnt, inter;
 	let video_button_display = false;
+	let video_progress = false;
 	let edited_display = false;
 
-	import { statust } from '$lib/js/stores.js';
-	$: statust.set(status);
+	import { call_but_status } from '$lib/js/stores.js';
+	$call_but_status = 'inactive';
 
 	import { editable } from '$lib/js/stores.js';
 	$: if ($editable) {
 		edited_display = $editable;
 	}
 
-	export let email, abonent;
+	export let email, abonent, name;
 	const uid = md5(email);
-	let operator = { type: 'operator', em: email, abonent: abonent, uid: uid };
-	if (operator.em === abonent) {
-		operator.role = 'admin';
-	} else {
-		operator.role = 'user';
-	}
+	import { operator } from '$lib/js/stores.js';
+	import { posterst } from '$lib/js/stores.js';
 
-	import { dc_msg } from './rtc/DataChannelOperator.js';
-	$: if ($dc_msg) {
-		OnMessage($dc_msg);
-	}
+	// import { dc_msg } from '$lib/js/stores.js';
+	// $: if ($dc_msg) {
+	// 	OnMessage($dc_msg);
+	// }
 
 	$: if (remote.text.msg) {
 		console.log(remote.text.msg);
@@ -109,12 +100,14 @@
 			.then((data) => {
 				if (Array.isArray(data.resp)) {
 					data.resp.map((resp) => {
-						$msg_signal_oper = resp;
+						$msg_oper = resp;
 					});
 				} else {
-					$msg_signal_oper = data.resp;
+					$msg_oper = data.resp;
 				}
-				CallWaiting(par);
+				if (true /*!rtc.DC.dc*/) {
+					CallWaiting(par);
+				}
 			})
 			.catch((error) => {
 				console.log(error);
@@ -124,10 +117,10 @@
 
 	onMount(async () => {
 		try {
-			rtc = new RTCOperator(operator, uid, $signal);
+			rtc = new RTCOperator($operator, uid, $signal);
 			initRTC();
 			rtc.SendCheck();
-			CallWaiting(operator);
+			CallWaiting($operator);
 		} catch (ex) {
 			console.log();
 		}
@@ -178,6 +171,20 @@
 		display: 'none'
 	};
 
+	$operator = {
+		type: 'operator',
+		em: email,
+		abonent: abonent,
+		uid: uid,
+		name: name,
+		img: $posterst
+	};
+	if ($operator.em === abonent) {
+		$operator.role = 'admin';
+	} else {
+		$operator.role = 'user';
+	}
+
 	function onTransFile(params) {
 		let event = new MouseEvent('click', {
 			bubbles: true,
@@ -203,18 +210,15 @@
 
 	// const SendToComponent = OnMessage;
 
-	function OnSelected(ev) {
-		$langs = ev.target.attributes[2].nodeValue;
-	}
-
 	async function initRTC() {
 		// rtc ..set(rtc .;
 		//rtc .type = "operator";
 
 		rtc.PlayCallCnt = () => {
-			call_cnt = 10;
+			video_progress = false;
 
-			local.audio.paused = false;
+			if (!call_cnt) local.audio.paused = false;
+			call_cnt = 10;
 
 			inter = setInterval(function () {
 				call_cnt--;
@@ -240,7 +244,7 @@
 		};
 
 		rtc.SetRemoteVideo = (src) => {
-			if (status === 'talk') {
+			if ($call_but_status === 'talk') {
 				remote.video.poster = '';
 				remote.video.srcObject = src;
 				remote.video.display = 'block';
@@ -266,30 +270,34 @@
 			console.log('Web Audio API is not supported in this browser');
 		}
 
-		switch (status) {
+		// console.log($call_but_status);
+
+		switch ($call_but_status) {
 			case 'inactive':
 				rtc.Offer();
-				status = 'active';
+				$call_but_status = 'active';
 				break;
 
 			case 'active':
-				status = 'inactive';
+				$call_but_status = 'inactive';
 				rtc.OnInactive();
 
 				break;
 			case 'call':
-				status = 'talk';
+				$call_but_status = 'talk';
 				clearInterval(inter);
 				local.audio.paused = true;
 				remote.audio.muted = false;
 				rtc.OnTalk();
 				video_button_display = true;
-				remote.text.display = 'block';
-				const event = new Event('talk');
-				document.getElementsByTagName('body')[0].dispatchEvent(event);
+				remote.text.display = 'none';
+				// const dispatch = createEventDispatcher();
+				// dispatch('talk');
+				// const event = new Event('talk');
+				// document.getElementsByTagName('body')[0].dispatchEvent(event);
+
 				break;
 			case 'talk':
-				rtc.OnInactive();
 				remote.audio.muted = true;
 				local.video.display = 'none';
 				video_button_display = false;
@@ -299,11 +307,11 @@
 				remote.text.display = 'none';
 				remote.text.name = '';
 				remote.text.email = '';
-				status = 'inactive';
-				// local.video.poster = UserSvg;
+				$call_but_status = 'inactive';
+				rtc.OnInactive();
 				break;
 			case 'muted':
-				status = 'inactive';
+				$call_but_status = 'inactive';
 
 				local.video.srcObject = '';
 				remote.audio.muted = true;
@@ -319,14 +327,22 @@
 		}
 	}
 
+	$click_call_func = OnClickCallButton;
+
+	$: if (!$click_call_func) {
+		$click_call_func = OnClickCallButton;
+	}
+
 	function openProfile(id) {
 		profile.display = 'block';
 	}
 
 	function OnClickVideoButton() {
-		status = 'talk';
+		$call_but_status = 'talk';
 		local.audio.paused = true;
 		local.video.display = 'block';
+		video_button_display = false;
+		video_progress = true;
 
 		if (rtc.DC.dc.readyState === 'open') {
 			rtc.GetUserMedia({ audio: 1, video: 1 }, function () {
@@ -335,7 +351,32 @@
 		}
 	}
 
+	function OnPlayVideo() {
+		video_progress = false;
+	}
+
 	function OnMessage(data, resolve) {
+		if (data.call || data.func === 'call') {
+			if ($call_but_status === 'active') {
+				$call_but_status = 'call';
+			}
+
+			rtc.OnCall();
+
+			remote.text.display = 'block';
+			video_button_display = false;
+
+			if (data.profile) {
+				let profile = data.profile;
+				let avatar = profile.img;
+				remote.video.poster = avatar;
+				if (avatar) remote.video.display = 'block';
+
+				remote.text.name = profile.name;
+				remote.text.email = profile.email;
+			}
+		}
+
 		if (data.func === 'mute') {
 			local.audio.paused = true;
 			remote.audio.muted = true;
@@ -351,171 +392,122 @@
 			remote.text.display = 'none';
 			// local.video.poster = UserSvg;
 			rtc.OnInactive();
-			if (status === 'talk') {
-				status = 'inactive';
+			if ($call_but_status === 'talk') {
+				$call_but_status = 'inactive';
 				// rtc .OnInactive();
-			} else if (status === 'call') {
-				status = 'inactive';
+			} else if ($call_but_status === 'call') {
+				$call_but_status = 'inactive';
 				rtc.OnMute();
 				// callcenter.GetUsers();
-				OnClickCallButton();
+				$click_call_func();
 			}
 			if (resolve) resolve();
-		}
-
-		if (data.call || data.func === 'call') {
-			status = 'call';
-
-			rtc.OnCall();
-
-			remote.text.display = 'block';
-
-			if (data.profile) {
-				let profile = data.profile;
-				let avatar = profile.src;
-				remote.video.poster = avatar;
-				if (avatar) remote.video.display = 'block';
-
-				remote.text.name = profile.name;
-				remote.text.email = profile.email;
-			}
-		}
-
-		if (data.desc) {
-			// $('.callObject').css('cb_display', 'block');
-			//status ='call';
 		}
 
 		if (data.camera) {
 			local.video.src = that.localStream;
 		}
 
-		if (data.status === 'wait') {
-			(remote.text.display = 'block'), (remote.text.msg = 'You have a waiting call');
+		if (data.lesson) {
+			$view = 'lesson';
+			if (data.lesson) {
+				$lesson.data = {
+					quiz: data.lesson.quiz,
+					html: data.lesson.html,
+					question: data.lesson.question,
+					answer: data.lesson.answer,
+					func: data.lesson.func
+				};
+			}
 		}
 	}
 </script>
 
-<div style="display:flex; min-height:60px; flex-wrap: nowrap;justify-content: space-between;">
-	<div style="flex:1">
-		<VideoRemote {...remote.video} />
+<div style="display:flex; height:70px; flex-wrap: nowrap;justify-content: space-between;">
+	<!-- <VideoLocal {...local.video} /> -->
+	<div class="placeholder">
+		{#if remote.text.display}
+			<VideoRemote {...remote.video} name={remote.text.name} em={$operator.em}>
+				<div
+					class="remote_text_display"
+					style="display:{remote.text.display};	
+						position:relative;			
+						background-color: rgba(125, 125, 125, 0.5);
+						z-index: 1"
+				>
+					<!-- <p
+						class="remote_msg"
+						style="font-size: .7em; white-space: nowrap; color:white; margin:auto;text-align: center;"
+					>
+						{remote.text.msg} <br />
+						{remote.text.name}
+					</p> -->
+				</div>
+			</VideoRemote>
+		{/if}
+	</div>
 
-		<CallButton on:click={OnClickCallButton} bind:status {OnLongPress}>
+	<div style="flex:48%" />
+
+	<div>
+		<!-- {@debug $call_but_status} -->
+		<CallButton on:click={$click_call_func} bind:status={$call_but_status} {OnLongPress}>
 			<b
 				class="call_cnt"
-				style="display:none;position: absolute;left:22px;top:10px;color:#0e0cff;font-size: 12px;"
+				style="display:none;position: relative;left:22px;top:10px;color:#0e0cff;font-size: 12px;"
 				>100</b
 			>
 			<span
 				class="badge badge-primary badge-pill call-queue"
-				style="display:none;position: absolute;right:0px;bottom:0px;color:#0e0cff;font-size: 12px;opacity:1"
+				style="display:none;position: relative;right:0px;bottom:0px;color:#0e0cff;font-size: 12px;opacity:1"
 				>0</span
 			>
 		</CallButton>
-		<div
-			class="remote_text_display"
-			style="display:{remote.text.display};
-                                position: absolute;
-                                z-index: 21;
-                                background-color: rgba(125, 125, 125, 0.8);
-                                top: 90px;
-                                left: 2px;"
-		>
-			<p
-				class="remote_msg"
-				style="font-size: .7em; white-space: nowrap; color:white;margin:auto;text-align: center;"
-			>
-				{remote.text.msg} <br />
-				{remote.text.name}
-			</p>
-		</div>
 	</div>
 
-	<div style="position:absolute;flex:1 1 0%">
+	<div style="flex:48%" />
+	<div
+		class="video"
+		on:click={OnClickVideoButton}
+		on:loadstart={OnPlayVideo}
+		style="
+			right: 100px;
+			top: 53px;
+			width: 30px;
+			height: 30px;
+			position: absolute;"
+	>
+		{#if video_button_display}
+			<Icon tag="svg" viewBox="0 0 24 24">
+				<path fill="currentColor" style="color:grey" d={mdiAccountBox} />
+			</Icon>
+
+			<!-- <i class="video icofont-ui-video-chat"  on:click = {OnClickVideoButton}
+                        style="position: absolute; right: 0; top: 0; stroke:black; stroke-width: 2px; color: lightgrey; font-size: 30px; z-index: 20;"></i>  -->
+		{/if}
+
+		{#if video_progress}
+			<div style="position: absolute; top: 0;">
+				<CircularProgress style="height: 30px; width: 30px;" indeterminate />
+			</div>
+		{/if}
+	</div>
+
+	<div style="position:relative; right: 20px; width: 70px;	height: 70px;">
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">
 				<div bind:this={container} />
 			</svelte:fragment>
 		</VideoLocal>
-
-		{#if video_button_display}
-			<div class="video" style="position: absolute;top: 0;width: 100px; height:100px;">
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<!-- svelte-ignore a11y-no-static-element-interactions -->
-				<svg
-					height="30"
-					width="30"
-					style="position: absolute;
-                        bottom: 70px;
-                        right: 0px;
-                        z-index: 30;"
-					on:click={OnClickVideoButton}
-				>
-					<glyph glyph-name="ui-video-chat" unicode="&#xec90;" horiz-adv-x="50" />
-					<g
-						class="currentLayer"
-						style=" position: absolute; right: 0; top: 0; stroke:grey; stroke-width:2px;fill:lightgrey;font-size: 30px;"
-					>
-						<path
-							d="M891.5 23h-783c-59.7 0-108.5 48.8-108.5 108.5v466.20000000000005c0 59.59999999999991 48.8 108.5 108.5 108.5h222.39999999999998v270.5999999999999l270.70000000000005-270.5999999999999h289.9c59.700000000000045 0 108.5-48.90000000000009 108.5-108.5v-466.20000000000005c0-59.7-48.799999999999955-108.5-108.5-108.5z m-223.5 370l-252.8 134.70000000000005c-26.30000000000001 14-47.89999999999998 1.099999999999909-47.89999999999998-28.700000000000045v-262.9c0-29.900000000000034 21.599999999999966-42.80000000000001 47.89999999999998-28.80000000000001l252.8 134.7c26.299999999999955 14 26.299999999999955 37 0 51z"
-							transform="scale(.03)"
-							style="fill:lightgrey; stroke:black; stroke-width:20px"
-						/>
-					</g>
-				</svg>
-
-				<!-- <i class="video icofont-ui-video-chat"  on:click = {OnClickVideoButton}
-                        style="position: absolute; right: 0; top: 0; stroke:black; stroke-width: 2px; color: lightgrey; font-size: 30px; z-index: 20;"></i>  -->
-			</div>
-		{/if}
 	</div>
+</div>
 
-	<div style="flex:3">
-		<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
-		<AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} />
+<div>
+	<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
+	<AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} />
 
-		<RecordedVideo />
-		<Download />
-	</div>
-
-	<BurgerMenu padding={'25px'}>
-		<!-- {@debug $langs} -->
-		{$dicts['Language Select'][$langs]}:
-
-		<div style="display: flex; margin-bottom:20px">
-			<label style="flex:1">
-				<input type="radio" bind:group={$langs} name="lang" value={'en'} on:change={OnSelected} />
-				<img src="https://www.sic-info.org/wp-content/uploads/2014/01/gb.png" alt="English" />
-			</label>
-
-			<label style="flex:1">
-				<input type="radio" bind:group={$langs} name="lang" value={'fr'} on:change={OnSelected} />
-				<img src="https://www.sic-info.org/wp-content/uploads/2014/01/fr.png" alt="French" />
-			</label>
-
-			<label style="flex:1">
-				<input type="radio" bind:group={$langs} name="lang" value={'ru'} on:change={OnSelected} />
-				<img src="https://www.sic-info.org/wp-content/uploads/2014/01/ru.png" alt="Russian" />
-			</label>
-		</div>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		{#if operator.role == 'admin'}
-			{#if !edited_display}
-				<h5 on:click={() => ($editable = true)}>{$dicts['Edit Call Center'][$langs]}</h5>
-			{:else}
-				<h5 on:click={() => ($editable = false)}>
-					{$dicts['Cancel Edit Call Center'][$langs]}
-				</h5>
-			{/if}
-		{/if}
-
-		{#if operator.role == 'user'}
-			<h5 on:click={() => {}}>
-				{$dicts['Create my own net'][$langs]}
-			</h5>
-		{/if}
-	</BurgerMenu>
+	<RecordedVideo />
+	<Download />
 </div>
 
 <progress
@@ -526,6 +518,14 @@
 	style="display:{progress.display};top:100px;width:98%;"
 />
 
-<Callcenter view={$view} bind:this={callcenter} bind:status bind:operator />
+<Callcenter view={$view} bind:this={callcenter} bind:$call_but_status bind:operator={$operator} />
 
-<Lesson view={$view} data={$users[0].staff} />
+<Lesson data={$users[0].staff} />
+
+<style>
+	.placeholder {
+		position: relative;
+		left: 5px;
+		top: 0px;
+	}
+</style>

@@ -3,9 +3,9 @@
 </script>
 
 <header />
-<main>
+<!-- <main>
 	<slot />
-</main>
+</main> -->
 <footer><p>{level}</p></footer>
 
 <style>

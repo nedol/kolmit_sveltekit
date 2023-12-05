@@ -1,6 +1,9 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
 
+	import List, { Item, Graphic, Separator, Text } from '@smui/list';
+	import IconButton from '@smui/button';
+
 	let options;
 	export let lang = 'en';
 
@@ -81,11 +84,13 @@
 	}
 </script>
 
-<button class="collapsible" on:click={toggleList}>
-	<div style="padding:10px">
-		<img src={selected.src} alt="" />{selected.alt}
-	</div>
-</button>
+<div class="collapsible" style="display: flex; align-items: center;">
+	<IconButton on:click={toggleList}>
+		<div style="padding:10px">
+			<img src={selected.src} alt="" />{selected.alt}
+		</div>
+	</IconButton>
+</div>
 
 {#if isListOpen}
 	<div class="list">
@@ -106,7 +111,7 @@
 		top: 0px;
 		display: flex; /* делаем кнопку и изображение горизонтально */
 		align-items: center; /* выравниваем элементы по вертикали */
-		background-color: white;
+		background-color: transparent;
 		color: rgb(3, 3, 3);
 		cursor: pointer;
 		padding: 5px;
@@ -119,6 +124,7 @@
 		padding-top: 15px;
 	}
 	img {
+		position: relative;
 		width: 15px;
 		/* padding-top: 20px; */
 		margin-right: 5px;

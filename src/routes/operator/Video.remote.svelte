@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-	export let display = 'none';
-	export let poster;
+	import Card, { Content, PrimaryAction, Media, MediaContent } from '@smui/card';
+	export let display = 'block';
+	export let poster, card, name, em;
 	export let srcObject;
 	let rv, video;
 	onMount(async () => {
@@ -19,30 +20,49 @@
 	}
 </script>
 
-<!-- <video  id="remoteVideo" autoplay playsinline  poster={poster}
-        style="
-        position: relative;
-        left: 0;
-        top: 0;
-        opacity: 1;">
-            <track kind="captions">
-    </video> -->
-
-<video
-	bind:this={video}
-	autoplay
-	playsinline
-	{poster}
+<!-- <div
 	style="
-            display:{display};
-            position: absolute;
-            height: 105px;
-            background-color: white;
-            max-width: 12%;
-            z-index: 10;
-            "
->
-	<track kind="captions" />
-</video>
+    display:{display};
+    position: relative;
+    width: 55px;
+	margin: 0 auto;
+    background-color: transparent;
+    border-radius:5px;"
+> -->
+<div class="card-display" bind:this={card} style="display:{display}">
+	<div class="card-container">
+		<Card style="min-width: 50px;">
+			<Media class="card-media-square" aspectRatio="square">
+				<MediaContent>
+					<video bind:this={video} autoplay playsinline {poster}>
+						<track kind="captions" />
+					</video>
+				</MediaContent>
+			</Media>
+			<!-- <Content style="color: #888; font-size:smaller">{name}</Content> -->
+			<h3
+				class="mdc-typography--subtitle2"
+				style="margin: 0; color: #888;font-size:smaller;text-align:center;z-index:1"
+			>
+				{#if name}
+					{name.slice(0, 8)}
+				{:else}
+					{em.slice(0, 8)}
+				{/if}
+			</h3>
+		</Card>
+	</div>
+</div>
+<!-- </div> -->
 
 <slot />
+
+<style>
+	video {
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: 5px;
+		width: 50px;
+		max-height: 55px;
+	}
+</style>

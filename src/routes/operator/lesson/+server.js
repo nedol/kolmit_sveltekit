@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import fs from 'fs';
 // import { path } from '$lib/js/server.path.js';
-import { GetText, GetDict, WriteSpeech, ReadSpeech } from '$lib/server/db.js';
+import { GetText, GetDict, GetWords } from '$lib/server/db.js';
 // import { getContext } from 'svelte';
 
 export const config = {
@@ -16,14 +16,15 @@ export async function GET({ url, fetch, cookies }) {
 	const abonent = url.searchParams.get('abonent');
 	const text = url.searchParams.get('text');
 	const dict = url.searchParams.get('dict');
-	const key = url.searchParams.get('key');
+	const words = url.searchParams.get('words');
 	// debugger;
 	if (text) {
 		// let resp = await fetch('/src/routes/operator/operator/lesson/' + path);
 		const level = url.searchParams.get('level');
 		const theme = url.searchParams.get('theme');
+		const title = url.searchParams.get('title');
 
-		let text = await GetText({ owner: abonent, level: level, theme: theme });
+		let text = await GetText({ owner: abonent, level: level, theme: theme, title: title });
 		// let data = await resp.text();
 		// let items = text.split('\r\n');
 		let obj = { text: text };
@@ -43,13 +44,11 @@ export async function GET({ url, fetch, cookies }) {
 			response.headers.append('Access-Control-Allow-Origin', `*`);
 			return response;
 		}
-	} else if (key) {
-		const audio = await ReadSpeech({ key: key });
-		//let resp = await fetch('/src/routes/operator/operator/lesson/audio.json');
-		// resp = await resp.json();
-		// let audio = resp[key];
-		//debugger;
-		let response = new Response(JSON.stringify({ audio }));
+	} else if (words) {
+		let name = url.searchParams.get('name');
+		let owner = url.searchParams.get('owner');
+		let data = await GetWords({ name: name, owner: owner });
+		let response = new Response(JSON.stringify({ data }));
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	}

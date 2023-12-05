@@ -33,7 +33,7 @@
 	let user_pic = operator_svg;
 	if (user.picture.medium) user_pic = user.picture.medium;
 
-	import { statust } from '$lib/js/stores.js';
+	import { call_but_status } from '$lib/js/stores.js';
 
 	// import { pswd } from '$lib/js/stores.js';
 	// let psw = $pswd;
@@ -181,32 +181,17 @@
 	}
 </script>
 
-<div
-	bind:this={oper_admin_div}
-	style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding-bottom:5px"
->
-	<!-- {@debug operator, user} -->
-	{#if user.email !== operator.em}
-		<div class="user_pic_div" style="position:relative; width: 100px; height:100px">
+{#if user.email !== operator.em}
+	<div
+		bind:this={oper_admin_div}
+		style="display:flex; flex-wrap: nowrap;justify-content: space-between; padding-bottom:22px"
+	>
+		<!-- {@debug operator, user} -->
+
+		<div class="user_pic_div" style="position:relative; width: 60px; height:60px">
 			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<video
-				id="localVideo"
-				class="user_pic is-rounded"
-				poster={user_pic}
-				autoplay
-				playsinline
-				muted
-				on:click={OnClickUpload}
-				style="display: block; position:absolute; top:0px; width:60px; height: 100px;"
-			/>
-			<!-- <img
-			class="user_pic is-rounded"
-			src={user_pic}
-			alt=""
-			on:click={OnClickUpload}
-			style="border-radius: 5px; float:right; max-width:100%"
-		/> -->
+
 			{#if edited_display}
 				<input
 					bind:this={upload}
@@ -221,12 +206,30 @@
 				/>
 			{/if}
 
+			<!-- <video
+				id="localVideo"
+				class="user_pic is-rounded"
+				poster={user_pic}
+				autoplay
+				playsinline
+				muted
+				on:click={OnClickUpload}
+				style="display: block; position:absolute; top:0px; width:60px; height: 100px;"
+			/> -->
+
 			<!-- src="/kolmit/user/iframe.html?em=oper@komi&abonent={user.email}" -->
 			<!-- {#if edited_display} -->
 			<!-- {@debug dep, user} -->
 			<!-- {#if user.email && operator.em !== user.email} -->
 			<!-- {@debug user} -->
-			<User em={user.email} operator={operator.em} abonent={user.abonent} />
+			<User
+				em={user.email}
+				name={user.name}
+				operator={operator.em}
+				abonent={user.abonent}
+				poster={user_pic}
+				{OnClickUpload}
+			/>
 			<!-- {/if} -->
 			<!-- {/if} -->
 
@@ -252,9 +255,8 @@
 				{/if}
 			{/if}
 		</div>
-
-		<div style="flex:1; margin-left:10px">
-			{#if dict}
+		{#if false && dict}
+			<div style="flex:1; margin-left:10px">
 				<input
 					type="text"
 					class="user_name"
@@ -273,24 +275,24 @@
 					readonly={readonlyAdm}
 					style="width:100%; max-height: 100px;"
 				/>
-			{/if}
-			<textarea
-				type="text"
-				rows="3"
-				class="user_desc"
-				placeholder={placeholder_desc}
-				on:change={OnChange}
-				bind:value={user.desc}
-				readonly={readonlyOper}
-				style="width:85%;overflow:auto;max-height: 100px;resize:none"
-			/>
-		</div>
 
+				<textarea
+					type="text"
+					rows="3"
+					class="user_desc"
+					placeholder={placeholder_desc}
+					on:change={OnChange}
+					bind:value={user.desc}
+					readonly={readonlyOper}
+					style="width:85%;overflow:auto;max-height: 100px;resize:none"
+				/>
+			</div>
+		{/if}
 		<div
 			style="display: flex;flex-flow: row nowrap; align-items: flex-start;flex-direction: column;"
 		>
-			{#if $statust === 'talk' && user_status === 'active' && user.email !== operator.email}
-				<Forward bind:$statust operator={user.email}>
+			{#if $call_but_status === 'talk' && user_status === 'active' && user.email !== operator.email}
+				<Forward bind:$call_but_status operator={user.email}>
 					<img
 						src="./src/routes/assets/call-forward.svg"
 						alt="call-forward"
@@ -299,8 +301,8 @@
 					/>
 				</Forward>
 			{/if}
-			{#if user_status === 'talk' || ($statust === 'talk' && user.email === operator.email)}
-				<FileTransfer {$statust} operator={user.email}>
+			{#if user_status === 'talk' || ($call_but_status === 'talk' && user.email === operator.email)}
+				<FileTransfer {$call_but_status} operator={user.email}>
 					<img
 						src="./src/routes/assets/file-transfer.svg"
 						alt="file-transfer"
@@ -310,8 +312,8 @@
 				</FileTransfer>
 			{/if}
 		</div>
-	{/if}
-</div>
+	</div>
+{/if}
 
 <style>
 	textarea:not([readonly]),

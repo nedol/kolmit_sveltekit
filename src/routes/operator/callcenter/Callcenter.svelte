@@ -7,7 +7,7 @@
 	import pkg from 'lodash';
 	const { forEach, findIndex } = pkg;
 
-	import { msg_signal_oper, msg_signal_user } from '$lib/js/stores.js';
+	import { msg_oper, msg_user } from '$lib/js/stores.js';
 	export let operator;
 
 	export let view;
@@ -45,10 +45,10 @@
 			.then((data) => {
 				if (Array.isArray(data.resp)) {
 					data.resp.map((resp) => {
-						$msg_signal_user = resp;
+						$msg_user = resp;
 					});
 				} else {
-					$msg_signal_user = data.resp;
+					$msg_user = data.resp;
 				}
 			})
 			.catch((error) => {
@@ -68,10 +68,10 @@
 			.then((data) => {
 				if (Array.isArray(data.resp)) {
 					data.resp.map((resp) => {
-						$msg_signal_user = resp;
+						$msg_user = resp;
 					});
 				} else {
-					$msg_signal_user = data.resp;
+					$msg_user = data.resp;
 				}
 
 				OperatorWaiting(par);
@@ -190,7 +190,7 @@
 				</svg>
 			{/if}
 		{/if}
-		<div class="empty" style="height:400px" />
+		<div class="empty" style="height:100px" />
 	</div>
 </div>
 

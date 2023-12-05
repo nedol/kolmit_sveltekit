@@ -9,12 +9,12 @@
 	<main>
 		<slot />
 	</main>
-
+	<!-- 
 	<footer>
-		<!-- <p>
+		<p>
 			visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
-		</p> -->
-	</footer>
+		</p>
+	</footer> -->
 </div>
 
 <style>
@@ -33,6 +33,7 @@
 		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
+		margin-top: 40px;
 	}
 
 	footer {

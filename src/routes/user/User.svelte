@@ -12,38 +12,46 @@
 	import AudioRemote from './Audio.remote.svelte';
 	import RecordedVideo from './RecordedVideo.svelte';
 
-	export let abonent, em, operator;
+	export let abonent, em, operator, poster, name;
 
 	import { signal } from '$lib/js/stores.js';
+
+	import { call_but_status } from '$lib/js/stores.js';
+
+	import { click_call_func } from '$lib/js/stores.js';
 
 	import pkg from 'lodash';
 	const { groupBy, find } = pkg;
 
 	import './lib/icofont/icofont.min.css';
 
-	import { msg_signal_user } from '$lib/js/stores.js';
-	$: if ($msg_signal_user) {
-		OnMessage($msg_signal_user);
+	import { msg_user } from '$lib/js/stores.js';
+	$: if ($msg_user) {
+		// if ($msg_user.em) {
+		// 	if ($msg_user.em === em) OnMessage($msg_user);
+		// } else {
+		OnMessage($msg_user);
+		// }
 	}
-	// $: if (msg['user']) {
-	// 	OnMessage(msg['user']);
+
+	// import { dc_msg } from '$lib/js/stores.js';
+	// $: if ($dc_msg) {
+	// 	OnMessage($dc_msg);
 	// }
 
 	let checked = false;
 
 	const uid = md5(abonent + em + operator);
 
-	$: if (rtc && !rtc.em) {
-		console.log();
-	}
-
 	let rtc;
 	let selected,
 		inter,
 		status = 'inactive',
-		profile = false;
+		profile = false,
+		card;
 
 	let video_button_display = false;
+	let video_element, parent_div;
 
 	import { users } from '$lib/js/stores.js';
 
@@ -74,8 +82,9 @@
 
 	let remote = {
 		video: {
-			display: 'none',
-			srcObject: ''
+			display: 'block',
+			srcObject: '',
+			poster: poster
 		},
 		audio: {
 			muted: true,
@@ -117,8 +126,10 @@
 			remote.video.srcObject = src;
 			remote.video.display = 'block';
 			status = 'talk';
-			local.audio.paused = true;
+			// $call_but_status = 'talk';
+			remote.audio.paused = true;
 		};
+		// $call_but_status = status;
 	});
 
 	// onDestroy();
@@ -129,6 +140,7 @@
 
 	function OnMute() {
 		status = 'talk';
+		// $call_but_status = 'talk';
 		OnClickCallButton();
 	}
 
@@ -148,24 +160,22 @@
 			let res = groupBy(data.operators[em], 'status');
 			try {
 				if (res && res['offer']) {
-					if (status !== 'call' && status !== 'wait') {
-						status = 'active';
-					}
-				} else if (res['busy']) {
 					if (status !== 'call') {
-						status = 'busy';
+						status = 'active';
+						// $call_but_status = 'active';
 					}
-				} else if (
-					res['close'] &&
-					//  && res["close"].length === Object.keys(data.operators[rtc.abonent]).length
-					status !== 'wait'
-				) {
+				} else if (res['close']) {
 					local.video.display = 'none';
-					remote.video.display = 'none';
+					// remote.video.display = 'none';
 					local.audio.paused = true;
 					remote.audio.muted = true;
 					//rtc.abonent = url.searchParams.get('abonent');
 					status = 'inactive';
+					// $call_but_status = 'inactive';
+					$click_call_func = null; //operator -> OnClickCallButton
+					parent_div.appendChild(card);
+					rtc.OnInactive();
+					video_element.src = '';
 				}
 			} catch (ex) {
 				console.log(ex);
@@ -174,6 +184,7 @@
 
 		if (data.operator && data.operator.em === rtc.em) {
 			status = 'active';
+			// $call_but_status = 'active';
 		}
 
 		// TODO: to delete
@@ -190,35 +201,33 @@
 			remote.audio.muted = true;
 			video_button_display = false;
 			local.video.display = 'none';
-			remote.video.display = 'none';
+			// remote.video.display = 'none';
 			// rtc.abonent = url.searchParams.get('abonent');
 			status = 'inactive';
-
-			// const event = new Event('inactive');
-			// window.frameElement.dispatchEvent(event);
-
-			// if(url.searchParams.get("em")!==rtc.em)
-			//   location.reload();
-
-			// window.frameElement.style.width = '60px'
-			// window.frameElement.style.height = '60px'
+			$call_but_status = 'inactive';
+			$click_call_func = null; //operator -> OnClickCallButton
+			parent_div.appendChild(card);
+			// video_element.load();
 		}
 
 		if (data.func === 'talk') {
-			status = 'talk';
-			clearInterval(inter);
-			video_button_display = true;
-			local.audio.paused = true;
-			remote.audio.muted = false;
-			video_button_display = 'block';
-			// local.video.display = "block";
-			video.display = 'block';
-			// window.frameElement.style.maxWidth = "200px";
-			// window.frameElement.style.maxHeight = "100px";
+			$call_but_status = 'talk';
+			if (data.em && data[em]) {
+				status = 'talk';
+
+				clearInterval(inter);
+				video_button_display = true;
+				local.audio.paused = true;
+				remote.audio.muted = false;
+				video_button_display = 'block';
+				// local.video.display = "block";
+				remote.video.display = 'block';
+			}
 		}
 
 		if (data.func === 'redirect') {
 			status = 'call';
+			// $call_but_status = 'call';
 			local.audio.paused = true;
 			remote.audio.muted = true;
 
@@ -226,12 +235,10 @@
 			remote.video.display = 'none';
 		}
 
-		if (data.status === 'wait') {
-			status = 'wait';
-		}
+		// $call_but_status = status;
 	}
 
-	async function OnClickCallButton() {
+	function OnClickCallButton() {
 		try {
 			// Fix up for prefixing
 			if (!window.AudioContext) {
@@ -251,61 +258,84 @@
 				// remote.video.srcObject = null;
 				break;
 
-			case 'wait':
-				status = 'inactive';
-				rtc.SendCheck();
-				break;
+			// case 'wait':
+			// 	status = 'inactive';
+			// 	// $call_but_status = 'inactive';
+			// 	rtc.SendCheck();
+			// 	break;
 			case 'active':
+				$click_call_func = OnClickCallButton;
 				function call() {
 					rtc.Call();
 					status = 'call';
-					remote.video.srcObject = null;
+					$call_but_status = 'call';
+					video_element.load();
+					document.getElementsByClassName('placeholder')[0].appendChild(card);
+
+					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}
-				if (!localStorage.getItem('kolmit_abonent') && false) {
-					if (confirm('Could you introduce youself?')) {
-						profile = true;
-					} else {
-						call();
-					}
-				} else {
-					call();
-				}
+
+				call();
 
 				break;
 			case 'call':
 				status = 'inactive';
+				$call_but_status = 'inactive';
+
 				local.audio.paused = true;
 				local.video.display = 'none';
 				video_button_display = 'none';
 				clearInterval(inter);
-				rtc.Hangup();
+				rtc.OnInactive();
+				$click_call_func = null; //operator -> OnClickCallButton
+				parent_div.appendChild(card);
 				break;
 			case 'talk':
 				status = 'inactive';
+				$call_but_status = 'inactive';
 				remote.audio.muted = true;
 				local.video.display = 'none';
-				remote.video.display = 'none';
+				// remote.video.display = 'none';
 				video_button_display = 'none';
-				rtc.Hangup();
+				rtc.OnInactive();
+				$click_call_func = null; //operator -> OnClickCallButton
+				parent_div.appendChild(card);
+				video_element.poster = '';
+				video_element.load();
+
+				video_element.poster = remote.video.poster;
 				break;
 			case 'muted':
 				status = 'inactive';
-				//rtc.abonent = url.searchParams.get('abonent');
+				// $call_but_status = 'inactive';
 				video_button_display = 'none';
+				$click_call_func = null; //operator -> OnClickCallButton
+				parent_div.appendChild(card);
 				break;
 			case 'busy':
-				rtc.Call();
-				status = 'wait';
+				// rtc.Call();
+				status = 'active';
+				// $call_but_status = 'active';
+				$click_call_func = null; //operator -> OnClickCallButton
+				parent_div.appendChild(card);
+				video_element.load();
+				video_element.src = '';
+				video_element.poster = remote.video.poster;
 				break;
 			default:
-				return;
+				break;
 		}
 	}
 </script>
 
-{#if profile}
-	<Profile bind:profile bind:selected />
-{/if}
-
-<!-- svelte-ignore missing-declaration -->
-<CallButtonUser {em} on:click={OnClickCallButton} on:mute={OnMute} bind:status {OnLongPress} />
+<VideoRemote
+	{...remote.video}
+	{name}
+	{em}
+	bind:parent_div
+	bind:video_element
+	bind:card
+	bind:status
+	on:click={OnClickCallButton}
+	on:mute={OnMute}
+/>

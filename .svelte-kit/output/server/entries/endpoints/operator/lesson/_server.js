@@ -15,7 +15,8 @@ async function GET({ url, fetch, cookies }) {
   if (text) {
     const level = url.searchParams.get("level");
     const theme = url.searchParams.get("theme");
-    let text2 = await GetText({ owner: abonent, level, theme });
+    const title = url.searchParams.get("title");
+    let text2 = await GetText({ owner: abonent, level, theme, title });
     let obj = { text: text2 };
     let response = new Response(JSON.stringify({ obj }));
     response.headers.append("Access-Control-Allow-Origin", `*`);

@@ -1,138 +1,163 @@
 <script>
-	import Quiz from './quiz/Quiz.svelte';
-	export let data;
+	import { onMount, onDestroy } from 'svelte';
 
-	export let view;
-	let display = 'none';
-	$: if (view === 'lesson') {
-		display = 'block';
-	} else {
-		display = 'none';
+	import pkg from 'lodash';
+	const { find, findKey, mapValues } = pkg;
+	import IconButton, { Icon } from '@smui/icon-button';
+	import { mdiAccountMultiple, mdiTextBoxOutline, mdiCardTextOutline } from '@mdi/js';
+	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
+	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
+	import Quiz from './quiz/Quiz.svelte';
+
+	import { view } from '$lib/js/stores.js';
+
+	import { lesson } from '$lib/js/stores.js';
+	let lesson_visible = true;
+
+	let display = 'hidden';
+
+	$: if ($lesson.data) {
+		// if (view !== 'lesson')
+		$view = 'lesson';
+		data = $lesson.data;
+
+		console.log();
 	}
 
-	let level = {
-		level: '1.2',
-		themes: [
-			{
-				num: '1',
-				name: 'Familie',
-				lessons: [
-					{
-						num: 1,
-						title: '',
-						quizes: [
-							{ type: 'text', title: 'Familie 1' },
-							{ type: 'text', title: 'Familie 2' },
-							{ type: 'text', title: 'Familie 3' }
-						]
-					},
-					{ num: 2, title: '' },
-					{ num: 3, title: '' }
-				]
-			},
-			{
-				num: '2',
-				name: 'In Het Restorant',
-				lessons: [
-					{
-						num: 1,
-						title: '',
-						quizes: [
-							{ type: 'text', title: 'In Het Restorant 1' },
-							{ type: 'text', title: 'In Het Restorant 2' },
-							{ type: 'text', title: 'In Het Restorant 3' }
-						]
-					},
-					{ num: 2, title: '' },
-					{ num: 3, title: '' }
-				]
-			},
-			{
-				num: '3',
-				name: 'Wonen',
-				lessons: [
-					{
-						num: 1,
-						title: '',
-						quizes: [
-							{ type: 'text', title: 'Wonen 1' },
-							{ type: 'text', title: 'Wonen 2' },
-							{ type: 'text', title: 'Wonen 3' }
-						]
-					},
-					{ num: 2, title: '' },
-					{ num: 3, title: '' }
-				]
-			}
-		]
-	};
-	let les = '2';
-	let quizShow = false;
+	$: if ($view === 'lesson') {
+		display = 'visible';
+	} else {
+		display = 'hidden';
+		data.quiz = '';
+	}
+
+	import obj from './lesson_data.json';
+	// import { disabled } from '@smui-extra/accordion/src/Panel.svelte';
+
+	const level = obj.module;
+	export let data;
+	let panel_disabled = true;
+
+	let containerWidth = '100%'; // Исходная ширина - 100% ширины родительского окна
+	let containerHeight = '100vh';
+
+	onMount(() => {
+		// Получаем ширину родительского окна при загрузке компонента
+		const parentWidth = window.innerWidth; // Может потребоваться window.innerWidth - некоторое смещение, если у вас есть другие элементы на странице
+
+		// Устанавливаем ширину контейнера равной ширине родительского окна
+		containerWidth = parentWidth + 'px';
+
+		// Получаем высоту родительского окна при загрузке компонента
+		const parentHeight = window.innerHeight; // Может потребоваться window.innerHeight - некоторое смещение, если у вас есть другие элементы на странице
+
+		// Устанавливаем высоту контейнера равной высоте родительского окна
+		containerHeight = parentHeight + 'px';
+	});
+
+	onDestroy(() => {});
 
 	function onClickQuiz(ev) {
-		data.quiz = ev.currentTarget.attributes[0].nodeValue;
-		data.level = ev.currentTarget.attributes[1].nodeValue.replace('.', '');
-		data.name = ev.currentTarget.attributes[2].nodeValue;
-		data.theme = ev.currentTarget.attributes[3].nodeValue;
-		quizShow = true;
+		if (ev) {
+			data.quiz = ev.currentTarget.attributes['quiz'].value;
+			data.level = ev.currentTarget.attributes['level'].value.replace('.', '');
+			data.name = ev.currentTarget.attributes['name'].value;
+			data.theme = ev.currentTarget.attributes['theme'].value;
+			data.title = ev.currentTarget.attributes['title'].value;
+			data.words = find(obj.module.themes, {
+				name: ev.currentTarget.attributes['theme_name'].value
+			})['words'];
+		}
+	}
+
+	function disablePanel(node) {
+		node.closest('.panel').classList.remove('smui-accordion__panel--disabled');
 	}
 </script>
 
+<!-- svelte-ignore a11y-missing-content -->
 <!-- {@debug display} -->
-<div style="display:{display};overflow-y: auto;height: 400px;">
-	{#if quizShow}
-		<!-- {@debug data} -->
-		<Quiz {data} />
+<div style="visibility={display}">
+	<!-- {@debug data} -->
+	{#if data.quiz}
+		<Quiz {data} bind:lesson_display={display} />
 	{:else}
-		<div>Module {level.level}</div>
-		{#each level.themes as theme, i}
-			<div>{theme.name}</div>
-			{#if theme.lessons}
-				{#each theme.lessons as lesson}
-					<div>{lesson.num}.{lesson.title}</div>
-					{#if lesson.quizes}
-						{#each lesson.quizes as quiz}
-							<!-- {@debug quiz} -->
-							<!-- svelte-ignore a11y-missing-content -->
-							<div
-								type={quiz.type}
-								level={level.level}
-								name={quiz.title}
-								theme={theme.num}
-								on:click={onClickQuiz}
-							>
-								{quiz.title}
-							</div>
-						{/each}
-					{/if}
-				{/each}
-			{/if}
-		{/each}
-		<h3>Les {les}</h3>
+		<div class="lesson-container" style="width: {containerWidth}; height: {containerHeight};">
+			<div class="module_level">
+				<div>Module {level.level}</div>
+			</div>
 
-		<div>
-			<a
-				on:click={() => {
-					quizShow = true;
-					data.quiz = 'text';
-					data.name = 'Quiz 1';
-					data.level = '12';
-					data.theme = '1';
-				}}>Familie van Marc 1</a
-			>
+			{#each level.themes as theme, t}
+				<div class="accordion-container">
+					<Accordion multiple>
+						<Panel class="panel">
+							<Header><h4>{theme.name}</h4></Header>
+							<Content>
+								{#if theme.lessons}
+									{#each theme.lessons as lesson}
+										<!-- <div>{lesson.num}.{lesson.title}</div> -->
+										{#if lesson.quizes}
+											{#each lesson.quizes as quiz}
+												<!-- {@debug quiz} -->
+
+												{#if quiz.title && quiz.name}
+													<div
+														use:disablePanel
+														name={quiz.name}
+														quiz={quiz.type}
+														level={level.level}
+														theme={theme.num}
+														theme_name={theme.name}
+														title={quiz.title}
+														on:click={onClickQuiz}
+													>
+														<a href="#">{quiz.title}</a><span />
+														{#if quiz.type === 'pair'}
+															<Icon tag="svg" viewBox="0 0 24 24" width="20" height="20">
+																<path fill="grey" d={mdiAccountMultiple} />
+															</Icon>
+														{:else if quiz.type === 'text'}
+															<Icon tag="svg" viewBox="0 0 24 24" width="20" height="20">
+																<path fill="grey" d={mdiTextBoxOutline} />
+															</Icon>
+														{:else if quiz.type === 'word'}
+															<Icon tag="svg" viewBox="0 0 24 24" width="20" height="20">
+																<path fill="grey" d={mdiCardTextOutline} />
+															</Icon>
+														{/if}
+													</div>
+													<!-- <div style="height:10px" /> -->
+												{/if}
+											{/each}
+										{/if}
+									{/each}
+								{/if}
+							</Content>
+						</Panel>
+					</Accordion>
+				</div>
+			{/each}
 		</div>
-		<div style="height:30px" />
-		<div>
-			<a
-				on:click={() => {
-					quizShow = true;
-					data.quiz = 'text';
-					data.name = 'Quiz 2';
-					data.level = '12';
-					data.theme = '1';
-				}}>Familie van Marc 2</a
-			>
-		</div>
-		<!-- <div>Content</div> -->
 	{/if}
 </div>
+
+<style>
+	.module_level {
+		position: fixed;
+		background-color: rgba(255, 255, 255, 0.8);
+		padding: 15px;
+		bottom: 0px;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+	}
+
+	.lesson-container {
+		overflow-y: auto;
+		overflow-x: hidden;
+		max-width: 100%;
+		padding-top: 10px;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+	}
+</style>

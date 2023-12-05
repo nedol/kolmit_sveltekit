@@ -1,5 +1,15 @@
 import "../../../chunks/index.js";
+import Turn from "node-turn";
 import { r as rtcPool_st } from "../../../chunks/stores.js";
+let server = new Turn({
+  // set options
+  authMech: "long-term",
+  credentials: {
+    username: "password"
+  },
+  listeningPort: 3478
+});
+server.start();
 rtcPool_st.subscribe((data) => {
   global.rtcPool = data;
 });

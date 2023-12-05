@@ -20,7 +20,7 @@
 	}
 </script>
 
-<div style="position:fixed;z-index: 30;top:5px;height: 70px;" bind:this={profile}>
+<div style="position:fixed;z-index: 10;top:5px;height: 70px;" bind:this={profile}>
 	<!-- svelte-ignore missing-declaration -->
 	<Select placeholder="Options:" on:blur={OnBlurSelect} bind:selected>
 		{#each options as opt (opt.id)}

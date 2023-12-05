@@ -1,17 +1,29 @@
 {
 	"/": [
-		"src/routes/+page.js"
-	],
-	"/about": [
-		"src/routes/about/+page.js"
+		"src/routes/+page.js",
+		"src/routes/+page.server.js",
+		"src/routes/+layout.server.js",
+		"src/routes/+layout.server.js",
+		"src/routes/+server.js"
 	],
 	"/operator": [
-		"src/routes/operator/+page.server.js"
+		"src/routes/operator/+server.js"
 	],
-	"/operator/api/edit_cc": [
-		"src/routes/operator/api/edit_cc/+server.js"
+	"/operator/lesson": [
+		"src/routes/operator/lesson/+page.js",
+		"src/routes/+layout.server.js",
+		"src/routes/+layout.server.js",
+		"src/routes/operator/lesson/+server.js"
 	],
 	"/site": [
-		"src/routes/site/+page.server.js"
+		"src/routes/site/+page.js",
+		"src/routes/+layout.server.js"
+	],
+	"/site/about": [
+		"src/routes/site/about/+page.js",
+		"src/routes/+layout.server.js"
+	],
+	"/user": [
+		"src/routes/user/+server.js"
 	]
 }

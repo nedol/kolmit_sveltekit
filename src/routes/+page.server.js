@@ -25,7 +25,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 
 	let host = url.origin; //'http://localhost:3000'; //'https://kolmit-sveltekit-nedol.vercel.app'; //
 
-	console.log();
+	// console.log();
 	//debugger;
 
 	let res;
@@ -60,6 +60,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 		check: true,
 		host: host,
 		operator: kolmit.operator,
+		name: kolmit.name,
 		abonent: abonent,
 		lang: kolmit.lang,
 		dict: dict,
@@ -75,24 +76,25 @@ export const actions = {
 		if (data.get('psw') !== data.get('confirmPassword')) return;
 		let q = {
 			abonent: abonent,
+			img: data.get('oper_pic_text'),
 			name: data.get('name'),
 			email: data.get('email'),
 			psw: md5(data.get('psw')),
 			lang: data.get('lang')
 		};
 
-		if (CreateOperator(q)) {
-			cookies.set(
-				'abonent:' + q.abonent,
-				JSON.stringify({
-					name: q.name,
-					operator: q.email,
-					abonent: q.abonent,
-					psw: q.psw,
-					lang: q.lang
-				}),
-				{ maxAge: 60 * 60 * 24 * 30 }
-			);
-		}
+		cookies.set(
+			'abonent:' + q.abonent,
+			JSON.stringify({
+				name: q.name,
+				operator: q.email,
+				abonent: q.abonent,
+				psw: q.psw,
+				lang: q.lang
+			}),
+			{ maxAge: 60 * 60 * 24 * 30 * 1000 }
+		);
+
+		await CreateOperator(q);
 	}
 };

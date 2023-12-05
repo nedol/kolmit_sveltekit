@@ -1,5 +1,534 @@
 {
-    "quiz": {
-        "volgorde": {}
+    "aangedaan": {
+        "ru": "причиненный",
+        "fr": "offensé",
+        "en": "affected",
+        "de": "betroffen",
+        "uk": "схвильований"
+    },
+    "aangekomen": {
+        "ru": "прибыл",
+        "fr": "arrivé",
+        "en": "arrived",
+        "de": "angekommen",
+        "uk": "прибув"
+    },
+    "afgewassen": {
+        "ru": "помытый",
+        "fr": "lavé",
+        "en": "washed",
+        "de": "abgewaschen",
+        "uk": "вимитий"
+    },
+    "gebakken": {
+        "ru": "пожаренный",
+        "fr": "cuit",
+        "en": "baked",
+        "de": "gebacken",
+        "uk": "випечений"
+    },
+    "begonnen": {
+        "ru": "начатый",
+        "fr": "commencé",
+        "en": "begun",
+        "de": "begonnen",
+        "uk": "початий"
+    },
+    "begrepen": {
+        "ru": "понятый",
+        "fr": "compris",
+        "en": "understood",
+        "de": "verstanden",
+        "uk": "розумітий"
+    },
+    "behangen": {
+        "ru": "покрытый обоями",
+        "fr": "tapisser",
+        "en": "wallpapered",
+        "de": "tapeziert",
+        "uk": "покритий шпалерами"
+    },
+    "bezocht": {
+        "ru": "посещенный",
+        "fr": "visité",
+        "en": "visited",
+        "de": "besucht",
+        "uk": "відвіданий"
+    },
+    "gebeten": {
+        "ru": "укушенный",
+        "fr": "mordu",
+        "en": "bitten",
+        "de": "gebissen",
+        "uk": "укушений"
+    },
+    "gebroken": {
+        "ru": "сломанный",
+        "fr": "cassé",
+        "en": "broken",
+        "de": "gebrochen",
+        "uk": "зламаний"
+    },
+    "gebracht": {
+        "ru": "привезенный",
+        "fr": "apporté",
+        "en": "brought",
+        "de": "gebracht",
+        "uk": "привезений"
+    },
+    "gedacht": {
+        "ru": "думавший",
+        "fr": "pensé",
+        "en": "thought",
+        "de": "gedacht",
+        "uk": "думав"
+    },
+    "gedaan": {
+        "ru": "сделанный",
+        "fr": "fait",
+        "en": "done",
+        "de": "gemacht",
+        "uk": "зроблений"
+    },
+    "gedragen": {
+        "ru": "поведенный",
+        "fr": "porté",
+        "en": "worn",
+        "de": "getragen",
+        "uk": "поведений"
+    },
+    "gedronken": {
+        "ru": "выпитый",
+        "fr": "bu",
+        "en": "drunk",
+        "de": "getrunken",
+        "uk": "випитий"
+    },
+    "gegeten": {
+        "ru": "съеденный",
+        "fr": "mangé",
+        "en": "eaten",
+        "de": "gegessen",
+        "uk": "з'їдений"
+    },
+    "gegeven": {
+        "ru": "данный",
+        "fr": "donné",
+        "en": "given",
+        "de": "gegeben",
+        "uk": "даний"
+    },
+    "gehangen": {
+        "ru": "подвешенный",
+        "fr": "accroché",
+        "en": "hung",
+        "de": "gehangen",
+        "uk": "підвішений"
+    },
+    "gehad": {
+        "ru": "имеющий",
+        "fr": "eu",
+        "en": "had",
+        "de": "gehabt",
+        "uk": "має"
+    },
+    "geholpen": {
+        "ru": "помогший",
+        "fr": "aidé",
+        "en": "helped",
+        "de": "geholfen",
+        "uk": "допомігший"
+    },
+    "ingenomen": {
+        "ru": "принятый",
+        "fr": "pris",
+        "en": "taken",
+        "de": "eingenommen",
+        "uk": "прийнятий"
+    },
+    "gekozen": {
+        "ru": "выбранный",
+        "fr": "choisi",
+        "en": "chosen",
+        "de": "gewählt",
+        "uk": "обраний"
+    },
+    "gekeken": {
+        "ru": "глядел",
+        "fr": "regardé",
+        "en": "watched",
+        "de": "geguckt",
+        "uk": "дивився"
+    },
+    "geklommen": {
+        "ru": "забрался",
+        "fr": "grimpé",
+        "en": "climbed",
+        "de": "geklommen",
+        "uk": "забравшись"
+    },
+    "gekomen": {
+        "ru": "пришедший",
+        "fr": "venu",
+        "en": "come",
+        "de": "gekommen",
+        "uk": "прийшов"
+    },
+    "gekocht": {
+        "ru": "купил",
+        "fr": "acheté",
+        "en": "bought",
+        "de": "gekauft",
+        "uk": "куплений"
+    },
+    "gekregen": {
+        "ru": "получил",
+        "fr": "reçu",
+        "en": "received",
+        "de": "bekommen",
+        "uk": "отриманий"
+    },
+    "gelachen": {
+        "ru": "смеялся",
+        "fr": "ri",
+        "en": "laughed",
+        "de": "gelacht",
+        "uk": "сміявся"
+    },
+    "gelezen": {
+        "ru": "читал",
+        "fr": "lu",
+        "en": "read",
+        "de": "gelesen",
+        "uk": "читав"
+    },
+    "gelegen": {
+        "ru": "лежал",
+        "fr": "été",
+        "en": "lain",
+        "de": "gelegen",
+        "uk": "лежав"
+    },
+    "gelopen": {
+        "ru": "бегавший",
+        "fr": "couru",
+        "en": "run",
+        "de": "gelaufen",
+        "uk": "бігав"
+    },
+    "meegedaan": {
+        "ru": "участвовавший",
+        "fr": "participé",
+        "en": "participated",
+        "de": "mitgemacht",
+        "uk": "брав участь"
+    },
+    "meegenomen": {
+        "ru": "принесенный с собой",
+        "fr": "emporté",
+        "en": "taken along",
+        "de": "mitgenommen",
+        "uk": ""
+    },
+    "nagekeken": {
+        "ru": "проверил",
+        "fr": "vérifié",
+        "en": "checked",
+        "de": "nachgeprüft",
+        "uk": "переглянув"
+    },
+    "genomen": {
+        "ru": "взял",
+        "fr": "pris",
+        "en": "taken",
+        "de": "genommen",
+        "uk": "взяв"
+    },
+    "ontbeten": {
+        "ru": "завтракал",
+        "fr": "pris le petit déjeuner",
+        "en": "had breakfast",
+        "de": "gefrühstückt",
+        "uk": "снідав"
+    },
+    "opgestaan": {
+        "ru": "встал",
+        "fr": "levé",
+        "en": "got up",
+        "de": "aufgestanden",
+        "uk": "встав"
+    },
+    "overleden": {
+        "ru": "умер",
+        "fr": "décédé",
+        "en": "passed away",
+        "de": "verstorben",
+        "uk": "помер"
+    },
+    "gereden": {
+        "ru": "поехал",
+        "fr": "conduit",
+        "en": "driven",
+        "de": "gefahren",
+        "uk": "поїхав"
+    },
+    "geroepen": {
+        "ru": "позвал",
+        "fr": "appelé",
+        "en": "called",
+        "de": "gerufen",
+        "uk": "викликав"
+    },
+    "gescheiden": {
+        "ru": "развелся",
+        "fr": "divorcé",
+        "en": "divorced",
+        "de": "geschieden",
+        "uk": "розійшовся"
+    },
+    "geschenen": {
+        "ru": "светился",
+        "fr": "brillé",
+        "en": "shone",
+        "de": "geschienen",
+        "uk": "світився"
+    },
+    "geschreven": {
+        "ru": "написал",
+        "fr": "écrit",
+        "en": "written",
+        "de": "geschrieben",
+        "uk": "написав"
+    },
+    "geslapen": {
+        "ru": "спал",
+        "fr": "dormi",
+        "en": "slept",
+        "de": "geschlafen",
+        "uk": "спав"
+    },
+    "gesloten": {
+        "ru": "закрыл",
+        "fr": "fermé",
+        "en": "closed",
+        "de": "geschlossen",
+        "uk": "закрив"
+    },
+    "gesneden": {
+        "ru": "нарезал",
+        "fr": "coupé",
+        "en": "cut",
+        "de": "geschnitten",
+        "uk": "нарізав"
+    },
+    "gesproken": {
+        "ru": "говорил",
+        "fr": "parlé",
+        "en": "spoken",
+        "de": "gesprochen",
+        "uk": "говорив"
+    },
+    "gesprongen": {
+        "ru": "прыгнул",
+        "fr": "sauté",
+        "en": "jumped",
+        "de": "gesprungen",
+        "uk": "стрибнув"
+    },
+    "gestaan": {
+        "ru": "стоял",
+        "fr": "resté debout",
+        "en": "stood",
+        "de": "gestanden",
+        "uk": "стояв"
+    },
+    "gestoken": {
+        "ru": "уколол",
+        "fr": "piqué",
+        "en": "stabbed",
+        "de": "gestochen",
+        "uk": "уколов"
+    },
+    "gestolen": {
+        "ru": "украл",
+        "fr": "volé",
+        "en": "stolen",
+        "de": "gestohlen",
+        "uk": "вкрав"
+    },
+    "gestorven": {
+        "ru": "умер",
+        "fr": "mort",
+        "en": "died",
+        "de": "gestorben",
+        "uk": "помер"
+    },
+    "gestegen": {
+        "ru": "поднялся",
+        "fr": "augmenté",
+        "en": "risen",
+        "de": "gestiegen",
+        "uk": "піднявся"
+    },
+    "gestreken": {
+        "ru": "разгладил",
+        "fr": "repassé",
+        "en": "ironed",
+        "de": "gebügelt",
+        "uk": "розгладжений"
+    },
+    "getrokken": {
+        "ru": "тянул",
+        "fr": "tiré",
+        "en": "pulled",
+        "de": "gezogen",
+        "uk": "тягнув"
+    },
+    "uitgedaan": {
+        "ru": "выключил",
+        "fr": "éteint",
+        "en": "turned off",
+        "de": "ausgezogen",
+        "uk": "вимкнув"
+    },
+    "uitgegaan": {
+        "ru": "вышел",
+        "fr": "sorti",
+        "en": "gone out",
+        "de": "ausgegangen",
+        "uk": "вийшов"
+    },
+    "gevallen": {
+        "ru": "упал",
+        "fr": "tombé",
+        "en": "fallen",
+        "de": "gefallen",
+        "uk": "впав"
+    },
+    "vergeten": {
+        "ru": "забыл",
+        "fr": "oublié",
+        "en": "forgotten",
+        "de": "vergessen",
+        "uk": "забув"
+    },
+    "verkocht": {
+        "ru": "продал",
+        "fr": "vendu",
+        "en": "sold",
+        "de": "verkauft",
+        "uk": "продав"
+    },
+    "verloren": {
+        "ru": "потерял",
+        "fr": "perdu",
+        "en": "lost",
+        "de": "verloren",
+        "uk": "втратив"
+    },
+    "vertrokken": {
+        "ru": "ушел",
+        "fr": "parti",
+        "en": "departed",
+        "de": "abgereist",
+        "uk": "вирушив"
+    },
+    "vervangen": {
+        "ru": "заменил",
+        "fr": "remplacé",
+        "en": "replaced",
+        "de": "ersetzt",
+        "uk": "замінив"
+    },
+    "gevonden": {
+        "ru": "нашел",
+        "fr": "trouvé",
+        "en": "found",
+        "de": "gefunden",
+        "uk": "знайшов"
+    },
+    "gevlogen": {
+        "ru": "летел",
+        "fr": "volé",
+        "en": "flown",
+        "de": "geflogen",
+        "uk": "летів"
+    },
+    "gevroren": {
+        "ru": "замерз",
+        "fr": "gelé",
+        "en": "frozen",
+        "de": "gefroren",
+        "uk": "замерз"
+    },
+    "gewassen": {
+        "ru": "помылся",
+        "fr": "lavé",
+        "en": "washed",
+        "de": "gewaschen",
+        "uk": "вирушив"
+    },
+    "gewogen": {
+        "ru": "взвесился",
+        "fr": "pesé",
+        "en": "weighed",
+        "de": "gewogen",
+        "uk": "зважився"
+    },
+    "gewonnen": {
+        "ru": "выиграл",
+        "fr": "gagné",
+        "en": "won",
+        "de": "gewonnen",
+        "uk": "виграв"
+    },
+    "geworden": {
+        "ru": "стал",
+        "fr": "devenu",
+        "en": "become",
+        "de": "geworden",
+        "uk": "став"
+    },
+    "gezien": {
+        "ru": "видел",
+        "fr": "vu",
+        "en": "seen",
+        "de": "gesehen",
+        "uk": "бачив"
+    },
+    "geweest": {
+        "ru": "был",
+        "fr": "été",
+        "en": "been",
+        "de": "gewesen",
+        "uk": "був"
+    },
+    "gezongen": {
+        "ru": "пел",
+        "fr": "chanté",
+        "en": "sung",
+        "de": "gesungen",
+        "uk": "співав"
+    },
+    "gezeten": {
+        "ru": "сидел",
+        "fr": "assis",
+        "en": "sat",
+        "de": "gesessen",
+        "uk": "сидів"
+    },
+    "gezocht": {
+        "ru": "иcскал",
+        "fr": "cherché",
+        "en": "sought",
+        "de": "gesucht",
+        "uk": "шукав"
+    },
+    "gezwommen": {
+        "ru": "поплавал",
+        "fr": "nageé",
+        "en": "swum",
+        "de": "geschwommen",
+        "uk": "поплив"
     }
 }

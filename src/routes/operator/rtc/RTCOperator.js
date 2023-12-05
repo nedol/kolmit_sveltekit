@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store';
-
+import { DataChannelOperator } from './DataChannelOperator';
 import { RTCBase } from './RTCBase';
 
 // import {log} from './utils'
 
-import { langs, msg_signal_oper } from '$lib/js/stores.js';
+import { langs, msg_oper } from '$lib/js/stores.js';
 
 // export const msg = writable('');
 
@@ -15,7 +15,7 @@ export class RTCOperator extends RTCBase {
 
 		this.checking_tmr;
 
-		msg_signal_oper.subscribe((data) => {
+		msg_oper.subscribe((data) => {
 			try {
 				if (data) this.OnMessage(data);
 			} catch (ex) {
@@ -48,7 +48,7 @@ export class RTCOperator extends RTCBase {
 			.createOffer(
 				(this.mode = {
 					offerToReceiveAudio: 1,
-					offerToReceiveVideo: 1, // test 0
+					offerToReceiveVideo: 0, // test 0
 					iceRestart: 1
 				})
 			)
@@ -110,7 +110,7 @@ export class RTCOperator extends RTCBase {
 	}
 
 	async Offer() {
-		this.Init(async () => {
+		this.Init(() => {
 			if (this.pcPull[this.abonent].con.signalingState !== 'closed') {
 				this.GetUserMedia({ audio: 1, video: 0 }, () => {
 					this.SendOffer(this.abonent);
@@ -152,7 +152,7 @@ export class RTCOperator extends RTCBase {
 	}
 
 	OnTalk() {
-		if (this.DC.dc) {
+		if (this.DC) {
 			this.DC.SendDCTalk();
 		}
 
@@ -184,16 +184,11 @@ export class RTCOperator extends RTCBase {
 	}
 
 	OnInactive() {
-		this.RemoveTracks();
-
-		if (this.DC.dc.readyState === 'open' || this.DC.dc.readyState === 'connecting') {
-			this.DC.SendDCHangup(() => {
-				this.DC.dc.close();
-				this.SendStatus('close');
-			});
+		if (this.DC && (this.DC.dc.readyState === 'open' || this.DC.dc.readyState === 'connecting')) {
+			this.RemoveTracks();
+			this.DC.dc.close();
+			this.SendStatus('close');
 		}
-
-		// });
 	}
 
 	OnMessage(data) {

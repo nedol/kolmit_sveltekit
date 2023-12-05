@@ -14,8 +14,8 @@
 	let user_pic = data.picture ? data.picture.medium : '';
 
 	let email = data.operator,
-		abonent = data.abonent;
-	let hash = null;
+		abonent = data.abonent,
+		name = data.name;
 
 	import { SignalingChannel } from './signalingChannel.js';
 	import { signal } from '$lib/js/stores.js';
@@ -35,7 +35,7 @@
 
 	import { users } from '$lib/js/stores.js';
 	if (data.users) {
-		$users = JSON.parse(data.users);
+		$users = data.users;
 	}
 
 	onMount(async () => {});
@@ -44,5 +44,5 @@
 {#if !email || !data.users}
 	<Login {email} {abonent} {user_pic} />
 {:else}
-	<Operator {email} {abonent} users_={$users} />
+	<Operator {email} {abonent} {name} users_={$users} />
 {/if}

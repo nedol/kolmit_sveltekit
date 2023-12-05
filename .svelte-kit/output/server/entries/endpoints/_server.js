@@ -55,7 +55,7 @@ async function POST({ request, url, fetch, cookies }) {
   } else {
     kolmit = { psw: md5("demo") };
   }
-  switch (par.func) {
+  switch (q.func) {
     case "operator":
       if (q.email && q.psw) {
         if (CreateOperator(q)) {
@@ -65,7 +65,7 @@ async function POST({ request, url, fetch, cookies }) {
               name: q.name,
               operator: q.email,
               abonent: q.abonent,
-              psw: q.psw,
+              psw: md5(q.psw),
               lang: q.lang
             }),
             { maxAge: 60 * 60 * 24 * 30 }
@@ -273,6 +273,8 @@ async function HandleCall(q) {
         user: q.em
         // "abonent": q.em
       });
+      if (!global.rtcPool["operator"][q.abonent][q.em])
+        return;
       let item = global.rtcPool["operator"][q.abonent][q.em][q.oper_uid];
       if (item) {
         await global.rtcPool["operator"][q.abonent][q.em].promise;
@@ -299,7 +301,8 @@ async function HandleCall(q) {
             cand: oper_offer.cand
           });
           await global.rtcPool["operator"][q.abonent][q.em].promise;
-          global.rtcPool["user"][q.abonent][q.operator].resolve(remAr);
+          if (global.rtcPool["user"][q.abonent][q.operator].resolve)
+            global.rtcPool["user"][q.abonent][q.operator].resolve(remAr);
           remAr = [];
         } else {
           item.status = "wait";
@@ -309,6 +312,7 @@ async function HandleCall(q) {
             status: "wait"
           });
           await global.rtcPool["operator"][q.abonent][q.em].promise;
+          global.rtcPool["user"][q.abonent][q.em].resolve;
           global.rtcPool["user"][q.abonent][q.em].resolve(remAr);
           if (oper_check && oper_check.resolve) {
             let remAr2 = {

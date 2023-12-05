@@ -1,3 +1,23 @@
+import { writable } from 'svelte/store';
+
+import { operator } from '$lib/js/stores.js';
+
+let oper;
+operator.subscribe((data) => {
+	oper = data;
+});
+
+import { dc_user } from '$lib/js/stores.js';
+import { dc_user_state } from '$lib/js/stores.js';
+
+import { msg_user } from '$lib/js/stores.js';
+
+import { posterst } from '$lib/js/stores.js';
+let poster;
+posterst.subscribe((data) => {
+	poster = data;
+});
+
 export class DataChannelUser {
 	constructor(rtc, pc) {
 		this.rtc = rtc;
@@ -10,8 +30,10 @@ export class DataChannelUser {
 		that.cnt_call = 0;
 
 		this.dc.onclose = () => {
-			// this.rtc.OnMessage({func:'mute'});
+			msg_user.set({ func: 'mute' });
 		};
+
+		dc_user_state.set(that.dc.readyState);
 
 		pc.StartEvents();
 
@@ -21,7 +43,8 @@ export class DataChannelUser {
 			this.dc = event.channel; //change dc
 
 			this.dc.onopen = () => {
-				//this.dc.onopen = null;
+				dc_user.set(this);
+				console.log('set dc_user');
 				if (that.dc.readyState === 'open') {
 					console.log(that.pc.pc_key + ' datachannel open');
 					//after redirect:
@@ -48,12 +71,15 @@ export class DataChannelUser {
 		let receiveBuffer = [];
 		let receivedSize = 0;
 		this.dc.removeEventListener('message', this.dc.onmessage);
-		this.dc.onmessage = function (event) {
+		this.dc.onmessage = (event) => {
 			try {
 				let parsed = JSON.parse(event.data);
 				if (parsed.type === 'eom') {
 					that.rtc.OnMessage(JSON.parse(data), that);
-					that.rtc.SendToComponent(JSON.parse(data));
+					// that.rtc.SendToComponent(JSON.parse(data));
+					data = JSON.parse(data);
+					data.em = this.rtc.em;
+					msg_user.set(data);
 					data = '';
 					return;
 				}
@@ -88,6 +114,10 @@ export class DataChannelUser {
 				if (!event.data.byteLength) return;
 			}
 		};
+	}
+
+	Close() {
+		this.dc.close();
 	}
 
 	SendFile(data, name, resolve) {
@@ -161,7 +191,7 @@ export class DataChannelUser {
 		par.call = that.rtc.call_num;
 		par.type = that.rtc.type;
 		par.email = that.rtc.email.from;
-		par.profile = { email: that.rtc.em, name: that.rtc.em };
+		par.profile = { email: oper.em, name: oper.name, img: poster };
 
 		if (that.dc.readyState === 'open') {
 			that.SendData(par);

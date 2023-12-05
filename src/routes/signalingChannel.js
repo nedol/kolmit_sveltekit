@@ -1,4 +1,4 @@
-import { msg_signal_oper, msg_signal_user } from '$lib/js/stores.js';
+import { msg_oper, msg_user } from '$lib/js/stores.js';
 
 import { server_path } from '$lib/js/stores.js';
 let server;
@@ -14,8 +14,8 @@ const headers = {
 
 export class SignalingChannel {
 	constructor(operator) {
-		this.msg_signal_oper = msg_signal_oper;
-		this.msg_signal_user = msg_signal_user;
+		this.msg_oper = msg_oper;
+		this.msg_user = msg_user;
 		this.operator = operator;
 	}
 

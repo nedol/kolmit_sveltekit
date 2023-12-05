@@ -1,6 +1,18 @@
 <script>
 	import { onMount /*, onDestroy, getContext, setContext*/, setContext } from 'svelte';
 	import { page, navigating, updated } from '$app/stores';
+	import List, { Item, Graphic, Separator, Text } from '@smui/list';
+	import TopAppBar, { Row, Section, Title, AutoAdjust } from '@smui/top-app-bar';
+	import IconButton from '@smui/icon-button';
+
+	import { lesson } from '$lib/js/stores.js';
+
+	import BurgerMenu from './menu/BurgerMenu.svelte';
+
+	import { editable } from '$lib/js/stores.js';
+	$: if ($editable) {
+		edited_display = $editable;
+	}
 
 	import { view } from '$lib/js/stores.js';
 
@@ -11,55 +23,127 @@
 		console.log($dicts);
 	}
 
+	import { call_but_status } from '$lib/js/stores.js';
+
 	$view = 'cc';
 
+	let topAppBar;
+
 	onMount(async () => {});
+
+	let lang_menu = false;
+
+	function OnSelected(ev) {
+		$langs = ev.target.attributes[2].nodeValue;
+	}
 </script>
 
 {#if $dicts && $dicts['CLASS'][$langs]}
 	<header>
-		<div class="corner">
-			<!-- <a href="https://kit.svelte.dev">
-      <img src={logo} alt="SvelteKit" />
-    </a> -->
-		</div>
+		<TopAppBar bind:this={topAppBar} variant="fixed" dense>
+			<Row>
+				<Section />
+				<div class="sec_items">
+					<Section>
+						<Title
+							on:click={() => {
+								$view = 'cc';
+							}}>{$dicts ? $dicts['CLASS'][$langs] : 'CLASS'}</Title
+						>
 
-		<nav>
-			<svg viewBox="0 0 2 3" aria-hidden="true">
-				<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-			</svg>
-			<ul>
-				<!-- <li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
-			</li> -->
-				<!-- {@debug $dicts} -->
-				<a
-					href="#"
-					target="_self"
-					on:click={() => {
-						$view = 'cc';
-					}}>{$dicts ? $dicts['CLASS'][$langs] : 'CLASS'}</a
-				>
-				<li>
-					<a
-						href="#"
-						target="_self"
+						<Title
+							on:click={() => {
+								console.log();
+								$view = 'lesson';
+							}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</Title
+						>
+						<!-- <IconButton class="material-icons" aria-label="Bookmark this page">bookmark</IconButton> -->
+					</Section>
+				</div>
+				<Section align="end">
+					<IconButton
+						class="material-icons"
 						on:click={() => {
-							$view = 'lesson';
-						}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</a
+							lang_menu = !lang_menu;
+						}}>menu</IconButton
 					>
-				</li>
-			</ul>
-			<svg viewBox="0 0 2 3" aria-hidden="true">
-				<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-			</svg>
-		</nav>
-
-		<div class="corner">
-			<!-- <a href="https://github.com/sveltejs/kit">
-      <img src={github} alt="GitHub" />
-    </a> -->
-		</div>
+					{#if lang_menu}
+						<div class="lang_list" style="position:absolute; display: flex; margin-top:300px">
+							<List dense>
+								<Item
+									on:SMUI:action={() => {
+										$langs = 'en';
+										lang_menu = false;
+									}}
+								>
+									<!-- <Graphic class="material-icons">edit</Graphic> -->
+									<img
+										src="https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-250.png"
+										alt="English"
+									/>
+								</Item>
+								<Item
+									on:SMUI:action={() => {
+										$langs = 'fr';
+										lang_menu = false;
+									}}
+								>
+									<!-- <Graphic class="material-icons">edit</Graphic> -->
+									<img
+										src="https://cdn.countryflags.com/thumbs/france/flag-square-250.png"
+										alt="Français"
+									/>
+								</Item>
+								<Item
+									on:SMUI:action={() => {
+										$langs = 'nl';
+										lang_menu = false;
+									}}
+								>
+									<!-- <Graphic class="material-icons">edit</Graphic> -->
+									<img
+										src="https://cdn.countryflags.com/thumbs/netherlands/flag-square-250.png"
+										alt="Nederlands"
+									/>
+								</Item>
+								<Item
+									on:SMUI:action={() => {
+										$langs = 'de';
+										lang_menu = false;
+									}}
+								>
+									<!-- <Graphic class="material-icons">edit</Graphic> -->
+									<img
+										src="https://cdn.countryflags.com/thumbs/germany/flag-square-250.png"
+										alt="Deutch"
+									/>
+								</Item>
+								<Item
+									on:SMUI:action={() => {
+										$langs = 'uk';
+										lang_menu = false;
+									}}
+								>
+									<!-- <Graphic class="material-icons">edit</Graphic> -->
+									<img
+										src="https://cdn.countryflags.com/thumbs/ukraine/flag-square-250.png"
+										alt="Український"
+									/>
+								</Item>
+								<Item
+									on:SMUI:action={() => {
+										$langs = 'ru';
+										lang_menu = false;
+									}}
+								>
+									<span>Русский</span>
+								</Item>
+							</List>
+						</div>
+					{/if}
+				</Section>
+			</Row>
+		</TopAppBar>
 	</header>
 {/if}
 
@@ -69,86 +153,23 @@
 		justify-content: space-between;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
+	img {
+		width: 20px;
+		opacity: 100%;
 	}
 
-	/* .corner a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  .corner img {
-    width: 2em;
-    height: 2em;
-    object-fit: contain;
-  } */
-
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+	button.sec_right {
+		left: 100px;
 	}
-
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
+	.lang_list {
+		background-color: white;
+		/* opacity: 50%; */
 	}
-
-	path {
-		fill: var(--background);
-	}
-
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
-
-	li {
-		position: relative;
-		height: 100%;
-	}
-
-	li[aria-current='page']::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
+	/* Стили для мобильных устройств */
+	@media screen and (max-width: 767px) {
+		/* .sec_items {
+			position: absolute;
+			left: 0;
+		} */
 	}
 </style>

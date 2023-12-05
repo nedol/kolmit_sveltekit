@@ -1,10 +1,18 @@
 <script>
 	import { onMount } from 'svelte';
-	export let display = 'none';
+	import Card, { Content, PrimaryAction, Media, MediaContent } from '@smui/card';
+
+	export let display = 'block';
 	export let srcObject;
-	let rv, video;
+	export let poster;
+	export let status;
+	export let video_element, card;
+	export let parent_div;
+	export let name, em;
+	let rv;
+
 	onMount(async () => {
-		rv = video;
+		rv = video_element;
 	});
 
 	$: if (rv && srcObject) {
@@ -18,30 +26,59 @@
 	}
 </script>
 
-<div
-	style="
-    display:{display};
-    position: relative;
-    width: 100%;
-    height: 95%;
-    background-color: white;
-    border-radius:5px;
-    z-index: 1;"
->
-	<video
-		bind:this={video}
-		autoplay
-		playsinline
-		style="
-    position: absolute;
-    width: 100%;
-    /* height: 80%; */
-    /* left: 0px; */
-    top: 30px;
-    opacity: 1;
-        "
-	>
-		<track kind="captions" />
-	</video>
+<div class="card-display" bind:this={parent_div}>
+	<div class="card-container" bind:this={card}>
+		<Card style="min-width: 50px;">
+			<Media class="card-media-square" aspectRatio="square">
+				<MediaContent>
+					<video bind:this={video_element} on:click on:mute {poster} {status} autoplay playsinline>
+						<track kind="captions" />
+					</video>
+				</MediaContent>
+			</Media>
+			<!-- <Content style="color: #888; font-size:smaller">{name}</Content> -->
+			<h3
+				class="mdc-typography--subtitle2"
+				style="margin: 0; color: #888;font-size:x-small;text-align:center;z-index:1"
+			>
+				{#if name}
+					{name.slice(0, 8)}
+				{:else}
+					{em.slice(0, 8)}
+				{/if}
+			</h3>
+		</Card>
+	</div>
 </div>
 <slot />
+
+<style>
+	video {
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: 5px;
+		width: 50px;
+		max-height: 55px;
+	}
+	[status='call'] {
+		opacity: 1;
+	}
+	[status='talk'] {
+		opacity: 1;
+	}
+
+	[status='muted'] {
+		opacity: 0.3;
+	}
+	[status='inactive'] {
+		opacity: 0.3;
+	}
+
+	[status='active'] {
+		opacity: 1;
+	}
+
+	[status='busy'] {
+		opacity: 1;
+	}
+</style>

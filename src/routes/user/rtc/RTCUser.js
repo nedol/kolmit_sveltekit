@@ -7,7 +7,7 @@ import { RTCBase } from './RTCBase';
 // import { SignalingChannel } from './signalingChannel.js';
 import { langs } from '$lib/js/stores.js';
 
-import { msg_signal_user } from '$lib/js/stores.js';
+import { msg_user } from '$lib/js/stores.js';
 
 // export const msg = writable('');
 
@@ -30,7 +30,7 @@ export default class RTCUser extends RTCBase {
 
 		// this.SendCheck();
 
-		msg_signal_user.subscribe((data) => {
+		msg_user.subscribe((data) => {
 			try {
 				if (data) this.OnMessage(data);
 			} catch (ex) {
@@ -70,13 +70,11 @@ export default class RTCUser extends RTCBase {
 		});
 	}
 
-	Hangup() {
-		if (this.DC) {
-			this.DC.SendDCHangup(() => {});
-
-			this.Init(() => {
-				this.SendCheck();
-			});
+	OnInactive() {
+		if (this.DC && (this.DC.dc.readyState === 'open' || this.DC.dc.readyState === 'connecting')) {
+			this.RemoveTracks();
+			this.DC.dc.close();
+			this.SendStatus('close');
 		}
 	}
 
@@ -107,9 +105,9 @@ export default class RTCUser extends RTCBase {
 
 		if (data.func === 'mute') {
 			that.RemoveTracks();
-			that.Init(() => {
-				that.SendCheck();
-			});
+			// that.Init(() => {
+			// 	that.SendCheck();
+			// });
 		}
 
 		if (data.call || data.func === 'call') {

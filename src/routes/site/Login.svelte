@@ -1,7 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-
-	import md5 from 'md5';
+	import { applyAction, deserialize } from '$app/forms';
+	import image from 'svelte-image';
+	import Button from '@smui/button';
+	import Textfield from '@smui/textfield';
 	import loadImage from 'blueimp-load-image/js/load-image.js';
 	import 'blueimp-load-image/js/load-image-scale.js';
 	import SelectMenu from './SelectMenu.svelte';
@@ -9,16 +11,23 @@
 	import { signal } from '$lib/js/stores.js';
 	import operator_svg from '$lib/images/operator.svg';
 
-	let width, height;
+	let width, height, value, abonent;
+	let formData = {
+		name: '',
+		email: '',
+		psw: '',
+		confirmPassword: '',
+		picture: '',
+		lang: ''
+	};
 
-	export let oper_pic;
-	if (!oper_pic) {
-		oper_pic = operator_svg;
+	if (!formData.picture) {
+		formData.picture = operator_svg;
 	}
 
 	let lang = 'en';
 	$: if (lang) {
-		console.log('lang:' + lang);
+		formData.lang = lang;
 	}
 
 	let psw = 'demo';
@@ -26,7 +35,10 @@
 	let confirmPassword = 'demo'; // Поле для повторного ввода пароля
 	let passwordMatch = true; // Переменная для проверки совпадения паролей
 
-	onMount(async () => {});
+	onMount(async () => {
+		let url = new URL(window.location.href);
+		abonent = url.searchParams.get('abonent');
+	});
 
 	$: if (confirmPassword) {
 		if (psw === confirmPassword) {
@@ -48,7 +60,7 @@
 					} else {
 						width = img.width;
 						height = img.height;
-						oper_pic = img.toDataURL();
+						formData.picture = img.toDataURL();
 					}
 				},
 				{
@@ -60,48 +72,84 @@
 			);
 		}
 	}
+
+	async function handleSubmit() {
+		// Здесь вы можете обработать данные формы
+
+		let par = formData;
+		par.func = 'operator';
+		par.abonent = abonent;
+		const headers = {
+			'Content-Type': 'application/json'
+			// Authorization: `Bearer ${token}`
+		};
+		let res = await fetch(`/`, {
+			method: 'POST',
+			// mode: 'no-cors',
+			body: JSON.stringify({ par }),
+			headers: { headers }
+		});
+
+		location.reload();
+	}
 </script>
 
-<form method="post">
-	<input name="lang" value={lang} hidden />
+<form on:submit|preventDefault={handleSubmit}>
+	<div class="columns margins">
+		<input name="lang" value={formData.lang} hidden />
+		<div>
+			<Textfield
+				name="email"
+				bind:value={formData.email}
+				label="{$dicts['Email'][lang]}:"
+				required
+			/>
+		</div>
 
-	<label for="email">{$dicts['Email'][lang]}:</label>
-	<input type="email" id="email" name="email" required />
+		<div>
+			<Textfield
+				type="text"
+				name="name"
+				bind:value={formData.name}
+				label="{$dicts['Имя'][lang]}:"
+				required
+			/>
+		</div>
 
-	<label for="oper_name">{$dicts['Имя'][lang]}:</label>
-	<input type="text" id="oper_name" name="name" required />
+		<div>
+			<Textfield
+				type="password"
+				name="psw"
+				bind:value={formData.psw}
+				label="{$dicts['Пароль'][lang]}:"
+				required
+			/>
+		</div>
 
-	<label for="psw">{$dicts['Пароль'][lang]}:</label>
-	<input type="psw" placeholder="input your psw" name="psw" bind:value={psw} required />
+		<div>
+			<Textfield
+				type="password"
+				name="confirmPassword"
+				value={formData.confirmPassword}
+				label="{$dicts['Повторить пароль'][lang]}:"
+				required
+			/>
+		</div>
 
-	<label for="psw">{$dicts['Повторить пароль'][lang]}:</label>
-	<input
-		type="psw"
-		placeholder="repeat your psw"
-		name="confirmPassword"
-		bind:value={confirmPassword}
-		required
-	/>
+		<div style="padding-top: 20px">
+			<input type="file" id="pic" on:change={uploadImage} accept="image/png, image/jpeg" />
 
-	<label for="oper_pic">{$dicts['Фотография профиля'][lang]}:</label>
-	<input
-		type="file"
-		id="oper_pic"
-		name="oper_pic"
-		on:change={uploadImage}
-		accept="image/png, image/jpeg"
-	/>
-
-	<div class="user-pic-container">
-		<img
-			class="user-pic"
-			src={oper_pic}
-			alt="Профиль пользователя"
-			on:click={() => document.getElementById('oper_pic').click()}
-		/>
+			<img
+				type="image"
+				id="oper_pic"
+				src={formData.picture}
+				on:click={() => document.getElementById('pic').click()}
+			/>
+		</div>
+		<div>
+			<Button class="upload-button">{$dicts['Зарегистрироваться'][lang]}</Button>
+		</div>
 	</div>
-
-	<button class="upload-button">{$dicts['Зарегистрироваться'][lang]}</button>
 </form>
 <SelectMenu bind:lang />
 
@@ -151,6 +199,12 @@
 		background-color: #fff;
 	}
 
+	img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
 	label {
 		font-weight: bold;
 		margin-top: 10px;
@@ -170,12 +224,12 @@
 		display: none;
 	}
 
-	.user-pic-container {
+	.container {
 		text-align: center;
 		margin-top: 10px;
 	}
 
-	.user-pic {
+	#oper_pic {
 		max-width: 100px;
 		max-height: 100px;
 		border-radius: 50%;

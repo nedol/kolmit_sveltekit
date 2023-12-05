@@ -70,34 +70,39 @@ function SendEmail(q, new_email) {
 
 export async function CreateOperator(par) {
 	try {
-		let res =
-			await pool.sql`SELECT operators.operator as operator, users.users as users FROM operators
-		INNER JOIN users ON (users.operator = operators.abonent)
-		WHERE operators.psw = ${par.psw} AND operators.operator=${par.email} 
-		AND operators.abonent =${par.abonent}`;
+		par.psw = md5(par.psw);
+		let res = await pool.sql`SELECT operators.operator as operator, users.users as users 
+			FROM operators
+			INNER JOIN users ON (users.operator = operators.abonent)
+			WHERE operators.psw = ${par.psw} AND operators.operator=${par.email} 
+			AND operators.abonent =${par.abonent}`;
 		if (res.rows[0]) {
-			let users = JSON.parse(res.rows[0].users);
+			let users = res.rows[0].users;
 			par.dep_id = '0';
 			let oper = find(users[0].staff, { email: par.email });
 			if (!oper) {
 				oper = {
-					id: 0,
+					id: users[0].staff.length + 1,
 					role: 'operator',
+					name: par.name,
 					email: par.email,
 					picture: {
-						medium: par.img
+						medium: par.picture
 					}
 				};
 
 				users[0].staff.push(oper);
 			} else {
-				oper.picture = { medium: par.img };
+				oper.picture = { medium: par.picture };
 			}
 
-			updateUsers(users, par);
+			return updateUsers(users, par);
 		} else {
-			if (par.email.toLowerCase().includes('cvo')) return AddOperator(par);
-			else return false;
+			if (par.email.toLowerCase().includes('cvoantwerpen')) {
+				return AddOperator(par);
+			} else {
+				return false;
+			}
 		}
 	} catch (er) {
 		console.log(er);
@@ -342,9 +347,23 @@ export async function GetText(q) {
 	await pool.sql`BEGIN;`;
 	try {
 		let res = await pool.sql`SELECT text FROM texts
-		WHERE level= ${q.level} AND theme=${q.theme} AND owner=${q.owner}`;
+		WHERE level= ${q.level} AND theme=${q.theme} AND title=${q.title} AND owner=${q.owner}`;
 		//debugger;
 		return res.rows[0].text;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+		return JSON.stringify({ func: q.func, res: ex });
+	}
+}
+
+export async function GetWords(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`SELECT data FROM words
+		WHERE name=${q.name} AND owner=${q.owner}`;
+		//debugger;
+		return res.rows[0].data;
 		await pool.sql`COMMIT;`;
 	} catch (ex) {
 		await pool.sql`ROLLBACK;`;
@@ -361,7 +380,7 @@ export async function GetDict(q) {
 		return res.rows[0].words;
 		await pool.sql`COMMIT;`;
 	} catch (ex) {
-		debugger;
+		// debugger;
 		await pool.sql`ROLLBACK;`;
 		return JSON.stringify({ func: q.func, res: ex });
 	}

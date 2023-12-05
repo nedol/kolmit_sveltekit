@@ -68,7 +68,7 @@ export class Peer {
 					that.rtc.SetRemoteVideo(null);
 					that.rtc.SetRemoteVideo(that.rtc.remoteStream);
 
-					that.rtc.DC.SendDCVideoOK(() => {});
+					// that.rtc.DC.SendDCVideoOK(() => {});
 				}
 			}
 		};

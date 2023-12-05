@@ -11,7 +11,14 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="callObject" on:long-press={OnLongPress} on:click>
 	<!-- {@debug em, status} -->
-	<svg class="callButton" {status} on:mute width="35" height="35">
+	<svg
+		class="callButton"
+		{status}
+		on:mute
+		width="35"
+		height="35"
+		style="position:absolute;left:0px;top:15px;"
+	>
 		<!-- <rect id='backgroundrect' width='100%' height='100%' x='0' y='0' fill='none' stroke='none'/>
         <glyph glyph-name='phone' unicode='' horiz-adv-x='1000'/>         -->
 		<g class="currentLayer" style=" stroke:black; stroke-width:10px;"
@@ -39,9 +46,9 @@
 		position: absolute;
 		max-width: 100%;
 		height: 100%;
-		top: 0px;
-		left: 6px;
-		z-index: 10;
+		top: -17px;
+		left: 0px;
+		z-index: 1;
 	}
 	.callButton {
 		margin-left: -10px;

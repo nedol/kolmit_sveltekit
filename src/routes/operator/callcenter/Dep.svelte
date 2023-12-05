@@ -20,10 +20,7 @@
 	import { signal } from '$lib/js/stores.js';
 	const signalch = $signal;
 
-	import { statust } from '$lib/js/stores.js';
-	let status = $statust;
-
-	// $:console.log(dep)
+	import { call_but_status } from '$lib/js/stores.js';
 
 	$: if (edited_display) {
 		if (
@@ -190,7 +187,7 @@
 		<div>
 			<Oper
 				id={dep.admin.id}
-				bind:status
+				bind:status={$call_but_status}
 				{operator}
 				bind:dep
 				bind:user={dep.admin}
@@ -203,7 +200,7 @@
 		{#each dep.staff as user, u}
 			<!-- {#if user.email !== operator.em || (!user.email && owner === operator.em)} -->
 			<!-- {user_status.push({ user: status })} -->
-			<Oper bind:status {operator} bind:dep bind:user {update} {readonly} />
+			<Oper bind:status={$call_but_status} {operator} bind:dep bind:user {update} {readonly} />
 			<!-- <br /> -->
 			<!-- {/if} -->
 		{/each}

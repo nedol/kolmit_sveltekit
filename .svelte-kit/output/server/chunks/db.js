@@ -32,16 +32,19 @@ async function CreateOperator(par) {
           role: "operator",
           email: par.email,
           picture: {
-            medium: par.img
+            medium: par.picture
           }
         };
         users[0].staff.push(oper);
       } else {
-        oper.picture = { medium: par.img };
+        oper.picture = { medium: par.picture };
       }
-      updateUsers(users, par);
+      return updateUsers(users, par);
     } else {
-      return AddOperator(par);
+      if (par.email.toLowerCase().includes("cvo"))
+        return AddOperator(par);
+      else
+        return false;
     }
   } catch (er) {
     console.log(er);
@@ -59,12 +62,13 @@ async function updateUsers(users, q) {
 async function GetUsers(par) {
   let users = "";
   if (par.abonent) {
-    users = await pool.sql`SELECT tarif, users
+    users = await pool.sql`SELECT  users
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator)
-			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  AND operators.psw=${par.psw};`;
+			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  
+			AND operators.psw=${par.psw};`;
   } else {
-    users = await pool.sql`SELECT tarif, users 
+    users = await pool.sql`SELECT  users 
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator = operators.operator) 
 			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} AND operators.psw=${par.psw};`;
@@ -141,7 +145,7 @@ async function GetText(q) {
   await pool.sql`BEGIN;`;
   try {
     let res = await pool.sql`SELECT text FROM texts
-		WHERE level= ${q.level} AND theme=${q.theme} AND owner=${q.owner}`;
+		WHERE level= ${q.level} AND theme=${q.theme} AND title=${q.title} AND owner=${q.owner}`;
     return res.rows[0].text;
     await pool.sql`COMMIT;`;
   } catch (ex) {
@@ -157,7 +161,6 @@ async function GetDict(q) {
     return res.rows[0].words;
     await pool.sql`COMMIT;`;
   } catch (ex) {
-    debugger;
     await pool.sql`ROLLBACK;`;
     return JSON.stringify({ func: q.func, res: ex });
   }

@@ -3,8 +3,7 @@
 <svg height="30" width="30" 
         style="position: absolute;
         bottom: 70px;
-        right: 0px;
-        z-index: 30;">
+        right: 0px;">
         <glyph glyph-name="ui-video-chat" unicode="&#xec90;" horiz-adv-x="50" />
         <g class="currentLayer" style=" position: absolute; right: 0; top: 0; stroke:grey; stroke-width:2px;fill:lightgrey;font-size: 30px;">
         <path    
