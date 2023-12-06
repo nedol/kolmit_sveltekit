@@ -18,23 +18,14 @@ rtcPool_st.subscribe((data) => {
 	global.rtcPool = data;
 });
 
-export const config = {
-	// runtime: 'edge'
-	// isr: {
-	// 	expiration: false // 10
-	// }
-};
-
 /** @type {import('./$types').RequestHandler} */
-export async function GET(event) {
+export async function GET(event, fetch) {
 	let q = {};
 	q.abonent = event.url.searchParams.get('abonent');
 	q.type = event.url.searchParams.get('type');
 	q.em = event.url.searchParams.get('em');
 
 	let resp;
-
-	// let global.rtcPool = get('global.rtcPool');
 
 	try {
 		let promise = new Promise((resolve, reject) => {

@@ -30,6 +30,7 @@ export async function GET({ url, fetch, cookies }) {
 	const text = url.searchParams.get('text');
 	const dict = url.searchParams.get('dict');
 	const key = url.searchParams.get('key');
+
 	// debugger;
 	if (text) {
 		// let resp = await fetch('/src/routes/operator/lesson/' + path);
@@ -68,6 +69,8 @@ export async function GET({ url, fetch, cookies }) {
 	}
 }
 
+let interval;
+
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, url, fetch, cookies }) {
 	//debugger;
@@ -83,6 +86,10 @@ export async function POST({ request, url, fetch, cookies }) {
 		kolmit = { psw: md5('demo') };
 	}
 
+	if (!interval)
+		interval = setInterval(() => {
+			let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+		}, 1000 * 10 * 60);
 	// global.rtcPool = get('global.rtcPool');
 
 	switch (q.func) {
