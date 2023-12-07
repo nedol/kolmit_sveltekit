@@ -91,7 +91,7 @@
 		}
 		q = dialog_data.content[cur_qa].question.text;
 		a = dialog_data.content[cur_qa].answer.text;
-		if (share_mode) {
+		if (share_mode && ($dc_user || $dc_oper)) {
 			let dc = $dc_user || $dc_oper;
 			await dc.SendData(
 				{

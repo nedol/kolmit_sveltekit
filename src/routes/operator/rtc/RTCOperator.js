@@ -10,7 +10,6 @@ import { langs, msg_oper } from '$lib/js/stores.js';
 
 export class RTCOperator extends RTCBase {
 	constructor(operator, uid, signal) {
-		// rtc.localSound.src = "./assets/call.mp3"
 		super(operator, uid, signal);
 
 		this.checking_tmr;

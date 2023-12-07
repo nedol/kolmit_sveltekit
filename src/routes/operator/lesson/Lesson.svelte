@@ -9,7 +9,8 @@
 	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
 	import Quiz from './quiz/Quiz.svelte';
 
-	import { view } from '$lib/js/stores.js';
+	// import { view } from '$lib/js/stores.js';
+	export let view;
 
 	import { lesson } from '$lib/js/stores.js';
 	let lesson_visible = true;
@@ -18,13 +19,11 @@
 
 	$: if ($lesson.data) {
 		// if (view !== 'lesson')
-		$view = 'lesson';
 		data = $lesson.data;
-
 		console.log();
 	}
 
-	$: if ($view === 'lesson') {
+	$: if (view === 'lesson') {
 		display = 'visible';
 	} else {
 		display = 'hidden';
@@ -77,7 +76,7 @@
 
 <!-- svelte-ignore a11y-missing-content -->
 <!-- {@debug display} -->
-<div style="visibility={display}">
+<div style="visibility:{display}">
 	<!-- {@debug data} -->
 	{#if data.quiz}
 		<Quiz {data} bind:lesson_display={display} />

@@ -15,6 +15,6 @@
 	}
 </script>
 
-<audio id="localSound" src="./assets/mp3/call.mp3" autoplay>
+<audio id="localSound" autoplay src="./assets/mp3/call.mp">
 	<track kind="captions" />
 </audio>

@@ -518,9 +518,10 @@
 	style="display:{progress.display};top:100px;width:98%;"
 />
 
+<!-- {@debug $view} -->
 <Callcenter view={$view} bind:this={callcenter} bind:$call_but_status bind:operator={$operator} />
 
-<Lesson data={$users[0].staff} />
+<Lesson view={$view} data={$users[0].staff} />
 
 <style>
 	.placeholder {
