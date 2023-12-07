@@ -13,6 +13,6 @@
 	}
 </script>
 
-<audio id="localSound" src="../src/routes/assets/mp3/ring.mp">
+<audio id="localSound" src="./assets/mp3/ring.mp">
 	<track kind="captions" />
 </audio>
