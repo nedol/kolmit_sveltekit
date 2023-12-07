@@ -28,7 +28,7 @@
 		lang: 'nl-BE',
 		rate: 0,
 		pitch: 1,
-		voice: 'WaveNet Male',
+		// voice: 'WaveNet Male',
 		splitSentences: true,
 		listeners: {
 			onvoiceschanged: (voices) => {
