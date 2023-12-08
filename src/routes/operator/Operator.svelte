@@ -40,7 +40,7 @@
 		lang: 'nl-BE',
 		rate: 0,
 		pitch: 1,
-		voice: 'Microsoft Bart - Dutch (Belgium)',
+		voice: 'Dutch Belgium',
 		splitSentences: true,
 		listeners: {
 			onvoiceschanged: (voices) => {
