@@ -40,7 +40,7 @@
 		lang: 'nl-BE',
 		rate: 0,
 		pitch: 1,
-		// voice: 'WaveNet Male',
+		voice: 'Microsoft Bart - Dutch (Belgium)',
 		splitSentences: true,
 		listeners: {
 			onvoiceschanged: (voices) => {
