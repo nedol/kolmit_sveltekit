@@ -9,28 +9,9 @@
 
 	import { lesson } from '$lib/js/stores.js';
 
-	import SpeakTTS from 'speak-tts'; // es6
-
 	export let data;
 
-	const tts = new SpeakTTS();
-	if (tts.hasBrowserSupport()) {
-		console.log('speech synthesis supported');
-	}
-
-	tts.init({
-		volume: 1,
-		lang: 'nl-BE',
-		rate: 0,
-		pitch: 1,
-		voice: 'Microsoft Bart - Dutch (Belgium)',
-		splitSentences: true,
-		listeners: {
-			onvoiceschanged: (voices) => {
-				console.log('Event voiceschanged', voices);
-			}
-		}
-	});
+	import { tts } from '$lib/js/stores.js';
 
 	let words, word;
 	let shuffleWords = words;
@@ -233,7 +214,7 @@
 
 	function onSpeach() {
 		// speak(currentWord.original);
-		tts
+		$tts
 			.speak({
 				text: currentWord.original
 			})

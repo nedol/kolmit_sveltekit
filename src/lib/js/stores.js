@@ -50,3 +50,5 @@ export let dc_oper_state = writable();
 export let dc_user_state = writable();
 
 export let share_mode = writable(false);
+
+export let tts = writable();

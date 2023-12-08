@@ -5,7 +5,7 @@
         "themes": [
             {
                 "num": "0",
-                "name": "Herhaling van module 1.1",
+                "name": "Herhalingsoefeningen: module 1.1",
                 "lessons": [
                     {
                         "num": 1,
@@ -267,7 +267,7 @@
             },
             {
                 "num": "3.1",
-                "name": "Herhalingsoefeningen familie, wonen, normal perfectum",
+                "name": "Herhalingsoefeningen: normal perfectum",
                 "words": {
                     "afstoffen": {
                         "en": "to dust",

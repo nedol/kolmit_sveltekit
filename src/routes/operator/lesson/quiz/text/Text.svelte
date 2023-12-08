@@ -15,27 +15,7 @@
 	import { langs } from '$lib/js/stores.js';
 
 	import { lesson } from '$lib/js/stores.js';
-
-	import Speech from 'speak-tts'; // es6
-
-	const tts = new Speech();
-	if (tts.hasBrowserSupport()) {
-		console.log('speech synthesis supported');
-	}
-
-	tts.init({
-		volume: 1,
-		lang: 'nl-BE',
-		rate: 0,
-		pitch: 1,
-		// voice: 'WaveNet Male',
-		splitSentences: true,
-		listeners: {
-			onvoiceschanged: (voices) => {
-				console.log('Event voiceschanged', voices);
-			}
-		}
-	});
+	import { tts } from '$lib/js/stores.js';
 
 	export let data;
 	let bottomAppBar;
@@ -143,7 +123,7 @@
 	}
 
 	function TTSSpeak(word) {
-		tts
+		$tts
 			.speak({
 				text: word
 			})

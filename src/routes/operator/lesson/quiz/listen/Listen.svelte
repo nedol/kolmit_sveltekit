@@ -13,24 +13,8 @@
 		mdiShareVariant,
 		mdiShuffle
 	} from '@mdi/js';
-	import Speech from 'speak-tts'; // es6
-	const tts = new Speech();
-	if (tts.hasBrowserSupport()) {
-		console.log('speech synthesis supported');
-	}
-	tts.init({
-		volume: 1,
-		lang: 'nl-BE',
-		rate: 0,
-		pitch: 1,
-		// voice: 'WaveNet Male',
-		splitSentences: true,
-		listeners: {
-			onvoiceschanged: (voices) => {
-				console.log('Event voiceschanged', voices);
-			}
-		}
-	});
+
+	import { tts } from '$lib/js/stores.js';
 
 	import { lesson } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
@@ -276,7 +260,7 @@
 	function speak(str) {
 		// Реализуйте функцию озвучивания числа, используя доступные средства или библиотеки
 		// Например, можно использовать Text-to-Speech API или библиотеку для озвучивания
-		tts
+		$tts
 			.speak({
 				text: str
 			})
@@ -353,6 +337,7 @@
 				<button on:click={generate}>{dict['Старт'][$langs]}</button>
 			{:else}
 				<button on:click={repeat}>{dict['Повторить'][$langs]}</button>
+				<button on:click={checkInput}>{dict['Проверить'][$langs]}</button>
 			{/if}
 		</div>
 
@@ -382,7 +367,6 @@
 				</div>
 			{/if}
 			<!-- <input type="text" id="userAnswer" bind:value={userAnswer} style={inputStyle} /> -->
-			<button on:click={checkInput}>{dict['Проверить'][$langs]}</button>
 		</div>
 	{:else if data.quiz == 'pair.client'}
 		<Speak {data} />
@@ -434,7 +418,7 @@
 
 	.input {
 		padding: 8px;
-		width: 10%;
+		width: 40%;
 		font-size: 24px;
 		margin-top: 10px; /* Добавим отступ сверху для выравнивания */
 		margin-left: auto;

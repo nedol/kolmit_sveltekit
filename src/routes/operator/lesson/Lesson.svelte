@@ -15,6 +15,8 @@
 	import { lesson } from '$lib/js/stores.js';
 	let lesson_visible = true;
 
+	let disabled = [true, true, true, true, true, true, true, true, true, true, true, true];
+
 	let display = 'hidden';
 
 	$: if ($lesson.data) {
@@ -70,7 +72,9 @@
 	}
 
 	function disablePanel(node) {
-		node.closest('.panel').classList.remove('smui-accordion__panel--disabled');
+		let t = node.offsetParent.attributes['theme'];
+		disabled[parseInt(t.value)] = false;
+		// disabled = 'disabled';
 	}
 </script>
 
@@ -89,7 +93,7 @@
 			{#each level.themes as theme, t}
 				<div class="accordion-container">
 					<Accordion multiple>
-						<Panel class="panel">
+						<Panel class="panel" disabled={disabled[parseInt(t)]} theme={t}>
 							<Header><h4>{theme.name}</h4></Header>
 							<Content>
 								{#if theme.lessons}
@@ -98,7 +102,6 @@
 										{#if lesson.quizes}
 											{#each lesson.quizes as quiz}
 												<!-- {@debug quiz} -->
-
 												{#if quiz.title && quiz.name}
 													<div
 														use:disablePanel
