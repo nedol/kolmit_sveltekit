@@ -35,16 +35,26 @@
 	if ($tts.hasBrowserSupport()) {
 		console.log('speech synthesis supported');
 	}
+
 	$tts.init({
 		volume: 1,
 		lang: 'nl-BE',
 		rate: 0,
 		pitch: 1,
-		voice: 'Dutch Belgium',
+		// voice: 'Dutch Belgium',
 		splitSentences: true,
 		listeners: {
 			onvoiceschanged: (voices) => {
-				console.log('Event voiceschanged', voices);
+				// const synth = window.speechSynthesis;
+				// const voices = synth.getVoices();
+				// Вывод информации о голосах
+				voices.forEach((voice, index) => {
+					console.log(`Голос ${index + 1}: ${voice.name}, Язык: ${voice.lang}`);
+					if (voice.name.includes('Dutch') && voice.lang === 'nl-BE') {
+						$tts.voice = voice;
+						return;
+					}
+				});
 			}
 		}
 	});
