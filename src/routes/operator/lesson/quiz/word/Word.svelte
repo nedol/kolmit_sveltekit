@@ -54,7 +54,11 @@
 
 	$: if (div_input) div_input.focus();
 
-	$: if (currentWord) word = currentWord.translation[$langs];
+	$: if (currentWord) {
+		word = currentWord.translation[$langs];
+		// Устанавливаем фокус в конец строки
+		setFocus();
+	}
 
 	onMount(() => {});
 
@@ -115,12 +119,11 @@
 	function setFocus() {
 		setTimeout(() => {
 			const range = document.createRange();
-			const sel = window.getSelection();
-			range.setStart(div_input, focus_pos);
-			range.collapse(true);
-			sel.removeAllRanges();
-			sel.addRange(range);
-			div_input.focus();
+			const selection = window.getSelection();
+			range.selectNodeContents(div_input);
+			range.collapse(false);
+			selection.removeAllRanges();
+			selection.addRange(range);
 		});
 	}
 
@@ -189,22 +192,16 @@
 				userContent = '';
 			}
 			userContent += currentWord.original[hintIndex];
-			// Устанавливаем фокус в конец строки
-			const range = document.createRange();
-			const selection = window.getSelection();
-			range.selectNodeContents(div_input);
-			range.collapse(false);
-			selection.removeAllRanges();
-			selection.addRange(range);
-
 			hintIndex++;
+
 			result = ''; // Очистим результат при каждой новой подсказке
 			showSpeakerButton = true; // Устанавливаем видимость кнопки
+			setFocus();
 		}
 	}
 
 	function nextWord() {
-		currentWordIndex = currentWordIndex + 1;
+		currentWordIndex++;
 		currentWord = words[currentWordIndex];
 		div_input.focus();
 		userContent = '';

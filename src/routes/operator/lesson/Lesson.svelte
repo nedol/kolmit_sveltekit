@@ -147,7 +147,7 @@
 	.module_level {
 		position: fixed;
 		background-color: rgba(255, 255, 255, 0.8);
-		padding: 15px;
+		padding: 10px;
 		bottom: -15px;
 		left: 50%;
 		transform: translate(-50%, -50%);
