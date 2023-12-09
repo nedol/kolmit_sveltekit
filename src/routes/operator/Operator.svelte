@@ -31,33 +31,6 @@
 	import { tts } from '$lib/js/stores.js';
 
 	import Speech from 'speak-tts'; // es6
-	$tts = new Speech();
-	if ($tts.hasBrowserSupport()) {
-		console.log('speech synthesis supported');
-	}
-
-	$tts.init({
-		volume: 1,
-		lang: 'nl-BE',
-		rate: 0,
-		pitch: 1,
-		voice: 'Dutch Belgium',
-		splitSentences: true,
-		listeners: {
-			onvoiceschanged: (voices) => {
-				// const synth = window.speechSynthesis;
-				// const voices = synth.getVoices();
-				// Вывод информации о голосах
-				voices.forEach((voice, index) => {
-					console.log(`Голос ${index + 1}: ${voice.name}, Язык: ${voice.lang}`);
-					if (voice.name.includes('Dutch') && voice.lang === 'nl-BE') {
-						$tts.voice = voice;
-						return;
-					}
-				});
-			}
-		}
-	});
 
 	// 	function speak(textToSpeak) {
 	// 	if ('speechSynthesis' in window) {
@@ -176,11 +149,33 @@
 			console.log();
 		}
 
-		// const evtSource = new EventSource('/operator/sse');
-		// evtSource.onmessage = function (event) {
-		// 	var dataobj = JSON.parse(event.data);
-		// 	console.log(dataobj);
-		// };
+		$tts = new Speech();
+		if ($tts.hasBrowserSupport()) {
+			console.log('speech synthesis supported');
+		}
+
+		$tts.init({
+			volume: 1,
+			lang: 'nl-BE',
+			rate: 0,
+			pitch: 1,
+			voice: 'Dutch Belgium',
+			splitSentences: true,
+			listeners: {
+				onvoiceschanged: (voices) => {
+					// const synth = window.speechSynthesis;
+					// const voices = synth.getVoices();
+					// Вывод информации о голосах
+					voices.forEach((voice, index) => {
+						console.log(`Голос ${index + 1}: ${voice.name}, Язык: ${voice.lang}`);
+						if (voice.name.includes('Dutch') && voice.lang === 'nl-BE') {
+							$tts.voice = voice;
+							return;
+						}
+					});
+				}
+			}
+		});
 	});
 
 	let progress = {
