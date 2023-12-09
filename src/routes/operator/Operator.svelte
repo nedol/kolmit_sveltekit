@@ -32,32 +32,6 @@
 
 	// import Speech from 'speak-tts'; // es6
 
-	$tts = {
-		speak: function (textObj) {
-			if ('speechSynthesis' in window) {
-				const synthesis = window.speechSynthesis;
-
-				// Получаем доступные голоса
-				let voices = synthesis.getVoices();
-
-				// Создаем объект с параметрами речи
-				const utterance = new SpeechSynthesisUtterance(textObj.text);
-				voices.forEach((voice, index) => {
-					if (voice.name.includes('Dutch') && voice.lang.includes('nl-BE')) {
-						utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-						return;
-					}
-				});
-				// Выбираем голос (по умолчанию первый доступный)
-
-				// Запускаем озвучивание
-				synthesis.speak(utterance);
-			} else {
-				console.error('Web Speech API не поддерживается в вашем браузере.');
-			}
-		}
-	};
-
 	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';
@@ -81,6 +55,7 @@
 	import { view } from '$lib/js/stores.js';
 
 	let rtc;
+	let voice;
 	let selected;
 	let call_cnt, inter;
 	let video_button_display = false;
@@ -184,6 +159,37 @@
 		} catch (ex) {
 			console.log();
 		}
+
+		const synthesis = window.speechSynthesis;
+
+		setTimeout(() => {
+			$tts = {
+				speak: function (textObj) {
+					if ('speechSynthesis' in window) {
+						// Получаем доступные голоса
+						let voices = synthesis.getVoices();
+						// Создаем объект с параметрами речи
+						const utterance = new SpeechSynthesisUtterance(textObj.text);
+						utterance.voice = voice;
+						if (!voice) {
+							voices.forEach((voice, index) => {
+								if (voice.name.includes('Dutch') && voice.lang.includes('nl-BE')) {
+									utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+									voice = voices[index];
+									return;
+								}
+							});
+							// Выбираем голос (по умолчанию первый доступный)
+						}
+
+						// Запускаем озвучивание
+						synthesis.speak(utterance);
+					} else {
+						console.error('Web Speech API не поддерживается в вашем браузере.');
+					}
+				}
+			};
+		}, 0);
 	});
 
 	let progress = {
