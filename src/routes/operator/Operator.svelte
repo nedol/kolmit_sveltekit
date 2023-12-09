@@ -175,10 +175,13 @@
 						if (!voice) {
 							voices.forEach((voice, index) => {
 								voice = voices[index];
-								if (voice.name.includes('Dutch') && voice.lang.includes('nl-BE')) {
-									utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+								if (voice.name.includes('Dutch')) {
 									voice = voices[index];
-									return;
+									if (voice.lang.includes('nl-BE')) {
+										utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+										voice = voices[index];
+										return;
+									}
 								}
 							});
 							// Выбираем голос (по умолчанию первый доступный)
