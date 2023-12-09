@@ -30,27 +30,33 @@
 
 	import { tts } from '$lib/js/stores.js';
 
-	import Speech from 'speak-tts'; // es6
+	// import Speech from 'speak-tts'; // es6
 
-	// 	function speak(textToSpeak) {
-	// 	if ('speechSynthesis' in window) {
-	// 		const synthesis = window.speechSynthesis;
+	$tts = {
+		speak: function (textObj) {
+			if ('speechSynthesis' in window) {
+				const synthesis = window.speechSynthesis;
 
-	// 		// Получаем доступные голоса
-	// 		let voices = synthesis.getVoices();
+				// Получаем доступные голоса
+				let voices = synthesis.getVoices();
 
-	// 		// Создаем объект с параметрами речи
-	// 		const utterance = new SpeechSynthesisUtterance(textToSpeak);
+				// Создаем объект с параметрами речи
+				const utterance = new SpeechSynthesisUtterance(textObj.text);
+				voices.forEach((voice, index) => {
+					if (voice.name.includes('Dutch') && voice.lang.includes('nl-BE')) {
+						utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+						return;
+					}
+				});
+				// Выбираем голос (по умолчанию первый доступный)
 
-	// 		// Выбираем голос (по умолчанию первый доступный)
-	// 		utterance.voice = 'Microsoft Bart - Dutch (Belgium)'; //voices[0]; //'Microsoft Bart - Dutch (Belgium)';
-
-	// 		// Запускаем озвучивание
-	// 		synthesis.speak(utterance);
-	// 	} else {
-	// 		console.error('Web Speech API не поддерживается в вашем браузере.');
-	// 	}
-	// }
+				// Запускаем озвучивание
+				synthesis.speak(utterance);
+			} else {
+				console.error('Web Speech API не поддерживается в вашем браузере.');
+			}
+		}
+	};
 
 	import { lesson } from '$lib/js/stores.js';
 
@@ -139,16 +145,7 @@
 			});
 	}
 
-	onMount(async () => {
-		try {
-			rtc = new RTCOperator($operator, uid, $signal);
-			initRTC();
-			rtc.SendCheck();
-			CallWaiting($operator);
-		} catch (ex) {
-			console.log();
-		}
-
+	function InitTTS() {
 		$tts = new Speech();
 		if ($tts.hasBrowserSupport()) {
 			console.log('speech synthesis supported');
@@ -176,6 +173,17 @@
 				}
 			}
 		});
+	}
+
+	onMount(async () => {
+		try {
+			rtc = new RTCOperator($operator, uid, $signal);
+			initRTC();
+			rtc.SendCheck();
+			CallWaiting($operator);
+		} catch (ex) {
+			console.log();
+		}
 	});
 
 	let progress = {
