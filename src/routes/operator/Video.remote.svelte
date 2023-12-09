@@ -61,8 +61,8 @@
 	video {
 		margin-right: auto;
 		margin-left: auto;
-		margin-top: 5px;
-		width: 50px;
-		max-height: 55px;
+		margin-top: auto;
+		max-width: 50px;
+		max-height: 50px;
 	}
 </style>

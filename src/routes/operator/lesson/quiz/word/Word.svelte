@@ -191,6 +191,14 @@
 				userContent = '';
 			}
 			userContent += currentWord.original[hintIndex];
+			// Устанавливаем фокус в конец строки
+			const range = document.createRange();
+			const selection = window.getSelection();
+			range.selectNodeContents(div_input);
+			range.collapse(false);
+			selection.removeAllRanges();
+			selection.addRange(range);
+
 			hintIndex++;
 			result = ''; // Очистим результат при каждой новой подсказке
 			showSpeakerButton = true; // Устанавливаем видимость кнопки
@@ -265,7 +273,7 @@
 		<div class="word">
 			<!-- {@debug currentWord} -->
 			<h1>{word}</h1>
-			<!-- <div><p class={isVisible ? '' : 'hidden'}>{currentWord.original}</p></div> -->
+			<div>{currentWordIndex + 1}/{words.length}</div>
 			{#if showSpeakerButton}
 				<button on:click={onSpeach} class="speaker-button">
 					<span class="material-symbols-outlined" style="font-size: 15px; color: blue; scale:1.5">

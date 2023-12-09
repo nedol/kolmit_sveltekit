@@ -517,34 +517,23 @@
 	</div>
 
 	<div style="flex:48%" />
-	<div
-		class="video"
-		on:click={OnClickVideoButton}
-		on:loadstart={OnPlayVideo}
-		style="
-			right: 100px;
-			top: 53px;
-			width: 30px;
-			height: 30px;
-			position: absolute;"
-	>
+	<div class="video" on:click={OnClickVideoButton} on:loadstart={OnPlayVideo}>
 		{#if video_button_display}
 			<Icon tag="svg" viewBox="0 0 24 24">
 				<path fill="currentColor" style="color:grey" d={mdiAccountBox} />
 			</Icon>
-
 			<!-- <i class="video icofont-ui-video-chat"  on:click = {OnClickVideoButton}
                         style="position: absolute; right: 0; top: 0; stroke:black; stroke-width: 2px; color: lightgrey; font-size: 30px; z-index: 20;"></i>  -->
 		{/if}
 
 		{#if video_progress}
-			<div style="position: absolute; top: 0;">
+			<div style="position: absolute; top: -10px;">
 				<CircularProgress style="height: 30px; width: 30px;" indeterminate />
 			</div>
 		{/if}
 	</div>
 
-	<div style="position:relative; right: 20px; width: 70px;	height: 70px;">
+	<div style="position:relative; right: 5px; width: 70px;	height: 70px;">
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">
 				<div bind:this={container} />
@@ -561,13 +550,7 @@
 	<Download />
 </div>
 
-<progress
-	id="dataProgress"
-	value={progress.value}
-	max="100"
-	duration="200"
-	style="display:{progress.display};top:100px;width:98%;"
-/>
+<progress class="progress" value={progress.value} max="100" duration="200" />
 
 <!-- {@debug $view} -->
 <Callcenter view={$view} bind:this={callcenter} bind:$call_but_status bind:operator={$operator} />
@@ -575,9 +558,27 @@
 <Lesson view={$view} data={$users[0].staff} />
 
 <style>
+	.video {
+		position: relative;
+		top: 5px;
+		margin: auto;
+		max-height: 50px;
+	}
+	.progress {
+		position: relative;
+		top: 0px;
+		width: 100%;
+		text-align: center;
+	}
 	.placeholder {
 		position: relative;
 		left: 5px;
 		top: 0px;
+	}
+
+	@media screen and (max-width: 400px) {
+		.video {
+			top: 0px;
+		}
 	}
 </style>

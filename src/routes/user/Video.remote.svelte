@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import Card, { Content, PrimaryAction, Media, MediaContent } from '@smui/card';
 
-	export let display = 'block';
 	export let srcObject;
 	export let poster;
 	export let status;
@@ -56,9 +55,9 @@
 	video {
 		margin-right: auto;
 		margin-left: auto;
-		margin-top: 5px;
-		width: 50px;
-		max-height: 55px;
+		margin-top: auto;
+		max-width: 50px;
+		max-height: 50px;
 	}
 	[status='call'] {
 		opacity: 1;

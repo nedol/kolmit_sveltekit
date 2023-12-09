@@ -188,7 +188,7 @@
 	>
 		<!-- {@debug operator, user} -->
 
-		<div class="user_pic_div" style="position:relative; width: 60px; height:60px">
+		<div class="user_pic_div">
 			<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 
@@ -316,7 +316,12 @@
 {/if}
 
 <style>
-	textarea:not([readonly]),
+	.user_pic_div {
+		position: relative;
+		width: 60px;
+		height: 60px;
+		text-align: center;
+	}
 	input:not([readonly]) {
 		color: rgb(35, 33, 158);
 	}

@@ -23,8 +23,6 @@
 		console.log($dicts);
 	}
 
-	import { call_but_status } from '$lib/js/stores.js';
-
 	$view = 'cc';
 
 	let topAppBar;
@@ -167,9 +165,10 @@
 	}
 	/* Стили для мобильных устройств */
 	@media screen and (max-width: 767px) {
-		/* .sec_items {
+		.sec_items {
 			position: absolute;
-			left: 0;
-		} */
+			/* left: 30%; */
+			top: 15%;
+		}
 	}
 </style>
