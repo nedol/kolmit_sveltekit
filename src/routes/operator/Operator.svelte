@@ -41,7 +41,7 @@
 		lang: 'nl-BE',
 		rate: 0,
 		pitch: 1,
-		// voice: 'Dutch Belgium',
+		voice: 'Dutch Belgium',
 		splitSentences: true,
 		listeners: {
 			onvoiceschanged: (voices) => {
