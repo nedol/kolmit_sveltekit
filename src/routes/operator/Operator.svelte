@@ -167,11 +167,11 @@
 				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
 						// Получаем доступные голоса
-						let voices = synthesis.getVoices();
+						let voices = await synthesis.getVoices();
 						// Создаем объект с параметрами речи
 						const utterance = new SpeechSynthesisUtterance(textObj.text);
 						utterance.lang = 'nl-BE';
-						utterance.voice = voice;
+
 						if (!voice) {
 							voices.forEach((voice, index) => {
 								voice = voices[index];
@@ -191,6 +191,7 @@
 							synthesis.cancel();
 						};
 						// Запускаем озвучивание
+						utterance.voice = voice;
 						await synthesis.speak(utterance);
 					} else {
 						console.error('Web Speech API не поддерживается в вашем браузере.');
