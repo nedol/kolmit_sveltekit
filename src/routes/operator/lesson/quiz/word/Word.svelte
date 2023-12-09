@@ -75,8 +75,6 @@
 		}
 
 		currentWord = words[0];
-
-		console.log(words);
 	}
 
 	function jumpNext10() {

@@ -260,16 +260,18 @@
 	function speak(str) {
 		// Реализуйте функцию озвучивания числа, используя доступные средства или библиотеки
 		// Например, можно использовать Text-to-Speech API или библиотеку для озвучивания
-		$tts
-			.speak({
-				text: str
-			})
-			.then(() => {
-				console.log('Success !');
-			})
-			.catch((e) => {
-				console.error('An error occurred :', e);
-			});
+		setTimeout(() => {
+			$tts
+				.speak({
+					text: str
+				})
+				.then(() => {
+					console.log('Success !');
+				})
+				.catch((e) => {
+					console.error('An error occurred :', e);
+				});
+		}, 0);
 	}
 
 	function repeat() {
