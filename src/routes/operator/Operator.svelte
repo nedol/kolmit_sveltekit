@@ -136,10 +136,11 @@
 			listeners: {
 				onvoiceschanged: (voices) => {
 					// Вывод информации о голосах
-					voices.forEach((voice, index) => {
-						console.log(`Голос ${index + 1}: ${voice.name}, Язык: ${voice.lang}`);
-						if (voice.name.includes('Dutch') && voice.lang === 'nl-BE') {
-							$tts.setVoice(voice.name);
+					voices.forEach((v, index) => {
+						if (v.name.includes('Dutch') && (v.lang === 'nl-BE' || v.lang === 'nl_BE')) {
+							console.log(`Голос ${index + 1}: ${v.name}, Язык: ${v.lang}`);
+							$tts.setVoice(v.name);
+							voice = v;
 							return;
 						}
 					});
