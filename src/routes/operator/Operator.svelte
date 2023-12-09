@@ -59,6 +59,26 @@
 		}
 	});
 
+	// 	function speak(textToSpeak) {
+	// 	if ('speechSynthesis' in window) {
+	// 		const synthesis = window.speechSynthesis;
+
+	// 		// Получаем доступные голоса
+	// 		let voices = synthesis.getVoices();
+
+	// 		// Создаем объект с параметрами речи
+	// 		const utterance = new SpeechSynthesisUtterance(textToSpeak);
+
+	// 		// Выбираем голос (по умолчанию первый доступный)
+	// 		utterance.voice = 'Microsoft Bart - Dutch (Belgium)'; //voices[0]; //'Microsoft Bart - Dutch (Belgium)';
+
+	// 		// Запускаем озвучивание
+	// 		synthesis.speak(utterance);
+	// 	} else {
+	// 		console.error('Web Speech API не поддерживается в вашем браузере.');
+	// 	}
+	// }
+
 	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';

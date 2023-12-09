@@ -5,7 +5,7 @@
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiPagePreviousOutline } from '@mdi/js';
+	import { mdiPagePreviousOutline, mdiShuffleVariant } from '@mdi/js';
 
 	import { lesson } from '$lib/js/stores.js';
 
@@ -135,6 +135,7 @@
 		if (trimmedUserContent === targetWord) {
 			showCheckMark = true; // Показываем галочку
 			showNextButton = true;
+			speak(currentWord.original);
 
 			if (hintIndex != 0 || errorIndex != 0) {
 				// Перемещаем текущее слово в конец своей "десятки" в words
@@ -213,10 +214,14 @@
 	}
 
 	function onSpeach() {
+		speak(currentWord.original);
+	}
+
+	function speak(word) {
 		// speak(currentWord.original);
 		$tts
 			.speak({
-				text: currentWord.original
+				text: word
 			})
 			.then(() => {
 				console.log('Success !');
@@ -227,41 +232,50 @@
 
 		setFocus();
 	}
-
-	function speak(textToSpeak) {
-		if ('speechSynthesis' in window) {
-			const synthesis = window.speechSynthesis;
-
-			// Получаем доступные голоса
-			let voices = synthesis.getVoices();
-
-			// Создаем объект с параметрами речи
-			const utterance = new SpeechSynthesisUtterance(textToSpeak);
-
-			// Выбираем голос (по умолчанию первый доступный)
-			utterance.voice = voices[0]; //'Microsoft Bart - Dutch (Belgium)';
-
-			// Запускаем озвучивание
-			synthesis.speak(utterance);
-		} else {
-			console.error('Web Speech API не поддерживается в вашем браузере.');
-		}
-	}
 </script>
+
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
 
 <main>
 	{#if words}
+		<div style="position:relative;float:left">
+			<button on:click={showHint} class="hint-button">
+				<span class="material-symbols-outlined"> reminder </span>
+				<!-- <i class="material-icons" style="font-size: 15px; color: blue; scale:1.5"> reminder </i> -->
+				<!-- <i class="material-icons" style="font-size: 15px; color: blue; scale:1.5">reminder</i> -->
+			</button>
+
+			<button on:click={onShuffleWords} class="shuffle-button">
+				<i class="material-symbols-outlined" style="font-size: 15px;  scale:1.5">shuffle</i>
+			</button>
+			<button on:click={jumpNext10} class="next10-button">+10</button>
+			<button on:click={onPrev} class="prev-button">-1</button>
+		</div>
+		<div style="position:relative;float:right">
+			{#if showNextButton}
+				<button on:click={nextWord} class="next-button">Дальше</button>
+			{:else}
+				<button on:click={checkInput} class="check-button">Проверить</button>
+			{/if}
+		</div>
+		<div style="height: 40px"></div>
 		<div class="word">
 			<!-- {@debug currentWord} -->
 			<h1>{word}</h1>
 			<!-- <div><p class={isVisible ? '' : 'hidden'}>{currentWord.original}</p></div> -->
+			{#if showSpeakerButton}
+				<button on:click={onSpeach} class="speaker-button">
+					<span class="material-symbols-outlined" style="font-size: 15px; color: blue; scale:1.5">
+						volume_up
+					</span>
+				</button>
+			{/if}
 		</div>
 
 		<div class="input-container">
-			<!-- {#if showCheckMark}
-			<div class="check-mark">✓</div>
-		{/if} -->
-			<!-- <div /> -->
 			<div
 				class="input"
 				contenteditable="true"
@@ -271,20 +285,7 @@
 			>
 				{@html result}
 			</div>
-			{#if showSpeakerButton}
-				<button on:click={onSpeach} class="speaker-button">🔊</button>
-			{/if}
 		</div>
-
-		<button on:click={onShuffleWords} class="shuffle-button">🔀</button>
-		<button on:click={jumpNext10} class="next10-button">+10</button>
-		<button on:click={onPrev} class="prev-button">-1</button>
-		<button on:click={showHint} class="hint-button">?</button>
-		<button on:click={checkInput} class="check-button">Проверить</button>
-
-		{#if showNextButton}
-			<button on:click={nextWord} class="next-button">Дальше</button>
-		{/if}
 
 		{#if hintIndex != 0}
 			<div class="words_div">
@@ -305,16 +306,25 @@
 	<Section>
 		<!-- <IconButton class="material-icons">change_circle</IconButton> -->
 	</Section>
-
 	<Section>
 		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
 	</Section>
 </BottomAppBar>
 
 <style>
+	.material-symbols-outlined {
+		font-size: 15px;
+		color: rgb(100, 180, 69);
+		scale: 1.5;
+		font-variation-settings:
+			'FILL' 0,
+			'wght' 400,
+			'GRAD' 0,
+			'opsz' 24;
+	}
+
 	/* Стилизуйте компонент по вашему усмотрению */
 	.word {
-		display: flex;
 		flex-direction: column;
 		align-items: center;
 		margin: 0;
@@ -340,25 +350,26 @@
 	.speaker-button {
 		position: absolute;
 		flex: auto;
-		right: 10px;
+		top: 210px;
+		right: 30px;
 		transform: translate(50%, 0%);
 		font-size: large;
 	}
 
 	.input-container {
 		position: relative;
-		flex: 10;
 		width: 100%;
-		margin: 30px auto;
+		margin: 0px auto;
 		display: flex; /* Добавлено свойство display: flex; */
 		align-items: center; /* Добавлено свойство align-items: center; */
 	}
 
 	.words_div {
+		width: 95%;
 		line-height: 30px;
-		margin: 20px;
+		margin-top: 20px;
 		text-align: justify;
-		max-height: 500px; /* Фиксированная высота контейнера */
+		max-height: 370px;
 		overflow-y: auto;
 	}
 
@@ -388,20 +399,12 @@
 	.hint-button,
 	.next-button {
 		margin-top: 10px;
-		margin-right: 10px;
-		padding: 10px;
-		font-size: large;
-		font-weight: 600;
-		background-color: rgb(29, 113, 192);
-		color: white;
-		border: none;
-		border-radius: 4px;
+		padding: 8px 10px;
+		font-size: 16px;
+		font-weight: 500;
+		border-color: rgb(100, 180, 69);
+		border-radius: 5px;
 		cursor: pointer;
-	}
-
-	.check-button:hover,
-	.hint-button:hover,
-	.next-button:hover {
-		background-color: #5d45a0;
+		color: rgb(85, 151, 59);
 	}
 </style>
