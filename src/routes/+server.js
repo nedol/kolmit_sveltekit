@@ -69,7 +69,13 @@ export async function GET({ url, fetch, cookies }) {
 	}
 }
 
-let interval;
+global.interval;
+global.loop = function () {
+	if (!global.interval)
+		global.interval = setInterval(async () => {
+			let resp = await fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+		}, 1000 * 10 * 60);
+};
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, url, fetch, cookies }) {
@@ -86,11 +92,7 @@ export async function POST({ request, url, fetch, cookies }) {
 		kolmit = { psw: md5('demo') };
 	}
 
-	if (!interval)
-		interval = setInterval(() => {
-			let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-		}, 1000 * 10 * 60);
-	// global.rtcPool = get('global.rtcPool');
+	if (!global.interval) global.loop();
 
 	switch (q.func) {
 		case 'operator':
