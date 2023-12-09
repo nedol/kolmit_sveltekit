@@ -164,15 +164,17 @@
 
 		setTimeout(() => {
 			$tts = {
-				speak: function (textObj) {
+				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
 						// Получаем доступные голоса
 						let voices = synthesis.getVoices();
 						// Создаем объект с параметрами речи
 						const utterance = new SpeechSynthesisUtterance(textObj.text);
+						utterance.lang = 'nl-BE';
 						utterance.voice = voice;
 						if (!voice) {
 							voices.forEach((voice, index) => {
+								voice = voices[index];
 								if (voice.name.includes('Dutch') && voice.lang.includes('nl-BE')) {
 									utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
 									voice = voices[index];
@@ -181,9 +183,12 @@
 							});
 							// Выбираем голос (по умолчанию первый доступный)
 						}
-
+						utterance.onerror = (event) => {
+							console.log(event);
+							synthesis.cancel();
+						};
 						// Запускаем озвучивание
-						synthesis.speak(utterance);
+						await synthesis.speak(utterance);
 					} else {
 						console.error('Web Speech API не поддерживается в вашем браузере.');
 					}
