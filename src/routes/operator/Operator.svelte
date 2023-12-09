@@ -30,7 +30,7 @@
 
 	import { tts } from '$lib/js/stores.js';
 
-	// import Speech from 'speak-tts'; // es6
+	import Speech from 'speak-tts'; // es6
 
 	import { lesson } from '$lib/js/stores.js';
 
@@ -129,22 +129,23 @@
 		$tts.init({
 			volume: 1,
 			lang: 'nl-BE',
-			rate: 0,
+			rate: 1,
 			pitch: 1,
-			voice: 'Dutch Belgium',
+			// voice: 'Dutch Belgium',
 			splitSentences: true,
 			listeners: {
 				onvoiceschanged: (voices) => {
-					// const synth = window.speechSynthesis;
-					// const voices = synth.getVoices();
 					// Вывод информации о голосах
 					voices.forEach((voice, index) => {
 						console.log(`Голос ${index + 1}: ${voice.name}, Язык: ${voice.lang}`);
 						if (voice.name.includes('Dutch') && voice.lang === 'nl-BE') {
-							$tts.voice = voice;
+							$tts.setVoice(voice.name);
 							return;
 						}
 					});
+				},
+				onerror: () => {
+					$tts.cancel();
 				}
 			}
 		});
@@ -160,45 +161,45 @@
 			console.log();
 		}
 
-		const synthesis = window.speechSynthesis;
+		// const synthesis = window.speechSynthesis;
+		// synthesis.onvoiceschanged = (voices) => {
+		// 	voices.forEach((voice, index) => {
+		// 		voice = voices[index];
+		// 		if (voice.name.includes('Dutch')) {
+		// 			voice = voices[index];
+		// 			if (voice.lang.includes('nl-BE')) {
+		// 				utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+		// 				voice = voices[index];
+		// 				return;
+		// 			}
+		// 		}
+		// 	});
+		//};
 
-		setTimeout(() => {
-			$tts = {
-				speak: async function (textObj) {
-					if ('speechSynthesis' in window) {
-						// Получаем доступные голоса
-						let voices = await synthesis.getVoices();
-						// Создаем объект с параметрами речи
-						const utterance = new SpeechSynthesisUtterance(textObj.text);
-						utterance.lang = 'nl-BE';
+		InitTTS();
 
-						if (!voice) {
-							voices.forEach((voice, index) => {
-								voice = voices[index];
-								if (voice.name.includes('Dutch')) {
-									voice = voices[index];
-									if (voice.lang.includes('nl-BE')) {
-										utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-										voice = voices[index];
-										return;
-									}
-								}
-							});
-							// Выбираем голос (по умолчанию первый доступный)
-						}
-						utterance.onerror = (event) => {
-							console.log(event);
-							synthesis.cancel();
-						};
-						// Запускаем озвучивание
-						utterance.voice = voice;
-						await synthesis.speak(utterance);
-					} else {
-						console.error('Web Speech API не поддерживается в вашем браузере.');
-					}
-				}
-			};
-		}, 10);
+		// setTimeout(() => {
+		// 	$tts = {
+		// 		speak: async function (textObj) {
+		// 			if ('speechSynthesis' in window) {
+		// 				// Получаем доступные голоса
+		// 				// let voices = await synthesis.getVoices();
+		// 				// Создаем объект с параметрами речи
+		// 				const utterance = new SpeechSynthesisUtterance(textObj.text);
+		// 				utterance.lang = 'nl-BE';
+		// 				utterance.onerror = (event) => {
+		// 					console.log(event);
+		// 					synthesis.cancel();
+		// 				};
+		// 				// Запускаем озвучивание
+		// 				utterance.voice = voice;
+		// 				await synthesis.speak(utterance);
+		// 			} else {
+		// 				console.error('Web Speech API не поддерживается в вашем браузере.');
+		// 			}
+		// 		}
+		// 	};
+		// }, 10);
 	});
 
 	let progress = {
