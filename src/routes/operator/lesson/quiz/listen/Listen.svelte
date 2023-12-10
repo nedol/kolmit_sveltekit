@@ -328,7 +328,32 @@
 			selection.addRange(range);
 		}
 	}
+
+	function showHint() {
+		// wordsString = shuffleWords(wordsString);
+		userContent = generatedValue.toString();
+
+		setTimeout(() => {
+			checkInput();
+		}, 1000);
+
+		// if (hintIndex < currentWord.original.length) {
+		// 	if (hintIndex === 0) {
+		// 		userContent = '';
+		// 	}
+		// 	userContent += currentWord.original[hintIndex];
+		// 	hintIndex++;
+
+		// 	result = ''; // Очистим результат при каждой новой подсказке
+		// 	// setFocus();
+		// }
+	}
 </script>
+
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
 
 <main>
 	{#if data.quiz == 'listen'}
@@ -356,18 +381,22 @@
 					{@html result}
 				</div>
 			{:else if name === 'time'}
-				<div>
-					<div
-						contenteditable="true"
-						id="userTime"
-						class="input"
-						placeholder="hh:mm"
-						on:input={handleUserInput}
-						bind:this={div_input}
-						bind:innerHTML={userContent}
-					/>
-				</div>
+				<div
+					contenteditable="true"
+					id="userTime"
+					class="input"
+					placeholder="hh:mm"
+					on:input={handleUserInput}
+					bind:this={div_input}
+					bind:innerHTML={userContent}
+				/>
 			{/if}
+			{#if isFirst}
+				<button on:click={showHint} class="hint-button">
+					<span class="material-symbols-outlined"> reminder </span>
+				</button>
+			{/if}
+
 			<!-- <input type="text" id="userAnswer" bind:value={userAnswer} style={inputStyle} /> -->
 		</div>
 	{:else if data.quiz == 'pair.client'}
@@ -402,6 +431,12 @@
 		text-align: center;
 		margin-top: 50px;
 	}
+	.hint-button {
+		display: inline-block;
+		position: relative;
+		top: 9px;
+		height: 36px;
+	}
 
 	button {
 		margin-top: 10px;
@@ -419,8 +454,9 @@
 	}
 
 	.input {
+		display: inline-block;
 		padding: 8px;
-		width: 40%;
+		width: 30%;
 		font-size: 24px;
 		margin-top: 10px; /* Добавим отступ сверху для выравнивания */
 		margin-left: auto;

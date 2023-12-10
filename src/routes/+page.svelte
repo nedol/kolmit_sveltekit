@@ -41,7 +41,7 @@
 	onMount(async () => {});
 </script>
 
-{#if (email && data.users) || psw}
+{#if email && data.users}
 	<Operator {email} {abonent} {name} users_={$users} />
 {:else}
 	<Login {email} {abonent} {user_pic} />
