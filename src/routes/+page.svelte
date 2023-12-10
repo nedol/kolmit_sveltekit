@@ -15,7 +15,8 @@
 
 	let email = data.operator,
 		abonent = data.abonent,
-		name = data.name;
+		name = data.name,
+		psw = new URL(data.url).searchParams.get('psw');
 
 	import { SignalingChannel } from './signalingChannel.js';
 	import { signal } from '$lib/js/stores.js';
@@ -41,8 +42,8 @@
 	onMount(async () => {});
 </script>
 
-{#if !email || !data.users}
-	<Login {email} {abonent} {user_pic} />
-{:else}
+{#if (email && data.users) || psw}
 	<Operator {email} {abonent} {name} users_={$users} />
+{:else}
+	<Login {email} {abonent} {user_pic} />
 {/if}

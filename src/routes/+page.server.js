@@ -59,7 +59,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	return {
 		check: true,
 		host: host,
-		// url: decodeURIComponent(url.toString()),
+		url: decodeURIComponent(url.toString()),
 		operator: kolmit.operator,
 		name: kolmit.name,
 		abonent: abonent,
