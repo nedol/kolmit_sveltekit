@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	let path = '$lib/mp3/call.mp3';
+	import call from '$lib/mp3/call.mp3';
 
 	export let paused = true;
 	let ls;
@@ -17,6 +17,6 @@
 	}
 </script>
 
-<audio id="localSound" autoplay src={path}>
+<audio id="localSound" autoplay src={call}>
 	<track kind="captions" />
 </audio>
