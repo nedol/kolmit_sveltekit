@@ -15,8 +15,7 @@
 
 	let email = data.operator,
 		abonent = data.abonent,
-		name = data.name,
-		psw = new URL(data.url).searchParams.get('psw');
+		name = data.name;
 
 	import { SignalingChannel } from './signalingChannel.js';
 	import { signal } from '$lib/js/stores.js';

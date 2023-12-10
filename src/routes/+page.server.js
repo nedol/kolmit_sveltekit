@@ -15,7 +15,9 @@ let kolmit;
 export async function load({ fetch, cookies, route, url, stuff }) {
 	// let operator = url.searchParams.get('operator');
 	let abonent = url.searchParams.get('abonent');
-	// let lang = url.searchParams.get('lang');
+	let lang = url.searchParams.get('lang');
+	let name = url.searchParams.get('name');
+	let email = url.searchParams.get('email');
 
 	let prom = new Promise((resolve, reject) => {
 		CreatePool(resolve);
@@ -24,9 +26,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	let pool = await prom;
 
 	let host = url.origin; //'http://localhost:3000'; //'https://kolmit-sveltekit-nedol.vercel.app'; //
-
-	// console.log();
-	//debugger;
+	let psw = url.searchParams.get('psw');
 
 	let res;
 	let resp = {
@@ -37,6 +37,8 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 		res = cookies.get('abonent:' + abonent);
 		if (res) {
 			kolmit = JSON.parse(res);
+		} else if (psw) {
+			kolmit = { operator: email, psw: md5(psw), name: name, lang: lang };
 		} else {
 			resp.check = false;
 			resp.abonent = abonent;
@@ -59,7 +61,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	return {
 		check: true,
 		host: host,
-		url: decodeURIComponent(url.toString()),
+		// url: decodeURIComponent(url.toString()),
 		operator: kolmit.operator,
 		name: kolmit.name,
 		abonent: abonent,
