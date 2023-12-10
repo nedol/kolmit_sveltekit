@@ -137,7 +137,7 @@
 				onvoiceschanged: (voices) => {
 					// Вывод информации о голосах
 					voices.forEach((v, index) => {
-						if (v.name.includes('Dutch') && (v.lang === 'nl-BE' || v.lang === 'nl_BE')) {
+						if (v.name.includes('Dutch') && v.lang.includes('nl') && v.lang.includes('BE')) {
 							console.log(`Голос ${index + 1}: ${v.name}, Язык: ${v.lang}`);
 							$tts.setVoice(v.name);
 							voice = v;

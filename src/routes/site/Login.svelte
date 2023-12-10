@@ -30,14 +30,20 @@
 		formData.lang = lang;
 	}
 
-	let psw = 'demo';
-
-	let confirmPassword = 'demo'; // Поле для повторного ввода пароля
+	let psw;
+	let confirmPassword; // Поле для повторного ввода пароля
 	let passwordMatch = true; // Переменная для проверки совпадения паролей
 
 	onMount(async () => {
 		let url = new URL(window.location.href);
 		abonent = url.searchParams.get('abonent');
+		if (url.searchParams.get('psw')) {
+			formData.name = url.searchParams.get('name');
+			formData.psw = url.searchParams.get('psw');
+			formData.email = url.searchParams.get('email');
+			formData.lang = url.searchParams.get('lang');
+			handleSubmit();
+		}
 	});
 
 	$: if (confirmPassword) {
