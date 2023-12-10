@@ -1,6 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 
+	let path = '$lib/mp3/ring.mp3';
+
 	export let paused = true;
 	let ls;
 	onMount(async () => {
@@ -13,6 +15,6 @@
 	}
 </script>
 
-<audio id="localSound" src="../src/routes/assets/mp3/ring.mp3">
+<audio id="localSound" src={path}>
 	<track kind="captions" />
 </audio>
