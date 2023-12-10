@@ -3,6 +3,14 @@
 	import SelectMenu from './site/SelectMenu.svelte';
 	import Operator from './operator/Operator.svelte';
 	import Login from './site/Login.svelte';
+
+	import makeCert from 'make-cert'
+	const {key, cert} = makeCert('kolmit')
+
+	console.log('key', key)
+	console.log('cert', cert)
+
+
 	// import Content from '../operator/modal/Content.svelte';
 	// import Modal from 'svelte-simple-modal';
 	// import md5 from 'md5';

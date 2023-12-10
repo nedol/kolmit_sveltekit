@@ -1,13 +1,11 @@
-
 // import { defineConfig } from 'vite'
-import dns from 'dns'
+import dns from 'dns';
 import { sveltekit } from '@sveltejs/kit/vite';
-
 
 // dns.setDefaultResultOrder('verbatim');
 
 const defineConfig = {
-	plugins:  [sveltekit()],
+	plugins: [sveltekit()]
 	// resolve: {
 	//   alias: {
 	// 	'@': resolve(__dirname, 'src'),
@@ -31,6 +29,15 @@ const defineConfig = {
 	// define: {
 	//   'process.env': {}
 	// }
-  }
 
-  export default defineConfig;
+	// server: {
+	// 	host: '192.168.0.2',
+	// 	port: 5173, // или любой другой свободный порт
+	// 	https: {
+	// 		key: path.resolve('./ca/key.pem'),
+	// 		cert: path.resolve('./ca/cert.pem')
+	// 	}
+	// }
+};
+
+export default defineConfig;
