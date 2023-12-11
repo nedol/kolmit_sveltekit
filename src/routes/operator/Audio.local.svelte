@@ -6,7 +6,7 @@
 	export let paused = true;
 	let ls;
 	onMount(async () => {
-		ls = document.getElementById('localSound');
+	
 	});
 
 	$: if (ls) {
@@ -15,6 +15,6 @@
 	}
 </script>
 
-<audio id="localSound" src={ring}>
+<audio id="localSound" src={ring} bind:this={ls}>
 	<track kind="captions" />
 </audio>

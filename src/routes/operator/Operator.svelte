@@ -162,6 +162,8 @@
 			console.log();
 		}
 
+		InitTTS();
+
 		// const synthesis = window.speechSynthesis;
 		// synthesis.onvoiceschanged = (voices) => {
 		// 	voices.forEach((voice, index) => {
@@ -176,9 +178,6 @@
 		// 		}
 		// 	});
 		//};
-
-		InitTTS();
-
 		// setTimeout(() => {
 		// 	$tts = {
 		// 		speak: async function (textObj) {
@@ -515,6 +514,15 @@
 					</p> -->
 				</div>
 			</VideoRemote>
+		{:else}
+			<div
+				style="block;
+				margin-right: auto;
+				margin-left: auto;
+				margin-top: auto;
+				max-width: 50px;
+				max-height: 50px;"
+			></div>
 		{/if}
 	</div>
 

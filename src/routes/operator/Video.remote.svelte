@@ -59,6 +59,7 @@
 
 <style>
 	video {
+		display:block;
 		margin-right: auto;
 		margin-left: auto;
 		margin-top: auto;

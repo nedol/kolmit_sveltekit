@@ -5,7 +5,7 @@
 
         let rs; 
         onMount(async () => {
-            rs = document.getElementById('remoteAudio');
+
         });
 
         $: if(rs && srcObject){
@@ -13,7 +13,7 @@
         }
 </script>
 
-<audio id="remoteAudio" autoplay {muted}>
+<audio bind:this={rs} autoplay {muted}>
     <track kind="captions">
 </audio>
 

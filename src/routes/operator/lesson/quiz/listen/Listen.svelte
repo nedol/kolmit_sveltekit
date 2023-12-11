@@ -26,7 +26,57 @@
 	import { dicts } from '$lib/js/stores.js';
 	let dict = $dicts;
 
+	let share_mode = false;
+	let share_button = false;
+	
+	let style_button_non_shared = `position: relative;
+		padding: 10px;
+		font-size: 1.5em;
+		background-color: white;
+		color: grey;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;`;
+	let style_button_shared = `position: relative;
+		padding: 10px;
+		font-size: 1.5em;
+		background-color: #2196f3;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;`;
+
+	let style_button = style_button_non_shared ;
+
 	export let data;
+
+	$: if (data) {	
+		if(data.html){
+		style_button = style_button_shared;
+		share_mode = true;
+		}
+	}
+
+	if (data.func) {
+		onChangeClick();
+	}
+
+	$: if ($dc_oper_state) {
+		switch ($dc_oper_state) {
+			case 'open':
+				share_button = true;
+				break;
+			case 'closed':
+				share_button = false;
+				share_mode = false;
+				style_button = style_button_non_shared;
+				break;
+		}
+	}
+
+	$: if ($dc_user_state) {
+		share_button = true;
+	}
 
 	let name = data.name;
 	let generatedValue, generatedValueObj;
@@ -45,17 +95,22 @@
 	let digit = 10;
 	let div_input;
 
-	$: if ($dc_oper_state) {
-		switch ($dc_oper_state) {
-			case 'open':
-				change_button = true;
-				break;
-			case 'closed':
-				change_button = false;
 
-				break;
+	async function SendToPartner(){
+		if (share_mode && ($dc_user || $dc_oper)) {
+			let dc = $dc_user || $dc_oper;
+			await dc.SendData(
+				{
+					lesson: { quiz: 'pair.client',  }
+				},
+				() => {
+					console.log();
+				}
+			);
 		}
 	}
+
+
 
 	function numberToDutchString(number) {
 		const ones = ['', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen'];
@@ -258,20 +313,19 @@
 	}
 
 	function speak(str) {
-		// Реализуйте функцию озвучивания числа, используя доступные средства или библиотеки
-		// Например, можно использовать Text-to-Speech API или библиотеку для озвучивания
+
 		setTimeout(() => {
 			$tts
 				.speak({
 					text: str
 				})
 				.then(() => {
-					console.log('Success !');
+					console.log('speak Success !');
 				})
 				.catch((e) => {
 					console.error('An error occurred :', e);
 				});
-		}, 0);
+		}, 10);
 	}
 
 	function repeat() {
@@ -348,15 +402,29 @@
 		// 	// setFocus();
 		// }
 	}
+
+	function onShare() {
+		// Обработчик нажатия на кнопку "share"
+		share_mode = !share_mode;
+		style_button = share_mode ? style_button_shared : style_button_non_shared;
+
+	}
 </script>
 
 <link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
-
+{#if share_button}
+			<IconButton class="material-icons" on:click={onShare} style={style_button}>
+				<Icon tag="svg" viewBox="0 0 24 24">
+					<path fill="currentColor" d={mdiShareVariant} /></Icon
+				>
+			</IconButton>
+		{/if}
 <main>
 	{#if data.quiz == 'listen'}
+		
 		<div>
 			<p>{dict['Послушай и напиши'][$langs]}:</p>
 
@@ -429,7 +497,7 @@
 <style>
 	main {
 		text-align: center;
-		margin-top: 50px;
+		margin-top: 20px;
 	}
 	.hint-button {
 		display: inline-block;
@@ -471,5 +539,18 @@
 
 	main > div {
 		margin-bottom: 20px; /* Добавим отступ снизу для разделения блоков */
+	}
+
+	.share-button {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		padding: 10px;
+		font-size: 1.5em;
+		background-color: #2196f3;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
 	}
 </style>
