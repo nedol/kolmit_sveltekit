@@ -165,12 +165,11 @@
 		// InitTTS();
 
 		const synthesis = window.speechSynthesis;
-		synthesis.onvoiceschanged = async (event) => {
+		synthesis.onvoiceschanged = (event) => {
 			// Получаем доступные голоса
-			const voices = await synthesis.getVoices();
+			const voices = synthesis.getVoices();
 			voices.every((v) => {
 				// voice = v;
-				debugger;
 				if (v.name.includes('Dutch')) {
 					voice = v;
 					if (v.lang.includes('nl-BE') || v.lang.includes('nl_BE')) {
