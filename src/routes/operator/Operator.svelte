@@ -165,25 +165,25 @@
 		// InitTTS();
 
 		const synthesis = window.speechSynthesis;
-		synthesis.onvoiceschanged = (voices) => {
-			voices.forEach((voice, index) => {
-				voice = voices[index];
-				if (voice.name.includes('Dutch')) {
-					voice = voices[index];
-					if (voice.lang.includes('nl-BE')) {
-						utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-						voice = voices[index];
-						return;
+		synthesis.onvoiceschanged = async (event) => {
+			// Получаем доступные голоса
+			const voices = await synthesis.getVoices();
+			voices.every((v) => {
+				// voice = v;
+				if (v.name.includes('Dutch')) {
+					voice = v;
+					if (v.lang.includes('nl') && v.lang.includes('BE')) {
+						voice = v;
+						return false;
 					}
 				}
+				return true;
 			});
 		};
 		setTimeout(() => {
 			$tts = {
 				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
-						// Получаем доступные голоса
-						// let voices = await synthesis.getVoices();
 						// Создаем объект с параметрами речи
 						const utterance = new SpeechSynthesisUtterance(textObj.text);
 						utterance.lang = 'nl-BE';
@@ -191,8 +191,12 @@
 							// console.log(event);
 							synthesis.cancel();
 						};
+						utterance.onend = (event) => {
+							synthesis.cancel();
+						};
 						// Запускаем озвучивание
 						utterance.voice = voice;
+						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
 						await synthesis.speak(utterance);
 						// synthesis.cancel();
 					} else {

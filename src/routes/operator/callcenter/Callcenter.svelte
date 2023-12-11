@@ -108,7 +108,7 @@
 			par.abonent = operator.abonent;
 			par.id = cnt;
 
-			const res = fetch($server_path + '/operator', {
+			const res = fetch('../operator', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -140,7 +140,7 @@
 			par.abonent = operator.abonent;
 			par.uid = operator.uid;
 
-			const res = fetch($server_path + '/operator', {
+			const res = fetch('../operator', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
