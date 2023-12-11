@@ -1,5 +1,4 @@
 <script>
-	import { page } from '$app/stores';
 	import { onMount, getContext, setContext } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
@@ -25,6 +24,9 @@
 	import RecordedVideo from './RecordedVideo.svelte';
 
 	import Lesson from './lesson/Lesson.svelte';
+
+	import pkg from 'lodash';
+	const { find } = pkg;
 
 	import md5 from 'md5';
 
@@ -166,25 +168,25 @@
 
 		const synthesis = window.speechSynthesis;
 		synthesis.onvoiceschanged = (event) => {
-			// Получаем доступные голоса
 			const voices = synthesis.getVoices();
-			voices.every((v) => {
-				// voice = v;
-				if (v.name.includes('Dutch')) {
-					voice = v;
-					if (v.lang.includes('nl-BE') || v.lang.includes('nl_BE')) {
-						voice = v;
-						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
-						return false;
+			for (let v in voices) {
+				// voice = voices[index];
+				if (voices[v].name.includes('Dutch')) {
+					voice = voices[v];
+					if (voices[v].lang.includes('nl') && voices[v].lang.includes('BE')) {
+						// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+						voice = voices[v];
+						break;
 					}
 				}
-				return true;
-			});
+			}
 		};
 		setTimeout(() => {
 			$tts = {
 				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
+						// Получаем доступные голоса
+						// let voices = await synthesis.getVoices();
 						// Создаем объект с параметрами речи
 						const utterance = new SpeechSynthesisUtterance(textObj.text);
 						utterance.lang = 'nl-BE';
