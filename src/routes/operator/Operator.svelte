@@ -162,44 +162,48 @@
 			console.log();
 		}
 
-		InitTTS();
+		// InitTTS();
 
-		// const synthesis = window.speechSynthesis;
-		// synthesis.onvoiceschanged = (voices) => {
-		// 	voices.forEach((voice, index) => {
-		// 		voice = voices[index];
-		// 		if (voice.name.includes('Dutch')) {
-		// 			voice = voices[index];
-		// 			if (voice.lang.includes('nl-BE')) {
-		// 				utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-		// 				voice = voices[index];
-		// 				return;
-		// 			}
-		// 		}
-		// 	});
-		//};
-		// setTimeout(() => {
-		// 	$tts = {
-		// 		speak: async function (textObj) {
-		// 			if ('speechSynthesis' in window) {
-		// 				// Получаем доступные голоса
-		// 				// let voices = await synthesis.getVoices();
-		// 				// Создаем объект с параметрами речи
-		// 				const utterance = new SpeechSynthesisUtterance(textObj.text);
-		// 				utterance.lang = 'nl-BE';
-		// 				utterance.onerror = (event) => {
-		// 					console.log(event);
-		// 					synthesis.cancel();
-		// 				};
-		// 				// Запускаем озвучивание
-		// 				utterance.voice = voice;
-		// 				await synthesis.speak(utterance);
-		// 			} else {
-		// 				console.error('Web Speech API не поддерживается в вашем браузере.');
-		// 			}
-		// 		}
-		// 	};
-		// }, 10);
+		const synthesis = window.speechSynthesis;
+		synthesis.onvoiceschanged = (voices) => {
+			voices.forEach((voice, index) => {
+				voice = voices[index];
+				if (voice.name.includes('Dutch')) {
+					voice = voices[index];
+					if (voice.lang.includes('nl-BE')) {
+						utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+						voice = voices[index];
+						return;
+					}
+				}
+			});
+		};
+		setTimeout(() => {
+			$tts = {
+				speak: async function (textObj) {
+					if ('speechSynthesis' in window) {
+						// Получаем доступные голоса
+						// let voices = await synthesis.getVoices();
+						// Создаем объект с параметрами речи
+						const utterance = new SpeechSynthesisUtterance(textObj.text);
+						utterance.lang = 'nl-BE';
+						utterance.onerror = (event) => {
+							// console.log(event);
+							synthesis.cancel();
+						};
+						// Запускаем озвучивание
+						utterance.voice = voice;
+						await synthesis.speak(utterance);
+						// synthesis.cancel();
+					} else {
+						console.error('Web Speech API не поддерживается в вашем браузере.');
+					}
+				},
+				cancel: async function () {
+					await synthesis.cancel();
+				}
+			};
+		}, 10);
 	});
 
 	let progress = {
@@ -517,16 +521,13 @@
 		{:else}
 			<div
 				style="block;
-				margin-right: auto;
-				margin-left: auto;
-				margin-top: auto;
 				max-width: 50px;
 				max-height: 50px;"
 			></div>
 		{/if}
 	</div>
 
-	<div style="flex:48%" />
+	<div style="flex:50%" />
 
 	<div>
 		<!-- {@debug $call_but_status} -->
