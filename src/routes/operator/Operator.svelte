@@ -164,25 +164,24 @@
 			console.log();
 		}
 
-		InitTTS();
+		//InitTTS();
 
-		return;
-		const synthesis = window.speechSynthesis;
-		synthesis.onvoiceschanged = (event) => {
-			const voices = synthesis.getVoices();
-			for (let v in voices) {
-				// voice = voices[index];
-				if (voices[v].name.includes('Dutch')) {
-					voice = voices[v];
-					if (voices[v].lang.includes('nl') && voices[v].lang.includes('BE')) {
-						// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+		setTimeout(() => {
+			const synthesis = window.speechSynthesis;
+			synthesis.onvoiceschanged = (event) => {
+				const voices = synthesis.getVoices();
+				for (let v in voices) {
+					// voice = voices[index];
+					if (voices[v].name.includes('Dutch')) {
 						voice = voices[v];
-						break;
+						if (voices[v].lang.includes('nl') && voices[v].lang.includes('BE')) {
+							// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+							voice = voices[v];
+							break;
+						}
 					}
 				}
-			}
-		};
-		setTimeout(() => {
+			};
 			$tts = {
 				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
