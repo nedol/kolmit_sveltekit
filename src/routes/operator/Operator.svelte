@@ -123,12 +123,12 @@
 	}
 
 	function InitTTS() {
-		$tts = new Speech();
-		if ($tts.hasBrowserSupport()) {
+		let speech = new Speech();
+		if (speech.hasBrowserSupport()) {
 			console.log('speech synthesis supported');
 		}
 
-		$tts.init({
+		speech.init({
 			volume: 1,
 			lang: 'nl-BE',
 			rate: 1,
@@ -141,14 +141,11 @@
 					voices.forEach((v, index) => {
 						if (v.name.includes('Dutch') && v.lang.includes('nl') && v.lang.includes('BE')) {
 							console.log(`Голос ${index + 1}: ${v.name}, Язык: ${v.lang}`);
-							$tts.setVoice(v.name);
+							// $tts.setVoice(v.name);
 							voice = v;
 							return;
 						}
 					});
-				},
-				onerror: () => {
-					$tts.cancel();
 				}
 			}
 		});
@@ -164,24 +161,24 @@
 			console.log();
 		}
 
-		//InitTTS();
+		InitTTS();
 
 		setTimeout(() => {
 			const synthesis = window.speechSynthesis;
-			synthesis.onvoiceschanged = (event) => {
-				const voices = synthesis.getVoices();
-				for (let v in voices) {
-					// voice = voices[index];
-					if (voices[v].name.includes('Dutch')) {
-						voice = voices[v];
-						if (voices[v].lang.includes('nl') && voices[v].lang.includes('BE')) {
-							// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-							voice = voices[v];
-							break;
-						}
-					}
-				}
-			};
+			// synthesis.onvoiceschanged = (event) => {
+			// 	const voices = synthesis.getVoices();
+			// 	for (let v in voices) {
+			// 		// voice = voices[index];
+			// 		if (voices[v].name.includes('Dutch')) {
+			// 			voice = voices[v];
+			// 			if (voices[v].lang.includes('nl') && voices[v].lang.includes('BE')) {
+			// 				// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+			// 				voice = voices[v];
+			// 				break;
+			// 			}
+			// 		}
+			// 	}
+			// };
 			$tts = {
 				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
