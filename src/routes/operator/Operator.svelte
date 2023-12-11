@@ -164,8 +164,9 @@
 			console.log();
 		}
 
-		// InitTTS();
+		InitTTS();
 
+		return;
 		const synthesis = window.speechSynthesis;
 		synthesis.onvoiceschanged = (event) => {
 			const voices = synthesis.getVoices();
