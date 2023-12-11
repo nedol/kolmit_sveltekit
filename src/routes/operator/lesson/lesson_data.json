@@ -1457,6 +1457,32 @@
                         "title": ""
                     }
                 ]
+            },
+            {
+                "num": "9",
+                "name": "Op vakantie",
+                "words": {},
+                "lessons": [
+                    {
+                        "num": 1,
+                        "title": "De vakantie",
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "title": "De vakantie",
+                                "name": "De vakantie van Amir, Jullie, Aisha en Elise"
+                            }
+                        ]
+                    },
+                    {
+                        "num": 2,
+                        "title": ""
+                    },
+                    {
+                        "num": 3,
+                        "title": ""
+                    }
+                ]
             }
         ]
     }

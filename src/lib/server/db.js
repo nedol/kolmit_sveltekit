@@ -71,12 +71,17 @@ function SendEmail(q, new_email) {
 export async function CreateOperator(par) {
 	try {
 		par.psw = md5(par.psw);
-		let res = await pool.sql`SELECT operators.operator as operator, users.users as users 
+		let res = await pool.sql`
+		SELECT operators.psw as psw, users.users as users 
 			FROM operators
 			INNER JOIN users ON (users.operator = operators.abonent)
-			WHERE operators.psw = ${par.psw} AND operators.operator=${par.email} 
+			WHERE operators.operator=${par.email} 
 			AND operators.abonent =${par.abonent}`;
 		if (res.rows[0]) {
+			let psw = res.rows[0].psw;
+			if (psw) {
+				if (psw !== par.psw) return JSON.stringify({ func: q.func });
+			}
 			let users = res.rows[0].users;
 			par.dep_id = '0';
 			let oper = find(users[0].staff, { email: par.email });
@@ -96,6 +101,8 @@ export async function CreateOperator(par) {
 				oper.picture = { medium: par.picture };
 			}
 
+			updateOperPsw(par);
+
 			return updateUsers(users, par);
 		} else {
 			if (par.email.toLowerCase().includes('cvoantwerpen')) {
@@ -109,14 +116,26 @@ export async function CreateOperator(par) {
 	}
 }
 
+async function updateOperPsw(q) {
+	let res = await pool.sql`UPDATE operators SET
+		psw = ${q.psw}
+		WHERE  operator=${q.email} AND abonent=${q.abonent}`;
+}
+
 async function updateUsers(users, q) {
 	let usrs = JSON.stringify(users);
 
-	let res = await pool.sql`UPDATE users SET
+	try {
+		await pool.sql`BEGIN;`;
+		let res = await pool.sql`UPDATE users SET
 		users=${usrs}, 
 		last=CURRENT_TIMESTAMP, 
 		editor=${q.abonent || q.email}
 		WHERE  operator=${q.abonent || q.email}`;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+	}
 	return JSON.stringify({ func: q.func, dep: users[0] });
 }
 
@@ -124,16 +143,19 @@ export async function GetUsers(par) {
 	let users = '';
 
 	if (par.abonent) {
-		users = await pool.sql`SELECT  users
+		users = await pool.sql`
+		SELECT  users
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator)
 			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  
-			AND operators.psw=${par.psw};`;
+				AND operators.psw=${par.psw};`;
 	} else {
-		users = await pool.sql`SELECT  users 
+		users = await pool.sql`
+		SELECT  users 
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator = operators.operator) 
-			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} AND operators.psw=${par.psw};`;
+			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} 
+				AND operators.psw=${par.psw};`;
 	}
 
 	return users.rows[0];
@@ -153,8 +175,9 @@ export async function CheckOperator(q) {
 	if (q.em) {
 		if (q.abonent) {
 			result = await pool.sql`
-				SELECT *, (SELECT tarif FROM operators WHERE operator=${q.abonent} AND abonent=operator) as tarif 
-			FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
+			SELECT *,
+				(SELECT tarif FROM operators WHERE operator=${q.abonent} AND abonent=operator) as tarif 
+				FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
 		} else {
 			result = result.rows;
 			await pool.sql`
@@ -186,7 +209,8 @@ export async function CheckOperator(q) {
 async function insertUsers(users, q) {
 	let usrs = JSON.stringify(users);
 
-	let res = await pool.sql`INSERT INTO users
+	let res = await pool.sql`
+	INSERT INTO users
 		(operator, users, last, editor) VALUES (${q.email},
 		${usrs}, CURRENT_TIMESTAMP, ${q.email})`;
 
@@ -194,7 +218,8 @@ async function insertUsers(users, q) {
 }
 
 export async function AddOperator(q) {
-	let res = await pool.sql`SELECT users 
+	let res = await pool.sql`
+	SELECT users 
 	FROM users 
 	INNER JOIN operators ON (operators.abonent = users.operator)
 	WHERE operators.abonent=${q.abonent}`;
