@@ -170,10 +170,12 @@
 			const voices = await synthesis.getVoices();
 			voices.every((v) => {
 				// voice = v;
+				debugger;
 				if (v.name.includes('Dutch')) {
 					voice = v;
-					if (v.lang.includes('nl') && v.lang.includes('BE')) {
+					if (v.lang.includes('nl-BE') || v.lang.includes('nl_BE')) {
 						voice = v;
+						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
 						return false;
 					}
 				}
