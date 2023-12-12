@@ -301,6 +301,8 @@
 	{/if}
 </main>
 
+<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{$tts.voice.name}</div>
+
 <BottomAppBar bind:this={bottomAppBar}>
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
