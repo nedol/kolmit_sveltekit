@@ -129,7 +129,10 @@
 
 	function checkInput() {
 		const targetWord = words[currentWordIndex].original;
-		userContent = userContent.replace(/&nbsp;/g, '').replace(/<\/?[^>]+(>|$)/g, '');
+		userContent = userContent
+			.toLowerCase()
+			.replace(/&nbsp;/g, '')
+			.replace(/<\/?[^>]+(>|$)/g, '');
 		const trimmedUserContent = userContent.trim();
 		focus_pos = 0;
 
@@ -142,7 +145,7 @@
 				// Перемещаем текущее слово в конец своей "десятки" в words
 				words.splice(currentWordIndex, 1);
 				words.splice(parseInt(currentWordIndex / 10) * 10 + 9, 0, currentWord);
-				currentWordIndex--;
+				currentWordIndex = currentWordIndex - 1;
 				errorIndex = 0;
 			}
 
@@ -177,7 +180,7 @@
 		}
 	}
 
-	function onChangeUserContent() {
+	function onChangeUserContent(ev) {
 		let ar = document.getElementsByClassName('empty_block');
 		if (ar.length > 0) {
 			// console.log(ar.length);
@@ -201,7 +204,8 @@
 	}
 
 	function nextWord() {
-		currentWordIndex++;
+		currentWordIndex = currentWordIndex + 1;
+		if (currentWordIndex >= words.length) currentWordIndex = 0;
 		currentWord = words[currentWordIndex];
 		div_input.focus();
 		userContent = '';

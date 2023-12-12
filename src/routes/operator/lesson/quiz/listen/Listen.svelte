@@ -309,9 +309,9 @@
 		}, 1500);
 	}
 
-	function speak(str) {
+	function speak(utterance) {
 		$tts.speak({
-			text: str
+			text: utterance
 		});
 		// .then(() => {
 		// 	console.log('speak Success !');

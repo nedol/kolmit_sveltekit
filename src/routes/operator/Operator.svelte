@@ -172,12 +172,20 @@
 			const voices = synthesis.getVoices();
 			for (let v in voices) {
 				// voice = voices[index];
-				if (voices[v].name.includes('Dutch')) {
+				if (
+					voices[v].name.includes('Dutch') ||
+					voices[v].name.includes('dutch') ||
+					voices[v].name.includes('Nederlands') ||
+					voices[v].name.includes('nederlands')
+				) {
 					voice = voices[v];
-					if (voices[v].lang.includes('nl') && voices[v].lang.includes('BE')) {
-						// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+					if (voices[v].lang.includes('nl')) {
 						voice = voices[v];
-						break;
+						if (voices[v].lang.includes('BE')) {
+							// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+							voice = voices[v];
+							break;
+						}
 					}
 				}
 			}
@@ -192,24 +200,25 @@
 						const utterance = new SpeechSynthesisUtterance(textObj.text);
 						utterance.lang = 'nl-BE';
 						utterance.onerror = (event) => {
-							// console.log(event);
+							console.log(event);
 							synthesis.cancel();
 						};
 						utterance.onend = (event) => {
+							console.log(event);
 							synthesis.cancel();
 						};
 						// Запускаем озвучивание
 						utterance.voice = voice;
 						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
 						synthesis.speak(utterance);
-						// synthesis.cancel();
 					} else {
 						alert('Web Speech API не поддерживается в вашем браузере.');
 					}
 				},
 				cancel: function () {
 					synthesis.cancel();
-				}
+				},
+				voice: voice
 			};
 		}, 10);
 	});
