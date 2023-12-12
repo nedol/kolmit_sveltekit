@@ -144,49 +144,49 @@
 					voices[v].name.includes('Nederlands') ||
 					voices[v].name.includes('nederlands')
 				) {
-					voice = voices[v];
+					$tts = { voice: voices[v] };
 					if (voices[v].lang.includes('nl')) {
-						voice = voices[v];
+						$tts = { voice: voices[v] };
 						if (voices[v].lang.includes('BE')) {
 							// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-							voice = voices[v];
+							$tts = { voice: voices[v] };
 							break;
 						}
 					}
 				}
 			}
 		};
-		setTimeout(() => {
-			$tts = {
-				speak: function (textObj) {
-					if ('speechSynthesis' in window) {
-						// Получаем доступные голоса
-						// let voices = await synthesis.getVoices();
-						// Создаем объект с параметрами речи
-						const utterance = new SpeechSynthesisUtterance(textObj.text);
-						utterance.lang = 'nl-BE';
-						utterance.onerror = (event) => {
-							console.log(event);
-							synthesis.cancel();
-						};
-						utterance.onend = (event) => {
-							console.log(event);
-							synthesis.cancel();
-						};
-						// Запускаем озвучивание
-						utterance.voice = voice;
-						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
-						synthesis.speak(utterance);
-					} else {
-						alert('Web Speech API не поддерживается в вашем браузере.');
-					}
-				},
-				cancel: function () {
-					synthesis.cancel();
-				},
-				voice: voice
-			};
-		}, 10);
+		// setTimeout(() => {
+		// 	$tts = {
+		// 		speak: function (textObj) {
+		// 			if ('speechSynthesis' in window) {
+		// 				// Получаем доступные голоса
+		// 				// let voices = await synthesis.getVoices();
+		// 				// Создаем объект с параметрами речи
+		// 				const utterance = new SpeechSynthesisUtterance(textObj.text);
+		// 				utterance.lang = 'nl-BE';
+		// 				utterance.onerror = (event) => {
+		// 					console.log(event);
+		// 					synthesis.cancel();
+		// 				};
+		// 				utterance.onend = (event) => {
+		// 					console.log(event);
+		// 					synthesis.cancel();
+		// 				};
+		// 				// Запускаем озвучивание
+		// 				utterance.voice = voice;
+		// 				console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
+		// 				synthesis.speak(utterance);
+		// 			} else {
+		// 				alert('Web Speech API не поддерживается в вашем браузере.');
+		// 			}
+		// 		},
+		// 		cancel: function () {
+		// 			synthesis.cancel();
+		// 		},
+		// 		voice: voice
+		// 	};
+		// }, 10);
 	});
 
 	let progress = {
