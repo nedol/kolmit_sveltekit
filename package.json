@@ -60,6 +60,7 @@
 		"chatgpt-api": "^0.0.6",
 		"clsx": "^2.0.0",
 		"create-cert": "^1.0.6",
+		"easy-speech": "^2.2.0",
 		"lodash": "^4.17.21",
 		"lucide-svelte": "^0.291.0",
 		"luxon": "^3.4.4",

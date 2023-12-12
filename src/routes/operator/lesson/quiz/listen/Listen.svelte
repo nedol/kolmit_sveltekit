@@ -1,4 +1,5 @@
 <script>
+	import EasySpeech from 'easy-speech';
 	import Speak from './Speak.svelte';
 	import moment from 'moment';
 	moment.locale('nl-be');
@@ -24,6 +25,7 @@
 	import { langs } from '$lib/js/stores.js';
 
 	import { dicts } from '$lib/js/stores.js';
+	import { onMount } from 'svelte';
 	let dict = $dicts;
 
 	let share_mode = false;
@@ -94,6 +96,8 @@
 	let cnt = 0;
 	let digit = 10;
 	let div_input;
+
+	onMount(() => {});
 
 	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {
@@ -309,10 +313,13 @@
 		}, 1500);
 	}
 
-	function speak(utterance) {
-		$tts.speak({
-			text: utterance
-		});
+	async function speak(text) {
+		await EasySpeech.init(); // required
+		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
+
+		// $tts.speak({
+		// 	text: utterance
+		// });
 		// .then(() => {
 		// 	console.log('speak Success !');
 		// })

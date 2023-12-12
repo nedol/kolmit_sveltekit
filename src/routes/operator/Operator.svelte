@@ -32,8 +32,6 @@
 
 	import { tts } from '$lib/js/stores.js';
 
-	import Speech from 'speak-tts'; // es6
-
 	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';
@@ -122,38 +120,6 @@
 			});
 	}
 
-	function InitTTS() {
-		$tts = new Speech();
-		if ($tts.hasBrowserSupport()) {
-			console.log('speech synthesis supported');
-		}
-
-		$tts.init({
-			volume: 1,
-			lang: 'nl-BE',
-			rate: 1,
-			pitch: 1,
-			// voice: 'Dutch Belgium',
-			splitSentences: true,
-			listeners: {
-				onvoiceschanged: (voices) => {
-					// Вывод информации о голосах
-					voices.forEach((v, index) => {
-						if (v.name.includes('Dutch') && v.lang.includes('nl') && v.lang.includes('BE')) {
-							console.log(`Голос ${index + 1}: ${v.name}, Язык: ${v.lang}`);
-							$tts.setVoice(v.name);
-							voice = v;
-							return;
-						}
-					});
-				},
-				onerror: () => {
-					$tts.cancel();
-				}
-			}
-		});
-	}
-
 	onMount(async () => {
 		try {
 			rtc = new RTCOperator($operator, uid, $signal);
@@ -164,7 +130,7 @@
 			console.log();
 		}
 
-		//InitTTS();
+		// InitTTS();
 
 		const synthesis = window.speechSynthesis;
 		synthesis.cancel();
