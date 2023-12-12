@@ -204,7 +204,7 @@
 						await synthesis.speak(utterance);
 						// synthesis.cancel();
 					} else {
-						console.error('Web Speech API не поддерживается в вашем браузере.');
+						alert('Web Speech API не поддерживается в вашем браузере.');
 					}
 				},
 				cancel: function () {

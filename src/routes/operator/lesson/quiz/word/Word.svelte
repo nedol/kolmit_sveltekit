@@ -251,11 +251,11 @@
 				<!-- <i class="material-icons" style="font-size: 15px; color: blue; scale:1.5">reminder</i> -->
 			</button>
 
+			<button on:click={jumpNext10} class="next10-button">+10</button>
+			<button on:click={onPrev} class="prev-button">-1</button>
 			<button on:click={onShuffleWords} class="shuffle-button">
 				<i class="material-symbols-outlined" style="font-size: 15px;  scale:1.5">shuffle</i>
 			</button>
-			<button on:click={jumpNext10} class="next10-button">+10</button>
-			<button on:click={onPrev} class="prev-button">-1</button>
 		</div>
 		<div style="position:relative;float:right">
 			{#if showNextButton}
