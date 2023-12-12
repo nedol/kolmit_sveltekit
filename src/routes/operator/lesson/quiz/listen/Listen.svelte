@@ -28,7 +28,7 @@
 
 	let share_mode = false;
 	let share_button = false;
-	
+
 	let style_button_non_shared = `position: relative;
 		padding: 10px;
 		font-size: 1.5em;
@@ -46,14 +46,14 @@
 		border-radius: 5px;
 		cursor: pointer;`;
 
-	let style_button = style_button_non_shared ;
+	let style_button = style_button_non_shared;
 
 	export let data;
 
-	$: if (data) {	
-		if(data.html){
-		style_button = style_button_shared;
-		share_mode = true;
+	$: if (data) {
+		if (data.html) {
+			style_button = style_button_shared;
+			share_mode = true;
 		}
 	}
 
@@ -95,13 +95,12 @@
 	let digit = 10;
 	let div_input;
 
-
-	async function SendToPartner(){
+	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {
 			let dc = $dc_user || $dc_oper;
 			await dc.SendData(
 				{
-					lesson: { quiz: 'pair.client',  }
+					lesson: { quiz: 'pair.client' }
 				},
 				() => {
 					console.log();
@@ -109,8 +108,6 @@
 			);
 		}
 	}
-
-
 
 	function numberToDutchString(number) {
 		const ones = ['', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen'];
@@ -313,19 +310,15 @@
 	}
 
 	function speak(str) {
-
-		setTimeout(() => {
-			$tts
-				.speak({
-					text: str
-				})
-				.then(() => {
-					console.log('speak Success !');
-				})
-				.catch((e) => {
-					console.error('An error occurred :', e);
-				});
-		}, 10);
+		$tts.speak({
+			text: str
+		});
+		// .then(() => {
+		// 	console.log('speak Success !');
+		// })
+		// .catch((e) => {
+		// 	console.error('An error occurred :', e);
+		// });
 	}
 
 	function repeat() {
@@ -407,7 +400,6 @@
 		// Обработчик нажатия на кнопку "share"
 		share_mode = !share_mode;
 		style_button = share_mode ? style_button_shared : style_button_non_shared;
-
 	}
 </script>
 
@@ -416,15 +408,14 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 {#if share_button}
-			<IconButton class="material-icons" on:click={onShare} style={style_button}>
-				<Icon tag="svg" viewBox="0 0 24 24">
-					<path fill="currentColor" d={mdiShareVariant} /></Icon
-				>
-			</IconButton>
-		{/if}
+	<IconButton class="material-icons" on:click={onShare} style={style_button}>
+		<Icon tag="svg" viewBox="0 0 24 24">
+			<path fill="currentColor" d={mdiShareVariant} /></Icon
+		>
+	</IconButton>
+{/if}
 <main>
 	{#if data.quiz == 'listen'}
-		
 		<div>
 			<p>{dict['Послушай и напиши'][$langs]}:</p>
 

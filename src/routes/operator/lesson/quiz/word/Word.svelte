@@ -222,16 +222,15 @@
 
 	function speak(word) {
 		// speak(currentWord.original);
-		$tts
-			.speak({
-				text: word
-			})
-			.then(() => {
-				console.log('Success !');
-			})
-			.catch((e) => {
-				console.error('An error occurred :', e);
-			});
+		$tts.speak({
+			text: word
+		});
+		// .then(() => {
+		// 	console.log('Success !');
+		// })
+		// .catch((e) => {
+		// 	console.error('An error occurred :', e);
+		// });
 
 		setFocus();
 	}
