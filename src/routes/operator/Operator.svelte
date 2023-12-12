@@ -184,7 +184,7 @@
 		};
 		setTimeout(() => {
 			$tts = {
-				speak: function (textObj) {
+				speak: async function (textObj) {
 					if ('speechSynthesis' in window) {
 						// Получаем доступные голоса
 						// let voices = await synthesis.getVoices();
@@ -201,7 +201,7 @@
 						// Запускаем озвучивание
 						utterance.voice = voice;
 						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
-						synthesis.speak(utterance);
+						await synthesis.speak(utterance);
 						// synthesis.cancel();
 					} else {
 						console.error('Web Speech API не поддерживается в вашем браузере.');
