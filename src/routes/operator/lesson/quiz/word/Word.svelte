@@ -226,8 +226,21 @@
 	}
 
 	async function speak(text) {
-		await EasySpeech.init(); // required
-		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
+		if ($tts.speak) {
+			$tts
+				.speak({
+					text: text
+				})
+				.then(() => {
+					console.log('speak Success !');
+				})
+				.catch((e) => {
+					console.error('An error occurred :', e);
+				});
+		} else {
+			// await EasySpeech.init(); // required
+			// await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
+		}
 
 		setFocus();
 	}

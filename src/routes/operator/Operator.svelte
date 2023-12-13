@@ -32,6 +32,8 @@
 
 	import { tts } from '$lib/js/stores.js';
 
+	import Speech from 'speak-tts'; // es6
+
 	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';
@@ -120,6 +122,38 @@
 			});
 	}
 
+	function InitTTS() {
+		$tts = new Speech();
+		if ($tts.hasBrowserSupport()) {
+			console.log('speech synthesis supported');
+		}
+
+		$tts.init({
+			volume: 1,
+			lang: 'nl-BE',
+			rate: 1,
+			pitch: 1,
+			// voice: 'Dutch Belgium',
+			splitSentences: true,
+			listeners: {
+				onvoiceschanged: (voices) => {
+					// Вывод информации о голосах
+					voices.forEach((v, index) => {
+						if (v.name.includes('Dutch') && v.lang.includes('nl') && v.lang.includes('BE')) {
+							console.log(`Голос ${index + 1}: ${v.name}, Язык: ${v.lang}`);
+							$tts.setVoice(v.name);
+							voice = v;
+							return;
+						}
+					});
+				},
+				onerror: () => {
+					$tts.cancel();
+				}
+			}
+		});
+	}
+
 	onMount(async () => {
 		try {
 			rtc = new RTCOperator($operator, uid, $signal);
@@ -130,7 +164,7 @@
 			console.log();
 		}
 
-		// InitTTS();
+		//InitTTS();
 
 		const synthesis = window.speechSynthesis;
 		synthesis.cancel();
@@ -144,49 +178,49 @@
 					voices[v].name.includes('Nederlands') ||
 					voices[v].name.includes('nederlands')
 				) {
-					$tts = { voice: voices[v] };
+					voice = voices[v];
 					if (voices[v].lang.includes('nl')) {
-						$tts = { voice: voices[v] };
+						voice = voices[v];
 						if (voices[v].lang.includes('BE')) {
 							// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-							$tts = { voice: voices[v] };
+							voice = voices[v];
 							break;
 						}
 					}
 				}
 			}
 		};
-		// setTimeout(() => {
-		// 	$tts = {
-		// 		speak: function (textObj) {
-		// 			if ('speechSynthesis' in window) {
-		// 				// Получаем доступные голоса
-		// 				// let voices = await synthesis.getVoices();
-		// 				// Создаем объект с параметрами речи
-		// 				const utterance = new SpeechSynthesisUtterance(textObj.text);
-		// 				utterance.lang = 'nl-BE';
-		// 				utterance.onerror = (event) => {
-		// 					console.log(event);
-		// 					synthesis.cancel();
-		// 				};
-		// 				utterance.onend = (event) => {
-		// 					console.log(event);
-		// 					synthesis.cancel();
-		// 				};
-		// 				// Запускаем озвучивание
-		// 				utterance.voice = voice;
-		// 				console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
-		// 				synthesis.speak(utterance);
-		// 			} else {
-		// 				alert('Web Speech API не поддерживается в вашем браузере.');
-		// 			}
-		// 		},
-		// 		cancel: function () {
-		// 			synthesis.cancel();
-		// 		},
-		// 		voice: voice
-		// 	};
-		// }, 10);
+		setTimeout(() => {
+			$tts = {
+				speak: function (textObj) {
+					if ('speechSynthesis' in window) {
+						// Получаем доступные голоса
+						// let voices = await synthesis.getVoices();
+						// Создаем объект с параметрами речи
+						const utterance = new SpeechSynthesisUtterance(textObj.text);
+						utterance.lang = 'nl-BE';
+						utterance.onerror = (event) => {
+							// console.log(event);
+							synthesis.cancel();
+						};
+						utterance.onend = (event) => {
+							synthesis.cancel();
+						};
+						// Запускаем озвучивание
+						utterance.voice = voice;
+						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
+						synthesis.speak(utterance);
+						// synthesis.cancel();
+					} else {
+						alert('Web Speech API не поддерживается в вашем браузере.');
+					}
+				},
+				cancel: function () {
+					synthesis.cancel();
+				},
+				voice: voice
+			};
+		}, 10);
 	});
 
 	let progress = {
