@@ -190,37 +190,37 @@
 				}
 			}
 		};
-		setTimeout(() => {
-			$tts = {
-				speak: function (textObj) {
-					if ('speechSynthesis' in window) {
-						// Получаем доступные голоса
-						// let voices = await synthesis.getVoices();
-						// Создаем объект с параметрами речи
-						const utterance = new SpeechSynthesisUtterance(textObj.text);
-						utterance.lang = 'nl-BE';
-						utterance.onerror = (event) => {
-							// console.log(event);
-							synthesis.cancel();
-						};
-						utterance.onend = (event) => {
-							synthesis.cancel();
-						};
-						// Запускаем озвучивание
-						utterance.voice = voice;
-						console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
-						synthesis.speak(utterance);
-						// synthesis.cancel();
-					} else {
-						alert('Web Speech API не поддерживается в вашем браузере.');
-					}
-				},
-				cancel: function () {
-					synthesis.cancel();
-				},
-				voice: voice
-			};
-		}, 10);
+		// setTimeout(() => {
+		// 	$tts = {
+		// 		speak: function (textObj) {
+		// 			if ('speechSynthesis' in window) {
+		// 				// Получаем доступные голоса
+		// 				// let voices = await synthesis.getVoices();
+		// 				// Создаем объект с параметрами речи
+		// 				const utterance = new SpeechSynthesisUtterance(textObj.text);
+		// 				utterance.lang = 'nl-BE';
+		// 				utterance.onerror = (event) => {
+		// 					// console.log(event);
+		// 					synthesis.cancel();
+		// 				};
+		// 				utterance.onend = (event) => {
+		// 					synthesis.cancel();
+		// 				};
+		// 				// Запускаем озвучивание
+		// 				utterance.voice = voice;
+		// 				console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
+		// 				synthesis.speak(utterance);
+		// 				// synthesis.cancel();
+		// 			} else {
+		// 				alert('Web Speech API не поддерживается в вашем браузере.');
+		// 			}
+		// 		},
+		// 		cancel: function () {
+		// 			synthesis.cancel();
+		// 		},
+		// 		voice: voice
+		// 	};
+		// }, 10);
 	});
 
 	let progress = {

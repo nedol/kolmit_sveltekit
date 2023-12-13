@@ -16,6 +16,8 @@
 	} from '@mdi/js';
 
 	import { tts } from '$lib/js/stores.js';
+	let voice_name = '';
+	if ($tts && $tts.voice) voice_name = $tts.voice.name;
 
 	import { lesson } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
@@ -97,7 +99,9 @@
 	let digit = 10;
 	let div_input;
 
-	onMount(() => {});
+	onMount(() => {
+		console.log();
+	});
 
 	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {
@@ -472,7 +476,7 @@
 	{/if}
 </main>
 
-<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{$tts.voice.name}</div>
+<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{voice_name}</div>
 
 <BottomAppBar bind:this={bottomAppBar}>
 	<Section>

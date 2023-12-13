@@ -13,6 +13,8 @@
 	export let data;
 
 	import { tts } from '$lib/js/stores.js';
+	let voice_name = '';
+	if ($tts && $tts.voice) voice_name = $tts.voice.name;
 
 	let words, word;
 	let shuffleWords = words;
@@ -37,7 +39,7 @@
 	let counter = 0;
 	let isVisible = false;
 
-	fetch(`/operator/lesson?words=theme&name=${data.name}&owner=nedooleg@gmail.com`)
+	fetch(`./operator/lesson?words=theme&name=${data.name}&owner=nedooleg@gmail.com`)
 		.then((response) => response.json())
 		.then((data) => {
 			words = data.data;
@@ -237,8 +239,8 @@
 			// 	console.error('An error occurred :', e);
 			// });
 		} else {
-			// await EasySpeech.init(); // required
-			// await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
+			await EasySpeech.init(); // required
+			await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
 		}
 
 		setFocus();
@@ -306,7 +308,7 @@
 	{/if}
 </main>
 
-<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{$tts.voice.name}</div>
+<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{voice_name}</div>
 
 <BottomAppBar bind:this={bottomAppBar}>
 	<Section>
