@@ -2,6 +2,7 @@
 	import { onMount, getContext } from 'svelte';
 	import md5 from 'md5';
 	import translate from 'translate';
+	import EasySpeech from 'easy-speech';
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -122,17 +123,19 @@
 		});
 	}
 
-	function TTSSpeak(word) {
-		$tts
-			.speak({
-				text: word
-			})
-			.then(() => {
-				console.log('Success !');
-			})
-			.catch((e) => {
-				console.error('An error occurred :', e);
-			});
+	async function TTSSpeak(text) {
+		// $tts
+		// 	.speak({
+		// 		text: word
+		// 	})
+		// 	.then(() => {
+		// 		console.log('Success !');
+		// 	})
+		// 	.catch((e) => {
+		// 		console.error('An error occurred :', e);
+		// 	});
+		await EasySpeech.init(); // required
+		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
 	}
 
 	async function onClickText(event) {

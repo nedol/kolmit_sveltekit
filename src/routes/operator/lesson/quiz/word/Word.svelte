@@ -240,7 +240,7 @@
 		// });
 		// } else {
 		await EasySpeech.init(); // required
-		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
+		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
 		// }
 
 		setFocus();
