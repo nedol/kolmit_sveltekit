@@ -167,29 +167,28 @@
 		//InitTTS();
 
 		const synthesis = window.speechSynthesis;
-		synthesis.cancel();
-		synthesis.onvoiceschanged = (event) => {
-			const voices = synthesis.getVoices();
+		let voices = synthesis.getVoices();
+		selectVoice(voices);
+		if (!voices)
+			synthesis.onvoiceschanged = (event) => {
+				const voices = synthesis.getVoices();
+				selectVoice(voices);
+			};
+
+		function selectVoice(voices) {
 			for (let v in voices) {
-				// voice = voices[index];
-				if (
-					voices[v].name.includes('Dutch') ||
-					voices[v].name.includes('dutch') ||
-					voices[v].name.includes('Nederlands') ||
-					voices[v].name.includes('nederlands')
-				) {
-					voice = voices[v];
-					if (voices[v].lang.includes('nl')) {
-						voice = voices[v];
-						if (voices[v].lang.includes('BE')) {
-							// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-							voice = voices[v];
-							break;
-						}
+				$tts = { voice: voices[v] };
+				if (voices[v].lang.includes('nl')) {
+					$tts = { voice: voices[v] };
+					if (voices[v].lang.includes('BE')) {
+						// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
+						$tts = { voice: voices[v] };
+						break;
 					}
 				}
 			}
-		};
+		}
+
 		// setTimeout(() => {
 		// 	$tts = {
 		// 		speak: function (textObj) {
