@@ -168,12 +168,15 @@
 
 		const synthesis = window.speechSynthesis;
 		let voices = synthesis.getVoices();
-		selectVoice(voices);
-		if (!voices)
+
+		if (!voices[0]) {
 			synthesis.onvoiceschanged = (event) => {
 				const voices = synthesis.getVoices();
 				selectVoice(voices);
 			};
+		} else {
+			selectVoice(voices);
+		}
 
 		function selectVoice(voices) {
 			for (let v in voices) {

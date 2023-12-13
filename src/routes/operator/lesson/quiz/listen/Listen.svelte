@@ -16,8 +16,6 @@
 	} from '@mdi/js';
 
 	import { tts } from '$lib/js/stores.js';
-	let voice_name = '';
-	if ($tts && $tts.voice) voice_name = $tts.voice.name;
 
 	import { lesson } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
@@ -99,9 +97,7 @@
 	let digit = 10;
 	let div_input;
 
-	onMount(() => {
-		console.log();
-	});
+	onMount(() => {});
 
 	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {
@@ -318,20 +314,18 @@
 	}
 
 	async function speak(text) {
-		// if ($tts.speak) {
-		// 	$tts.speak({
-		// 		text: text
-		// 	});
-		// 	// .then(() => {
-		// 	// 	console.log('speak Success !');
-		// 	// })
-		// 	// .catch((e) => {
-		// 	// 	console.error('An error occurred :', e);
-		// 	// });
-		// } else {
 		await EasySpeech.init(); // required
 		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
-		// }
+
+		// $tts.speak({
+		// 	text: utterance
+		// });
+		// .then(() => {
+		// 	console.log('speak Success !');
+		// })
+		// .catch((e) => {
+		// 	console.error('An error occurred :', e);
+		// });
 	}
 
 	function repeat() {
@@ -476,7 +470,7 @@
 	{/if}
 </main>
 
-<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{voice_name}</div>
+<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{$tts.voice.name}</div>
 
 <BottomAppBar bind:this={bottomAppBar}>
 	<Section>
