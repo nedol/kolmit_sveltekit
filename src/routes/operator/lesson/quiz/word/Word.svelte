@@ -2,6 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	// import words from './80.json';
 	import { langs } from '$lib/js/stores.js';
+	import EasySpeech from 'easy-speech';
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -224,17 +225,9 @@
 		speak(currentWord.original);
 	}
 
-	function speak(word) {
-		// speak(currentWord.original);
-		$tts.speak({
-			text: word
-		});
-		// .then(() => {
-		// 	console.log('Success !');
-		// })
-		// .catch((e) => {
-		// 	console.error('An error occurred :', e);
-		// });
+	async function speak(text) {
+		await EasySpeech.init(); // required
+		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => notify(e) });
 
 		setFocus();
 	}
