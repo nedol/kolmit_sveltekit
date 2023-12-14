@@ -785,13 +785,7 @@
                     {
                         "num": 1,
                         "title": "",
-                        "quizes": [
-                            {
-                                "type": "text",
-                                "name": "ABC",
-                                "title": "ABC-lijst normaal perfectum"
-                            }
-                        ]
+                        "quizes": []
                     }
                 ]
             },
@@ -1407,6 +1401,11 @@
                         "num": 2,
                         "title": "Speciaal perfectum",
                         "quizes": [
+                            {
+                                "type": "word",
+                                "name": "ABC-lijst normal perfectum",
+                                "title": "Normal perfectum"
+                            },
                             {
                                 "type": "word",
                                 "name": "ABC-lijst speciaal perfectum",
