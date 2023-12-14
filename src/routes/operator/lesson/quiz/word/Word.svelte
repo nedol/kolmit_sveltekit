@@ -132,14 +132,11 @@
 
 	function checkInput() {
 		const targetWord = words[currentWordIndex].original;
-		userContent = userContent
-			.toLowerCase()
-			.replace(/&nbsp;/g, '')
-			.replace(/<\/?[^>]+(>|$)/g, '');
+		userContent = userContent.replace(/&nbsp;/g, '').replace(/<\/?[^>]+(>|$)/g, '');
 		const trimmedUserContent = userContent.trim();
 		focus_pos = 0;
 
-		if (trimmedUserContent === targetWord) {
+		if (trimmedUserContent.toLowerCase() === targetWord) {
 			showCheckMark = true; // Показываем галочку
 			showNextButton = true;
 			speak(currentWord.original);
@@ -220,6 +217,7 @@
 	}
 
 	function onPrev() {
+		if (currentWordIndex === 1) return;
 		currentWord = words[--currentWordIndex];
 	}
 

@@ -1,6 +1,5 @@
 <script>
 	import { onMount, setContext } from 'svelte';
-	import SelectMenu from './site/SelectMenu.svelte';
 	import Operator from './operator/Operator.svelte';
 	import Login from './site/Login.svelte';
 

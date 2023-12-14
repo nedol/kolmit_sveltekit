@@ -5,6 +5,8 @@
 	import TopAppBar, { Row, Section, Title, AutoAdjust } from '@smui/top-app-bar';
 	import IconButton from '@smui/icon-button';
 
+	import ru_flag from '$lib/images/flag-square-250_ru.png';
+
 	import { lesson } from '$lib/js/stores.js';
 
 	import BurgerMenu from './menu/BurgerMenu.svelte';
@@ -25,11 +27,30 @@
 
 	$view = 'cc';
 
+	let menu = 'menu';
+
 	let topAppBar;
 
 	onMount(async () => {});
 
 	let lang_menu = false;
+
+	let langAr = {
+		en: `https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-250.png
+			`,
+		fr: `
+			https://cdn.countryflags.com/thumbs/france/flag-square-250.png
+			`,
+		nl: `
+			https://cdn.countryflags.com/thumbs/netherlands/flag-square-250.png
+			`,
+		de: `https://cdn.countryflags.com/thumbs/germany/flag-square-250.png
+			`,
+		uk: `
+			https://cdn.countryflags.com/thumbs/ukraine/flag-square-250.png
+			`,
+		ru: ru_flag
+	};
 
 	function OnSelected(ev) {
 		$langs = ev.target.attributes[2].nodeValue;
@@ -63,7 +84,7 @@
 						class="material-icons"
 						on:click={() => {
 							lang_menu = !lang_menu;
-						}}>menu</IconButton
+						}}><img src={langAr[$langs]} alt={langAr[$langs]} /></IconButton
 					>
 					{#if lang_menu}
 						<div class="lang_list" style="position:absolute; display: flex; margin-top:300px">
@@ -75,10 +96,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img
-										src="https://cdn.countryflags.com/thumbs/united-kingdom/flag-square-250.png"
-										alt="English"
-									/>
+									<img src={langAr['en']} alt="English" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -87,10 +105,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img
-										src="https://cdn.countryflags.com/thumbs/france/flag-square-250.png"
-										alt="Français"
-									/>
+									<img src={langAr['fr']} alt="English" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -99,10 +114,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img
-										src="https://cdn.countryflags.com/thumbs/netherlands/flag-square-250.png"
-										alt="Nederlands"
-									/>
+									<img src={langAr['nl']} alt="English" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -111,10 +123,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img
-										src="https://cdn.countryflags.com/thumbs/germany/flag-square-250.png"
-										alt="Deutch"
-									/>
+									<img src={langAr['de']} alt="English" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -123,10 +132,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img
-										src="https://cdn.countryflags.com/thumbs/ukraine/flag-square-250.png"
-										alt="Український"
-									/>
+									<img src={langAr['uk']} alt="English" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -134,7 +140,7 @@
 										lang_menu = false;
 									}}
 								>
-									<span>Русский</span>
+									<img src={langAr['ru']} alt="English" />
 								</Item>
 							</List>
 						</div>
