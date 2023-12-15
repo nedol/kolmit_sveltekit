@@ -158,7 +158,7 @@
 	}
 
 	img {
-		width: 20px;
+		width: 30px;
 		opacity: 100%;
 	}
 

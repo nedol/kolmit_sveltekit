@@ -1,853 +1,901 @@
 [
   {
-    "original": "afstoffen",
     "infinitive": "afstoffen",
+    "original": "afgestoft",
     "translation": {
-      "ru": "снять пыль",
-      "fr": "dépoussiérer",
-      "en": "dust off",
-      "de": "abstauben",
-      "uk": "видалити пилу"
+      "ru": "вытер пыль",
+      "fr": "dépoussiéré",
+      "en": "dusted off",
+      "de": "abgestaubt",
+      "uk": "витер пил"
     },
     "example": "Gisteren heb ik het huis afgestoft."
   },
   {
-    "original": "afdrogen",
     "infinitive": "afdrogen",
+    "original": "afgedroogd",
     "translation": {
-      "ru": "вытереть (сухим)",
-      "fr": "essuyer",
-      "en": "dry off",
-      "de": "abtrocknen",
-      "uk": "витерти (сухо)"
+      "ru": "вытер (насухo)",
+      "fr": "essuyé",
+      "en": "dried off",
+      "de": "abgetrocknet",
+      "uk": "витер (насухo)"
     },
     "example": "Na het zwemmen hebben we ons afgedroogd."
   },
   {
-    "original": "babbelen",
     "infinitive": "babbelen",
+    "original": "gebabbeld",
     "translation": {
-      "ru": "болтать",
-      "fr": "bavarder",
-      "en": "chat",
-      "de": "plaudern",
-      "uk": "балакати"
+      "ru": "болтали",
+      "fr": "bavardé",
+      "en": "chatted",
+      "de": "geplaudert",
+      "uk": "балакали"
     },
     "example": "Tijdens het feest hebben we met vrienden gebabbeld."
   },
   {
-    "original": "basketballen",
     "infinitive": "basketballen",
+    "original": "gebasketbald",
     "translation": {
-      "ru": "играть в баскетбол",
-      "fr": "jouer au basket",
-      "en": "play basketball",
-      "de": "Basketball spielen",
-      "uk": "грати в баскетбол"
+      "ru": "играл в баскетбол",
+      "fr": "joué au basket",
+      "en": "played basketball",
+      "de": "Basketball gespielt",
+      "uk": "грав в баскетбол"
     },
     "example": "Vorige week hebben we in het park gebasketbald."
   },
   {
-    "original": "beantwoorden",
     "infinitive": "beantwoorden",
+    "original": "beantwoord",
     "translation": {
-      "ru": "ответить",
-      "fr": "répondre",
-      "en": "answer",
-      "de": "beantworten",
-      "uk": "відповісти"
+      "ru": "ответил",
+      "fr": "répondu",
+      "en": "answered",
+      "de": "beantwortet",
+      "uk": "відповів"
     },
     "example": "Hij heeft snel de vragen beantwoord."
   },
   {
-    "original": "bellen",
     "infinitive": "bellen",
+    "original": "gebeld",
     "translation": {
-      "ru": "звонить",
-      "fr": "appeler",
-      "en": "call",
-      "de": "anrufen",
-      "uk": "дзвонити"
+      "ru": "звонил",
+      "fr": "appelé",
+      "en": "called",
+      "de": "angerufen",
+      "uk": "дзвонив"
     },
     "example": "Voordat ik naar het werk ging, heb ik mijn moeder gebeld."
   },
   {
-    "original": "bestellen",
     "infinitive": "bestellen",
+    "original": "besteld",
     "translation": {
-      "ru": "заказать",
-      "fr": "commander",
-      "en": "order",
-      "de": "bestellen",
-      "uk": "замовити"
+      "ru": "заказал",
+      "fr": "commandé",
+      "en": "ordered",
+      "de": "bestellt",
+      "uk": "замовив"
     },
     "example": "Ze hebben gisteravond sushi besteld."
   },
   {
-    "original": "betalen",
     "infinitive": "betalen",
+    "original": "betaald",
     "translation": {
-      "ru": "оплатить",
-      "fr": "payer",
-      "en": "pay",
-      "de": "bezahlen",
-      "uk": "оплатити"
+      "ru": "оплатил",
+      "fr": "payé",
+      "en": "paid",
+      "de": "bezahlt",
+      "uk": "оплатив"
     },
     "example": "Na het eten hebben we de rekening betaald en een fooi gegeven."
   },
   {
-    "original": "botsen",
     "infinitive": "botsen",
+    "original": "gebotst",
     "translation": {
-      "ru": "столкнуться",
-      "fr": "heurter",
-      "en": "collide",
-      "de": "zusammenstoßen",
-      "uk": "зіткнутися"
+      "ru": "столкнулись",
+      "fr": "heurtés",
+      "en": "collided",
+      "de": "zusammen gestoßen",
+      "uk": "зіткнулися"
     },
     "example": "Gisteren zijn we per ongeluk tegen elkaar gebotst."
   },
   {
-    "original": "controleren",
     "infinitive": "controleren",
+    "original": "gecontroleerd",
     "translation": {
-      "ru": "проверить",
-      "fr": "vérifier",
-      "en": "check",
-      "de": "kontrollieren",
-      "uk": "перевірити"
+      "ru": "проверили",
+      "fr": "vérifié",
+      "en": "checked",
+      "de": "kontrolliert",
+      "uk": "перевірили"
     },
     "example": "Ze heeft gisteren de lijst gecontroleerd."
   },
   {
-    "original": "dansen",
     "infinitive": "dansen",
+    "original": "gedanst",
     "translation": {
-      "ru": "танцевать",
-      "fr": "danser",
-      "en": "dance",
-      "de": "tanzen",
-      "uk": "танцювати"
+      "ru": "танцевали",
+      "fr": "dansé",
+      "en": "danced",
+      "de": "getanzt",
+      "uk": "танцювали"
     },
     "example": "Op het bruiloftsfeest hebben we de hele avond gedanst."
   },
   {
-    "original": "dekken",
     "infinitive": "dekken",
+    "original": "gedekt",
     "translation": {
-      "ru": "накрыть",
-      "fr": "mettre la table",
+      "ru": "накрывали",
+      "fr": "mis la table",
       "en": "set the table",
-      "de": "decken",
-      "uk": "накрити"
+      "de": "gedeckt",
+      "uk": "накривали"
     },
     "example": "Voor het familiediner hebben we de tafel gedekt."
   },
   {
-    "original": "dromen",
     "infinitive": "dromen",
+    "original": "gedroomd",
     "translation": {
-      "ru": "грезить",
-      "fr": "rêver",
-      "en": "dream",
-      "de": "träumen",
-      "uk": "мріяти"
+      "ru": "снилось",
+      "fr": "rêvé",
+      "en": "dreamt",
+      "de": "geträumt",
+      "uk": "снилося"
     },
     "example": "Vannacht heb ik lekker gedroomd."
   },
   {
-    "original": "dweilen",
     "infinitive": "dweilen",
+    "original": "gedweild",
     "translation": {
-      "ru": "помыть пол",
-      "fr": "passer la serpillère",
-      "en": "mop the floor",
-      "de": "wischen",
-      "uk": "помити підлогу"
+      "ru": "мыли пол",
+      "fr": "lavé le sol",
+      "en": "mopped the floor",
+      "de": "gewischt",
+      "uk": "мили підлогу"
     },
     "example": "Nadat we pasta hadden gekookt, hebben we de vloer gedweild."
   },
   {
-    "original": "fietsen",
     "infinitive": "fietsen",
+    "original": "gefietst",
     "translation": {
-      "ru": "ездить на велосипеде",
-      "fr": "faire du vélo",
-      "en": "cycle",
-      "de": "Rad fahren",
-      "uk": "їздити на велосипеді"
+      "ru": "ездили на велосипеде",
+      "fr": "fait du vélo",
+      "en": "cycled",
+      "de": "Rad gefahren",
+      "uk": "їздили на велосипеді"
     },
     "example": "Gisteren zijn we samen naar school gefietst."
   },
   {
-    "original": "fitnessen",
     "infinitive": "fitnessen",
+    "original": "gefitnest",
     "translation": {
-      "ru": "заниматься фитнесом",
-      "fr": "faire du fitness",
-      "en": "work out",
-      "de": "fitness machen",
-      "uk": "займатися фітнесом"
+      "ru": "занимались фитнесом",
+      "fr": "fait du fitness",
+      "en": "worked out",
+      "de": "Fitness gemacht",
+      "uk": "займалися фітнесом"
     },
     "example": "Hij heeft gisteren in de sportschool gefitnest."
   },
   {
-    "original": "gebruiken",
     "infinitive": "gebruiken",
+    "original": "gebruikt",
     "translation": {
-      "ru": "использовать",
-      "fr": "utiliser",
-      "en": "use",
-      "de": "benutzen",
-      "uk": "використовувати"
+      "ru": "использовали",
+      "fr": "utilisé",
+      "en": "used",
+      "de": "benutzt",
+      "uk": "використовували"
     },
     "example": "In de wiskundeles heeft ze een rekenmachine gebruikt."
   },
   {
-    "original": "grillen",
     "infinitive": "grillen",
+    "original": "gegrild",
     "translation": {
-      "ru": "готовить на гриле",
-      "fr": "griller",
-      "en": "grill",
-      "de": "grillen",
-      "uk": "готувати на грилі"
+      "ru": "готовили на гриле",
+      "fr": "grillé",
+      "en": "grilled",
+      "de": "gegrillt",
+      "uk": "готували на грилі"
     },
     "example": "Ze hebben gisteren vlees gegrild op de barbecue."
   },
   {
-    "original": "halen",
     "infinitive": "halen",
+    "original": "gehaald",
     "translation": {
-      "ru": "забрать",
+      "ru": "забирали",
       "fr": "aller chercher",
-      "en": "fetch",
-      "de": "holen",
-      "uk": "забрати"
+      "en": "fetched",
+      "de": "geholt",
+      "uk": "забирали"
     },
     "example": "Ik heb gisteren de kinderen van school gehaald."
   },
   {
-    "original": "herhalen",
     "infinitive": "herhalen",
+    "original": "herhaald",
     "translation": {
-      "ru": "повторить",
-      "fr": "répéter",
-      "en": "repeat",
-      "de": "wiederholen",
-      "uk": "повторити"
+      "ru": "повторил",
+      "fr": "répété",
+      "en": "repeated",
+      "de": "wiederholt",
+      "uk": "повторил"
     },
     "example": "Hij heeft gisteren de zin herhaald."
   },
   {
-    "original": "invullen",
     "infinitive": "invullen",
+    "original": "ingevuld",
     "translation": {
-      "ru": "заполнить",
-      "fr": "remplir",
-      "en": "fill in",
-      "de": "ausfüllen",
-      "uk": "заповнити"
+      "ru": "заполнил",
+      "fr": "rempli",
+      "en": "filled in",
+      "de": "ausgefüllt",
+      "uk": "заповнил"
     },
     "example": "Ze heeft gisteren het formulier ingevuld voor het evenement."
   },
   {
-    "original": "joggen",
     "infinitive": "joggen",
+    "original": "gejogd",
     "translation": {
-      "ru": "бегать трусцой",
-      "fr": "jogger",
-      "en": "jog",
-      "de": "joggen",
-      "uk": "бігати трусцой"
+      "ru": "бегали",
+      "fr": "joggé",
+      "en": "jogged",
+      "de": "gejoggt",
+      "uk": "бігали"
     },
     "example": "Vanmorgen heb ik in het park gejogd."
   },
   {
-    "original": "kamperen",
     "infinitive": "kamperen",
+    "original": "gekampeerd",
     "translation": {
-      "ru": "кемпинговать",
-      "fr": "camper",
-      "en": "camp",
-      "de": "campen",
-      "uk": "кемпінгувати"
+      "ru": "кемпинговал",
+      "fr": "campé",
+      "en": "camped",
+      "de": "gecampt",
+      "uk": "кемпінгувал"
     },
     "example": "Vorige zomer hebben we in de bergen gekampeerd."
   },
   {
-    "original": "klaarmaken",
     "infinitive": "klaarmaken",
+    "original": "klaargemaakt",
     "translation": {
-      "ru": "готовить",
-      "fr": "préparer",
-      "en": "prepare",
-      "de": "zubereiten",
-      "uk": "готувати"
+      "ru": "готовил",
+      "fr": "préparé",
+      "en": "prepared",
+      "de": "zubereitet",
+      "uk": "готувал"
     },
     "example": "Gisteravond heeft ze tapas klaargemaakt."
   },
   {
-    "original": "kloppen",
     "infinitive": "kloppen",
+    "original": "geklopt",
     "translation": {
-      "ru": "постучать",
-      "fr": "frapper",
-      "en": "knock",
-      "de": "klopfen",
-      "uk": "стукати"
+      "ru": "стучали",
+      "fr": "frappé",
+      "en": "knocked",
+      "de": "geklopft",
+      "uk": "стукали"
     },
     "example": "Voordat ik naar binnen ging, heb ik op de deur geklopt."
   },
   {
-    "original": "knippen",
     "infinitive": "knippen",
+    "original": "geknipt",
     "translation": {
-      "ru": "подстричь",
-      "fr": "couper",
+      "ru": "подстригал",
+      "fr": "coupé",
       "en": "cut",
-      "de": "schneiden",
-      "uk": "стригти"
+      "de": "geschnitten",
+      "uk": "стригл"
     },
     "example": "Ze heeft gisteren haar geknipt."
   },
   {
-    "original": "koken",
     "infinitive": "koken",
+    "original": "gekookt",
     "translation": {
-      "ru": "готовить",
-      "fr": "cuisiner",
-      "en": "cook",
-      "de": "kochen",
-      "uk": "готувати"
+      "ru": "готовил",
+      "fr": "cuit",
+      "en": "cooked",
+      "de": "gekocht",
+      "uk": "готувал"
     },
     "example": "We hebben samen gekookt en een nieuw recept uitgeprobeerd."
   },
   {
-    "original": "kussen",
     "infinitive": "kussen",
+    "original": "gekust",
     "translation": {
-      "ru": "поцеловать",
-      "fr": "embrasser",
-      "en": "kiss",
-      "de": "küssen",
-      "uk": "цілувати"
+      "ru": "поцеловал",
+      "fr": "embrassé",
+      "en": "kissed",
+      "de": "geküsst",
+      "uk": "поцілував"
     },
     "example": "Onder de sterrenhemel hebben ze elkaar gisteren gekust."
   },
   {
-    "original": "luisteren",
     "infinitive": "luisteren",
+    "original": "geluisterd",
     "translation": {
-      "ru": "слушать",
-      "fr": "écouter",
-      "en": "listen",
-      "de": "hören",
-      "uk": "слухати"
+      "ru": "слушал",
+      "fr": "écouté",
+      "en": "listened",
+      "de": "gehört",
+      "uk": "слухал"
     },
     "example": "Terwijl ik de kamer opruimde, heb ik naar mijn favoriete muziek geluisterd."
   },
   {
-    "original": "maken",
     "infinitive": "maken",
+    "original": "gemaakt",
     "translation": {
-      "ru": "сделал(а)",
-      "fr": "fabriquer",
+      "ru": "сделал",
+      "fr": "fabriqué",
       "en": "made",
-      "de": "machen",
-      "uk": "зробив(ла)"
+      "de": "gemacht",
+      "uk": "зробил"
     },
-    "example": "Gisteren heb ik een schilderij gemaakt voor mijn vriendin."
+    "example": "Gisteren hebben ze een schilderij gemaakt voor mijn vriendin."
   },
   {
-    "original": "naaien",
     "infinitive": "naaien",
+    "original": "genaaid",
     "translation": {
-      "ru": "шить",
-      "fr": "coudre",
-      "en": "sew",
-      "de": "nähen",
-      "uk": "шити"
+      "ru": "шил",
+      "fr": "cousu",
+      "en": "sewed",
+      "de": "genäht",
+      "uk": "шил"
     },
-    "example": "Ze heeft gisteravond een rok genaaid."
+    "example": "Ze hebben gisteravond een rok genaaid."
   },
   {
-    "original": "noteren",
     "infinitive": "noteren",
+    "original": "genoteerd",
     "translation": {
-      "ru": "записал(а)",
-      "fr": "noter",
+      "ru": "записал",
+      "fr": "noté",
       "en": "noted",
-      "de": "notieren",
-      "uk": "записав(ла)"
+      "de": "notiert",
+      "uk": "записал"
     },
     "example": "Hij heeft tijdens de vergadering alles genoteerd."
   },
   {
-    "original": "ontdekken",
     "infinitive": "ontdekken",
+    "original": "ontdekt",
     "translation": {
-      "ru": "обнаружили",
-      "fr": "découvrir",
+      "ru": "обнаружил/открыл",
+      "fr": "découvert",
       "en": "discovered",
-      "de": "entdecken",
-      "uk": "виявили"
+      "de": "entdeckt",
+      "uk": "виявил/відкрил"
     },
-    "example": "Tijdens de wandeling hebben we een verborgen pad ontdekt."
+    "example": "Tijdens de wandeling hebben ze een verborgen pad ontdekt."
   },
   {
-    "original": "opruimen",
     "infinitive": "opruimen",
+    "original": "opgeruimd",
     "translation": {
-      "ru": "убрали",
+      "ru": "убрал",
       "fr": "rangé",
       "en": "cleaned up",
-      "de": "aufräumen",
-      "uk": "прибрали"
+      "de": "aufgeräumt",
+      "uk": "прибрал"
     },
-    "example": "Na het feest hebben we gezamenlijk opgeruimd."
+    "example": "Na het feest hebben ze gezamenlijk opgeruimd."
   },
   {
-    "original": "parkeren",
     "infinitive": "parkeren",
+    "original": "geparkeerd",
     "translation": {
-      "ru": "припарковал(а)",
+      "ru": "припарковал",
       "fr": "garé",
       "en": "parked",
-      "de": "parken",
-      "uk": "припаркував(ла)"
+      "de": "geparkt",
+      "uk": "припаркувал"
     },
     "example": "Hij heeft zijn auto keurig geparkeerd."
   },
   {
-    "original": "passen",
     "infinitive": "passen",
+    "original": "gepast",
     "translation": {
-      "ru": "примерили",
+      "ru": "примерил",
       "fr": "essayé",
       "en": "tried on",
-      "de": "anprobieren",
-      "uk": "примірили"
+      "de": "angepasst",
+      "uk": "примірил"
     },
-    "example": "In de winkel hebben we verschillende jurken gepast."
+    "example": "In de winkel hebben ze verschillende jurken gepast."
   },
   {
-    "original": "poetsen",
     "infinitive": "poetsen",
+    "original": "gepoetst",
     "translation": {
-      "ru": "почистил(а)",
+      "ru": "почистил",
       "fr": "nettoyé",
       "en": "cleaned",
-      "de": "putzen",
-      "uk": "очистив(ла)"
+      "de": "geputzt",
+      "uk": "очистил"
     },
-    "example": "Na het werk heeft hij zijn auto gepoetst."
+    "example": "Na het werk hebben ze de auto gepoetst."
   },
   {
-    "original": "posten",
     "infinitive": "posten",
+    "original": "gepost",
     "translation": {
-      "ru": "отправил(а)",
+      "ru": "отправил",
       "fr": "posté",
       "en": "posted",
-      "de": "posten",
-      "uk": "відправив(ла)"
+      "de": "gepostet",
+      "uk": "відправил"
     },
-    "example": "Ze heeft gisteren de belangrijke brief gepost."
+    "example": "Ze hebben gisteren de belangrijke brief gepost."
   },
   {
-    "original": "praten",
     "infinitive": "praten",
+    "original": "gepraat",
     "translation": {
-      "ru": "поговорили",
+      "ru": "поговорил",
       "fr": "parlé",
       "en": "talked",
-      "de": "sprechen",
-      "uk": "поговорили"
+      "de": "gesprochen",
+      "uk": "поговорил"
     },
-    "example": "Tijdens het etentje hebben we uitgebreid met elkaar gepraat."
+    "example": "Tijdens het etentje hebben ze uitgebreid met elkaar gepraat."
   },
   {
-    "original": "proeven",
     "infinitive": "proeven",
+    "original": "geproefd",
     "translation": {
-      "ru": "пробовал(а)",
+      "ru": "пробовал",
       "fr": "goûté",
       "en": "tasted",
-      "de": "probieren",
-      "uk": "скуштував(ла)"
+      "de": "probiert",
+      "uk": "скуштувал"
     },
     "example": "De kok heeft de soep geproefd."
   },
   {
-    "original": "regenen",
     "infinitive": "regenen",
+    "original": "geregend",
     "translation": {
       "ru": "шёл дождь",
       "fr": "plu",
       "en": "rained",
-      "de": "regnen",
+      "de": "geregnet",
       "uk": "йшов дощ"
     },
     "example": "Het heeft de hele dag geregend."
   },
   {
-    "original": "repareren",
     "infinitive": "repareren",
+    "original": "gerepareerd",
     "translation": {
-      "ru": "отремонтировал(а)",
+      "ru": "отремонтировал",
       "fr": "réparé",
       "en": "repaired",
-      "de": "reparieren",
-      "uk": "відремонтував(ла)"
+      "de": "repariert",
+      "uk": "відремонтувал"
     },
     "example": "Hij heeft gisteren snel de kapotte fiets gerepareerd."
   },
   {
-    "original": "roken",
     "infinitive": "roken",
+    "original": "gerookt",
     "translation": {
-      "ru": "курили",
+      "ru": "курил",
       "fr": "fumé",
       "en": "smoked",
-      "de": "rauchen",
-      "uk": "курили"
+      "de": "geraucht",
+      "uk": "курил"
     },
     "example": "Gisteren zijn ze naar buiten gegaan en hebben samen gerookt."
   },
   {
-    "original": "schilderen",
     "infinitive": "schilderen",
+    "original": "geschilderd",
     "translation": {
-      "ru": "покрасил(а)",
+      "ru": "покрасил",
       "fr": "peint",
       "en": "painted",
-      "de": "malen",
-      "uk": "пофарбував(ла)"
+      "de": "gemalt",
+      "uk": "пофарбувал"
     },
-    "example": "Ze heeft gisteren haar kamer geschilderd."
+    "example": "Ze hebben gisteren haar kamer geschilderd."
   },
   {
-    "original": "sorteren",
-    "infinitive": "sorteren",
+    "infinitive": "schillen",
+    "original": "geschild",
     "translation": {
-      "ru": "отсортировали",
+      "ru": "чистил",
+      "fr": "épluché",
+      "en": "peeled",
+      "de": "geschält",
+      "uk": "чистив"
+    },
+    "example": "Gisteren heeft ze aardappelen geschild voor het avondeten."
+  },
+  {
+    "infinitive": "skiën",
+    "original": "geskied",
+    "translation": {
+      "ru": "катался на лыжах",
+      "fr": "skié",
+      "en": "skied",
+      "de": "skigefahren",
+      "uk": "катався на лижах"
+    },
+    "example": "Vorige winter zijn we naar de bergen gegaan en hebben geskied."
+  },
+  {
+    "infinitive": "sorteren",
+    "original": "gesorteerd",
+    "translation": {
+      "ru": "отсортировал",
       "fr": "trié",
       "en": "sorted",
-      "de": "sortieren",
-      "uk": "відсортували"
+      "de": "sortiert",
+      "uk": "відсортувал"
     },
     "example": "Gisteren hebben we het afval gesorteerd voor recycling."
   },
   {
-    "original": "spelen",
     "infinitive": "spelen",
+    "original": "gespeeld",
     "translation": {
-      "ru": "играли",
+      "ru": "играл",
       "fr": "joué",
       "en": "played",
-      "de": "spielen",
-      "uk": "грали"
+      "de": "gespielt",
+      "uk": "грал"
     },
     "example": "De kinderen hebben gistermiddag vrolijk in de tuin gespeeld."
   },
   {
-    "original": "sporten",
-    "infinitive": "sporten",
+    "infinitive": "sportten gesport",
+    "original": "gesport",
     "translation": {
-      "ru": "занимались спортом",
+      "ru": "занимался спортом",
       "fr": "fait du sport",
       "en": "exercised",
-      "de": "Sport treiben",
-      "uk": "займалися спортом"
+      "de": "Sport getrieben",
+      "uk": "займался спортом"
     },
     "example": "Hij heeft gisteren in de sportschool gesport."
   },
   {
-    "original": "stofzuigen",
     "infinitive": "stofzuigen",
+    "original": "gestofzuigd",
     "translation": {
-      "ru": "пылесосили",
+      "ru": "пылесосил",
       "fr": "passé l'aspirateur",
       "en": "vacuumed",
-      "de": "staubsaugen",
-      "uk": "пилососили"
+      "de": "staubgesaugt",
+      "uk": "пилососил"
     },
-    "example": "Voordat de gasten kwamen, heeft ze snel gestofzuigd."
+    "example": "Voordat de gasten kwamen, hebben ze snel gestofzuigd."
   },
   {
-    "original": "stoppen",
     "infinitive": "stoppen",
+    "original": "gestopt",
     "translation": {
       "ru": "остановился",
       "fr": "arrêté",
       "en": "stopped",
-      "de": "aufhören",
-      "uk": "зупинився"
+      "de": "gestoppt",
+      "uk": "зупинился"
     },
     "example": "Hij is gisteren vroeg gestopt met werken om te ontspannen."
   },
   {
-    "original": "studeren",
     "infinitive": "studeren",
+    "original": "gestudeerd",
     "translation": {
-      "ru": "занималась учёбой",
+      "ru": "учился",
       "fr": "étudié",
       "en": "studied",
-      "de": "studieren",
-      "uk": "вчилась"
+      "de": "studiert",
+      "uk": "вчився"
     },
-    "example": "Ze heeft gisteren gestudeerd voor haar examen."
+    "example": "Ze hebben gisteren gestudeerd voor haar examen."
   },
   {
-    "original": "sturen",
     "infinitive": "sturen",
+    "original": "gestuurd",
     "translation": {
-      "ru": "отправил(а)",
+      "ru": "отправил",
       "fr": "envoyé",
       "en": "sent",
-      "de": "schicken",
-      "uk": "відправив(ла)"
+      "de": "geschickt",
+      "uk": "відправил"
     },
-    "example": "Gisteren heeft ze een kaartje naar haar vriendin gestuurd."
+    "example": "Gisteren hebben ze een kaartje naar haar vriendin gestuurd."
   },
   {
-    "original": "surfen",
     "infinitive": "surfen",
+    "original": "gesurft",
     "translation": {
-      "ru": "сёрфил(а) в интернете",
+      "ru": "сёрфил в интернете",
       "fr": "surfé",
       "en": "surfed",
-      "de": "surfen",
-      "uk": "серфував(ла) в інтернеті"
+      "de": "gesurft",
+      "uk": "серфувал в інтернеті"
     },
     "example": "Hij heeft gisteren op internet gesurft om informatie te vinden."
   },
   {
-    "original": "tennissen",
-    "infinitive": "tennissen",
+    "infinitive": "tekenen",
+    "original": "getekend",
     "translation": {
-      "ru": "играли в теннис",
+      "ru": "рисовал",
+      "fr": "dessiné",
+      "en": "drew",
+      "de": "gezeichnet",
+      "uk": "малював"
+    },
+    "example": "Gisteravond heeft ze een prachtig landschap getekend."
+  },
+  {
+    "infinitive": "telefoneren",
+    "original": "getelefoneerd",
+    "translation": {
+      "ru": "звонил по телефону",
+      "fr": "téléphoné",
+      "en": "phoned",
+      "de": "telefoniert",
+      "uk": "телефонував"
+    },
+    "example": "Gisteren heeft ze haar vriendin telefonisch gesproken."
+  },
+  {
+    "infinitive": "tennissen",
+    "original": "getennist",
+    "translation": {
+      "ru": "играл в теннис",
       "fr": "joué au tennis",
       "en": "played tennis",
-      "de": "Tennis spielen",
-      "uk": "грали в теніс"
+      "de": "Tennis gespielt",
+      "uk": "грал в теніс"
     },
     "example": "Ze hebben gistermiddag getennist op de tennisbaan."
   },
   {
-    "original": "tuinieren",
     "infinitive": "tuinieren",
+    "original": "getuinierd",
     "translation": {
-      "ru": "занимались садоводством",
+      "ru": "занимался садоводством",
       "fr": "jardiné",
       "en": "gardened",
-      "de": "gärtnern",
-      "uk": "садіння"
+      "de": "gegartnert",
+      "uk": "саділ"
     },
-    "example": "In het weekend hebben ze de tuin verzorgd."
+    "example": "In het weekend hebben ze in de tuin getuinierd."
   },
   {
-    "original": "verbranden",
     "infinitive": "verbranden",
+    "original": "verbrand",
     "translation": {
-      "ru": "сожгли",
+      "ru": "обжегся",
       "fr": "brûlé",
       "en": "burned",
-      "de": "verbrennen",
-      "uk": "спалили"
+      "de": "verbrannt",
+      "uk": "обпікся"
     },
     "example": "Hij heeft gisteren per ongeluk zijn hand verbrand tijdens het koken."
   },
   {
-    "original": "vergaderen",
     "infinitive": "vergaderen",
+    "original": "vergaderd",
     "translation": {
-      "ru": "проводили собрание",
+      "ru": "проводил собрание",
       "fr": "réuni",
       "en": "had a meeting",
-      "de": "tagen",
-      "uk": "проводили збори"
+      "de": "getagt",
+      "uk": "проводил збори"
     },
     "example": "Op het werk hebben ze gisteren lang vergaderd over nieuwe projecten."
   },
   {
-    "original": "verhuizen",
     "infinitive": "verhuizen",
+    "original": "verhuisd",
     "translation": {
-      "ru": "переехали",
+      "ru": "переехал",
       "fr": "déménagé",
       "en": "moved",
-      "de": "umziehen",
-      "uk": "переїхали"
+      "de": "umgezogen",
+      "uk": "переїхал"
     },
     "example": "Ze zijn onlangs naar een nieuw huis verhuisd."
   },
   {
-    "original": "verjaren",
     "infinitive": "verjaren",
+    "original": "verjaard",
     "translation": {
       "ru": "праздновали день рождения",
       "fr": "célébré l'anniversaire",
       "en": "celebrated a birthday",
-      "de": "Geburtstag feiern",
+      "de": "Geburtstag gefeiert",
       "uk": "святкували день народження"
     },
-    "example": "Vorige week heeft ze haar verjaardag gevierd met vrienden."
+    "example": "Vorige week hebben ze haar verjaardag gevierd met vrienden."
   },
   {
-    "original": "vertellen",
     "infinitive": "vertellen",
+    "original": "verteld",
     "translation": {
       "ru": "рассказывали",
       "fr": "raconté",
       "en": "told",
-      "de": "erzählen",
+      "de": "erzählt",
       "uk": "розповідали"
     },
-    "example": "Ze heeft gisteravond een spannend verhaal aan de kinderen verteld."
+    "example": "Ze hebben gisteravond een spannend verhaal aan de kinderen verteld."
   },
   {
-    "original": "verzorgen",
     "infinitive": "verzorgen",
+    "original": "verzorgd",
     "translation": {
-      "ru": "заботиться",
-      "fr": "soigner",
-      "en": "care for",
-      "de": "pflegen",
-      "uk": "дбати"
+      "ru": "заботился",
+      "fr": "soigné",
+      "en": "cared for",
+      "de": "gepflegt",
+      "uk": "дбав"
     },
     "example": "Hij heeft tijdens zijn vakantie goed voor de planten gezorgd."
   },
   {
-    "original": "vissen",
     "infinitive": "vissen",
+    "original": "gevist",
     "translation": {
-      "ru": "рыбачить",
-      "fr": "pêcher",
-      "en": "fish",
-      "de": "angeln",
-      "uk": "рибалити"
+      "ru": "рыбачил",
+      "fr": "pêché",
+      "en": "fished",
+      "de": "gefischt",
+      "uk": "рибачив"
     },
     "example": "Op vakantie hebben ze samen op zee gevist."
   },
   {
-    "original": "voetballen",
     "infinitive": "voetballen",
+    "original": "gevoetbald",
     "translation": {
-      "ru": "играть в футбол",
-      "fr": "jouer au football",
-      "en": "play football",
-      "de": "Fußball spielen",
-      "uk": "грати в футбол"
+      "ru": "играл в футбол",
+      "fr": "joué au football",
+      "en": "played football",
+      "de": "Fußball gespielt",
+      "uk": "грав в футбол"
     },
     "example": "In het park hebben de kinderen gisteren gevoetbald."
   },
   {
-    "original": "volgen",
     "infinitive": "volgen",
+    "original": "gevolgd",
     "translation": {
-      "ru": "следовать",
-      "fr": "suivre",
-      "en": "follow",
-      "de": "folgen",
-      "uk": "слідувати"
+      "ru": "посещал",
+      "fr": "suivi",
+      "en": "followed",
+      "de": "gefolgt",
+      "uk": "відвідував"
     },
     "example": "Ze heeft een cursus gevolgd om haar vaardigheden te verbeteren."
   },
   {
-    "original": "volleyballen",
     "infinitive": "volleyballen",
+    "original": "gevolleybald",
     "translation": {
-      "ru": "играть в волейбол",
-      "fr": "jouer au volleyball",
-      "en": "play volleyball",
-      "de": "Volleyball spielen",
-      "uk": "грати в волейбол"
+      "ru": "играл в волейбол",
+      "fr": "joué au volleyball",
+      "en": "played volleyball",
+      "de": "Volleyball gespielt",
+      "uk": "грав в волейбол"
     },
     "example": "Op het strand hebben ze gistermiddag volleybal gespeeld met vrienden."
   },
   {
-    "original": "vragen",
     "infinitive": "vragen",
+    "original": "gevraagd",
     "translation": {
-      "ru": "спрашивать",
-      "fr": "demander",
-      "en": "ask",
-      "de": "fragen",
-      "uk": "питати"
+      "ru": "спрашивал",
+      "fr": "demandé",
+      "en": "asked",
+      "de": "gefragt",
+      "uk": "питав"
     },
     "example": "Ze heeft gisteren vriendelijk aan de ober gevraagd om de rekening."
   },
   {
-    "original": "wandelen",
     "infinitive": "wandelen",
+    "original": "gewandeld",
     "translation": {
-      "ru": "гулять",
-      "fr": "se promener",
-      "en": "walk",
-      "de": "spazieren gehen",
-      "uk": "гуляти"
+      "ru": "гулял",
+      "fr": "se promené",
+      "en": "walked",
+      "de": "spaziert",
+      "uk": "гуляв"
     },
     "example": "Op zondagmiddag hebben ze gisteren door het bos gewandeld."
   },
   {
-    "original": "weggooien",
     "infinitive": "weggooien",
+    "original": "weggegooide",
     "translation": {
-      "ru": "выбрасывать",
-      "fr": "jeter",
-      "en": "throw away",
-      "de": "wegwerfen",
-      "uk": "викидати"
+      "ru": "выбрасывал",
+      "fr": "jeté",
+      "en": "threw away",
+      "de": "weggeworfen",
+      "uk": "викидав"
     },
     "example": "Ze hebben gisteren oude spullen weggegooid om ruimte te maken."
   },
   {
-    "original": "werken",
     "infinitive": "werken",
+    "original": "gewerkt",
     "translation": {
-      "ru": "работать",
-      "fr": "travailler",
-      "en": "work",
-      "de": "arbeiten",
-      "uk": "працювати"
+      "ru": "работал",
+      "fr": "travaillé",
+      "en": "worked",
+      "de": "gearbeitet",
+      "uk": "працював"
     },
     "example": "Hij heeft gisteren hard gewerkt aan zijn project."
   },
   {
-    "original": "winkelen",
     "infinitive": "winkelen",
+    "original": "gewinkeld",
     "translation": {
-      "ru": "покупать",
-      "fr": "faire du shopping",
-      "en": "shop",
-      "de": "einkaufen",
-      "uk": "шопінгувати"
+      "ru": "покупал",
+      "fr": "fait du shopping",
+      "en": "shopped",
+      "de": "eingekauft",
+      "uk": "покупав"
     },
     "example": "Ze hebben gisteren de hele dag gewinkeld en leuke dingen gekocht."
   },
   {
-    "original": "zeilen",
     "infinitive": "zeilen",
+    "original": "gezeild",
     "translation": {
-      "ru": "парусить",
-      "fr": "faire de la voile",
-      "en": "sail",
-      "de": "segeln",
-      "uk": "вітрильництво"
+      "ru": "ходил под парусом",
+      "fr": "fait de la voile",
+      "en": "sailed",
+      "de": "gesegelt",
+      "uk": "ходив під вітрилом"
     },
-    "example": "Op vakantie hebben ze samen leren zeilen."
+    "example": "Hij heeft in Nederland gezeild."
   },
   {
-    "original": "zetten",
     "infinitive": "zetten",
+    "original": "gezet",
     "translation": {
-      "ru": "ставить",
-      "fr": "mettre",
-      "en": "set",
-      "de": "stellen",
-      "uk": "ставити"
+      "ru": "ставил",
+      "fr": "mis",
+      "en": "put",
+      "de": "gesetzt",
+      "uk": "ставив"
     },
     "example": "Ze hebben gisteravond de tafel gezet voor het familiediner."
   }

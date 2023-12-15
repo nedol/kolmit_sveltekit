@@ -306,9 +306,9 @@
 	{/if}
 </main>
 
-<div style="position:absolute; bottom:55px ; right:0; font-size:medium">{voice_name}</div>
-
 <BottomAppBar bind:this={bottomAppBar}>
+	<div style="position:absolute; bottom:55px ; right:0; font-size:small">{voice_name}</div>
+
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
 			<Icon tag="svg" viewBox="0 0 24 24">
