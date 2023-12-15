@@ -105,7 +105,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img src={langAr['fr']} alt="English" />
+									<img src={langAr['fr']} alt="Français" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -114,7 +114,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img src={langAr['nl']} alt="English" />
+									<img src={langAr['nl']} alt="Nederlands" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -123,7 +123,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img src={langAr['de']} alt="English" />
+									<img src={langAr['de']} alt="Deutch" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -132,7 +132,7 @@
 									}}
 								>
 									<!-- <Graphic class="material-icons">edit</Graphic> -->
-									<img src={langAr['uk']} alt="English" />
+									<img src={langAr['uk']} alt="Український" />
 								</Item>
 								<Item
 									on:SMUI:action={() => {
@@ -140,7 +140,7 @@
 										lang_menu = false;
 									}}
 								>
-									<img src={langAr['ru']} alt="English" />
+									<img src={langAr['ru']} alt="Русский" />
 								</Item>
 							</List>
 						</div>
