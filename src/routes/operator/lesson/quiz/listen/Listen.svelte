@@ -98,7 +98,9 @@
 	let digit = 10;
 	let div_input;
 
-	onMount(() => {});
+	onMount(async () => {
+		await EasySpeech.init(); // required
+	});
 
 	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {
@@ -315,7 +317,6 @@
 	}
 
 	async function speak(text) {
-		await EasySpeech.init(); // required
 		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
 
 		// $tts.speak({

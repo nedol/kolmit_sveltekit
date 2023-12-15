@@ -67,7 +67,9 @@
 		setFocus();
 	}
 
-	onMount(() => {});
+	onMount(async () => {
+		await EasySpeech.init(); // required
+	});
 
 	onDestroy(() => {
 		// Очищаем интервал при размонтировании компонента
@@ -241,7 +243,7 @@
 		// 	console.error('An error occurred :', e);
 		// });
 		// } else {
-		await EasySpeech.init(); // required
+
 		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
 		// }
 

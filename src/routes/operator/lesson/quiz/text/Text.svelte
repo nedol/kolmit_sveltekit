@@ -89,7 +89,8 @@
 		return matchedWords;
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		await EasySpeech.init(); // required
 		const parentWidth = window.innerWidth;
 		containerWidth = parentWidth + 'px';
 
@@ -134,7 +135,7 @@
 		// 	.catch((e) => {
 		// 		console.error('An error occurred :', e);
 		// 	});
-		await EasySpeech.init(); // required
+
 		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
 	}
 
