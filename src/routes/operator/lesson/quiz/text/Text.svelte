@@ -31,7 +31,7 @@
 	const abonent = getContext('abonent');
 
 	fetch(
-		`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.title}&abonent=${abonent}`
+		`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
 	)
 		.then((response) => response.json())
 		.then((data) => {

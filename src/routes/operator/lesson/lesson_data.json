@@ -35,18 +35,18 @@
                         "quizes": [
                             {
                                 "type": "text",
-                                "name": "Quiz 1",
-                                "title": "Familie 1"
+                                "title": "Familie 1",
+                                "name": "Familie 1"
                             },
                             {
                                 "type": "text",
-                                "name": "Quiz 2",
-                                "title": "Familie 2"
+                                "title": "Familie 2",
+                                "name": "Familie 2"
                             },
                             {
                                 "type": "pair",
-                                "name": "Dialog 1",
-                                "title": "Familie 3"
+                                "title": "Dialog 1",
+                                "name": "Familie 3"
                             }
                         ]
                     },
@@ -863,13 +863,13 @@
                         "quizes": [
                             {
                                 "type": "text",
-                                "name": "Een weekje Oostende met de klas",
-                                "title": "Schooluitstap"
+                                "title": "Een weekje Oostende met de klas",
+                                "name": "Schooluitstap"
                             },
                             {
                                 "type": "text",
-                                "name": "Een weekje Oostende met de klas",
-                                "title": "Een weekje Oostende"
+                                "title": "Een weekje Oostende met de klas",
+                                "name": "Een weekje Oostende"
                             }
                         ]
                     },
@@ -907,7 +907,12 @@
                             {
                                 "type": "text",
                                 "name": "Exam info",
-                                "title": "Exam info"
+                                "title": "Exam.1 info"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Exam.2 info",
+                                "title": "Exam.2 info"
                             }
                         ]
                     }
@@ -944,8 +949,8 @@
                         "quizes": [
                             {
                                 "type": "text",
-                                "title": "De vakantie",
-                                "name": "De vakantie van Amir, Jullie, Aisha en Elise"
+                                "name": "De vakantie",
+                                "title": "De vakantie van Amir, Jullie, Aisha en Elise"
                             }
                         ]
                     },
