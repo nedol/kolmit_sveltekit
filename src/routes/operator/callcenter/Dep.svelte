@@ -197,13 +197,11 @@
 		</div>
 	{/if}
 	{#if dep.staff}
-		{#each dep.staff as user, u}
-			<!-- {#if user.email !== operator.em || (!user.email && owner === operator.em)} -->
-			<!-- {user_status.push({ user: status })} -->
-			<Oper bind:status={$call_but_status} {operator} bind:dep bind:user {update} {readonly} />
-			<!-- <br /> -->
-			<!-- {/if} -->
-		{/each}
+		<div class="horizontal-container">
+			{#each dep.staff as user, u}
+				<Oper bind:status={$call_but_status} {operator} bind:dep bind:user {update} {readonly} />
+			{/each}
+		</div>
 	{/if}
 	{#if edited_display}
 		<!-- {#if tarif.deps} -->
@@ -233,6 +231,11 @@
 
 <!-- </Collapse> -->
 <style>
+	.horizontal-container {
+		display: flex;
+		flex-wrap: wrap; /* Перенос элементов на новую строку при нехватке места */
+		gap: 10px; /* Расстояние между элементами */
+	}
 	.collapsible {
 		background-color: rgb(158, 158, 158);
 		color: white;
