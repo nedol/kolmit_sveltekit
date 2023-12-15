@@ -71,10 +71,12 @@ export async function GET({ url, fetch, cookies }) {
 
 global.interval;
 global.loop = function () {
-	if (!global.interval)
-		global.interval = setInterval(async () => {
-			// let resp = await fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-		}, 1000 * 10 * 60);
+	try {
+		if (!global.interval)
+			global.interval = setInterval(async () => {
+				let resp = await fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+			}, 1000 * 10 * 60);
+	} catch (ex) {}
 };
 
 /** @type {import('./$types').RequestHandler} */
