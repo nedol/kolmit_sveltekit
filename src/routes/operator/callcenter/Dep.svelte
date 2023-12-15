@@ -67,6 +67,12 @@
 
 	import { langs } from '$lib/js/stores.js';
 
+	function sortStaffAlphabetically(staff) {
+		return staff.sort((a, b) => a.name.localeCompare(b.name));
+	}
+
+	dep.staff = sortStaffAlphabetically(dep.staff);
+
 	function OnClickInput(ev) {
 		if (edited_display)
 			if (dep.admin.email === owner || !operator.abonent) {
