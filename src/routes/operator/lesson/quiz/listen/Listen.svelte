@@ -98,9 +98,7 @@
 	let digit = 10;
 	let div_input;
 
-	onMount(async () => {
-		await EasySpeech.init(); // required
-	});
+	onMount(async () => {});
 
 	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {

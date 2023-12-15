@@ -90,7 +90,6 @@
 	}
 
 	onMount(async () => {
-		await EasySpeech.init(); // required
 		const parentWidth = window.innerWidth;
 		containerWidth = parentWidth + 'px';
 

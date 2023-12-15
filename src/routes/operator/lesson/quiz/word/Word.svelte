@@ -67,9 +67,7 @@
 		setFocus();
 	}
 
-	onMount(async () => {
-		await EasySpeech.init(); // required
-	});
+	onMount(async () => {});
 
 	onDestroy(() => {
 		// Очищаем интервал при размонтировании компонента

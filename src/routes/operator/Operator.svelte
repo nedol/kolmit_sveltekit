@@ -3,6 +3,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
 
+	import EasySpeech from 'easy-speech';
+
 	import IconButton, { Icon } from '@smui/icon-button';
 	import { mdiAccountBox } from '@mdi/js';
 	import CircularProgress from '@smui/circular-progress';
@@ -156,6 +158,7 @@
 
 	onMount(async () => {
 		try {
+			await EasySpeech.init(); // required
 			rtc = new RTCOperator($operator, uid, $signal);
 			initRTC();
 			rtc.SendCheck();

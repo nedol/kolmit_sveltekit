@@ -863,12 +863,12 @@
                         "quizes": [
                             {
                                 "type": "text",
-                                "title": "Een weekje Oostende met de klas",
+                                "title": "Een weekje Oostende.1",
                                 "name": "Schooluitstap"
                             },
                             {
                                 "type": "text",
-                                "title": "Een weekje Oostende met de klas",
+                                "title": "Een weekje Oostende.2",
                                 "name": "Een weekje Oostende"
                             }
                         ]
