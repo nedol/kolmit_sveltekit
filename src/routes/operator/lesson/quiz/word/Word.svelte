@@ -8,6 +8,10 @@
 	import IconButton, { Icon } from '@smui/icon-button';
 	import { mdiPagePreviousOutline, mdiShuffleVariant } from '@mdi/js';
 
+	import { dicts } from '$lib/js/stores.js';
+
+	let dict = $dicts;
+
 	import { lesson } from '$lib/js/stores.js';
 
 	export let data;
@@ -267,9 +271,9 @@
 		</div>
 		<div style="position:relative;float:right">
 			{#if showNextButton}
-				<button on:click={nextWord} class="next-button">Дальше</button>
+				<button on:click={nextWord} class="next-button">{dict['Дальше'][$langs]}</button>
 			{:else}
-				<button on:click={checkInput} class="check-button">Проверить</button>
+				<button on:click={checkInput} class="check-button">{dict['Проверить'][$langs]}</button>
 			{/if}
 		</div>
 		<div style="height: 40px"></div>

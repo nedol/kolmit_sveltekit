@@ -56,6 +56,14 @@ export const dict = [
 			nl: 'Kijk hier',
 			de: 'Überprüfen Sie es'
 		},
+		Дальше: {
+			en: 'Next',
+			ru: 'Дальше',
+			fr: 'Plus loin',
+			uk: 'Далі',
+			nl: 'Verder',
+			de: 'Weitere'
+		},
 		'Послушай и напиши': {
 			en: 'Listen and type',
 			ru: 'Послушай и напиши',

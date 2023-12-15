@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import EasySpeech from 'easy-speech';
 	import Speak from './Speak.svelte';
 	import moment from 'moment';
@@ -25,7 +26,7 @@
 	import { langs } from '$lib/js/stores.js';
 
 	import { dicts } from '$lib/js/stores.js';
-	import { onMount } from 'svelte';
+
 	let dict = $dicts;
 
 	let share_mode = false;
