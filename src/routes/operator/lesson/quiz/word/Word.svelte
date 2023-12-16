@@ -194,12 +194,19 @@
 				// Перемещаем текущее слово в конец своей "десятки" в words
 				words.splice(currentWordIndex, 1);
 				words.splice(parseInt(currentWordIndex / 10) * 10 + 9, 0, currentWord);
-				// Вычисляем индекс конечного элемента в следующей "десятке"
-				const nextTenIndex = (parseInt(currentWordIndex / 20) + 1) * 10 - 1;
 				// Создаем клон текущего слова
 				const currentWordClone = { ...currentWord };
-				// Вставляем currentWord в конец следующей "десятки"
-				words.splice(nextTenIndex, 0, currentWordClone);
+				// Проверяем, достаточно ли элементов в массиве words для добавления в следующую "двадцатку"
+				if (currentWordIndex + 20 < words.length) {
+					// Вычисляем индекс конечного элемента в следующей "двадцатке"
+					const nextTwentyIndex = currentWordIndex + 20;
+					// Вставляем клон currentWord в конец следующей "двадцатки"
+					words.splice(nextTwentyIndex, 0, currentWordClone);
+				} else {
+					// Если условие не выполняется, вставляем клон currentWord в конец массива words
+					words.push(currentWordClone);
+				}
+
 				words = words;
 				currentWordIndex = currentWordIndex - 1;
 				errorIndex = 0;
