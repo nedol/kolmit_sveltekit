@@ -84,7 +84,7 @@
 
 			userContent = userContent.replace(
 				regex,
-				`<span class="highlight" style="color: red;background-color: transparent">${woord}</span>`
+				`<span class="highlight" style="color: green;background-color: transparent">${woord}</span>`
 			);
 		});
 
@@ -97,7 +97,7 @@
 
 			userContent = userContent.replace(
 				regex,
-				`<span class="highlight" style="color: red;background-color: transparent">${woord}</span>`
+				`<span class="highlight" style="color: green;background-color: transparent">${woord}</span>`
 			);
 		});
 	}
