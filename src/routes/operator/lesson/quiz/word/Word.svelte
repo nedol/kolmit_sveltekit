@@ -195,7 +195,7 @@
 				words.splice(currentWordIndex, 1);
 				words.splice(parseInt(currentWordIndex / 10) * 10 + 9, 0, currentWord);
 				// Вычисляем индекс конечного элемента в следующей "десятке"
-				const nextTenIndex = (parseInt(currentWordIndex / 10) + 1) * 10 - 1;
+				const nextTenIndex = (parseInt(currentWordIndex / 20) + 1) * 10 - 1;
 				// Создаем клон текущего слова
 				const currentWordClone = { ...currentWord };
 				// Вставляем currentWord в конец следующей "десятки"
