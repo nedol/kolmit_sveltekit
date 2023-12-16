@@ -315,17 +315,25 @@
 	}
 
 	async function speak(text) {
-		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
-
-		// $tts.speak({
-		// 	text: utterance
+		// await EasySpeech.speak({
+		// 	text: text,
+		// 	voice: $tts.voice,
+		// 	error: async (e) => {
+		// 		console.log(e);
+		// 		await EasySpeech.init();
+		// 	}
 		// });
-		// .then(() => {
-		// 	console.log('speak Success !');
-		// })
-		// .catch((e) => {
-		// 	console.error('An error occurred :', e);
-		// });
+		// return;
+		$tts
+			.speak({
+				text
+			})
+			.then(() => {
+				console.log('speak Success !');
+			})
+			.catch((e) => {
+				console.error('An error occurred :', e);
+			});
 	}
 
 	function repeat() {

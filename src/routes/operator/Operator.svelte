@@ -129,36 +129,12 @@
 		if ($tts.hasBrowserSupport()) {
 			console.log('speech synthesis supported');
 		}
-
-		$tts.init({
-			volume: 1,
-			lang: 'nl-BE',
-			rate: 1,
-			pitch: 1,
-			// voice: 'Dutch Belgium',
-			splitSentences: true,
-			listeners: {
-				onvoiceschanged: (voices) => {
-					// Вывод информации о голосах
-					voices.forEach((v, index) => {
-						if (v.name.includes('Dutch') && v.lang.includes('nl') && v.lang.includes('BE')) {
-							console.log(`Голос ${index + 1}: ${v.name}, Язык: ${v.lang}`);
-							$tts.setVoice(v.name);
-							voice = v;
-							return;
-						}
-					});
-				},
-				onerror: () => {
-					$tts.cancel();
-				}
-			}
-		});
 	}
 
 	onMount(async () => {
 		try {
 			await EasySpeech.init(); // required
+
 			rtc = new RTCOperator($operator, uid, $signal);
 			initRTC();
 			rtc.SendCheck();
@@ -166,8 +142,6 @@
 		} catch (ex) {
 			console.log();
 		}
-
-		//InitTTS();
 
 		const synthesis = window.speechSynthesis;
 		let voices = synthesis.getVoices();
@@ -184,48 +158,85 @@
 		function selectVoice(voices) {
 			for (let v in voices) {
 				$tts = { voice: voices[v] };
+
 				if (voices[v].lang.includes('nl')) {
 					$tts = { voice: voices[v] };
+
 					if (voices[v].lang.includes('BE')) {
 						// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
 						$tts = { voice: voices[v] };
+
 						break;
 					}
 				}
 			}
 		}
 
-		// setTimeout(() => {
-		// 	$tts = {
-		// 		speak: function (textObj) {
-		// 			if ('speechSynthesis' in window) {
-		// 				// Получаем доступные голоса
-		// 				// let voices = await synthesis.getVoices();
-		// 				// Создаем объект с параметрами речи
-		// 				const utterance = new SpeechSynthesisUtterance(textObj.text);
-		// 				utterance.lang = 'nl-BE';
-		// 				utterance.onerror = (event) => {
-		// 					// console.log(event);
-		// 					synthesis.cancel();
-		// 				};
-		// 				utterance.onend = (event) => {
-		// 					synthesis.cancel();
-		// 				};
-		// 				// Запускаем озвучивание
-		// 				utterance.voice = voice;
-		// 				console.log(`Голос: ${voice.name}, Язык: ${voice.lang}`);
-		// 				synthesis.speak(utterance);
-		// 				// synthesis.cancel();
-		// 			} else {
-		// 				alert('Web Speech API не поддерживается в вашем браузере.');
-		// 			}
-		// 		},
-		// 		cancel: function () {
-		// 			synthesis.cancel();
-		// 		},
-		// 		voice: voice
-		// 	};
-		// }, 10);
+		setTimeout(() => {
+			$tts = {
+				speak: function (textObj) {
+					let timer;
+					if ('speechSynthesis' in window) {
+						// Получаем доступные голоса
+						// let voices = await synthesis.getVoices();
+						// Создаем объект с параметрами речи
+						const utterance = new SpeechSynthesisUtterance(textObj.text);
+						const clear = () => {
+							clearTimeout(timer);
+						};
+						function isAndroid() {
+							return navigator.userAgent.toLowerCase().includes('android');
+						}
+						utterance.onstart = () => {
+							// detection is up to you for this article as
+							// this is an own huge topic for itself
+							if (!isAndroid) {
+								resumeInfinity(utterance);
+							}
+						};
+						utterance.onerror = clear;
+						utterance.onend = clear;
+						// utterance.lang = 'nl-BE';
+						// utterance.onerror = (event) => {
+						// 	console.log(event);
+						// 	synthesis.cancel();
+						// 	// $tts.speak(textObj);
+						// };
+						// utterance.onend = (event) => {
+						// 	synthesis.cancel();
+						// };
+
+						const resumeInfinity = (target) => {
+							// prevent memory-leak in case utterance is deleted, while this is ongoing
+							if (!target && timer) {
+								return clear();
+							}
+
+							speechSynthesis.pause();
+							speechSynthesis.resume();
+
+							timer = setTimeout(function () {
+								resumeInfinity(target);
+							}, 5000);
+						};
+						// Запускаем озвучивание
+						utterance.voice = $tts.voice;
+						utterance.lang = $tts.voice.lang;
+						utterance.rate = 1;
+						utterance.voiceURI = $tts.voiceURI;
+						console.log(`Голос: ${$tts.voice.name}, Язык: ${$tts.voice.lang}`);
+						synthesis.speak(utterance);
+						// synthesis.cancel();
+					} else {
+						alert('Web Speech API не поддерживается в вашем браузере.');
+					}
+				},
+				cancel: function () {
+					synthesis.cancel();
+				},
+				voice: $tts.voice
+			};
+		}, 100);
 	});
 
 	let progress = {
