@@ -68,6 +68,7 @@
 			data.words = find(obj.module.themes, {
 				name: ev.currentTarget.attributes['theme_name'].value
 			})['words'];
+			data.highlight = ev.currentTarget.attributes['highlight'].value;
 		}
 	}
 
@@ -111,6 +112,7 @@
 														theme={theme.num}
 														theme_name={theme.name}
 														title={quiz.title}
+														highlight={quiz.highlight}
 														on:click={onClickQuiz}
 													>
 														<a href="#">{quiz.title}</a><span />

@@ -26,6 +26,7 @@
 	let wordsString = '';
 	let currentWordIndex = 0;
 	let currentWord;
+	let hl_words = data.highlight.split(',');
 
 	let arrayOfArrays;
 	let userContent = '';
@@ -74,21 +75,32 @@
 			});
 	}
 
-	// for (let n in names) {
-	// 	fetch(`./operator/lesson?words=theme&name=${names[n]}&owner=nedooleg@gmail.com`)
-	// 		.then((response) => response.json())
-	// 		.then((data) => {
-	// 			words.push(data.data);
-	// 			currentWord = words[currentWordIndex];
-	// 			words.map((word) => {
-	// 				if (word.original) wordsString += word.original + '  ';
-	// 			});
-	// 		})
-	// 		.catch((error) => {
-	// 			console.log(error);
-	// 			return [];
-	// 		});
-	// }
+	function highlightWords() {
+		hl_words.forEach((woord) => {
+			const regex = new RegExp(
+				`\\b[${woord.charAt(0).toUpperCase()}${woord.charAt(0).toLowerCase()}]${woord.slice(1)}\\b`,
+				'g'
+			);
+
+			userContent = userContent.replace(
+				regex,
+				`<span class="highlight" style="color: red;background-color: transparent">${woord}</span>`
+			);
+		});
+
+		Object.keys(words).forEach((i) => {
+			const woord = words[i].original;
+			const regex = new RegExp(
+				`\\b[${woord.charAt(0).toUpperCase()}${woord.charAt(0).toLowerCase()}]${woord.slice(1)}\\b`,
+				'g'
+			);
+
+			userContent = userContent.replace(
+				regex,
+				`<span class="highlight" style="color: red;background-color: transparent">${woord}</span>`
+			);
+		});
+	}
 
 	let bottomAppBar;
 
@@ -187,6 +199,7 @@
 			}
 
 			userContent = currentWord.example;
+			highlightWords(userContent);
 			// nextWord();
 		} else {
 			showCheckMark = false;

@@ -897,7 +897,15 @@
                                     "ABC-lijst normal perfectum",
                                     "ABC-lijst speciaal perfectum"
                                 ],
-                                "title": "Mix perfectum 1-156"
+                                "title": "Mix perfectum 1-156",
+                                "highlight": [
+                                    "is",
+                                    "ben",
+                                    "zijn",
+                                    "hebben",
+                                    "heb",
+                                    "heeft"
+                                ]
                             }
                         ]
                     }
