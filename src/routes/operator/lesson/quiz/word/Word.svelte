@@ -20,7 +20,8 @@
 	let voice_name = '';
 	if ($tts && $tts.voice) voice_name = $tts.voice.name;
 
-	let words, word;
+	let words = [],
+		word;
 	let shuffleWords = words;
 	let wordsString = '';
 	let currentWordIndex = 0;
@@ -43,19 +44,51 @@
 	let counter = 0;
 	let isVisible = false;
 
-	fetch(`./operator/lesson?words=theme&name=${data.name}&owner=nedooleg@gmail.com`)
-		.then((response) => response.json())
-		.then((data) => {
-			words = data.data;
-			currentWord = words[currentWordIndex];
-			words.map((word) => {
-				if (word.original) wordsString += word.original + '  ';
-			});
-		})
-		.catch((error) => {
-			console.log(error);
-			return [];
+	let names = data.name.split(',');
+
+	for (let n in names) {
+		// Создаем массив промисов для каждого запроса
+		const fetchPromises = names.map((name) => {
+			return fetch(`./operator/lesson?words=theme&name=${name}&owner=nedooleg@gmail.com`)
+				.then((response) => response.json())
+				.then((data) => data.data)
+				.catch((error) => {
+					console.log(error);
+					return [];
+				});
 		});
+		// Ждем завершения всех запросов
+		Promise.all(fetchPromises)
+			.then((allData) => {
+				// allData - это массив результатов каждого запроса
+				words = [].concat(...allData); // Объединяем массивы в один
+				console.log(words);
+				currentWord = words[currentWordIndex];
+				words.map((word) => {
+					if (word.original) wordsString += word.original + '  ';
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+				return [];
+			});
+	}
+
+	// for (let n in names) {
+	// 	fetch(`./operator/lesson?words=theme&name=${names[n]}&owner=nedooleg@gmail.com`)
+	// 		.then((response) => response.json())
+	// 		.then((data) => {
+	// 			words.push(data.data);
+	// 			currentWord = words[currentWordIndex];
+	// 			words.map((word) => {
+	// 				if (word.original) wordsString += word.original + '  ';
+	// 			});
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error);
+	// 			return [];
+	// 		});
+	// }
 
 	let bottomAppBar;
 

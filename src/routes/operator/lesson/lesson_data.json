@@ -879,13 +879,25 @@
                         "quizes": [
                             {
                                 "type": "word",
-                                "name": "ABC-lijst normal perfectum",
+                                "name": [
+                                    "ABC-lijst normal perfectum"
+                                ],
                                 "title": "Normal perfectum"
                             },
                             {
                                 "type": "word",
-                                "name": "ABC-lijst speciaal perfectum",
+                                "name": [
+                                    "ABC-lijst speciaal perfectum"
+                                ],
                                 "title": "Speciaal perfectum 1-80"
+                            },
+                            {
+                                "type": "word",
+                                "name": [
+                                    "ABC-lijst normal perfectum",
+                                    "ABC-lijst speciaal perfectum"
+                                ],
+                                "title": "Mix perfectum 1-156"
                             }
                         ]
                     }
