@@ -26,7 +26,7 @@
 	let wordsString = '';
 	let currentWordIndex = 0;
 	let currentWord;
-	let hl_words = data.highlight.split(',');
+	let hl_words = data.highlight ? data.highlight.split(',') : '';
 
 	let arrayOfArrays;
 	let userContent = '';
