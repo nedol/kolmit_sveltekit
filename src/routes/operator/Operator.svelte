@@ -628,6 +628,7 @@
 
 <style>
 	.chat-container {
+		display: none;
 		position: absolute;
 		width: 50%;
 		bottom: 50px;
