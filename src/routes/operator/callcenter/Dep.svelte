@@ -240,7 +240,7 @@
 	.horizontal-container {
 		display: flex;
 		flex-wrap: wrap; /* Перенос элементов на новую строку при нехватке места */
-		gap: 10px; /* Расстояние между элементами */
+		gap: 20px; /* Расстояние между элементами */
 	}
 	.collapsible {
 		background-color: rgb(158, 158, 158);

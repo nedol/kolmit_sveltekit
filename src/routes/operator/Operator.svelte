@@ -618,25 +618,34 @@
 <progress class="progress" value={progress.value} max="100" duration="200" />
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="debug" bind:this={debug_div} on:click={onDebug}>{debug}</div>
-
+<div class="chat-container" bind:this={debug_div} on:click={onDebug}>
+	<div class="debug">{debug}</div>
+</div>
 <!-- {@debug $view} -->
 <Callcenter view={$view} bind:this={callcenter} bind:$call_but_status bind:operator={$operator} />
 
 <Lesson view={$view} data={$users[0].staff} />
 
 <style>
-	.debug {
+	.chat-container {
 		position: absolute;
-		pointer-events: auto;
-		text-align: right;
+		width: 50%;
 		bottom: 50px;
 		right: 0;
+		height: 100px;
+		overflow-y: auto;
+		border: 1px solid #ccc;
 		padding: 10px;
-		width: 50%;
-		font-size: small;
+		direction: rtl;
+		pointer-events: auto;
+		text-align: right;
 		opacity: 0; /* Делаем элемент видимым */
 		z-index: 1;
+	}
+	.debug {
+		font-size: small;
+		display: flex;
+		flex-direction: column-reverse; /* Используем стиль column-reverse для отображения дочерних элементов в обратном порядке */
 	}
 	.video {
 		position: relative;
