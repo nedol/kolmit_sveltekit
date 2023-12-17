@@ -72,6 +72,15 @@ export const dict = [
 			nl: 'Luisteren en schrijven',
 			de: 'Zuhören und schreiben'
 		},
+		'Напиши перевод': {
+			en: 'Type translation',
+			ru: 'Напиши перевод',
+			fr: 'Écrire une traduction',
+			uk: 'Напиши переклад',
+			nl: 'Schrijf een vertaling',
+			de: 'Eine Übersetzung schreiben'
+		},
+
 		'Повторить пароль': {
 			en: 'Confirm Password',
 			ru: 'Повторить пароль',

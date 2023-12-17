@@ -336,7 +336,9 @@
 				<button on:click={checkInput} class="check-button">{dict['Проверить'][$langs]}</button>
 			{/if}
 		</div>
+
 		<div style="height: 40px"></div>
+		<div class="title"><h3>{dict['Напиши перевод'][$langs]}:</h3></div>
 		<div class="word">
 			<!-- {@debug currentWord} -->
 			<h1>{word}</h1>
@@ -389,6 +391,11 @@
 </BottomAppBar>
 
 <style>
+	.title {
+		color: grey;
+		position: relative;
+		text-align: center;
+	}
 	.material-symbols-outlined {
 		font-size: 15px;
 		color: rgb(100, 180, 69);
