@@ -640,7 +640,7 @@
 		pointer-events: auto;
 		text-align: right;
 		opacity: 0; /* Делаем элемент видимым */
-		z-index: 1;
+		/* z-index: 1; */
 	}
 	.debug {
 		font-size: small;
