@@ -1,5 +1,5 @@
 <script>
-	import { onMount, getContext, setContext } from 'svelte';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
 
@@ -34,8 +34,6 @@
 
 	import { tts } from '$lib/js/stores.js';
 
-	import Speech from 'speak-tts'; // es6
-
 	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';
@@ -57,6 +55,8 @@
 	}
 
 	import { view } from '$lib/js/stores.js';
+	import { operator } from '$lib/js/stores.js';
+	import { posterst } from '$lib/js/stores.js';
 
 	let rtc;
 	let voice;
@@ -65,6 +65,8 @@
 	let video_button_display = false;
 	let video_progress = false;
 	let edited_display = false;
+	let debug = 'debug';
+	let debug_div;
 
 	import { call_but_status } from '$lib/js/stores.js';
 	$call_but_status = 'inactive';
@@ -76,8 +78,6 @@
 
 	export let email, abonent, name;
 	const uid = md5(email);
-	import { operator } from '$lib/js/stores.js';
-	import { posterst } from '$lib/js/stores.js';
 
 	// import { dc_msg } from '$lib/js/stores.js';
 	// $: if ($dc_msg) {
@@ -124,12 +124,9 @@
 			});
 	}
 
-	function InitTTS() {
-		$tts = new Speech();
-		if ($tts.hasBrowserSupport()) {
-			console.log('speech synthesis supported');
-		}
-	}
+	onDestroy(() => {
+		debug = 'onDestroy';
+	});
 
 	onMount(async () => {
 		try {
@@ -170,6 +167,7 @@
 					}
 				}
 			}
+			debug = $tts.voice.name;
 		}
 
 		setTimeout(() => {
@@ -528,9 +526,14 @@
 			}
 		}
 	}
+
+	function onDebug() {
+		if (debug_div.style.opacity === '10') debug_div.style.opacity = '0';
+		else debug_div.style.opacity = '10';
+	}
 </script>
 
-<div style="display:flex; height:70px; flex-wrap: nowrap;justify-content: space-between;">
+<div style="display:flex; height:60px; flex-wrap: nowrap;justify-content: space-between;">
 	<!-- <VideoLocal {...local.video} /> -->
 	<div class="placeholder">
 		{#if remote.text.display}
@@ -613,6 +616,9 @@
 </div>
 
 <progress class="progress" value={progress.value} max="100" duration="200" />
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="debug" bind:this={debug_div} on:click={onDebug}>{debug}</div>
 
 <!-- {@debug $view} -->
 <Callcenter view={$view} bind:this={callcenter} bind:$call_but_status bind:operator={$operator} />
@@ -620,6 +626,18 @@
 <Lesson view={$view} data={$users[0].staff} />
 
 <style>
+	.debug {
+		position: absolute;
+		pointer-events: auto;
+		text-align: right;
+		bottom: 50px;
+		right: 0;
+		padding: 10px;
+		width: 50%;
+		font-size: small;
+		opacity: 10; /* Делаем элемент видимым */
+		z-index: 1;
+	}
 	.video {
 		position: relative;
 		top: 5px;

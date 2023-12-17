@@ -479,7 +479,7 @@
 </main>
 
 <BottomAppBar bind:this={bottomAppBar}>
-	<div style="position:absolute; bottom:55px ; right:0; font-size:small">{$tts.voice.name}</div>
+	<!-- <div style="position:absolute; bottom:55px ; right:0; font-size:small">{$tts.voice.name}</div> -->
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
 			<Icon tag="svg" viewBox="0 0 24 24">

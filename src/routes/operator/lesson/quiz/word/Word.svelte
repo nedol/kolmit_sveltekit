@@ -371,7 +371,7 @@
 </main>
 
 <BottomAppBar bind:this={bottomAppBar}>
-	<div style="position:absolute; bottom:55px ; right:0; font-size:small">{voice_name}</div>
+	<!-- <div style="position:absolute; bottom:55px ; right:0; font-size:small">{voice_name}</div> -->
 
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
