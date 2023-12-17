@@ -635,7 +635,7 @@
 		padding: 10px;
 		width: 50%;
 		font-size: small;
-		opacity: 10; /* Делаем элемент видимым */
+		opacity: 0; /* Делаем элемент видимым */
 		z-index: 1;
 	}
 	.video {
