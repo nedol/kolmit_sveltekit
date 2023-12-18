@@ -557,12 +557,12 @@
 
 	// Функция для скрытия списка команд при клике за его пределами
 	const handleOutsideClick = (event) => {
-		const commandsList = document.getElementById('commandsList');
-		if ((commandsList && !commandsList.contains(event.target)) || showCommands) {
-			showCommands = false;
-		} else {
-			showCommands = true;
-		}
+		// const commandsList = document.getElementById('commandsList');
+		// if (commandsList && !commandsList.contains(event.target)) {
+		// 	showCommands = false;
+		// } else {
+		// 	showCommands = true;
+		// }
 	};
 </script>
 

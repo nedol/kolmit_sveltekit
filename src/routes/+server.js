@@ -33,7 +33,7 @@ export async function GET({ url, fetch, cookies }) {
 	const func = url.searchParams.get('func');
 
 	// debugger;
-	if (func) {
+	if (func === 'reset') {
 		let response = new Response();
 		cookies.delete('abonent:' + abonent);
 		response.headers.append('Access-Control-Allow-Origin', `*`);
