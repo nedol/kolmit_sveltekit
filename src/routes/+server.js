@@ -73,9 +73,10 @@ global.interval;
 global.loop = function () {
 	try {
 		if (!global.interval)
-			global.interval = setInterval(async () => {
-				//let resp = await fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-			}, 1000 * 10 * 60);
+			global.interval = setInterval(() => {
+				console.log();
+				let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+			}, 1000 * 60 * 10);
 	} catch (ex) {}
 };
 
