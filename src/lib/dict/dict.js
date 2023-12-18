@@ -80,7 +80,14 @@ export const dict = [
 			nl: 'Schrijf een vertaling',
 			de: 'Eine Übersetzung schreiben'
 		},
-
+		'Изменить профиль': {
+			en: 'Change profile',
+			ru: 'Изменить профиль',
+			fr: 'Modifier le profil',
+			uk: 'Змінити профіль',
+			nl: 'Profiel wijzigen',
+			de: 'Profil ändern'
+		},
 		'Повторить пароль': {
 			en: 'Confirm Password',
 			ru: 'Повторить пароль',

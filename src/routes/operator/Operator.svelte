@@ -8,11 +8,12 @@
 	import IconButton, { Icon } from '@smui/icon-button';
 	import { mdiAccountBox } from '@mdi/js';
 	import CircularProgress from '@smui/circular-progress';
+	import { dicts } from '$lib/js/stores.js';
+	import { langs } from '$lib/js/stores.js';
 	// import {Dict} from '$lib/js/$dicts'
 	import Callcenter from './callcenter/Callcenter.svelte';
 	let callcenter;
 	import { RTCOperator } from './rtc/RTCOperator.js';
-	import * as cookie from 'cookie';
 
 	import CallButton from './callbutton/CallButtonOperator.svelte';
 	// import BurgerMenu from './menu/BurgerMenu.svelte';
@@ -545,17 +546,22 @@
 		else debug_div.style.opacity = '10';
 	}
 
-	function showCommandsHandle(ev) {
-		showCommands = !showCommands;
+	function handleChangeProfile(ev) {
+		console.log();
+		fetch(`./?abonent=${abonent}&func=reset`)
+			.then(() => location.reload())
+			.catch((error) => {
+				console.log(error);
+			});
 	}
-
-	function handleChangeProfile(ev) {}
 
 	// Функция для скрытия списка команд при клике за его пределами
 	const handleOutsideClick = (event) => {
 		const commandsList = document.getElementById('commandsList');
-		if (commandsList && commandsList.contains(event.target)) {
+		if ((commandsList && !commandsList.contains(event.target)) || showCommands) {
 			showCommands = false;
+		} else {
+			showCommands = true;
 		}
 	};
 </script>
@@ -625,11 +631,7 @@
 		{/if}
 	</div>
 
-	<div
-		class="videolocal_div"
-		on:click={showCommandsHandle}
-		style="position:relative; right: 5px; width: 70px;	height: 70px;"
-	>
+	<div class="videolocal_div" style="position:relative; right: 5px; width: 70px;	height: 70px;">
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">
 				<div bind:this={container} />
@@ -639,7 +641,7 @@
 	{#if showCommands}
 		<!-- Список команд -->
 		<div id="commandsList">
-			<div on:click={handleChangeProfile}>Изменить профиль</div>
+			<div on:click={handleChangeProfile}>{$dicts['Изменить профиль'][$langs]}</div>
 		</div>
 	{/if}
 </div>

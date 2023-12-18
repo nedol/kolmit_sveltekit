@@ -30,9 +30,15 @@ export async function GET({ url, fetch, cookies }) {
 	const text = url.searchParams.get('text');
 	const dict = url.searchParams.get('dict');
 	const key = url.searchParams.get('key');
+	const func = url.searchParams.get('func');
 
 	// debugger;
-	if (text) {
+	if (func) {
+		let response = new Response();
+		cookies.delete('abonent:' + abonent);
+		response.headers.append('Access-Control-Allow-Origin', `*`);
+		return response;
+	} else if (text) {
 		// let resp = await fetch('/src/routes/operator/lesson/' + path);
 		const level = url.searchParams.get('level');
 		const theme = url.searchParams.get('theme');
