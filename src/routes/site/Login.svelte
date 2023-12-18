@@ -37,23 +37,15 @@
 	onMount(async () => {
 		let url = new URL(window.location.href);
 		abonent = url.searchParams.get('abonent');
-		if (url.searchParams.get('psw')) {
-			formData.name = url.searchParams.get('name');
-			formData.psw = url.searchParams.get('psw');
-			formData.email = url.searchParams.get('email');
-			formData.lang = url.searchParams.get('lang');
-			handleSubmit();
-		}
+		// console.log(abonent);
+		// if (url.searchParams.get('psw')) {
+		// 	formData.name = url.searchParams.get('name');
+		// 	formData.psw = url.searchParams.get('psw');
+		// 	formData.email = url.searchParams.get('email');
+		// 	formData.lang = url.searchParams.get('lang');
+		// 	handleSubmit();
+		// }
 	});
-
-	$: if (confirmPassword) {
-		if (psw === confirmPassword) {
-			// Проверка на совпадение паролей
-			passwordMatch = true;
-		} else {
-			passwordMatch = false;
-		}
-	}
 
 	function uploadImage(event) {
 		const file = event.target.files[0];
@@ -81,8 +73,9 @@
 
 	async function handleSubmit() {
 		// Здесь вы можете обработать данные формы
-
 		let par = formData;
+		passwordMatch = par.confirmPassword === par.psw;
+		if (!passwordMatch) return;
 		par.func = 'operator';
 		par.abonent = abonent;
 		const headers = {
@@ -93,7 +86,7 @@
 			method: 'POST',
 			// mode: 'no-cors',
 			body: JSON.stringify({ par }),
-			headers: { headers }
+			headers: headers
 		});
 
 		location.reload();
@@ -136,7 +129,7 @@
 			<Textfield
 				type="password"
 				name="confirmPassword"
-				value={formData.confirmPassword}
+				bind:value={formData.confirmPassword}
 				label="{$dicts['Повторить пароль'][lang]}:"
 				required
 			/>
@@ -152,6 +145,7 @@
 				on:click={() => document.getElementById('pic').click()}
 			/>
 		</div>
+
 		<div>
 			<Button class="upload-button">{$dicts['Зарегистрироваться'][lang]}</Button>
 		</div>

@@ -65,6 +65,7 @@
 	let video_button_display = false;
 	let video_progress = false;
 	let edited_display = false;
+	let showCommands = false;
 	let debug = 'debug';
 	let debug_div;
 
@@ -136,10 +137,22 @@
 			initRTC();
 			rtc.SendCheck();
 			CallWaiting($operator);
+
+			initSpeech();
+
+			// Добавьте слушателя событий для скрытия списка команд при клике за его пределами
+			document.addEventListener('click', handleOutsideClick);
 		} catch (ex) {
 			console.log();
 		}
 
+		return () => {
+			// Удалите слушателя событий при размонтировании компонента
+			document.removeEventListener('click', handleOutsideClick);
+		};
+	});
+
+	function initSpeech() {
 		const synthesis = window.speechSynthesis;
 		let voices = synthesis.getVoices();
 
@@ -235,7 +248,7 @@
 				voice: $tts.voice
 			};
 		}, 100);
-	});
+	}
 
 	let progress = {
 		display: 'block',
@@ -531,6 +544,20 @@
 		if (debug_div.style.opacity === '10') debug_div.style.opacity = '0';
 		else debug_div.style.opacity = '10';
 	}
+
+	function showCommandsHandle(ev) {
+		showCommands = !showCommands;
+	}
+
+	function handleChangeProfile(ev) {}
+
+	// Функция для скрытия списка команд при клике за его пределами
+	const handleOutsideClick = (event) => {
+		const commandsList = document.getElementById('commandsList');
+		if (commandsList && commandsList.contains(event.target)) {
+			showCommands = false;
+		}
+	};
 </script>
 
 <div style="display:flex; height:60px; flex-wrap: nowrap;justify-content: space-between;">
@@ -598,13 +625,23 @@
 		{/if}
 	</div>
 
-	<div style="position:relative; right: 5px; width: 70px;	height: 70px;">
+	<div
+		class="videolocal_div"
+		on:click={showCommandsHandle}
+		style="position:relative; right: 5px; width: 70px;	height: 70px;"
+	>
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">
 				<div bind:this={container} />
 			</svelte:fragment>
 		</VideoLocal>
 	</div>
+	{#if showCommands}
+		<!-- Список команд -->
+		<div id="commandsList">
+			<div on:click={handleChangeProfile}>Изменить профиль</div>
+		</div>
+	{/if}
 </div>
 
 <div>
@@ -664,6 +701,17 @@
 		position: relative;
 		left: 5px;
 		top: 0px;
+	}
+
+	/* Стили для списка команд */
+	#commandsList {
+		position: absolute;
+		top: 50px; /* Выберите подходящий отступ сверху */
+		right: 10px; /* Выберите подходящий отступ справа */
+		background-color: white;
+		border: 1px solid #ccc;
+		padding: 10px;
+		display: 'block';
 	}
 
 	@media screen and (max-width: 400px) {

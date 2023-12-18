@@ -57,21 +57,6 @@ export class RTCOperator extends RTCBase {
 			);
 	}
 
-	ChooseTarif(tarif) {
-		let par = {};
-		par.proj = 'kolmit';
-		par.func = 'tarif';
-		par.em = this.em;
-		par.tarif = tarif;
-		par.psw = this.psw;
-
-		return new Promise((resolve, reject) => {
-			this.signal.SendMessage(par, (data) => {
-				resolve(data);
-			});
-		});
-	}
-
 	SendStatus(status) {
 		let par = {};
 		par.proj = 'kolmit';

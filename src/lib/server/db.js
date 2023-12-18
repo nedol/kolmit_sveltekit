@@ -70,6 +70,7 @@ function SendEmail(q, new_email) {
 
 export async function CreateOperator(par) {
 	try {
+		if (par.abonent === par.email) return false;
 		par.psw = md5(par.psw);
 		let res = await pool.sql`
 		SELECT operators.psw as psw, users.users as users 
@@ -80,7 +81,7 @@ export async function CreateOperator(par) {
 		if (res.rows[0]) {
 			let psw = res.rows[0].psw;
 			if (psw) {
-				if (psw !== par.psw) return JSON.stringify({ func: q.func });
+				if (psw !== par.psw) return false;
 			}
 			let users = res.rows[0].users;
 			par.dep_id = '0';
@@ -101,11 +102,11 @@ export async function CreateOperator(par) {
 				oper.picture = { medium: par.picture };
 			}
 
-			updateOperPsw(par);
+			updateOper(par);
 
 			return updateUsers(users, par);
 		} else {
-			if (par.email.toLowerCase().includes('cvoantwerpen')) {
+			if (par.email.toLowerCase().includes('cvoantwerpen.org')) {
 				return AddOperator(par);
 			} else {
 				return false;
@@ -116,10 +117,16 @@ export async function CreateOperator(par) {
 	}
 }
 
-async function updateOperPsw(q) {
-	let res = await pool.sql`UPDATE operators SET
-		psw = ${q.psw}
+async function updateOper(q) {
+	try {
+		await pool.sql`BEGIN;`;
+		let res = await pool.sql`UPDATE operators SET
+		psw = ${q.psw}, picture=${q.picture}
 		WHERE  operator=${q.email} AND abonent=${q.abonent}`;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+	}
 }
 
 async function updateUsers(users, q) {
@@ -167,17 +174,21 @@ export async function CheckOperator(q) {
 	// console.log(pool.sql);
 
 	if (q.psw && q.hash && getHash(q.em) === q.hash) {
-		await pool.sql`
-		INSERT INTO operators (psw, operator, abonent, tarif, name) VALUES(${q.psw}, ${q.em}, 
-			${q.abonent}, ${q.name})`;
+		try {
+			await pool.sql`BEGIN;`;
+			await pool.sql`
+			INSERT INTO operators (psw, operator, abonent,  name) VALUES(${q.psw}, ${q.em}, 
+			, ${q.name})`;
+			await pool.sql`COMMIT;`;
+		} catch (ex) {
+			await pool.sql`ROLLBACK;`;
+		}
 	}
 
 	if (q.em) {
 		if (q.abonent) {
 			result = await pool.sql`
-			SELECT *,
-				(SELECT tarif FROM operators WHERE operator=${q.abonent} AND abonent=operator) as tarif 
-				FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
+			SELECT * FROM  operators WHERE operator=${q.em} AND abonent=${q.abonent} AND psw=${q.psw}`;
 		} else {
 			result = result.rows;
 			await pool.sql`
@@ -208,11 +219,16 @@ export async function CheckOperator(q) {
 
 async function insertUsers(users, q) {
 	let usrs = JSON.stringify(users);
-
-	let res = await pool.sql`
+	try {
+		await pool.sql`BEGIN;`;
+		let res = await pool.sql`
 	INSERT INTO users
 		(operator, users, last, editor) VALUES (${q.email},
 		${usrs}, CURRENT_TIMESTAMP, ${q.email})`;
+		await pool.sql`ROLLBACK;`; //await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
+	}
 
 	return JSON.stringify({ func: q.func, res: res });
 }
@@ -243,7 +259,7 @@ export async function AddOperator(q) {
 	}
 	try {
 		let res = await pool.sql`INSERT INTO operators
-		(operator, abonent, psw, tarif) VALUES (${q.email}, ${q.abonent}, ${q.psw},'free')`;
+		(operator, abonent, psw) VALUES (${q.email}, ${q.abonent}, ${q.psw})`;
 	} catch (ex) {
 		await pool.sql`ROLLBACK;`;
 		return JSON.stringify({ func: q.func, res: ex });

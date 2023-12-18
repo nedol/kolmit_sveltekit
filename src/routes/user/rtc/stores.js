@@ -1,20 +1,8 @@
 import { writable } from 'svelte/store';
 
-export let tarif = writable();
-
 export let editable = writable(false);
 
-export let langs = writable();
-let lang = 'en';
-
-// (async ()=>{
-//     try{
-//         lang = JSON.parse(localStorage.getItem('kolmit'))['lang'];
-//     }catch(ex){
-//         localStorage.setItem('kolmit',JSON.stringify({"lang":lang}));
-//     }
-//     langs.set(lang);
-// })();
+export let langs = writable('en');
 
 export const hosts = writable();
 
