@@ -81,7 +81,7 @@ global.loop = function () {
 		if (!global.interval)
 			global.interval = setInterval(() => {
 				console.log();
-				let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+				// let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
 			}, 1000 * 60 * 10);
 	} catch (ex) {}
 };
