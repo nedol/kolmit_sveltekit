@@ -555,14 +555,16 @@
 			});
 	}
 
+	const handleCommandClick = (event) => {
+		showCommands = !showCommands;
+	};
+
 	// Функция для скрытия списка команд при клике за его пределами
 	const handleOutsideClick = (event) => {
-		// const commandsList = document.getElementById('commandsList');
-		// if (commandsList && !commandsList.contains(event.target)) {
-		// 	showCommands = false;
-		// } else {
-		// 	showCommands = true;
-		// }
+		const commandsList = document.getElementById('commandsList');
+		if (commandsList && !commandsList.contains(event.target)) {
+			showCommands = false;
+		}
 	};
 </script>
 
@@ -631,7 +633,11 @@
 		{/if}
 	</div>
 
-	<div class="videolocal_div" style="position:relative; right: 5px; width: 70px;	height: 70px;">
+	<div
+		class="videolocal_div"
+		on:click|preventDefault|stopPropagation={handleCommandClick}
+		style="position:relative; right: 5px; width: 70px;	height: 70px;"
+	>
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">
 				<div bind:this={container} />
