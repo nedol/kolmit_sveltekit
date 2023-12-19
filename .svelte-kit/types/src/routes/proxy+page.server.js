@@ -19,6 +19,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	let lang = url.searchParams.get('lang');
 	let name = url.searchParams.get('name');
 	let email = url.searchParams.get('email');
+	let psw = url.searchParams.get('psw');
 
 	let prom = new Promise((resolve, reject) => {
 		CreatePool(resolve);
@@ -27,7 +28,6 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	let pool = await prom;
 
 	let host = url.origin; //'http://localhost:3000'; //'https://kolmit-sveltekit-nedol.vercel.app'; //
-	let psw = url.searchParams.get('psw');
 
 	let res;
 	let resp = {
@@ -36,16 +36,19 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	};
 	try {
 		res = cookies.get('abonent:' + abonent);
-		if (res) {
-			kolmit = JSON.parse(res);
-		} else if (psw) {
+
+		if (psw) {
 			kolmit = { operator: email, psw: md5(psw), name: name, lang: lang };
 		} else {
-			resp.check = false;
-			resp.abonent = abonent;
-			resp.users = '{}';
-			resp.host = host;
-			return resp;
+			if (res) {
+				kolmit = JSON.parse(res);
+			} else {
+				resp.check = false;
+				resp.abonent = abonent;
+				resp.users = '{}';
+				resp.host = host;
+				return resp;
+			}
 		}
 	} catch (ex) {
 		console.log();

@@ -53,7 +53,7 @@
 
 <style>
 	video {
-		display:block;
+		display: block;
 		margin-right: auto;
 		margin-left: auto;
 		margin-top: auto;
@@ -66,19 +66,16 @@
 	[status='talk'] {
 		opacity: 1;
 	}
-
 	[status='muted'] {
 		opacity: 0.3;
 	}
 	[status='inactive'] {
 		opacity: 0.3;
 	}
-
 	[status='active'] {
 		opacity: 1;
 	}
-
 	[status='busy'] {
-		opacity: 1;
+		opacity: 0.3;
 	}
 </style>

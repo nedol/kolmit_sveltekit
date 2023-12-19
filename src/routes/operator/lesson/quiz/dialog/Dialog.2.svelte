@@ -4,7 +4,13 @@
 	import { onMount, getContext } from 'svelte';
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiPagePreviousOutline } from '@mdi/js';
+	import {
+		mdiPagePreviousOutline,
+		mdiArrowRight,
+		mdiArrowLeft,
+		mdiShareVariant,
+		mdiShuffle
+	} from '@mdi/js';
 
 	import { lesson } from '$lib/js/stores.js';
 	import { dc_oper } from '$lib/js/stores.js';
@@ -77,6 +83,11 @@
 	}
 </script>
 
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+
 <div style="display: flex;">
 	<div style="margin:0 auto">
 		<div class="q" id="question" style="visibility:{q_visibility}">
@@ -85,7 +96,9 @@
 		<div class="q" id="answer" style="visibility:{a_visibility}">
 			<div>{@html data.answer}</div>
 		</div>
-		<button class="toggleButton" on:click={onClickQ}> ? </button>
+		<button on:click={onClickQ} class="toggleButton">
+			<span class="material-symbols-outlined"> reminder </span>
+		</button>
 	</div>
 </div>
 {#if data.html}

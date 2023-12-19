@@ -164,6 +164,8 @@
 						status = 'active';
 						// $call_but_status = 'active';
 					}
+				} else if (res['busy']) {
+					status = 'busy';
 				} else if (res['close']) {
 					local.video.display = 'none';
 					// remote.video.display = 'none';
@@ -314,13 +316,13 @@
 				break;
 			case 'busy':
 				// rtc.Call();
-				status = 'active';
+				// status = 'busy';
 				// $call_but_status = 'active';
-				$click_call_func = null; //operator -> OnClickCallButton
-				parent_div.appendChild(card);
-				video_element.load();
-				video_element.src = '';
-				video_element.poster = remote.video.poster;
+				// $click_call_func = null; //operator -> OnClickCallButton
+				// parent_div.appendChild(card);
+				// video_element.load();
+				// video_element.src = '';
+				// video_element.poster = remote.video.poster;
 				break;
 			default:
 				break;
