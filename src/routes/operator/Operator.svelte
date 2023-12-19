@@ -66,6 +66,7 @@
 	let video_button_display = false;
 	let video_progress = false;
 	let edited_display = false;
+	let synthesis;
 	let showCommands = false;
 	let debug = 'debug';
 	let debug_div;
@@ -105,7 +106,7 @@
 			method: 'POST',
 			// mode: 'no-cors',
 			body: JSON.stringify({ par }),
-			headers: { headers }
+			headers: headers
 		})
 			.then((response) => response.json())
 			.then((data) => {
@@ -147,6 +148,18 @@
 			console.log();
 		}
 
+		document.addEventListener('visibilitychange', () => {
+			if (document.hidden) {
+				// Ваш код, выполняемый при переходе приложения в неактивное состояние
+				synthesis.pause = true;
+				console.log('Приложение неактивно');
+			} else {
+				// Ваш код, выполняемый при восстановлении активности приложения
+				synthesis.resume();
+				console.log('Приложение активно');
+			}
+		});
+
 		return () => {
 			// Удалите слушателя событий при размонтировании компонента
 			document.removeEventListener('click', handleOutsideClick);
@@ -154,7 +167,7 @@
 	});
 
 	function initSpeech() {
-		const synthesis = window.speechSynthesis;
+		synthesis = window.speechSynthesis;
 		let voices = synthesis.getVoices();
 
 		if (!voices[0]) {
@@ -389,7 +402,7 @@
 			console.log('Web Audio API is not supported in this browser');
 		}
 
-		// console.log($call_but_status);
+		console.log($call_but_status);
 
 		switch ($call_but_status) {
 			case 'inactive':

@@ -19,6 +19,7 @@
 	import { call_but_status } from '$lib/js/stores.js';
 
 	import { click_call_func } from '$lib/js/stores.js';
+	$click_call_func = null;
 
 	import pkg from 'lodash';
 	const { groupBy, find } = pkg;
@@ -165,7 +166,7 @@
 						// $call_but_status = 'active';
 					}
 				} else if (res['busy']) {
-					status = 'busy';
+					if ($click_call_func === null) status = 'busy';
 				} else if (res['close']) {
 					local.video.display = 'none';
 					// remote.video.display = 'none';
@@ -253,6 +254,8 @@
 			console.log('Web Audio API is not supported in this browser');
 		}
 
+		console.log();
+
 		switch (status) {
 			case 'inactive':
 				// status = 'wait';
@@ -316,8 +319,12 @@
 				break;
 			case 'busy':
 				// rtc.Call();
-				// status = 'busy';
-				// $call_but_status = 'active';
+				if ($call_but_status === 'talk') {
+					status = 'inactive';
+					$call_but_status = 'inactive';
+					rtc.OnInactive();
+				}
+
 				// $click_call_func = null; //operator -> OnClickCallButton
 				// parent_div.appendChild(card);
 				// video_element.load();

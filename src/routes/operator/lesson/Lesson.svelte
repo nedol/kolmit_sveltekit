@@ -32,10 +32,10 @@
 		data.quiz = '';
 	}
 
-	import obj from './lesson_data.json';
+	import lesson_data from './lesson_data.json';
 	// import { disabled } from '@smui-extra/accordion/src/Panel.svelte';
 
-	const level = obj.module;
+	const level = lesson_data.module;
 	export let data;
 	let panel_disabled = true;
 
@@ -65,10 +65,11 @@
 			data.name = ev.currentTarget.attributes['name'].value;
 			data.theme = ev.currentTarget.attributes['theme'].value;
 			data.title = ev.currentTarget.attributes['title'].value;
-			data.words = find(obj.module.themes, {
+			data.words = find(lesson_data.module.themes, {
 				name: ev.currentTarget.attributes['theme_name'].value
 			})['words'];
-			data.highlight = ev.currentTarget.attributes['highlight'].value;
+			if (ev.currentTarget.attributes['highlight'])
+				data.highlight = ev.currentTarget.attributes['highlight'].value;
 		}
 	}
 

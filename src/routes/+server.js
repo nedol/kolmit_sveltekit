@@ -7,6 +7,8 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
+import { request } from 'undici';
+
 // import { get, set } from 'node-global-storage';
 // set('global.rtcPool', { user: {}, operator: {} });
 
@@ -79,12 +81,22 @@ global.interval;
 global.loop = function () {
 	try {
 		if (!global.interval)
-			global.interval = setInterval(() => {
-				console.log();
-				let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+			global.interval = setInterval(async () => {
+				const { statusCode, headers, trailers, body } = await request(
+					`https://kolmit-service.onrender.com`
+				);
+				console.log('response received', statusCode);
+				console.log('headers', headers);
+
+				for await (const data of body) {
+					console.log('data', data);
+				}
+				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
 			}, 1000 * 60 * 10);
 	} catch (ex) {}
 };
+
+global.loop();
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, url, fetch, cookies }) {
