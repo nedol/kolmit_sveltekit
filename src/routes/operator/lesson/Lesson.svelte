@@ -113,7 +113,7 @@
 														theme={theme.num}
 														theme_name={theme.name}
 														title={quiz.title}
-														highlight={quiz.highlight}
+														highlight={quiz.highlight || ''}
 														on:click={onClickQuiz}
 													>
 														<a href="#">{quiz.title}</a><span />
