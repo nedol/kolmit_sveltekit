@@ -131,6 +131,8 @@
 		debug = 'onDestroy';
 	});
 
+	let audioCtx;
+
 	onMount(async () => {
 		try {
 			await EasySpeech.init(); // required
@@ -139,6 +141,17 @@
 			initRTC();
 			rtc.SendCheck();
 			CallWaiting($operator);
+			try {
+				// Fix up for prefixing
+				if (!window.AudioContext) {
+					window.AudioContext = window.AudioContext || window.webkitAudioContext;
+					audioCtx = new AudioContext();
+					rtc.localSoundSrc = audioCtx.createMediaElementSource(window.user.localSound);
+					rtc.localSoundSrc.connect(audioCtx.destination);
+				}
+			} catch (ex) {
+				console.log('Web Audio API is not supported in this browser');
+			}
 
 			initSpeech();
 
@@ -151,12 +164,13 @@
 		document.addEventListener('visibilitychange', () => {
 			if (document.hidden) {
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
-				synthesis.pause = true;
-				console.log('Приложение неактивно');
+				audioCtx.suspend();
+				synthesis.pause();
 			} else {
 				// Ваш код, выполняемый при восстановлении активности приложения
 				synthesis.resume();
 				console.log('Приложение активно');
+				audioCtx.resume().then(() => {});
 			}
 		});
 
@@ -390,18 +404,6 @@
 	}
 
 	function OnClickCallButton() {
-		try {
-			// Fix up for prefixing
-			if (!window.AudioContext) {
-				window.AudioContext = window.AudioContext || window.webkitAudioContext;
-				let audioCtx = new AudioContext();
-				rtc.localSoundSrc = audioCtx.createMediaElementSource(window.user.localSound);
-				rtc.localSoundSrc.connect(audioCtx.destination);
-			}
-		} catch (ex) {
-			console.log('Web Audio API is not supported in this browser');
-		}
-
 		console.log($call_but_status);
 
 		switch ($call_but_status) {
