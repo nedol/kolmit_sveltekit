@@ -66,7 +66,7 @@
 				console.log(words);
 				currentWord = words[currentWordIndex];
 				words.map((word) => {
-					if (word.original) wordsString += word.original + '  ';
+					if (word.original) wordsString += word.infinitive + '  ';
 				});
 			})
 			.catch((error) => {
