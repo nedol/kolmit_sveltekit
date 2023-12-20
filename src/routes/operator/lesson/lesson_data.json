@@ -983,6 +983,110 @@
                         "title": ""
                     }
                 ]
+            },
+            {
+                "num": "12",
+                "name": "Een ongeval",
+                "words": {
+                    "bestuurder": {
+                        "ru": "водитель",
+                        "uk": "водій",
+                        "en": "driver",
+                        "fr": "conducteur",
+                        "de": "Fahrer"
+                    },
+                    "ziekenhuis": {
+                        "ru": "больница",
+                        "uk": "лікарня",
+                        "en": "hospital",
+                        "fr": "hôpital",
+                        "de": "Krankenhaus"
+                    },
+                    "besteligst": {
+                        "ru": "срочно",
+                        "uk": "негайно",
+                        "en": "urgently",
+                        "fr": "urgemment",
+                        "de": "dringend"
+                    },
+                    "onmiddellijk": {
+                        "ru": "немедленно",
+                        "uk": "негайно",
+                        "en": "immediately",
+                        "fr": "immédiatement",
+                        "de": "sofort"
+                    },
+                    "in kritieke toestand": {
+                        "ru": "в критическом состоянии",
+                        "uk": "у критичному стані",
+                        "en": "in critical condition",
+                        "fr": "en état critique",
+                        "de": "in kritischem Zustand"
+                    },
+                    "motorrijder": {
+                        "ru": "мотоциклист",
+                        "uk": "мотоцикліст",
+                        "en": "motorcyclist",
+                        "fr": "motocycliste",
+                        "de": "Motorradfahrer"
+                    },
+                    "obstakel": {
+                        "ru": "препядствие",
+                        "uk": "перешкода",
+                        "en": "obstacle",
+                        "fr": "obstacle",
+                        "de": "Hindernis"
+                    },
+                    "chauffeur": {
+                        "ru": "шофер",
+                        "uk": "шофер",
+                        "en": "driver",
+                        "fr": "chauffeur",
+                        "de": "Fahrer"
+                    },
+                    "medepassagiers": {
+                        "ru": "попутчики",
+                        "uk": "спіткачі",
+                        "en": "passengers",
+                        "fr": "passagers",
+                        "de": "Mitfahrer"
+                    },
+                    "brandwonden": {
+                        "ru": "ожоги",
+                        "uk": "опіки",
+                        "en": "burns",
+                        "fr": "brûlures",
+                        "de": "Verbrennungen"
+                    },
+                    "gespecialiseerd brandwondencentrum": {
+                        "ru": "специализированный ожоговый центр",
+                        "uk": "спеціалізований центр опіків",
+                        "en": "specialized burn center",
+                        "fr": "centre spécialisé des brûlures",
+                        "de": "spezialisiertes Verbrennungszentrum"
+                    }
+                },
+                "lessons": [
+                    {
+                        "num": 1,
+                        "title": "Een ongeval",
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.1",
+                                "title": "Een ongeval.1"
+                            }
+                        ]
+                    },
+                    {
+                        "num": 2,
+                        "title": ""
+                    },
+                    {
+                        "num": 3,
+                        "title": ""
+                    }
+                ]
             }
         ]
     }
