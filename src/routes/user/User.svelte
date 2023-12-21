@@ -166,7 +166,8 @@
 						// $call_but_status = 'active';
 					}
 				} else if (res['busy']) {
-					if ($click_call_func === null) status = 'busy';
+					// if ($click_call_func === null)
+					status = 'busy';
 				} else if (res['close']) {
 					local.video.display = 'none';
 					// remote.video.display = 'none';

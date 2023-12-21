@@ -18,7 +18,7 @@
 	import { dialog_data } from './dialog_data.js';
 	import { msg_user } from '$lib/js/stores.js';
 
-	import QA2 from './Dialog.2.svelte';
+	import Dialog2 from './Dialog.2.svelte';
 
 	let share_mode = false;
 	export let data;
@@ -78,7 +78,7 @@
 		share_button = true;
 	}
 
-	async function QA() {
+	async function Dialog() {
 		if (!dialog_data.content[cur_qa]) {
 			cur_qa = 0;
 			cur_html++;
@@ -104,7 +104,7 @@
 		}
 	}
 
-	QA();
+	Dialog();
 
 	onMount(() => {
 		const parentWidth = window.innerWidth;
@@ -127,20 +127,20 @@
 
 	function onNextQA() {
 		cur_qa++;
-		QA();
+		Dialog();
 	}
 
 	function onBackQA() {
 		// Обработчик нажатия на кнопку "<-"
 		cur_qa--;
-		QA();
+		Dialog();
 	}
 
 	function onShare() {
 		// Обработчик нажатия на кнопку "share"
 		share_mode = !share_mode;
 		style_button = share_mode ? style_button_shared : style_button_non_shared;
-		QA();
+		Dialog();
 	}
 
 	function onChangeClick() {
@@ -179,7 +179,7 @@
 		<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 	</div>
 {:else}
-	<QA2 {data} />
+	<Dialog2 {data} />
 {/if}
 
 {#if data.quiz}
