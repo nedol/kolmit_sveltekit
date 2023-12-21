@@ -74,6 +74,7 @@
 	}
 
 	function disablePanel(node) {
+		return;
 		let t = node.offsetParent.attributes['theme'];
 		disabled[parseInt(t.value)] = false;
 		// disabled = 'disabled';
