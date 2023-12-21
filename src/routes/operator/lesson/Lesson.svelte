@@ -15,7 +15,7 @@
 	import { lesson } from '$lib/js/stores.js';
 	let lesson_visible = true;
 
-	let disabled = [true, true, true, true, true, true, true, true, true, true, true, true];
+	let disabled = [];
 
 	let display = 'hidden';
 
