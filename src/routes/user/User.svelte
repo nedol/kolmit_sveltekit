@@ -35,6 +35,7 @@
 		// }
 	}
 
+	let dc = false;
 	// import { dc_msg } from '$lib/js/stores.js';
 	// $: if ($dc_msg) {
 	// 	OnMessage($dc_msg);
@@ -167,7 +168,7 @@
 					}
 				} else if (res['busy']) {
 					// if ($click_call_func === null)
-					status = 'busy';
+					if (!dc) status = 'busy';
 				} else if (res['close']) {
 					local.video.display = 'none';
 					// remote.video.display = 'none';

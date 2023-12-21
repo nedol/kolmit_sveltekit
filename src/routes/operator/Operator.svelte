@@ -164,13 +164,13 @@
 		document.addEventListener('visibilitychange', () => {
 			if (document.hidden) {
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
-				audioCtx.suspend();
+				if (audioCtx) audioCtx.suspend();
 				synthesis.pause();
 			} else {
 				// Ваш код, выполняемый при восстановлении активности приложения
 				synthesis.resume();
 				console.log('Приложение активно');
-				audioCtx.resume().then(() => {});
+				if (audioCtx) audioCtx.resume().then(() => {});
 			}
 		});
 
