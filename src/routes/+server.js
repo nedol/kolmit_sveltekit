@@ -166,14 +166,28 @@ export async function POST({ request, url, fetch, cookies }) {
 				// 	});
 				// }
 
+				SendOperatorStatus(q);
+
+				let operators = { [q.em]: {} };
+				for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+					if (uid !== 'resolve')
+						operators[q.em][uid] = {
+							type: q.type,
+							abonent: q.abonent,
+							em: q.em,
+							uid: q.uid,
+							status: global.rtcPool['operator'][q.abonent][q.em][uid].status
+							// queue: queue
+						};
+				}
+
 				resp = {
 					func: q.func,
 					type: q.type,
 					check: true,
-					queue: String(cnt_queue)
+					queue: String(cnt_queue),
+					operators: operators
 				};
-
-				SendOperatorStatus(q);
 
 				// set('global.rtcPool', global.rtcPool);
 
@@ -189,7 +203,7 @@ export async function POST({ request, url, fetch, cookies }) {
 		case 'offer':
 			try {
 				SetParams(q);
-				BroadcastOperatorStatus(q, 'offer');
+				BroadcastOperatorStatus(q);
 			} catch (ex) {
 				console.log();
 			}
@@ -206,7 +220,7 @@ export async function POST({ request, url, fetch, cookies }) {
 				if (q.type === 'operator') {
 					let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
 					if (item) item.status = 'busy';
-					BroadcastOperatorStatus(q, 'busy');
+					BroadcastOperatorStatus(q);
 					// global.rtcPool['operator'][q.abonent][q.em].shift();
 				}
 				break;
@@ -216,7 +230,7 @@ export async function POST({ request, url, fetch, cookies }) {
 					let item = global.rtcPool[q.type][q.abonent][q.em][q.uid];
 					if (item) {
 						item.status = q.status;
-						if (q.type === 'operator') BroadcastOperatorStatus(q, 'close');
+						if (q.type === 'operator') BroadcastOperatorStatus(q);
 					}
 				} catch (ex) {}
 				//this.RemoveAbonent(q);
@@ -324,7 +338,7 @@ function SetParams(q) {
 	// };
 }
 
-function BroadcastOperatorStatus(q, status) {
+function BroadcastOperatorStatus(q, check) {
 	try {
 		let queue = 0;
 		if (!global.rtcPool['user'][q.abonent]) return;

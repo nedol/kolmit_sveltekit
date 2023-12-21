@@ -168,7 +168,7 @@
 					}
 				} else if (res['busy']) {
 					// if ($click_call_func === null)
-					if (!dc) status = 'busy';
+					if (!rtc.DC || (rtc.DC && rtc.DC.dc.readyState !== 'open')) status = 'busy';
 				} else if (res['close']) {
 					local.video.display = 'none';
 					// remote.video.display = 'none';
