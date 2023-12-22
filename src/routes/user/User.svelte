@@ -217,7 +217,8 @@
 
 		if (data.func === 'talk') {
 			$call_but_status = 'talk';
-			if (data.em && data[em]) {
+			console.log('talk', data.em);
+			if (data.em === em) {
 				status = 'talk';
 
 				clearInterval(inter);
