@@ -29,7 +29,10 @@
 		placeholder_desc = dict['input description'][$langs];
 	}
 
-	import operator_svg from '$lib/images/operator.svg';
+	// import operator_svg from '$lib/images/operator.svg';
+	let operator_svg =
+		'https://kolmit-service.onrender.com/_app/immutable/assets/operator.7238a518.svg';
+
 	let user_pic = operator_svg;
 	if (user.picture.medium) user_pic = user.picture.medium;
 
