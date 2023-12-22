@@ -581,13 +581,25 @@
 			showCommands = false;
 		}
 	};
+
+	function OnMute() {
+		$call_but_status = 'talk';
+		// $call_but_status = 'talk';
+		OnClickCallButton();
+	}
 </script>
 
 <div style="display:flex; height:60px; flex-wrap: nowrap;justify-content: space-between;">
 	<!-- <VideoLocal {...local.video} /> -->
 	<div class="placeholder">
 		{#if remote.text.display}
-			<VideoRemote {...remote.video} name={remote.text.name} em={$operator.em}>
+			<VideoRemote
+				{...remote.video}
+				name={remote.text.name}
+				em={$operator.em}
+				on:click={OnClickCallButton}
+				on:mute={OnMute}
+			>
 				<div
 					class="remote_text_display"
 					style="display:{remote.text.display};	

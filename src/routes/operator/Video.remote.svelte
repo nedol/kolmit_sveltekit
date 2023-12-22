@@ -34,7 +34,7 @@
 		<Card style="min-width: 50px;">
 			<Media class="card-media-square" aspectRatio="square">
 				<MediaContent>
-					<video bind:this={video} autoplay playsinline {poster}>
+					<video bind:this={video} on:click on:mute autoplay playsinline {poster}>
 						<track kind="captions" />
 					</video>
 				</MediaContent>
@@ -59,7 +59,7 @@
 
 <style>
 	video {
-		display:block;
+		display: block;
 		margin-right: auto;
 		margin-left: auto;
 		margin-top: auto;
