@@ -15,7 +15,7 @@
 	import { lesson } from '$lib/js/stores.js';
 	let lesson_visible = true;
 
-	let disabled = [];
+	let disabled = [true, true, true, true, true, true, true, true, true, true, true, true, true];
 
 	let display = 'hidden';
 
@@ -74,9 +74,10 @@
 	}
 
 	function disablePanel(node) {
-		return;
-		let t = node.offsetParent.attributes['theme'];
-		disabled[parseInt(t.value)] = false;
+		try {
+			let t = node.attributes['t'].value;
+			disabled[parseInt(t)] = false;
+		} catch (ex) {}
 		// disabled = 'disabled';
 	}
 </script>
@@ -96,7 +97,7 @@
 			{#each level.themes as theme, t}
 				<div class="accordion-container">
 					<Accordion multiple>
-						<Panel class="panel" disabled={disabled[parseInt(t)]} theme={t}>
+						<Panel class="panel" disabled={disabled[parseInt(t)]}>
 							<Header><h4>{theme.name}</h4></Header>
 							<Content>
 								{#if theme.lessons}
@@ -107,6 +108,7 @@
 												<!-- {@debug quiz} -->
 												{#if quiz.title && quiz.name}
 													<div
+														{t}
 														use:disablePanel
 														name={quiz.name}
 														quiz={quiz.type}

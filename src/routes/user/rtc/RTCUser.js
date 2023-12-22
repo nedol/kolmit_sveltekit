@@ -111,7 +111,7 @@ export default class RTCUser extends RTCBase {
 		}
 
 		if (data.call || data.func === 'call') {
-			console.log('received call: ' + data.call + ' from ' + that.type, that);
+			console.log('received call: ' + ' from ' + that.type, that);
 
 			//window.parent.$('img.kolmit').parent().append(that.remoteVideo);
 		}
