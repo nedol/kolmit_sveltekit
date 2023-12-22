@@ -912,33 +912,6 @@
                 ]
             },
             {
-                "num": "7",
-                "name": "Extra informatie - exams",
-                "words": {
-                    "misschien": {
-                        "ru": "может быть"
-                    }
-                },
-                "lessons": [
-                    {
-                        "num": 1,
-                        "title": "",
-                        "quizes": [
-                            {
-                                "type": "text",
-                                "name": "Exam info",
-                                "title": "Exam.1 info"
-                            },
-                            {
-                                "type": "text",
-                                "name": "Exam.2 info",
-                                "title": "Exam.2 info"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "num": "8",
                 "name": "Bij de dokter",
                 "words": {},
@@ -1075,6 +1048,21 @@
                                 "type": "text",
                                 "name": "Een ongeval.1",
                                 "title": "Een ongeval.1"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.2",
+                                "title": "Een ongeval.2"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.3",
+                                "title": "Een ongeval.3"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.4",
+                                "title": "Een ongeval.4"
                             }
                         ]
                     },
@@ -1085,6 +1073,33 @@
                     {
                         "num": 3,
                         "title": ""
+                    }
+                ]
+            },
+            {
+                "num": "7",
+                "name": "Extra informatie - exams",
+                "words": {
+                    "misschien": {
+                        "ru": "может быть"
+                    }
+                },
+                "lessons": [
+                    {
+                        "num": 1,
+                        "title": "",
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "name": "Exam info",
+                                "title": "Exam.1 info"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Exam.2 info",
+                                "title": "Exam.2 info"
+                            }
+                        ]
                     }
                 ]
             }
