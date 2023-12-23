@@ -393,12 +393,68 @@
             {
                 "num": "5",
                 "name": "Feest",
+                "words": {
+                    "werk als secretaris": {
+                        "ru": "работаю секретарем",
+                        "fr": "travaille en tant que secrétaire",
+                        "en": "work as a secretary",
+                        "de": "arbeite als Sekretär",
+                        "uk": "працюю секретарем"
+                    },
+                    "bij de gemeente": {
+                        "ru": "в муниципалитете",
+                        "fr": "à la mairie",
+                        "en": "at the municipality",
+                        "de": "bei der Gemeinde",
+                        "uk": "в муніципалітеті"
+                    },
+                    "schaak": {
+                        "ru": "шахматы",
+                        "fr": "échecs",
+                        "en": "chess",
+                        "de": "Schach",
+                        "uk": "шахи"
+                    },
+                    "kinderverzorgster": {
+                        "ru": "сиделка за детьми",
+                        "fr": "nounou",
+                        "en": "childcare provider",
+                        "de": "Kinderpflegerin",
+                        "uk": "доглядач за дітьми"
+                    },
+                    "leuk": {
+                        "ru": "весело",
+                        "fr": "amusant",
+                        "en": "fun",
+                        "de": "spaßig",
+                        "uk": "весело"
+                    },
+                    "Momenteel": {
+                        "ru": "в настоящее время",
+                        "fr": "actuellement",
+                        "en": "currently",
+                        "de": "derzeit",
+                        "uk": "зараз"
+                    },
+                    "afgestudeerd": {
+                        "ru": "окончил(а) учебу",
+                        "fr": "diplômé",
+                        "en": "graduated",
+                        "de": "abgeschlossen",
+                        "uk": "закінчив(ла) навчання"
+                    }
+                },
                 "lessons": [
                     {
                         "num": 1,
                         "title": "",
-                        "words": {},
-                        "quizes": []
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "title": "Het gezin van Patrick",
+                                "name": "Het gezin"
+                            }
+                        ]
                     },
                     {
                         "num": 2,
@@ -414,6 +470,69 @@
                 "num": "6",
                 "name": "Op uitstap",
                 "words": {
+                    "Het is weer zover": {
+                        "ru": "Вот опять",
+                        "fr": "C'est reparti",
+                        "en": "Here we go again",
+                        "de": "Es ist wieder soweit",
+                        "uk": "Знову те саме"
+                    },
+                    "middelbaar": {
+                        "ru": "среднее образование",
+                        "fr": "enseignement secondaire",
+                        "en": "secondary education",
+                        "de": "weiterführende Schule",
+                        "uk": "середня освіта"
+                    },
+                    "de praktische regeling": {
+                        "ru": "практическое урегулирование",
+                        "fr": "réglementation pratique",
+                        "en": "practical arrangement",
+                        "de": "praktische Regelung",
+                        "uk": "практичне врегулювання"
+                    },
+                    "schoolreis": {
+                        "ru": "школьная поездка",
+                        "fr": "voyage scolaire",
+                        "en": "school trip",
+                        "de": "Klassenfahrt",
+                        "uk": "шкільна подорож"
+                    },
+                    "brief": {
+                        "ru": "письмо",
+                        "fr": "lettre",
+                        "en": "letter",
+                        "de": "Brief",
+                        "uk": "лист"
+                    },
+                    "verzamelen": {
+                        "ru": "собираться",
+                        "fr": "se rassembler",
+                        "en": "gather",
+                        "de": "sich sammeln",
+                        "uk": "збиратися"
+                    },
+                    "stationsgebouw": {
+                        "ru": "здание вокзала",
+                        "fr": "bâtiment de la gare",
+                        "en": "train station building",
+                        "de": "Bahnhofsgebäude",
+                        "uk": "будівля вокзалу"
+                    },
+                    "vertrekt": {
+                        "ru": "отправляется",
+                        "fr": "départ",
+                        "en": "departure",
+                        "de": "Abfahrt",
+                        "uk": "відправляється"
+                    },
+                    "redders": {
+                        "ru": "спасатели",
+                        "fr": "sauveteurs",
+                        "en": "lifeguards",
+                        "de": "Rettungsschwimmer",
+                        "uk": "рятувальники"
+                    },
                     "kleren aangedaan": {
                         "ru": "оделся",
                         "fr": "a revêtu des vêtements",
@@ -964,6 +1083,22 @@
                 "lessons": [
                     {
                         "num": 1,
+                        "title": "Op uitstap",
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "title": "Op uitstap.1",
+                                "name": "Op uitstap.1"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Een weekje Oostende.2",
+                                "name": "Een weekje Oostende"
+                            }
+                        ]
+                    },
+                    {
+                        "num": 2,
                         "title": "Een weekje Oostende",
                         "quizes": [
                             {
@@ -979,7 +1114,7 @@
                         ]
                     },
                     {
-                        "num": 2,
+                        "num": 3,
                         "title": "Speciaal perfectum",
                         "quizes": [
                             {
