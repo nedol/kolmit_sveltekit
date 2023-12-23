@@ -14,7 +14,11 @@ let kolmit;
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
 export async function load({ fetch, cookies, route, url, stuff }) {
+	// res.json({ response: completion.data.choices[0].text }
 	// let operator = url.searchParams.get('operator');
+
+	let res;
+
 	let abonent = url.searchParams.get('abonent');
 	let lang = url.searchParams.get('lang');
 	let name = url.searchParams.get('name');
@@ -29,7 +33,6 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 
 	let host = url.origin; //'http://localhost:3000'; //'https://kolmit-sveltekit-nedol.vercel.app'; //
 
-	let res;
 	let resp = {
 		dict: dict,
 		ice_conf: ice_conf

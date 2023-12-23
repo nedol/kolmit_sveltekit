@@ -158,7 +158,7 @@
 </script>
 
 <div style="display:{display}">
-	<div class="deps_div" style="height: 100vh; overflow-y: scroll;">
+	<div class="deps_div" style="height: 80vh; overflow-y: scroll;">
 		<!-- {@debug operator} -->
 		{#each cc_data as dep, i}
 			<br />

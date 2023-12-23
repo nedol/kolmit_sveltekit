@@ -315,6 +315,8 @@
 	}
 
 	async function speak(text) {
+		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
+
 		// await EasySpeech.speak({
 		// 	text: text,
 		// 	voice: $tts.voice,
@@ -324,16 +326,16 @@
 		// 	}
 		// });
 		// return;
-		$tts
-			.speak({
-				text
-			})
-			.then(() => {
-				console.log('speak Success !');
-			})
-			.catch((e) => {
-				console.error('An error occurred :', e);
-			});
+		// $tts
+		// 	.speak({
+		// 		text
+		// 	})
+		// 	.then(() => {
+		// 		console.log('speak Success !');
+		// 	})
+		// 	.catch((e) => {
+		// 		console.error('An error occurred :', e);
+		// 	});
 	}
 
 	function repeat() {

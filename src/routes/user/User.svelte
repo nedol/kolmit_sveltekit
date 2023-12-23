@@ -21,6 +21,8 @@
 	import { click_call_func } from '$lib/js/stores.js';
 	$click_call_func = null;
 
+	import { user_placeholder } from '$lib/js/stores.js';
+
 	import pkg from 'lodash';
 	const { groupBy, find } = pkg;
 
@@ -278,7 +280,7 @@
 					status = 'call';
 					$call_but_status = 'call';
 					video_element.load();
-					document.getElementsByClassName('placeholder')[0].appendChild(card);
+					$user_placeholder.appendChild(card);
 
 					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}
@@ -349,5 +351,4 @@
 	bind:card
 	bind:status
 	on:click={OnClickCallButton}
-	on:mute={OnMute}
 />

@@ -434,7 +434,7 @@
 	.speaker-button {
 		position: absolute;
 		flex: auto;
-		top: 210px;
+		top: 260px;
 		right: 30px;
 		transform: translate(50%, 0%);
 		font-size: large;

@@ -1,5 +1,5 @@
 <script>
-	import { onMount, getContext } from 'svelte';
+	import { onMount, getContext, onDestroy } from 'svelte';
 	import md5 from 'md5';
 	import translate from 'translate';
 	import EasySpeech from 'easy-speech';
@@ -29,6 +29,7 @@
 	let containerWidth = '100%';
 	let containerHeight = '100vh';
 	const abonent = getContext('abonent');
+	let speaker = 'volume_up';
 
 	fetch(
 		`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
@@ -97,6 +98,10 @@
 		containerHeight = parentHeight + 'px';
 	});
 
+	onDestroy(() => {
+		EasySpeech.cancel();
+	});
+
 	function measureTextSize(text, cb) {
 		const measureElement = trans_div;
 		measureElement.textContent = text;
@@ -124,20 +129,21 @@
 	}
 
 	async function TTSSpeak(text) {
-		// $tts
-		// 	.speak({
-		// 		text: word
-		// 	})
-		// 	.then(() => {
-		// 		console.log('Success !');
-		// 	})
-		// 	.catch((e) => {
-		// 		console.error('An error occurred :', e);
-		// 	});
-
-		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
+		await EasySpeech.speak({
+			text: text,
+			voice: $tts.voice,
+			rate: 0,
+			error: (e) => console.log(e)
+		});
 	}
 
+	async function TTSPause() {
+		await EasySpeech.pause();
+	}
+
+	async function TTSResume() {
+		await EasySpeech.resume();
+	}
 	async function onClickText(event) {
 		let x, y;
 		if (event.target.attributes['trans']) {
@@ -235,9 +241,33 @@
 			}
 		}
 	}
+
+	function onSpeach(ev) {
+		if (speaker === 'volume_up') {
+			TTSSpeak(text);
+			speaker = 'pause_circle';
+		} else if (speaker === 'pause_circle') {
+			TTSPause();
+			speaker = 'play_circle';
+		} else if (speaker === 'play_circle') {
+			TTSResume();
+			speaker = 'pause_circle';
+		}
+	}
 </script>
 
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+
 <h3>{data.title}</h3>
+
+<button on:click={onSpeach} class="speaker-button">
+	<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5">
+		{speaker}
+	</span>
+</button>
 
 <div
 	style="height:{window.innerHeight}; line-height:50px"

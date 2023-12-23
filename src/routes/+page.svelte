@@ -3,14 +3,6 @@
 	import Operator from './operator/Operator.svelte';
 	import Login from './site/Login.svelte';
 
-	// import makeCert from 'make-cert'
-	// const {key, cert} = makeCert('kolmit')
-
-	// console.log('key', key)
-	// console.log('cert', cert)
-
-	// import md5 from 'md5';
-
 	export let data;
 
 	let user_pic = data.picture ? data.picture.medium : '';

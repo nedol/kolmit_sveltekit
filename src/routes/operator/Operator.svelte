@@ -10,6 +10,7 @@
 	import CircularProgress from '@smui/circular-progress';
 	import { dicts } from '$lib/js/stores.js';
 	import { langs } from '$lib/js/stores.js';
+	import { user_placeholder } from '$lib/js/stores.js';
 	// import {Dict} from '$lib/js/$dicts'
 	import Callcenter from './callcenter/Callcenter.svelte';
 	let callcenter;
@@ -67,6 +68,7 @@
 	let video_progress = false;
 	let edited_display = false;
 	let synthesis;
+	let commandsList;
 	let showCommands = false;
 	let debug = 'debug';
 	let debug_div;
@@ -137,6 +139,10 @@
 		try {
 			await EasySpeech.init(); // required
 
+			EasySpeech.on('error', () => {
+				EasySpeech.reset();
+			});
+
 			rtc = new RTCOperator($operator, uid, $signal);
 			initRTC();
 			rtc.SendCheck();
@@ -164,19 +170,21 @@
 		document.addEventListener('visibilitychange', () => {
 			if (document.hidden) {
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
-				if (audioCtx) audioCtx.suspend();
-				synthesis.pause();
+				// if (audioCtx) audioCtx.suspend();
+				EasySpeech.pause();
 			} else {
 				// Ваш код, выполняемый при восстановлении активности приложения
-				synthesis.resume();
+				// EasySpeech.reset();
+				EasySpeech.resume();
 				console.log('Приложение активно');
-				if (audioCtx) audioCtx.resume().then(() => {});
+				// if (audioCtx) audioCtx.resume().then(() => {});
 			}
 		});
 
 		return () => {
 			// Удалите слушателя событий при размонтировании компонента
 			document.removeEventListener('click', handleOutsideClick);
+			EasySpeech.cancel();
 		};
 	});
 
@@ -576,7 +584,6 @@
 
 	// Функция для скрытия списка команд при клике за его пределами
 	const handleOutsideClick = (event) => {
-		const commandsList = document.getElementById('commandsList');
 		if (commandsList && !commandsList.contains(event.target)) {
 			showCommands = false;
 		}
@@ -591,7 +598,7 @@
 
 <div style="display:flex; height:60px; flex-wrap: nowrap;justify-content: space-between;">
 	<!-- <VideoLocal {...local.video} /> -->
-	<div class="placeholder">
+	<div bind:this={$user_placeholder}>
 		{#if remote.text.display}
 			<VideoRemote
 				{...remote.video}
@@ -673,7 +680,7 @@
 	</div>
 	{#if showCommands}
 		<!-- Список команд -->
-		<div id="commandsList">
+		<div bind:this={commandsList}>
 			<div on:click={handleChangeProfile}>{$dicts['Изменить профиль'][$langs]}</div>
 		</div>
 	{/if}

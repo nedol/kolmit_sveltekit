@@ -4,11 +4,11 @@
 </script>
 
 <div class="app">
-	<Header />
-
+	<Header></Header>
 	<main>
 		<slot />
 	</main>
+
 	<!-- 
 	<footer>
 		<p>
