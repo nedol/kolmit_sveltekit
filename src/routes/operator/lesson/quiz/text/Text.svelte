@@ -22,6 +22,7 @@
 	export let data;
 	let bottomAppBar;
 	let woorden = data.words,
+		orig_text,
 		text,
 		trans = '',
 		trans_div;
@@ -37,7 +38,7 @@
 	)
 		.then((response) => response.json())
 		.then((data) => {
-			text = data.obj.text;
+			orig_text = text = data.obj.text;
 			fetchText();
 		})
 		.catch((error) => {
@@ -131,7 +132,7 @@
 
 	async function TTSSpeak(text) {
 		await EasySpeech.speak({
-			text: text,
+			text: orig_text,
 			voice: $tts.voice,
 			rate: 0,
 			error: (e) => console.log(e)

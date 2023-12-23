@@ -1,4 +1,4 @@
-export const ice_conf = {
+export let ice_conf = {
 	stun: {
 		urls: [
 			'stun:stun1.l.google.com:19302',
@@ -8,13 +8,8 @@ export const ice_conf = {
 		]
 	},
 	turn: {
-		urls: [
-			'turn:delivery-angels.com:3478?transport=udp',
-			'turn:delivery-angels.com:3478?transport=tcp',
-			'turn:delivery-angels.com:5349?transport=udp',
-			'turn:delivery-angels.com:5349?transport=tcp'
-		],
-		username: 'guest',
+		urls: ['turn:localhost:3478?transport=udp', 'turn:localhost:3478?transport=tcp'],
+		username: 'username',
 		credential: 'password'
 	},
 	lifetimeDuration: '86400s'

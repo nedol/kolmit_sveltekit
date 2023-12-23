@@ -2,6 +2,7 @@ import md5 from 'md5';
 import { dict } from '$lib/dict/dict';
 import { ice_conf } from '$lib/ice_conf';
 import os from 'os';
+import Turn from 'node-turn';
 
 import { CreateOperator, CheckOperator } from '$lib/server/db.js';
 
@@ -10,6 +11,18 @@ global.rtcPull = { user: {}, operator: {} };
 import { CreatePool, GetUsers } from '$lib/server/db.js'; //src\lib\server\server.db.js
 
 let kolmit;
+
+if (!global.server) {
+	global.server = new Turn({
+		// set options
+		authMech: 'long-term',
+		credentials: {
+			username: 'password'
+		}
+	});
+}
+
+global.server.start();
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ fetch, cookies, route, url, stuff }) {

@@ -12,7 +12,7 @@
       "turn:localhost:3478?transport=udp",
       "turn:localhost:3478?transport=tcp"
     ],
-    "username": "guest",
+    "username": "username",
     "credential": "password"
   },
   "lifetimeDuration": "86400s"
