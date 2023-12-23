@@ -268,12 +268,117 @@
             {
                 "num": "4",
                 "name": "Verhuizen",
+                "words": {
+                    "verhuisd": {
+                        "ru": "переехал(а)",
+                        "fr": "déménagé",
+                        "en": "moved",
+                        "de": "umgezogen",
+                        "uk": "переїхав(ла)"
+                    },
+                    "huren": {
+                        "ru": "снимать в аренду",
+                        "fr": "louer",
+                        "en": "rent",
+                        "de": "mieten",
+                        "uk": "орендувати"
+                    },
+                    "kleerkast": {
+                        "ru": "гардероб",
+                        "fr": "garde-robe",
+                        "en": "wardrobe",
+                        "de": "Kleiderschrank",
+                        "uk": "шафа для одягу"
+                    },
+                    "bureau": {
+                        "ru": "письменный стол",
+                        "fr": "bureau",
+                        "en": "desk",
+                        "de": "Schreibtisch",
+                        "uk": "письмовий стіл"
+                    },
+                    "zetel": {
+                        "ru": "кресло",
+                        "fr": "siège",
+                        "en": "armchair",
+                        "de": "Sessel",
+                        "uk": "крісло"
+                    },
+                    "muur": {
+                        "ru": "стена",
+                        "fr": "mur",
+                        "en": "wall",
+                        "de": "Wand",
+                        "uk": "стіна"
+                    },
+                    "schilderijen": {
+                        "ru": "картины",
+                        "fr": "tableaux",
+                        "en": "paintings",
+                        "de": "Gemälde",
+                        "uk": "картини"
+                    },
+                    "gordijnen": {
+                        "ru": "шторы",
+                        "fr": "rideaux",
+                        "en": "curtains",
+                        "de": "Vorhänge",
+                        "uk": "штори"
+                    },
+                    "tafeltje": {
+                        "ru": "столик",
+                        "fr": "petite table",
+                        "en": "small table",
+                        "de": "Tischchen",
+                        "uk": "невеликий стілець"
+                    },
+                    "nachtkastjes": {
+                        "ru": "тумбочки",
+                        "fr": "tables de nuit",
+                        "en": "nightstands",
+                        "de": "Nachttische",
+                        "uk": "тумбочки"
+                    },
+                    "straatkant": {
+                        "ru": "уличная сторона",
+                        "fr": "côté rue",
+                        "en": "street side",
+                        "de": "Straßenseite",
+                        "uk": "вуличний бік"
+                    },
+                    "buffetkast": {
+                        "ru": "буфет",
+                        "fr": "buffet",
+                        "en": "buffet",
+                        "de": "Buffetschrank",
+                        "uk": "буфет"
+                    },
+                    "boven": {
+                        "ru": "наверху",
+                        "fr": "en haut",
+                        "en": "above",
+                        "de": "oben",
+                        "uk": "вище"
+                    },
+                    "eettafel": {
+                        "ru": "стол для обеда",
+                        "fr": "table à manger",
+                        "en": "dining table",
+                        "de": "Esstisch",
+                        "uk": "стіл для обіду"
+                    }
+                },
                 "lessons": [
                     {
                         "num": 1,
                         "title": "",
-                        "words": {},
-                        "quizes": []
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "title": "Mail.1",
+                                "name": "Mail.1"
+                            }
+                        ]
                     },
                     {
                         "num": 2,

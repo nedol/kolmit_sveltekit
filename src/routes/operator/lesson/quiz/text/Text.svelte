@@ -132,7 +132,7 @@
 
 	async function TTSSpeak(text) {
 		await EasySpeech.speak({
-			text: orig_text,
+			text: text,
 			voice: $tts.voice,
 			rate: 0,
 			error: (e) => console.log(e)
@@ -246,7 +246,7 @@
 
 	function onSpeach(ev) {
 		if (speaker === 'volume_up') {
-			TTSSpeak(text);
+			TTSSpeak(orig_text);
 			speaker = 'pause_circle';
 		} else if (speaker === 'pause_circle') {
 			TTSPause();
