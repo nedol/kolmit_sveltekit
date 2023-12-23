@@ -105,6 +105,7 @@ declare module '$env/static/private' {
 	export const NVM_SYMLINK: string;
 	export const OneDrive: string;
 	export const OneDriveConsumer: string;
+	export const OPENAI_API_KEY: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const Path: string;
@@ -250,6 +251,7 @@ declare module '$env/dynamic/private' {
 		NVM_SYMLINK: string;
 		OneDrive: string;
 		OneDriveConsumer: string;
+		OPENAI_API_KEY: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		Path: string;

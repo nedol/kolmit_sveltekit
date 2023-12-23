@@ -3,6 +3,7 @@
 	import md5 from 'md5';
 	import translate from 'translate';
 	import EasySpeech from 'easy-speech';
+	import CircularProgress from '@smui/circular-progress';
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -265,7 +266,11 @@
 
 <button on:click={onSpeach} class="speaker-button">
 	<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5">
-		{speaker}
+		{#if !text}
+			<CircularProgress style="height: 30px; width: 30px;" indeterminate />
+		{:else}
+			{speaker}
+		{/if}
 	</span>
 </button>
 
