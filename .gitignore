@@ -15,7 +15,7 @@ sql
 .vscode
 .vercel
 ssh
-node-chatgpt-api
+/node-chatgpt-api
 
 
 # Local Netlify folder

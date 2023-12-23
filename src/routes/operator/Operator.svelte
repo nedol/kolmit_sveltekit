@@ -162,7 +162,7 @@
 			initSpeech();
 
 			// Добавьте слушателя событий для скрытия списка команд при клике за его пределами
-			document.addEventListener('click', handleOutsideClick);
+			// document.addEventListener('click', handleOutsideClick);
 		} catch (ex) {
 			console.log();
 		}
@@ -183,7 +183,7 @@
 
 		return () => {
 			// Удалите слушателя событий при размонтировании компонента
-			document.removeEventListener('click', handleOutsideClick);
+			// document.removeEventListener('click', handleOutsideClick);
 			EasySpeech.cancel();
 		};
 	});

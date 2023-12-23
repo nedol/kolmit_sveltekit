@@ -187,7 +187,7 @@
 {/if}
 
 <!-- {#if true} -->
-<div class="content" bind:this={content} style="max-height:100vh">
+<div class="content" bind:this={content} style="max-height:80vh">
 	<!-- <br /> -->
 	{#if dep.admin}
 		<div>

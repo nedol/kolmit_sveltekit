@@ -159,7 +159,7 @@
 
 	.top-app-bar-container {
 		/* max-width: 480px; */
-		width: 100%;
+		/* width: 100%; */
 		/* height: 100vh; */
 		border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.1));
 		margin: 0 18px 18px 0;
@@ -172,6 +172,13 @@
 	img {
 		width: 30px;
 		opacity: 100%;
+	}
+
+	.sec_items {
+		position: absolute;
+		z-index: 2;
+		/* left: 30%; */
+		top: 15%;
 	}
 
 	button.sec_right {
@@ -207,6 +214,7 @@
 	@media screen and (max-width: 767px) {
 		.sec_items {
 			position: absolute;
+
 			/* left: 30%; */
 			top: 15%;
 		}
