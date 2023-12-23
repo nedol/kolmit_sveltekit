@@ -101,7 +101,7 @@
 	});
 
 	onDestroy(() => {
-		EasySpeech.cancel();
+		// EasySpeech.cancel();
 	});
 
 	function measureTextSize(text, cb) {
