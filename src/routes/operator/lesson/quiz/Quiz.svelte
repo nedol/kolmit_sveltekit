@@ -1,6 +1,6 @@
 <script>
 	import Volgorde from './Volgorde.svelte';
-	import QA1 from './dialog/Dialog.1.svelte';
+	import Dialog from './dialog/Dialog.1.svelte';
 	import Listen from './listen/Listen.svelte';
 	import Text from './text/Text.svelte';
 	import Word from './word/Word.svelte';
@@ -15,7 +15,7 @@
 	{#if quiz === 'sequence'}
 		<Volgorde data={data.zinnen} />
 	{:else if quiz.includes('pair')}
-		<QA1 {data} />
+		<Dialog {data} />
 	{:else if quiz.includes('listen')}
 		<Listen {data} />
 	{:else if quiz === 'text'}

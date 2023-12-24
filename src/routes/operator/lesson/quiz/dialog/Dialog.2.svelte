@@ -1,6 +1,6 @@
 <script>
 	import { users } from '$lib/js/stores.js';
-
+	import { langs } from '$lib/js/stores.js';
 	import { onMount, getContext } from 'svelte';
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -36,22 +36,14 @@
 		console.log($msg_oper);
 	}
 
-	$: if (data.question) {
-		q_visibility = 'hidden';
-	}
-
-	$: if (data.answer) {
-		a_visibility = 'hidden';
-	}
-
 	$: {
 		console.log($lesson.visible);
 	}
 	// import pair_data from './pair_data.json';
 	export let data;
 
-	let q_visibility = 'hidden';
-	let a_visibility = 'hidden';
+	let visibility = ['hidden', 'hidden', 'hidden'];
+	let visibility_cnt = 0;
 
 	let containerWidth, containerHeight;
 
@@ -73,13 +65,7 @@
 	}
 
 	function onClickQ() {
-		if (a_visibility === 'visible') {
-			q_visibility = 'hidden';
-			a_visibility = 'hidden';
-		} else {
-			if (q_visibility === 'visible') a_visibility = 'visible';
-			q_visibility = 'visible';
-		}
+		visibility[visibility_cnt++] = 'visible';
 	}
 </script>
 
@@ -90,11 +76,14 @@
 
 <div style="display: flex;">
 	<div style="margin:0 auto">
-		<div class="q" id="question" style="visibility:{q_visibility}">
-			<div>{@html data.question}</div>
+		<div class="q" id="question" style="visibility:{visibility[0]}">
+			<div>{@html data.question['nl']}</div>
 		</div>
-		<div class="q" id="answer" style="visibility:{a_visibility}">
-			<div>{@html data.answer}</div>
+		<div class="q" id="answer" style="visibility:{visibility[1]}">
+			<div>{@html data.answer[$langs]}</div>
+		</div>
+		<div class="q" id="answer" style="visibility:{visibility[2]}">
+			<div>{@html data.answer['nl']}</div>
 		</div>
 		<button on:click={onClickQ} class="toggleButton">
 			<span class="material-symbols-outlined"> reminder </span>

@@ -45,8 +45,8 @@
                             },
                             {
                                 "type": "pair",
-                                "title": "Dialog 1",
-                                "name": "Familie 3"
+                                "title": "Familie Dialog 1",
+                                "name": "Familie.Dialog.1"
                             }
                         ]
                     },
@@ -68,6 +68,11 @@
                         "num": 1,
                         "title": "",
                         "quizes": [
+                            {
+                                "type": "pair",
+                                "title": "In het restorant 1",
+                                "name": "In het restorant.Dialog.1"
+                            },
                             {
                                 "type": "text",
                                 "name": "In Het Restorant 1"

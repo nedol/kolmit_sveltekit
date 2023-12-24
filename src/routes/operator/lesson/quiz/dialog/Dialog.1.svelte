@@ -2,6 +2,7 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
+	import { langs } from '$lib/js/stores.js';
 	import {
 		mdiPagePreviousOutline,
 		mdiArrowRight,
@@ -15,10 +16,16 @@
 	import { dc_oper_state } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
 	import { dc_user_state } from '$lib/js/stores.js';
-	import { dialog_data } from './dialog_data.js';
+	// import { dialog_data } from './dialog_data.js';
 	import { msg_user } from '$lib/js/stores.js';
 
 	import Dialog2 from './Dialog.2.svelte';
+	import { initial } from 'lodash';
+
+	let dialog_data;
+
+	let visibility = ['visible', 'hidden', 'hidden'];
+	let visibility_cnt = 1;
 
 	let share_mode = false;
 	export let data;
@@ -78,6 +85,12 @@
 		share_button = true;
 	}
 
+	(async function init() {
+		const module = await import(`./${data.name}.js`);
+		dialog_data = module['dialog_data'];
+		Dialog();
+	})();
+
 	async function Dialog() {
 		if (!dialog_data.content[cur_qa]) {
 			cur_qa = 0;
@@ -89,13 +102,18 @@
 				onChangeClick();
 			}, 0);
 		}
-		q = dialog_data.content[cur_qa].question.text;
-		a = dialog_data.content[cur_qa].answer.text;
+		q = dialog_data.content[cur_qa].question;
+		a = dialog_data.content[cur_qa].answer;
 		if (share_mode && ($dc_user || $dc_oper)) {
 			let dc = $dc_user || $dc_oper;
 			await dc.SendData(
 				{
-					lesson: { quiz: 'pair.client', html: dialog_data.html[cur_html], question: q, answer: a }
+					lesson: {
+						quiz: 'pair.client',
+						html: dialog_data.html[cur_html],
+						question: dialog_data.content[cur_qa].question['nl'],
+						answer: dialog_data.content[cur_qa].answer['nl']
+					}
 				},
 				() => {
 					console.log();
@@ -103,8 +121,6 @@
 			);
 		}
 	}
-
-	Dialog();
 
 	onMount(() => {
 		const parentWidth = window.innerWidth;
@@ -127,12 +143,14 @@
 
 	function onNextQA() {
 		cur_qa++;
+		visibility[1] = 'hidden';
 		Dialog();
 	}
 
 	function onBackQA() {
 		// Обработчик нажатия на кнопку "<-"
 		cur_qa--;
+
 		Dialog();
 	}
 
@@ -144,19 +162,40 @@
 	}
 
 	function onChangeClick() {
-		data = { html: dialog_data.html[cur_html], question: q, answer: a, quiz: data.quiz };
+		data = {
+			html: dialog_data.html ? dialog_data.html[cur_html] : '',
+			question: dialog_data.content[cur_qa].question,
+			answer: dialog_data.content[cur_qa].answer,
+			quiz: data.quiz
+		};
 		data.quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
 		let client_quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
 		let dc = $dc_user || $dc_oper;
 		if (dc)
 			dc.SendData(
-				{ lesson: { quiz: client_quiz, html: dialog_data.html[cur_html], question: q, answer: a } },
+				{
+					lesson: {
+						quiz: client_quiz,
+						html: dialog_data.html[cur_html],
+						question: dialog_data.content[cur_qa].question,
+						answer: dialog_data.content[cur_qa].answer
+					}
+				},
 				() => {
 					console.log();
 				}
 			);
 	}
+
+	function onClickQ() {
+		visibility[1] = 'visible';
+	}
 </script>
+
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
 
 {#if data.quiz == 'pair'}
 	{#if share_button}
@@ -167,10 +206,26 @@
 		</IconButton>
 	{/if}
 
-	<div class="container">
+	<!-- <div class="container">
 		<div class="card">
 			<div class="question">{cur_qa + 1}. {q}</div>
 			<div class="answer">{@html a}</div>
+		</div>
+	</div> -->
+	<!-- {@debug dialog_data} -->
+	<div class="container">
+		<div class="card">
+			{#if q || a}
+				<div class="question">
+					{cur_qa + 1}. {q[$langs]}
+				</div>
+				<div class="question" style="visibility:{visibility[1]}">
+					{q['nl']}
+				</div>
+				<div class="answer">
+					{@html a['nl']}
+				</div>
+			{/if}
 		</div>
 	</div>
 
@@ -178,6 +233,10 @@
 		<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
 		<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 	</div>
+
+	<button on:click={onClickQ} class="toggleButton">
+		<span class="material-symbols-outlined"> reminder </span>
+	</button>
 {:else}
 	<Dialog2 {data} />
 {/if}
@@ -271,16 +330,9 @@
 		transform: translateY(-50%);
 	}
 
-	.share-button {
+	.toggleButton {
 		position: absolute;
-		top: 10px;
-		left: 10px;
-		padding: 10px;
-		font-size: 1.5em;
-		background-color: #2196f3;
-		color: #fff;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
+		right: 25px;
+		top: 170px;
 	}
 </style>
