@@ -3,6 +3,8 @@
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import { langs } from '$lib/js/stores.js';
+	import { dicts } from '$lib/js/stores.js';
+	let dict = $dicts;
 	import {
 		mdiPagePreviousOutline,
 		mdiArrowRight,
@@ -206,23 +208,18 @@
 		</IconButton>
 	{/if}
 
-	<!-- <div class="container">
-		<div class="card">
-			<div class="question">{cur_qa + 1}. {q}</div>
-			<div class="answer">{@html a}</div>
-		</div>
-	</div> -->
-	<!-- {@debug dialog_data} -->
+	<div class="title"><h3>{dict['Переведи и проконтролируй ответ'][$langs]}:</h3></div>
+
 	<div class="container">
 		<div class="card">
 			{#if q || a}
 				<div class="question">
 					{cur_qa + 1}. {q[$langs]}
 				</div>
-				<div class="question" style="visibility:{visibility[1]}">
+				<div class="tip" style="visibility:{visibility[1]}">
 					{q['nl']}
 				</div>
-				<div class="answer">
+				<div class="answer" style="visibility:{visibility[1]}">
 					{@html a['nl']}
 				</div>
 			{/if}
@@ -274,6 +271,12 @@
 		align-items: center; /* Центрирование по вертикали */
 	}
 
+	.title {
+		color: grey;
+		position: relative;
+		text-align: center;
+	}
+
 	.card {
 		background-color: #fff;
 		border: 1px solid #ddd;
@@ -297,6 +300,14 @@
 	.answer {
 		color: #555;
 		text-align: center;
+	}
+
+	.tip {
+		font-size: 1.2em;
+		text-align: left;
+		margin-bottom: 10px;
+		margin-left: 20px;
+		color: #1e5a2b;
 	}
 
 	.arrow-buttons {

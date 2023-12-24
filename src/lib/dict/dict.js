@@ -80,6 +80,22 @@ export const dict = [
 			nl: 'Schrijf een vertaling',
 			de: 'Eine Übersetzung schreiben'
 		},
+		'Переведи и проконтролируй ответ': {
+			en: 'Translate and control the answer',
+			ru: 'Переведи и проконтролируй ответ',
+			fr: 'Traduire et contrôler la réponse',
+			uk: 'Переведи і проконтролюй відповідь',
+			nl: 'Vertaal en controleer het antwoord',
+			de: 'Übersetzen und überwachen Sie die Antwort'
+		},
+		'Ответь на вопрос': {
+			en: 'Answer the question',
+			ru: 'Ответь на вопрос',
+			fr: 'Répondre à la question',
+			uk: 'Відповідай на запитання',
+			nl: 'Beantwoord de vraag',
+			de: 'Beantworten Sie die Frage'
+		},
 		'Изменить профиль': {
 			en: 'Change profile',
 			ru: 'Изменить профиль',

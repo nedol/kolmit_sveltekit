@@ -26,6 +26,9 @@
 		};
 	}
 
+	import { dicts } from '$lib/js/stores.js';
+	let dict = $dicts;
+
 	import pkg from 'lodash';
 	const { find, findKey, mapValues } = pkg;
 
@@ -74,15 +77,17 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 
+<div class="title"><h3>{dict['Ответь на вопрос'][$langs]}:</h3></div>
+
 <div style="display: flex;">
 	<div style="margin:0 auto">
-		<div class="q" id="question" style="visibility:{visibility[0]}">
+		<div class="question" style="visibility:{visibility[0]}">
 			<div>{@html data.question['nl']}</div>
 		</div>
-		<div class="q" id="answer" style="visibility:{visibility[1]}">
+		<div class="answer" style="visibility:{visibility[0]}">
 			<div>{@html data.answer[$langs]}</div>
 		</div>
-		<div class="q" id="answer" style="visibility:{visibility[2]}">
+		<div class="answer" style="visibility:{visibility[1]}">
 			<div>{@html data.answer['nl']}</div>
 		</div>
 		<button on:click={onClickQ} class="toggleButton">
@@ -124,11 +129,24 @@
 		border: 1px solid #ccc;
 		border-radius: 5px;
 	}
-	.q {
+
+	.title {
+		color: grey;
+		position: relative;
+		text-align: center;
+	}
+	.question {
 		color: gray;
 		border: 0;
 		background-color: transparent;
 		font: 1.2em sans-serif;
+	}
+
+	.answer {
+		color: gray;
+		border: 0;
+		background-color: transparent;
+		font: 1.5em sans-serif;
 	}
 	.toggleButton {
 		position: absolute;
