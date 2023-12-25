@@ -249,6 +249,11 @@
                             {
                                 "type": "text",
                                 "title": "Wonen 3"
+                            },
+                            {
+                                "type": "pair",
+                                "title": "Wonen.Dialog",
+                                "name": "Wonen.Dialog"
                             }
                         ]
                     },
@@ -379,6 +384,11 @@
                                 "type": "pair",
                                 "title": "Verhuisd.Dialog.1",
                                 "name": "Verhuisd.Dialog.1"
+                            },
+                            {
+                                "type": "pair",
+                                "title": "Verhuisd.Dialog.2",
+                                "name": "Verhuisd.Dialog.2"
                             }
                         ]
                     },
@@ -1340,6 +1350,11 @@
                                 "type": "text",
                                 "name": "Exam.2 info",
                                 "title": "Exam.2 info"
+                            },
+                            {
+                                "type": "pair",
+                                "title": "In het restorant. Extra",
+                                "name": "In het restorant.Dialog.extra"
                             }
                         ]
                     }
