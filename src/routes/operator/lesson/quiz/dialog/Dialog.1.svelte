@@ -23,6 +23,8 @@
 
 	import Dialog2 from './Dialog.2.svelte';
 	import { initial } from 'lodash';
+	// import js from './Familie.Dialog.1.js';
+	// import js_ from './In het restorant.Dialog.1.js';
 
 	let dialog_data;
 
@@ -88,7 +90,7 @@
 	}
 
 	async function init() {
-		const module = await fetch('https://kolmit-service.onrender.com/dialog/' + `${data.name}.js`);
+		const module = await import(`../../../../assets/dialog/${data.name}.js`);
 		dialog_data = await module['dialog_data'];
 		Dialog();
 	}
