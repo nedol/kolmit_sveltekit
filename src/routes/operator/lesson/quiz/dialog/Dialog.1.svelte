@@ -88,7 +88,7 @@
 	}
 
 	async function init() {
-		const module = await import(`./${data.name}.js`);
+		const module = await fetch('https://kolmit-service.onrender.com/dialog/' + `${data.name}.js`);
 		dialog_data = await module['dialog_data'];
 		Dialog();
 	}
@@ -201,7 +201,7 @@
 />
 
 {@debug dialog_data}
-{#if data.quiz == 'pair' && dialog_data}
+{#if data.quiz == 'pair'}
 	{#if share_button}
 		<IconButton class="material-icons" on:click={onShare} style={style_button}>
 			<Icon tag="svg" viewBox="0 0 24 24">
