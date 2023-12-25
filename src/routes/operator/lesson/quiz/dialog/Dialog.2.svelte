@@ -82,13 +82,19 @@
 <div style="display: flex;">
 	<div style="margin:0 auto">
 		<div class="question" style="visibility:{visibility[0]}">
-			<div>{@html data.question['nl']}</div>
+			{#if data.question}
+				<div>{@html data.question['nl']}</div>
+			{/if}
 		</div>
 		<div class="answer" style="visibility:{visibility[0]}">
-			<div>{@html data.answer[$langs]}</div>
+			{#if data.answer}
+				<div>{@html data.answer[$langs]}</div>
+			{/if}
 		</div>
 		<div class="answer" style="visibility:{visibility[1]}">
-			<div>{@html data.answer['nl']}</div>
+			{#if data.answer}
+				<div>{@html data.answer['nl']}</div>
+			{/if}
 		</div>
 		<button on:click={onClickQ} class="toggleButton">
 			<span class="material-symbols-outlined"> reminder </span>

@@ -87,11 +87,13 @@
 		share_button = true;
 	}
 
-	(async function init() {
+	async function init() {
 		const module = await import(`./${data.name}.js`);
 		dialog_data = module['dialog_data'];
 		Dialog();
-	})();
+	}
+
+	init();
 
 	async function Dialog() {
 		if (!dialog_data.content[cur_qa]) {
@@ -199,7 +201,7 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 
-{#if data.quiz == 'pair'}
+{#if data.quiz == 'pair' && dialog_data}
 	{#if share_button}
 		<IconButton class="material-icons" on:click={onShare} style={style_button}>
 			<Icon tag="svg" viewBox="0 0 24 24">
