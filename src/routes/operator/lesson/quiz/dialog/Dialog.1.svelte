@@ -89,11 +89,9 @@
 
 	async function init() {
 		const module = await import(`./${data.name}.js`);
-		dialog_data = module['dialog_data'];
+		dialog_data = await module['dialog_data'];
 		Dialog();
 	}
-
-	init();
 
 	async function Dialog() {
 		if (!dialog_data.content[cur_qa]) {
@@ -127,6 +125,7 @@
 	}
 
 	onMount(() => {
+		init();
 		const parentWidth = window.innerWidth;
 		containerWidth = parentWidth + 'px';
 
