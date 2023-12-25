@@ -43,8 +43,8 @@ export let dialog_data = {
 			num: '3',
 			question: {
 				nl: 'Welke toestellen zijn er in de keuken?',
-				ru: 'Какие устройства в кухне?',
-				uk: 'Які пристрої є на кухні?',
+				ru: 'Какая техника есть на кухне?',
+				uk: 'Яка техніка є на кухні?',
 				fr: 'Quels appareils y a-t-il dans la cuisine?',
 				en: 'Which appliances are there in the kitchen?',
 				de: 'Welche Geräte gibt es in der Küche?'

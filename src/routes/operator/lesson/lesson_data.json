@@ -251,6 +251,13 @@
                                 "title": "Wonen 3"
                             },
                             {
+                                "type": "word",
+                                "title": "Wonen. Meubels en toestellen",
+                                "name": [
+                                    "Wonen. Meubels en toestellen"
+                                ]
+                            },
+                            {
                                 "type": "pair",
                                 "title": "Wonen.Dialog",
                                 "name": "Wonen.Dialog"
