@@ -374,6 +374,11 @@
                                 "type": "text",
                                 "title": "Mail.1",
                                 "name": "Mail.1"
+                            },
+                            {
+                                "type": "pair",
+                                "title": "Verhuisd.Dialog.1",
+                                "name": "Verhuisd.Dialog.1"
                             }
                         ]
                     },

@@ -202,7 +202,6 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 
-{@debug dialog_data}
 {#if data.quiz == 'pair'}
 	{#if share_button}
 		<IconButton class="material-icons" on:click={onShare} style={style_button}>
@@ -315,6 +314,7 @@
 	}
 
 	.arrow-buttons {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -347,7 +347,7 @@
 
 	.toggleButton {
 		position: absolute;
-		right: 25px;
-		top: 170px;
+		right: 10px;
+		top: 200px;
 	}
 </style>
