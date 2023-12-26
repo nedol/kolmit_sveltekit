@@ -1,6 +1,8 @@
 <script>
 	import Header from './Header.svelte';
 	import './styles.css';
+	import './smui.css';
+	import './smui.1.css';
 </script>
 
 <div class="app">

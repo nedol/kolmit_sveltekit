@@ -12,12 +12,12 @@ export let dialog_data = {
 				de: 'Haben Sie hart gearbeitet?'
 			},
 			answer: {
-				nl: 'Ja, ik heb hard gewerkt?',
-				ru: 'Да, я много работал?',
-				uk: 'Так, я багато працював?',
-				fr: "Oui, j'ai beaucoup travaillé ?",
-				en: 'Yes, I worked hard?',
-				de: 'Ja, ich habe hart gearbeitet?'
+				nl: 'Ja, ik heb hard gewerkt',
+				ru: 'Да, я много работал.',
+				uk: 'Так, я багато працював.',
+				fr: "Oui, j'ai beaucoup travaillé",
+				en: 'Yes, I worked hard',
+				de: 'Ja, ich habe hart gearbeitet'
 			}
 		},
 		{

@@ -4,6 +4,8 @@
 	"engines": {
 		"node": ">=18"
 	},
+	"prepare": "npm run smui-theme",
+	"smui-theme": "smui-theme compile static/smui.css -i src/theme",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

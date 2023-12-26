@@ -78,6 +78,7 @@
 			})
 			.catch((error) => {
 				console.log(error);
+				OperatorWaiting(par);
 				return [];
 			});
 	}
@@ -157,7 +158,11 @@
 	}
 </script>
 
-<div style="display:{display}">
+<div
+	style="display:{display};    
+	height: 50vh;
+    overflow-y: scroll;"
+>
 	<div class="deps_div" style="height: 80vh; overflow-y: scroll;">
 		<!-- {@debug operator} -->
 		{#each cc_data as dep, i}
