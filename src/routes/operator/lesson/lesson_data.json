@@ -258,6 +258,13 @@
                                 ]
                             },
                             {
+                                "type": "word",
+                                "title": "Wonen.Kleding",
+                                "name": [
+                                    "Wonen.Kleding"
+                                ]
+                            },
+                            {
                                 "type": "pair",
                                 "title": "Wonen.Dialog",
                                 "name": "Wonen.Dialog"
