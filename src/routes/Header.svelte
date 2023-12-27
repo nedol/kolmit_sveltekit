@@ -74,7 +74,7 @@
 								on:click={() => {
 									console.log();
 									$lesson.data = { quiz: '' };
-									EasySpeech.cancel();
+									// EasySpeech.cancel();
 									$view = 'lesson';
 								}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</Title
 							>
