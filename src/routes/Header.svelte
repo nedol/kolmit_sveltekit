@@ -71,10 +71,10 @@
 							>
 
 							<Title
-								on:click={() => {
+								on:click={async () => {
 									console.log();
 									$lesson.data = { quiz: '' };
-									// EasySpeech.cancel();
+									await EasySpeech.cancel();
 									$view = 'lesson';
 								}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</Title
 							>
