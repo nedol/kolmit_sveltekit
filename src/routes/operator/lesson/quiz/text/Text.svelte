@@ -7,7 +7,7 @@
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiPagePreviousOutline } from '@mdi/js';
+	import { mdiPagePreviousOutline, mdiVolumeHigh, mdiPause, mdiPlay } from '@mdi/js';
 
 	import pkg from 'lodash';
 	const { merge } = pkg;
@@ -31,7 +31,7 @@
 	let containerWidth = '100%';
 	let containerHeight = '100vh';
 	const abonent = getContext('abonent');
-	let speaker = 'volume_up';
+	let speaker = mdiVolumeHigh;
 
 	fetch(
 		`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
@@ -59,7 +59,8 @@
 			});
 	}
 
-	function handleBackClick() {
+	async function handleBackClick() {
+		await EasySpeech.cancel();
 		$lesson.data = { quiz: '' }; // При клике на "Back" показываем компонент Lesson
 	}
 
@@ -100,9 +101,7 @@
 		containerHeight = parentHeight + 'px';
 	});
 
-	onDestroy(() => {
-		// EasySpeech.cancel();
-	});
+	onDestroy(() => {});
 
 	function measureTextSize(text, cb) {
 		const measureElement = trans_div;
@@ -135,6 +134,9 @@
 			text: text,
 			voice: $tts.voice,
 			rate: 0,
+			end: (e) => {
+				speaker = mdiVolumeHigh;
+			},
 			error: (e) => console.log(e)
 		});
 	}
@@ -245,15 +247,15 @@
 	}
 
 	function onSpeach(ev) {
-		if (speaker === 'volume_up') {
+		if (speaker === mdiVolumeHigh) {
 			TTSSpeak(orig_text);
-			speaker = 'pause_circle';
-		} else if (speaker === 'pause_circle') {
+			speaker = mdiPause;
+		} else if (speaker === mdiPause) {
 			TTSPause();
-			speaker = 'play_circle';
-		} else if (speaker === 'play_circle') {
+			speaker = mdiPlay;
+		} else if (speaker === mdiPlay) {
 			TTSResume();
-			speaker = 'pause_circle';
+			speaker = mdiPause;
 		}
 	}
 </script>
@@ -265,15 +267,21 @@
 
 <h3>{data.title}</h3>
 
-<button on:click={onSpeach} class="speaker-button">
+<!-- <button  class="speaker-button"> -->
+
+{#if !text}
 	<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5">
-		{#if !text}
-			<CircularProgress style="height: 30px; width: 30px;" indeterminate />
-		{:else}
-			{speaker}
-		{/if}
+		<CircularProgress style="height: 30px; width: 30px;" indeterminate />
 	</span>
-</button>
+{:else}
+	<IconButton class="material-icons" on:click={onSpeach}>
+		<Icon tag="svg" viewBox="0 0 24 24">
+			<path fill="currentColor" d={speaker} />
+		</Icon>
+	</IconButton>
+{/if}
+
+<!-- </button> -->
 
 <div
 	style="height:{window.innerHeight}; line-height:50px"

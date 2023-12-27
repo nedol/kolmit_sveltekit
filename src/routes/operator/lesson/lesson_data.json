@@ -1200,7 +1200,20 @@
             {
                 "num": "9",
                 "name": "Op vakantie",
-                "words": {},
+                "words": {
+                    "amfitheater": {},
+                    "marktplein": {},
+                    "tempels": {},
+                    "basiliek": {},
+                    "kathedralen": {},
+                    "kerken": {},
+                    "plein": {},
+                    "fonteinen": {},
+                    "de botanische tuinen": {},
+                    "musea": {},
+                    "park": {},
+                    "kindermuseum": {}
+                },
                 "lessons": [
                     {
                         "num": 1,
@@ -1210,6 +1223,11 @@
                                 "type": "text",
                                 "name": "De vakantie",
                                 "title": "De vakantie van Amir, Jullie, Aisha en Elise"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Op vakantie.Rome",
+                                "title": "Rome"
                             }
                         ]
                     },
