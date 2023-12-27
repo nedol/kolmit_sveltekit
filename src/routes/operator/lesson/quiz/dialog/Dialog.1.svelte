@@ -10,7 +10,8 @@
 		mdiArrowRight,
 		mdiArrowLeft,
 		mdiShareVariant,
-		mdiShuffle
+		mdiShuffle,
+		mdiAccountConvertOutline
 	} from '@mdi/js';
 	import { lesson } from '$lib/js/stores.js';
 
@@ -253,13 +254,13 @@
 
 		<Section>
 			<Icon tag="svg" viewBox="0 0 24 24" on:click={onChangeClick}>
-				<path fill="currentColor" d={mdiShuffle} />
+				<path fill="currentColor" d={mdiAccountConvertOutline} />
 			</Icon>
 		</Section>
 
 		<Section>
-			<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton
-			>
+			<!-- <IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton
+			> -->
 		</Section>
 	</BottomAppBar>
 {/if}

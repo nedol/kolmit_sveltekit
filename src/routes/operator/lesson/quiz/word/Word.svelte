@@ -5,8 +5,9 @@
 	import EasySpeech from 'easy-speech';
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
+	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiPagePreviousOutline, mdiShuffleVariant } from '@mdi/js';
+	import { mdiPagePreviousOutline, mdiChevronDownCircleOutline } from '@mdi/js';
 
 	import { dicts } from '$lib/js/stores.js';
 
@@ -22,11 +23,11 @@
 
 	let words = [],
 		word;
-	let shuffleWords = words;
-	let wordsString = '';
+	let shuffleWords;
+	let hints;
 	let currentWordIndex = 0;
 	let currentWord;
-	let hl_words = data.highlight ? data.highlight.split(',') : '';
+	let hl_words = data.highlight ? data.highlight.split(',') : [];
 
 	let arrayOfArrays;
 	let userContent = '';
@@ -63,10 +64,13 @@
 			.then((allData) => {
 				// allData - это массив результатов каждого запроса
 				words = [].concat(...allData); // Объединяем массивы в один
-				console.log(words);
+				// console.log(words);
+				hints = [...words];
+				shuffle(hints);
 				currentWord = words[currentWordIndex];
 				words.map((word) => {
-					if (word.original) wordsString += word.infinitive + '  ';
+					// if (word.original)
+					// 	wordsString +=
 				});
 			})
 			.catch((error) => {
@@ -124,11 +128,15 @@
 		$lesson.data = { quiz: '' }; // При клике на "Back" показываем компонент Lesson
 	}
 
-	function onShuffleWords(ev) {
-		for (let i = words.length - 1; i > 0; i--) {
+	function shuffle(array) {
+		for (let i = array.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
-			[words[i], words[j]] = [words[j], words[i]];
+			[array[i], array[j]] = [array[j], array[i]];
 		}
+	}
+
+	function onShuffleWords(ev) {
+		shuffle(words);
 
 		currentWord = words[0];
 	}
@@ -307,6 +315,11 @@
 
 		setFocus();
 	}
+
+	function OnClickHint(ev) {
+		userContent = ev.target.innerHTML;
+		hl_words.push(ev.target.innerHTML);
+	}
 </script>
 
 <link
@@ -364,11 +377,29 @@
 			</div>
 		</div>
 
-		{#if hintIndex != 0}
-			<div class="words_div">
-				{wordsString}
-			</div>
-		{/if}
+		<!-- {#if hintIndex != 0} -->
+		<div class="words_div accordion-container">
+			{#if hints}
+				<Accordion>
+					<Panel>
+						<Header>
+							<IconButton class="material-icons">
+								<Icon tag="svg" viewBox="0 0 24 24">
+									<path fill="currentColor" d={mdiChevronDownCircleOutline} />
+								</Icon>
+							</IconButton>
+						</Header>
+						<Content>
+							{#each hints as hint}
+								<span on:click={OnClickHint}> {hint.original} </span>
+							{/each}
+						</Content>
+					</Panel>
+				</Accordion>
+			{/if}
+		</div>
+
+		<!-- {/if} -->
 	{/if}
 </main>
 
@@ -449,7 +480,7 @@
 	}
 
 	.words_div {
-		width: 95%;
+		/* width: 95%; */
 		line-height: 30px;
 		margin-top: 20px;
 		text-align: justify;
