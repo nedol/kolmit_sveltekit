@@ -6,6 +6,9 @@
 	import TopAppBar, { Row, Section, Title, AutoAdjust } from '@smui/top-app-bar';
 	import IconButton from '@smui/icon-button';
 
+	import EasySpeech from 'easy-speech';
+	import { lesson } from '$lib/js/stores.js';
+
 	import ru_flag from '$lib/images/flag-square-250_ru.png';
 
 	import { editable } from '$lib/js/stores.js';
@@ -70,6 +73,8 @@
 							<Title
 								on:click={() => {
 									console.log();
+									$lesson.data = { quiz: '' };
+									EasySpeech.cancel();
 									$view = 'lesson';
 								}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</Title
 							>
