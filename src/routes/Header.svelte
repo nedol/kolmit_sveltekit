@@ -74,7 +74,9 @@
 								on:click={async () => {
 									console.log();
 									$lesson.data = { quiz: '' };
-									// await EasySpeech.cancel();
+									setTimeout(() => {
+										EasySpeech.cancel();
+									}, 0);
 									$view = 'lesson';
 								}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</Title
 							>
