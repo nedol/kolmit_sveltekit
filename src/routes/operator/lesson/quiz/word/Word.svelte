@@ -389,7 +389,7 @@
 								</Icon>
 							</IconButton>
 						</Header>
-						<Content>
+						<Content style="line-height: 2.2;">
 							{#each hints as hint}
 								<span on:click={OnClickHint}> {hint.original} </span>
 							{/each}
@@ -427,6 +427,7 @@
 		position: relative;
 		text-align: center;
 	}
+
 	.material-symbols-outlined {
 		font-size: 15px;
 		color: rgb(100, 180, 69);
@@ -481,7 +482,7 @@
 
 	.words_div {
 		/* width: 95%; */
-		line-height: 30px;
+
 		margin-top: 20px;
 		text-align: justify;
 		max-height: 370px;
