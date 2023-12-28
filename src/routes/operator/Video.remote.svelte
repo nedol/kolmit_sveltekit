@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Card, { Content, PrimaryAction, Media, MediaContent } from '@smui/card';
 	export let display = 'block';
+	export let status;
 	export let poster, card, name, em;
 	export let srcObject;
 	let rv, video;
@@ -34,7 +35,7 @@
 		<Card style="min-width: 50px;">
 			<Media class="card-media-square" aspectRatio="square">
 				<MediaContent>
-					<video bind:this={video} on:click on:mute autoplay playsinline {poster}>
+					<video bind:this={video} on:click on:mute {status} autoplay playsinline {poster}>
 						<track kind="captions" />
 					</video>
 				</MediaContent>

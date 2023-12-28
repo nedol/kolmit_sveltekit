@@ -7,7 +7,12 @@
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiPagePreviousOutline, mdiChevronDownCircleOutline } from '@mdi/js';
+	import {
+		mdiPagePreviousOutline,
+		mdiChevronDownCircleOutline,
+		mdiHelp,
+		mdiVolumeHigh
+	} from '@mdi/js';
 
 	import { dicts } from '$lib/js/stores.js';
 
@@ -310,7 +315,10 @@
 		// });
 		// } else {
 
-		await EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => console.log(e) });
+		setTimeout(() => {
+			EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => EasySpeech.reset() });
+		}, 0);
+
 		// }
 
 		setFocus();
@@ -330,10 +338,19 @@
 <main>
 	{#if words}
 		<div style="position:relative;float:left">
-			<button on:click={showHint} class="hint-button">
-				<span class="material-symbols-outlined"> reminder </span>
-				<!-- <i class="material-icons" style="font-size: 15px; color: blue; scale:1.5"> reminder </i> -->
-				<!-- <i class="material-icons" style="font-size: 15px; color: blue; scale:1.5">reminder</i> -->
+			<!-- <IconButton class="material-icons"  on:click={showHint}>
+				<Icon tag="svg" viewBox="0 0 24 24">
+					<path fill="currentColor" d={mdiHelp} />
+				</Icon>
+			</IconButton> -->
+
+			<button class="hint-button" on:click={showHint}>
+				<span class="material-symbols-outlined"> ? </span>
+				<!-- <IconButton class="material-icons" on:click={showHint}>
+					<Icon tag="svg" viewBox="0 0 24 24">
+						<path fill="currentColor" d={mdiHelp} />
+					</Icon>
+				</IconButton> -->
 			</button>
 
 			<button on:click={jumpNext10} class="next10-button">+10</button>
@@ -357,11 +374,18 @@
 			<h1>{word}</h1>
 			<div>{currentWordIndex + 1}/{words.length}</div>
 			{#if showSpeakerButton}
-				<button on:click={onSpeach} class="speaker-button">
+				<div class="speaker-button">
+					<IconButton on:click={onSpeach}>
+						<Icon tag="svg" viewBox="0 0 24 24">
+							<path fill="currentColor" d={mdiVolumeHigh} />
+						</Icon>
+					</IconButton>
+				</div>
+				<!-- <button on:click={onSpeach} class="speaker-button">
 					<span class="material-symbols-outlined" style="font-size: 15px; color: blue; scale:1.5">
 						volume_up
 					</span>
-				</button>
+				</button> -->
 			{/if}
 		</div>
 
@@ -522,5 +546,8 @@
 		border-radius: 5px;
 		cursor: pointer;
 		color: rgb(85, 151, 59);
+	}
+	.hint-button {
+		padding: 8px 20px;
 	}
 </style>

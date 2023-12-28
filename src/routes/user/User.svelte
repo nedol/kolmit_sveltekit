@@ -19,6 +19,7 @@
 	import { call_but_status } from '$lib/js/stores.js';
 
 	import { click_call_func } from '$lib/js/stores.js';
+
 	$click_call_func = null;
 
 	import { user_placeholder } from '$lib/js/stores.js';
@@ -48,6 +49,8 @@
 	const uid = md5(abonent + em + operator);
 
 	let rtc;
+
+	let call_cnt;
 	let selected,
 		inter,
 		status = 'inactive',
@@ -133,6 +136,26 @@
 			// $call_but_status = 'talk';
 			remote.audio.paused = true;
 		};
+
+		rtc.PlayCallCnt = () => {
+			// video_progress = false;
+
+			if (!call_cnt) local.audio.paused = false;
+			call_cnt = 10;
+
+			inter = setInterval(function () {
+				call_cnt--;
+
+				if (call_cnt === 0) {
+					clearInterval(inter);
+					call_cnt = 10;
+					local.audio.paused = true;
+				}
+			}, 2000);
+
+			return;
+		};
+
 		// $call_but_status = status;
 	});
 
@@ -170,7 +193,11 @@
 					}
 				} else if (res['busy']) {
 					// if ($click_call_func === null)
-					if (!rtc.DC || (rtc.DC && rtc.DC.dc.readyState !== 'open')) status = 'busy';
+					if (
+						!rtc.DC ||
+						(rtc.DC && rtc.DC.dc.readyState !== 'open' && rtc.DC.dc.readyState !== 'connecting')
+					)
+						status = 'busy';
 				} else if (res['close']) {
 					local.video.display = 'none';
 					// remote.video.display = 'none';
@@ -203,6 +230,10 @@
 			}
 		}
 
+		if (data.func === 'call') {
+			remote.video.muted = true;
+		}
+
 		if (data.func === 'mute') {
 			local.audio.paused = true;
 			remote.audio.muted = true;
@@ -223,10 +254,9 @@
 			if (data.em === em) {
 				status = 'talk';
 
-				clearInterval(inter);
 				video_button_display = true;
 				local.audio.paused = true;
-				remote.audio.muted = false;
+				remote.video.muted = false;
 				video_button_display = 'block';
 				// local.video.display = "block";
 				remote.video.display = 'block';
@@ -296,6 +326,7 @@
 				local.video.display = 'none';
 				video_button_display = 'none';
 				clearInterval(inter);
+				call_cnt = 10;
 				rtc.OnInactive();
 				$click_call_func = null; //operator -> OnClickCallButton
 				parent_div.appendChild(card);
@@ -352,3 +383,6 @@
 	bind:status
 	on:click={OnClickCallButton}
 />
+
+<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
+<!-- <AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} /> -->

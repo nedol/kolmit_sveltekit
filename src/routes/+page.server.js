@@ -22,7 +22,7 @@ if (!global.server) {
 	});
 }
 
-global.server.start();
+// global.server.start();
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ fetch, cookies, route, url, stuff }) {

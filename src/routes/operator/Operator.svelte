@@ -171,11 +171,15 @@
 			if (document.hidden) {
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
 				// if (audioCtx) audioCtx.suspend();
-				EasySpeech.pause();
+				setTimeout(() => {
+					EasySpeech.cancel();
+				}, 0);
 			} else {
 				// Ваш код, выполняемый при восстановлении активности приложения
 				// EasySpeech.reset();
-				EasySpeech.resume();
+				setTimeout(() => {
+					EasySpeech.init();
+				}, 0);
 				console.log('Приложение активно');
 				// if (audioCtx) audioCtx.resume().then(() => {});
 			}
@@ -184,7 +188,9 @@
 		return () => {
 			// Удалите слушателя событий при размонтировании компонента
 			// document.removeEventListener('click', handleOutsideClick);
-			EasySpeech.cancel();
+			setTimeout(() => {
+				EasySpeech.cancel();
+			}, 0);
 		};
 	});
 
@@ -379,9 +385,12 @@
 
 				if (call_cnt === 0) {
 					clearInterval(inter);
+					call_cnt = 10;
 					local.audio.paused = true;
 				}
 			}, 2000);
+
+			return;
 		};
 		// rtc .SendToComponent = OnMessage;
 		rtc.GetRemoteAudio = () => {
@@ -428,6 +437,7 @@
 			case 'call':
 				$call_but_status = 'talk';
 				clearInterval(inter);
+				call_cnt = 10;
 				local.audio.paused = true;
 				remote.audio.muted = false;
 				rtc.OnTalk();
@@ -518,6 +528,15 @@
 				remote.text.email = profile.email;
 			}
 		}
+		if (data.func === 'talk') {
+			clearInterval(inter);
+			call_cnt = 10;
+			video_button_display = true;
+			$call_but_status = 'talk';
+
+			video_button_display = 'block';
+			remote.text.display = 'none';
+		}
 
 		if (data.func === 'mute') {
 			local.audio.paused = true;
@@ -588,12 +607,6 @@
 			showCommands = false;
 		}
 	};
-
-	function OnMute() {
-		$call_but_status = 'talk';
-		// $call_but_status = 'talk';
-		OnClickCallButton();
-	}
 </script>
 
 <div style="display:flex; height:60px; flex-wrap: nowrap;justify-content: space-between;">
@@ -605,7 +618,8 @@
 				name={remote.text.name}
 				em={$operator.em}
 				on:click={OnClickCallButton}
-				on:mute={OnMute}
+				on:mute
+				bind:status={$call_but_status}
 			>
 				<div
 					class="remote_text_display"
@@ -686,13 +700,12 @@
 	{/if}
 </div>
 
-<div>
-	<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
-	<AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} />
+<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
+<!-- <AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} />
 
 	<RecordedVideo />
 	<Download />
-</div>
+ -->
 
 <progress class="progress" value={progress.value} max="100" duration="200" />
 <!-- svelte-ignore a11y-no-static-element-interactions -->

@@ -43,9 +43,14 @@
 		console.log($lesson.visible);
 	}
 	// import pair_data from './pair_data.json';
+	let visibility = ['hidden', 'hidden', 'hidden'];
 	export let data;
 
-	let visibility = ['hidden', 'hidden', 'hidden'];
+	$: if (data) {
+		visibility = ['hidden', 'hidden', 'hidden'];
+		visibility_cnt = 0;
+	}
+
 	let visibility_cnt = 0;
 
 	let containerWidth, containerHeight;
@@ -77,7 +82,7 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 
-<div class="title"><h3>{dict['Ответь на вопрос'][$langs]}:</h3></div>
+<div class="title"><h3>{dict['Проконтролируй вопрос и ответь'][$langs]}:</h3></div>
 
 <div style="display: flex;">
 	<div style="margin:0 auto">

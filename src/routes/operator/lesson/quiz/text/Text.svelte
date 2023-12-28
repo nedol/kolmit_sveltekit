@@ -131,24 +131,30 @@
 		});
 	}
 
-	async function TTSSpeak(text) {
-		await EasySpeech.speak({
-			text: text,
-			voice: $tts.voice,
-			rate: 0,
-			end: (e) => {
-				speaker = mdiVolumeHigh;
-			},
-			error: (e) => console.log(e)
-		});
+	function TTSSpeak(text) {
+		setTimeout(() => {
+			EasySpeech.speak({
+				text: text,
+				voice: $tts.voice,
+				rate: 0,
+				end: (e) => {
+					speaker = mdiVolumeHigh;
+				},
+				error: (e) => console.log(e)
+			});
+		}, 0);
 	}
 
-	async function TTSPause() {
-		await EasySpeech.pause();
+	function TTSPause() {
+		setTimeout(() => {
+			EasySpeech.pause();
+		}, 0);
 	}
 
-	async function TTSResume() {
-		await EasySpeech.resume();
+	function TTSResume() {
+		setTimeout(() => {
+			EasySpeech.resume();
+		}, 0);
 	}
 	async function onClickText(event) {
 		let x, y;

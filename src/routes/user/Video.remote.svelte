@@ -4,7 +4,7 @@
 
 	export let srcObject;
 	export let poster;
-	export let status;
+	export let status = 'muted';
 	export let video_element, card;
 	export let parent_div;
 	export let name, em;

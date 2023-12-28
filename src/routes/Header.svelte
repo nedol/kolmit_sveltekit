@@ -221,8 +221,7 @@
 	@media screen and (max-width: 767px) {
 		.sec_items {
 			position: absolute;
-
-			/* left: 30%; */
+			left: 30%;
 			top: 15%;
 		}
 	}

@@ -60,16 +60,16 @@ export class Peer {
 			}
 
 			if (that.rtc.remoteStream) {
-				if (ev.track.kind === 'audio') {
-					that.rtc.SetRemoteAudio(null);
-					that.rtc.SetRemoteAudio(that.rtc.remoteStream);
-				}
-				if (ev.track.kind === 'video') {
-					that.rtc.SetRemoteVideo(null);
-					that.rtc.SetRemoteVideo(that.rtc.remoteStream);
+				// if (ev.track.kind === 'audio') {
+				// 	that.rtc.SetRemoteAudio(null);
+				// 	that.rtc.SetRemoteAudio(that.rtc.remoteStream);
+				// }
+				// if (ev.track.kind === 'video') {
+				that.rtc.SetRemoteVideo(null);
+				that.rtc.SetRemoteVideo(that.rtc.remoteStream);
 
-					// that.rtc.DC.SendDCVideoOK(() => {});
-				}
+				// that.rtc.DC.SendDCVideoOK(() => {});
+				// }
 			}
 		};
 

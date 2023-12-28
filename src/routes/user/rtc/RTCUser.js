@@ -140,6 +140,8 @@ export default class RTCUser extends RTCBase {
 				that.pcPull[data.abonent].params['rem_desc'] = data.desc;
 				that.pcPull[data.abonent].setRemoteDesc(data.desc);
 			}
+
+			that.PlayCallCnt(); //->User.svelte
 		}
 		if (data.cand && that.pcPull[data.abonent]) {
 			if (that.pcPull[data.abonent]) {

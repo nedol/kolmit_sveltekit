@@ -23,7 +23,7 @@ if (!global.server) {
 	});
 }
 
-global.server.start();
+// global.server.start();
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
 export async function load({ fetch, cookies, route, url, stuff }) {

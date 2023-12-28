@@ -88,13 +88,13 @@ export const dict = [
 			nl: 'Vertaal en controleer het antwoord',
 			de: 'Übersetzen und überwachen Sie die Antwort'
 		},
-		'Ответь на вопрос': {
-			en: 'Answer the question',
-			ru: 'Ответь на вопрос',
-			fr: 'Répondre à la question',
-			uk: 'Відповідай на запитання',
-			nl: 'Beantwoord de vraag',
-			de: 'Beantworten Sie die Frage'
+		'Проконтролируй вопрос и ответь': {
+			en: 'Control the question and answer',
+			ru: 'Проконтролируй вопрос и ответь',
+			fr: 'Contrôler la question et y répondre',
+			uk: 'Проконтролюй запитання і відповідай',
+			nl: 'Controleer de vraag en beantwoord hem',
+			de: 'Die Frage kontrollieren und beantworten'
 		},
 		'Изменить профиль': {
 			en: 'Change profile',

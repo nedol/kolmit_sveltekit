@@ -115,9 +115,9 @@
 				{
 					lesson: {
 						quiz: 'pair.client',
-						html: dialog_data.html[cur_html],
-						question: dialog_data.content[cur_qa].question['nl'],
-						answer: dialog_data.content[cur_qa].answer['nl']
+						html: dialog_data.html ? dialog_data.html[cur_html] : null,
+						question: dialog_data.content[cur_qa].question,
+						answer: dialog_data.content[cur_qa].answer
 					}
 				},
 				() => {
