@@ -80,21 +80,37 @@ export const dict = [
 			nl: 'Schrijf een vertaling',
 			de: 'Eine Übersetzung schreiben'
 		},
-		'Переведи и проконтролируй ответ': {
-			en: 'Translate and control the answer',
-			ru: 'Переведи и проконтролируй ответ',
-			fr: 'Traduire et contrôler la réponse',
-			uk: 'Переведи і проконтролюй відповідь',
-			nl: 'Vertaal en controleer het antwoord',
-			de: 'Übersetzen und überwachen Sie die Antwort'
+		Переведи: {
+			en: 'Translate',
+			ru: 'Переведи',
+			fr: 'Traduire',
+			uk: 'Переведи',
+			nl: 'Vertaal',
+			de: 'Übersetzen'
 		},
-		'Проконтролируй вопрос и ответь': {
-			en: 'Control the question and answer',
-			ru: 'Проконтролируй вопрос и ответь',
+		'Проконтролируй ответ': {
+			en: 'Control the answer',
+			ru: 'Проконтролируй ответ',
+			fr: 'Vérifier la réponse',
+			uk: 'Проконтролюй відповідь',
+			nl: 'Controleer het antwoord',
+			de: 'Überwachen Sie die Antwort'
+		},
+		'Проконтролируй вопрос': {
+			en: 'Control the question',
+			ru: 'Проконтролируй вопрос',
 			fr: 'Contrôler la question et y répondre',
-			uk: 'Проконтролюй запитання і відповідай',
-			nl: 'Controleer de vraag en beantwoord hem',
-			de: 'Die Frage kontrollieren und beantworten'
+			uk: 'Проконтролюй запитання',
+			nl: 'Controleer de vraag',
+			de: 'Die Frage kontrollieren'
+		},
+		'Переведи и ответь': {
+			en: 'Translate and answer',
+			ru: 'Переведи и ответь',
+			fr: 'Traduire et répondre',
+			uk: 'Переведи i відповідай',
+			nl: 'Vertaal i beantwoord',
+			de: 'Übersetzen und beantworten'
 		},
 		'Изменить профиль': {
 			en: 'Change profile',

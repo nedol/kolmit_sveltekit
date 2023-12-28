@@ -46,6 +46,12 @@
 
 	import { click_call_func } from '$lib/js/stores.js';
 
+	import { dc_oper_state } from '$lib/js/stores.js';
+	import { dc_user_state } from '$lib/js/stores.js';
+
+	$: if ($dc_oper_state === 'closed' || $dc_user_state === 'closed') {
+	}
+
 	import { msg_user } from '$lib/js/stores.js';
 	$: if ($msg_user) {
 		OnMessage($msg_user);
@@ -574,6 +580,7 @@
 			if (data.lesson) {
 				$lesson.data = {
 					quiz: data.lesson.quiz,
+					name: data.lesson.name,
 					html: data.lesson.html,
 					question: data.lesson.question,
 					answer: data.lesson.answer,

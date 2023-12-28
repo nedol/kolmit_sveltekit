@@ -115,6 +115,7 @@
 				{
 					lesson: {
 						quiz: 'pair.client',
+						name: data.name,
 						html: dialog_data.html ? dialog_data.html[cur_html] : null,
 						question: dialog_data.content[cur_qa].question,
 						answer: dialog_data.content[cur_qa].answer
@@ -182,7 +183,8 @@
 				{
 					lesson: {
 						quiz: client_quiz,
-						html: dialog_data.html[cur_html],
+						name: data.name,
+						html: dialog_data.html ? dialog_data.html[cur_html] : '',
 						question: dialog_data.content[cur_qa].question,
 						answer: dialog_data.content[cur_qa].answer
 					}
@@ -212,18 +214,18 @@
 		</IconButton>
 	{/if}
 
-	<div class="title"><h3>{dict['Переведи и проконтролируй ответ'][$langs]}:</h3></div>
-
 	<div class="container">
 		<div class="card">
 			{#if q || a}
+				<div class="title"><h3>{dict['Переведи'][$langs]}:</h3></div>
 				<div class="question">
 					{cur_qa + 1}. {q[$langs]}
 				</div>
 				<div class="tip" style="visibility:{visibility[1]}">
 					{q['nl']}
 				</div>
-				<div class="answer" style="visibility:{visibility[1]}">
+				<div class="title"><h3>{dict['Проконтролируй ответ'][$langs]}:</h3></div>
+				<div class="answer" style="visibility:{visibility[0]}">
 					{@html a['nl']}
 				</div>
 			{/if}
