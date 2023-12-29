@@ -82,87 +82,101 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 
-<div class="title"><h3>{dict['Проконтролируй вопрос'][$langs]}:</h3></div>
+<div class="container">
+	<div class="card">
+		<div class="title">{dict['Проконтролируй вопрос'][$langs]}:</div>
 
-<div style="display: flex;">
-	<div style="margin:0 auto">
-		<div class="question" style="visibility:{visibility[0]}">
-			{#if data.question}
-				<div>{@html data.question['nl']}</div>
-			{/if}
+		<div style="display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+			<div>
+				<div class="question" style="visibility:{visibility[0]}">
+					{#if data.question}
+						<div>{@html data.question['nl']}</div>
+					{/if}
+				</div>
+
+				<div class="title">{dict['Переведи и ответь'][$langs]}:</div>
+
+				<div class="answer" style="visibility:{visibility[0]}">
+					{#if data.answer}
+						<div>{@html data.answer[$langs]}</div>
+					{/if}
+				</div>
+
+				<div class="tip" style="visibility:{visibility[1]}">
+					{#if data.answer}
+						<div>{@html data.answer['nl']}</div>
+					{/if}
+				</div>
+
+				<div>
+					<button on:click={onClickQ} class="toggleButton">
+						<span class="material-symbols-outlined"> ? </span>
+					</button>
+				</div>
+			</div>
 		</div>
-		<div class="title"><h3>{dict['Переведи и ответь'][$langs]}:</h3></div>
-		<div class="answer" style="visibility:{visibility[0]}">
-			{#if data.answer}
-				<div>{@html data.answer[$langs]}</div>
-			{/if}
-		</div>
-		<div class="answer" style="visibility:{visibility[1]}">
-			{#if data.answer}
-				<div>{@html data.answer['nl']}</div>
-			{/if}
-		</div>
-		<button on:click={onClickQ} class="toggleButton">
-			<span class="material-symbols-outlined"> reminder </span>
-		</button>
 	</div>
 </div>
+
 {#if data.html}
 	<div>{@html data.html}</div>
 {/if}
 
-<!-- <BottomAppBar bind:this={bottomAppBar}>
-	<Section>
-		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiPagePreviousOutline} />
-			</Icon>
-		</IconButton>
-	</Section>
-	<Section>
-		<IconButton class="material-icons">change_circle</IconButton>
-	</Section>
-
-	<Section>
-		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
-	</Section>
-</BottomAppBar> -->
-
 <style>
 	.container {
-		position: absolute;
-		line-height: 50px;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		/* Дополнительные стили по вашему усмотрению */
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		margin: 0;
 		padding: 20px;
 		border: 1px solid #ccc;
 		border-radius: 5px;
 	}
 
+	.card {
+		background-color: #fff;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		padding: 16px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease-in-out;
+		width: 90%;
+	}
+
 	.title {
 		color: grey;
-		position: relative;
 		text-align: center;
+		margin-bottom: 10px;
 	}
+
 	.question {
-		color: gray;
-		border: 0;
-		background-color: transparent;
-		font: 1.2em sans-serif;
+		color: #333;
+		font-size: 1.3em;
+		margin-bottom: 10px;
+		text-align: center;
 	}
 
 	.answer {
-		color: gray;
-		border: 0;
-		background-color: transparent;
-		font: 1.5em sans-serif;
+		color: #555;
+		font-size: 1.3em;
+		text-align: center;
+		margin-bottom: 10px;
 	}
+	.tip {
+		font-size: 1.2em;
+		margin-bottom: 10px;
+		margin-left: 20px;
+		color: #2196f3;
+	}
+
 	.toggleButton {
-		position: absolute;
-		right: 25px;
-		top: 170px;
+		background-color: #2196f3;
+		color: #fff;
+		border: none;
+		padding: 10px;
+		border-radius: 5px;
+		cursor: pointer;
+		float: right;
 	}
 </style>

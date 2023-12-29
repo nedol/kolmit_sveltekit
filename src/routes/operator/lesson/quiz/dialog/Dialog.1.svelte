@@ -209,22 +209,28 @@
 	{#if share_button}
 		<IconButton class="material-icons" on:click={onShare} style={style_button}>
 			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiShareVariant} /></Icon
-			>
+				<path fill="currentColor" d={mdiShareVariant} />
+			</Icon>
 		</IconButton>
 	{/if}
 
 	<div class="container">
 		<div class="card">
 			{#if q || a}
-				<div class="title"><h3>{dict['Переведи'][$langs]}:</h3></div>
+				<div class="cnt">{cur_qa + 1}</div>
+				<div class="title">{dict['Переведи'][$langs]}:</div>
 				<div class="question">
-					{cur_qa + 1}. {q[$langs]}
+					{q[$langs]}
 				</div>
-				<div class="tip" style="visibility:{visibility[1]}">
-					{q['nl']}
+				<div style="display:inline-flex;">
+					<div class="tip" style="display:inline;visibility:{visibility[1]}">
+						{q['nl']}
+					</div>
+					<button on:click={onClickQ} class="toggleButton">
+						<span class="material-symbols-outlined"> ? </span>
+					</button>
 				</div>
-				<div class="title"><h3>{dict['Проконтролируй ответ'][$langs]}:</h3></div>
+				<div class="title">{dict['Проконтролируй ответ'][$langs]}:</div>
 				<div class="answer" style="visibility:{visibility[0]}">
 					{@html a['nl']}
 				</div>
@@ -236,10 +242,6 @@
 		<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
 		<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 	</div>
-
-	<button on:click={onClickQ} class="toggleButton">
-		<span class="material-symbols-outlined"> reminder </span>
-	</button>
 {:else}
 	<Dialog2 {data} />
 {/if}
@@ -261,26 +263,32 @@
 		</Section>
 
 		<Section>
-			<!-- <IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton
-			> -->
+			<!-- <IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton> -->
 		</Section>
 	</BottomAppBar>
 {/if}
 
 <style>
+	/* Добавленные стили для улучшения визуального восприятия */
+
+	body {
+		font-family: 'Arial', sans-serif;
+		background-color: #f8f8f8;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+	}
+
 	.container {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 20px;
 		padding: 20px;
-		justify-content: center; /* Центрирование по горизонтали */
-		align-items: center; /* Центрирование по вертикали */
-	}
-
-	.title {
-		color: grey;
-		position: relative;
-		text-align: center;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.card {
@@ -290,30 +298,48 @@
 		padding: 16px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-in-out;
-		width: 70%; /* Ширина карточки */
+		width: 90%;
+		text-align: center;
 	}
 
-	.card:hover {
+	/* .card:hover {
 		transform: scale(1.05);
+	} */
+
+	.cnt {
+		position: relative;
+		text-align: left;
+		left: 15px;
+		top: 3px;
+		z-index: 2;
+		font-size: 1.2em;
+		margin-bottom: 10px;
+		color: #2196f3;
+	}
+
+	.title {
+		color: grey;
+		position: relative;
+		text-align: center;
 	}
 
 	.question {
-		font-size: 1.5em;
+		font-size: 1.3em;
 		margin-bottom: 10px;
 		color: #333;
 	}
 
 	.answer {
+		font-size: 1.2em;
 		color: #555;
 		text-align: center;
 	}
 
 	.tip {
 		font-size: 1.2em;
-		text-align: left;
 		margin-bottom: 10px;
 		margin-left: 20px;
-		color: #1e5a2b;
+		color: #2196f3;
 	}
 
 	.arrow-buttons {
@@ -338,19 +364,22 @@
 
 	.arrow-button-left {
 		left: 0;
-
 		transform: translateY(-50%);
 	}
 
 	.arrow-button-right {
 		right: 0;
-
 		transform: translateY(-50%);
 	}
 
 	.toggleButton {
 		position: absolute;
-		right: 10px;
-		top: 200px;
+		right: 80px;
+		background-color: #2196f3;
+		color: #fff;
+		border: none;
+		padding: 10px;
+		border-radius: 5px;
+		cursor: pointer;
 	}
 </style>
