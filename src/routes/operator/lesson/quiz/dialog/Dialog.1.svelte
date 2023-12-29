@@ -373,8 +373,8 @@
 	}
 
 	.toggleButton {
-		position: absolute;
-		right: 80px;
+		position: relative;
+		margin-left: 20px;
 		background-color: #2196f3;
 		color: #fff;
 		border: none;

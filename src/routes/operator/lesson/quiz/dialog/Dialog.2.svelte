@@ -164,6 +164,7 @@
 		margin-bottom: 10px;
 	}
 	.tip {
+		text-align: center;
 		font-size: 1.2em;
 		margin-bottom: 10px;
 		margin-left: 20px;
