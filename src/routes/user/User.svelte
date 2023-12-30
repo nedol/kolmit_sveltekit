@@ -92,10 +92,6 @@
 			display: 'block',
 			srcObject: '',
 			poster: poster
-		},
-		audio: {
-			muted: true,
-			srcObject: ''
 		}
 	};
 
@@ -117,24 +113,21 @@
 			console.log('OnOpenDataChannel');
 		};
 
-		rtc.GetRemoteAudio = () => {
-			return remote.audio.srcObject;
-		};
-		rtc.SetRemoteAudio = (src) => {
-			remote.audio.srcObject = src;
-		};
 		rtc.SendToComponent = OnMessage;
 
 		rtc.SetLocalVideo = (src) => {
 			local.video.srcObject = src;
 		};
 
+		rtc.GetRemoteVideo = () => {
+			return remote.video.srcObject;
+		};
+
 		rtc.SetRemoteVideo = (src) => {
 			remote.video.srcObject = src;
 			remote.video.display = 'block';
-			status = 'talk';
+			// status = 'talk';
 			// $call_but_status = 'talk';
-			remote.audio.paused = true;
 		};
 
 		rtc.PlayCallCnt = () => {
@@ -165,11 +158,11 @@
 		select.display = true;
 	}
 
-	function OnMute() {
-		status = 'talk';
-		// $call_but_status = 'talk';
-		OnClickCallButton();
-	}
+	// function OnMute() {
+	// 	status = 'talk';
+	// 	// $call_but_status = 'talk';
+	// 	OnClickCallButton();
+	// }
 
 	function OnChangeFile(e) {
 		try {
@@ -202,7 +195,7 @@
 					local.video.display = 'none';
 					// remote.video.display = 'none';
 					local.audio.paused = true;
-					remote.audio.muted = true;
+
 					//rtc.abonent = url.searchParams.get('abonent');
 					status = 'inactive';
 					// $call_but_status = 'inactive';
@@ -236,7 +229,7 @@
 
 		if (data.func === 'mute') {
 			local.audio.paused = true;
-			remote.audio.muted = true;
+
 			video_button_display = false;
 			local.video.display = 'none';
 			// remote.video.display = 'none';
@@ -267,7 +260,6 @@
 			status = 'call';
 			// $call_but_status = 'call';
 			local.audio.paused = true;
-			remote.audio.muted = true;
 
 			remote.video.srcObject = null;
 			remote.video.display = 'none';
@@ -334,7 +326,7 @@
 			case 'talk':
 				status = 'inactive';
 				$call_but_status = 'inactive';
-				remote.audio.muted = true;
+
 				local.video.display = 'none';
 				// remote.video.display = 'none';
 				video_button_display = 'none';
@@ -385,4 +377,3 @@
 />
 
 <AudioLocal {...local.audio} bind:paused={local.audio.paused} />
-<!-- <AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} /> -->

@@ -51,10 +51,6 @@
 			`,
 		ru: ru_flag
 	};
-
-	function OnSelected(ev) {
-		$langs = ev.target.attributes[2].nodeValue;
-	}
 </script>
 
 {#if $dicts && $dicts['CLASS'][$langs]}

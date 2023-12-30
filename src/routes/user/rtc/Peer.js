@@ -51,7 +51,7 @@ export class Peer {
 				return;
 			}
 
-			if (that.rtc.GetRemoteAudio() !== ev.streams[0]) {
+			if (that.rtc.GetRemoteVideo() !== ev.streams[0]) {
 				that.rtc.remoteStream = ev.streams[0];
 				//log('pc2 received remote stream', that);
 				that.rtc.remoteStream.onaddtrack = function (ev) {

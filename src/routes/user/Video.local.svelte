@@ -18,7 +18,7 @@
 
 <video
 	bind:this={lv}
-	id="localVideo"
+	class="user_video_local"
 	autoplay
 	playsinline
 	muted

@@ -9,8 +9,10 @@ const { find, findKey } = pkg;
 
 import { request } from 'undici';
 
+import { CreateServer } from '$lib/server/server.js';
 // import { get, set } from 'node-global-storage';
 // set('global.rtcPool', { user: {}, operator: {} });
+CreateServer();
 
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
@@ -33,11 +35,21 @@ export async function GET({ url, fetch, cookies }) {
 	const dict = url.searchParams.get('dict');
 	const key = url.searchParams.get('key');
 	const func = url.searchParams.get('func');
+	const lang = url.searchParams.get('lang');
 
 	// debugger;
 	if (func === 'reset') {
 		let response = new Response();
 		cookies.delete('abonent:' + abonent);
+		response.headers.append('Access-Control-Allow-Origin', `*`);
+		return response;
+	} else if (func === 'cookie') {
+		if (lang) {
+			let cookie = JSON.parse(cookies.get(`abonent:${abonent}`));
+			cookie.lang = lang;
+			cookies.set(`abonent:${abonent}`, JSON.stringify(cookie));
+		}
+		let response = new Response();
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	} else if (text) {

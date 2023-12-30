@@ -90,10 +90,13 @@
 	export let email, abonent, name;
 	const uid = md5(email);
 
-	// import { dc_msg } from '$lib/js/stores.js';
-	// $: if ($dc_msg) {
-	// 	OnMessage($dc_msg);
-	// }
+	$: if ($langs) {
+		fetch(`./?func=cookie&abonent=${abonent}&lang=${$langs}`)
+			.then(() => console.log())
+			.catch((error) => {
+				console.log(error);
+			});
+	}
 
 	$: if (remote.text.msg) {
 		console.log(remote.text.msg);
@@ -326,10 +329,6 @@
 			display: 'none',
 			srcObject: '',
 			poster: ''
-		},
-		audio: {
-			muted: true,
-			srcObject: ''
 		}
 	};
 
@@ -374,12 +373,7 @@
 
 	setContext('abonent', abonent);
 
-	// const SendToComponent = OnMessage;
-
-	async function initRTC() {
-		// rtc ..set(rtc .;
-		//rtc .type = "operator";
-
+	$: if (rtc) {
 		rtc.PlayCallCnt = () => {
 			video_progress = false;
 
@@ -398,13 +392,16 @@
 
 			return;
 		};
+	}
+
+	// const SendToComponent = OnMessage;
+
+	async function initRTC() {
+		// rtc ..set(rtc .;
+		//rtc .type = "operator";
+
 		// rtc .SendToComponent = OnMessage;
-		rtc.GetRemoteAudio = () => {
-			return remote.audio.srcObject;
-		};
-		rtc.SetRemoteAudio = (src) => {
-			if (src) remote.audio.srcObject = src;
-		};
+
 		rtc.GetRemoteVideo = () => {
 			return remote.video.srcObject;
 		};
@@ -413,12 +410,12 @@
 		};
 
 		rtc.SetRemoteVideo = (src) => {
-			if ($call_but_status === 'talk') {
-				remote.video.poster = '';
-				remote.video.srcObject = src;
-				remote.video.display = 'block';
-				local.audio.paused = true;
-			}
+			// if ($call_but_status === 'talk') {
+			remote.video.poster = '';
+			remote.video.srcObject = src;
+			remote.video.display = 'block';
+			local.audio.paused = true;
+			// }
 		};
 	}
 
@@ -445,7 +442,7 @@
 				clearInterval(inter);
 				call_cnt = 10;
 				local.audio.paused = true;
-				remote.audio.muted = false;
+
 				rtc.OnTalk();
 				video_button_display = true;
 				remote.text.display = 'none';
@@ -456,7 +453,6 @@
 
 				break;
 			case 'talk':
-				remote.audio.muted = true;
 				local.video.display = 'none';
 				video_button_display = false;
 				remote.video.display = 'none';
@@ -472,7 +468,7 @@
 				$call_but_status = 'inactive';
 
 				local.video.srcObject = '';
-				remote.audio.muted = true;
+
 				remote.video.display = 'none';
 				remote.video.srcObject = '';
 				remote.video.poster = '';
@@ -546,7 +542,7 @@
 
 		if (data.func === 'mute') {
 			local.audio.paused = true;
-			remote.audio.muted = true;
+
 			video_button_display = false;
 			local.video.display = 'none';
 			local.video.srcObject = '';
@@ -626,7 +622,7 @@
 				em={$operator.em}
 				on:click={OnClickCallButton}
 				on:mute
-				bind:status={$call_but_status}
+				status={$call_but_status}
 			>
 				<div
 					class="remote_text_display"
@@ -708,11 +704,6 @@
 </div>
 
 <AudioLocal {...local.audio} bind:paused={local.audio.paused} />
-<!-- <AudioRemote {...remote.audio} bind:srcObject={remote.audio.srcObject} />
-
-	<RecordedVideo />
-	<Download />
- -->
 
 <progress class="progress" value={progress.value} max="100" duration="200" />
 <!-- svelte-ignore a11y-no-static-element-interactions -->

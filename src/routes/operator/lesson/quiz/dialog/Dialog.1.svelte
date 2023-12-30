@@ -239,7 +239,9 @@
 	</div>
 
 	<div class="arrow-buttons">
-		<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+		{#if cur_qa > 0}
+			<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+		{/if}
 		<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 	</div>
 {:else}
@@ -374,7 +376,7 @@
 
 	.toggleButton {
 		position: relative;
-		margin-left: 20px;
+		margin-left: 10px;
 		background-color: #2196f3;
 		color: #fff;
 		border: none;

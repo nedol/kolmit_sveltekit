@@ -33,6 +33,7 @@
 			<Media class="card-media-square" aspectRatio="square">
 				<MediaContent>
 					<video
+						class="oper_video_local"
 						bind:this={lv}
 						poster={$posterst}
 						autoplay
@@ -55,7 +56,7 @@
 
 <style>
 	video {
-		display:block;
+		display: block;
 		margin-right: auto;
 		margin-left: auto;
 		margin-top: auto;

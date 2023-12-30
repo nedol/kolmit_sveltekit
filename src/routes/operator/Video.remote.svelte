@@ -3,6 +3,7 @@
 	import Card, { Content, PrimaryAction, Media, MediaContent } from '@smui/card';
 	export let display = 'block';
 	export let status;
+	let muted = false;
 	export let poster, card, name, em;
 	export let srcObject;
 	let rv, video;
@@ -18,6 +19,12 @@
 			rv.srcObject.removeTrack(track);
 		});
 		rv.src = '';
+	}
+
+	$: if (status === 'talk') {
+		muted = false;
+	} else {
+		muted = true;
 	}
 </script>
 
@@ -35,7 +42,17 @@
 		<Card style="min-width: 50px;">
 			<Media class="card-media-square" aspectRatio="square">
 				<MediaContent>
-					<video bind:this={video} on:click on:mute {status} autoplay playsinline {poster}>
+					<video
+						class="oper_video_remote"
+						bind:this={video}
+						on:click
+						on:mute
+						{status}
+						{muted}
+						autoplay
+						playsinline
+						{poster}
+					>
 						<track kind="captions" />
 					</video>
 				</MediaContent>

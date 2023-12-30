@@ -4,7 +4,8 @@
 
 	export let srcObject;
 	export let poster;
-	export let status = 'muted';
+	export let status;
+	let muted = true;
 	export let video_element, card;
 	export let parent_div;
 	export let name, em;
@@ -23,6 +24,12 @@
 		});
 		rv.src = '';
 	}
+
+	$: if (status === 'talk') {
+		muted = false;
+	} else {
+		muted = true;
+	}
 </script>
 
 <div class="card-display" bind:this={parent_div}>
@@ -30,7 +37,17 @@
 		<Card style="min-width: 50px;">
 			<Media class="card-media-square" aspectRatio="square">
 				<MediaContent>
-					<video bind:this={video_element} on:click on:mute {poster} {status} autoplay playsinline>
+					<video
+						class="user_video_remote"
+						bind:this={video_element}
+						on:click
+						on:mute
+						{status}
+						{muted}
+						{poster}
+						autoplay
+						playsinline
+					>
 						<track kind="captions" />
 					</video>
 				</MediaContent>

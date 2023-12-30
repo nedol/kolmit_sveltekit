@@ -5,8 +5,9 @@ import path from 'path';
 export default defineConfig({
 	plugins: [sveltekit()],
 	assetsInclude: ['**/*.html'],
+
 	server: {
-		// port: 80, // Измените этот порт по вашему усмотрению
+		//port: 3478, // Измените этот порт по вашему усмотрению
 		https: {
 			key: path.resolve('./key.pem'),
 			cert: path.resolve('./cert.pem')
