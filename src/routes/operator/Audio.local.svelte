@@ -5,16 +5,17 @@
 
 	export let paused = true;
 	let ls;
-	onMount(async () => {
-	
-	});
+	onMount(async () => {});
 
 	$: if (ls) {
-		if (paused) ls.pause();
-		else ls.play();
+		if (paused) {
+			ls.pause();
+		} else {
+			ls.play();
+		}
 	}
 </script>
 
-<audio id="localSound" src={ring} bind:this={ls}>
+<audio src={ring} bind:this={ls} loop>
 	<track kind="captions" />
 </audio>

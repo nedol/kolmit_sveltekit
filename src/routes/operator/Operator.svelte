@@ -373,11 +373,21 @@
 
 	setContext('abonent', abonent);
 
-	$: if (rtc) {
-		rtc.PlayCallCnt = () => {
-			video_progress = false;
+	// const SendToComponent = OnMessage;
 
-			if (!call_cnt) local.audio.paused = false;
+	async function initRTC() {
+		// rtc ..set(rtc .;
+		//rtc .type = "operator";
+
+		// rtc .SendToComponent = OnMessage;
+
+		rtc.PlayCallCnt = () => {
+			// video_progress = false;
+
+			local.audio.paused = false;
+
+			return;
+
 			call_cnt = 10;
 
 			inter = setInterval(function () {
@@ -387,20 +397,12 @@
 					clearInterval(inter);
 					call_cnt = 10;
 					local.audio.paused = true;
+					return;
 				}
 			}, 2000);
 
 			return;
 		};
-	}
-
-	// const SendToComponent = OnMessage;
-
-	async function initRTC() {
-		// rtc ..set(rtc .;
-		//rtc .type = "operator";
-
-		// rtc .SendToComponent = OnMessage;
 
 		rtc.GetRemoteVideo = () => {
 			return remote.video.srcObject;
@@ -414,7 +416,7 @@
 			remote.video.poster = '';
 			remote.video.srcObject = src;
 			remote.video.display = 'block';
-			local.audio.paused = true;
+			// local.audio.paused = true;
 			// }
 		};
 	}

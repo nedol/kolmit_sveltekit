@@ -113,7 +113,7 @@
 			console.log('OnOpenDataChannel');
 		};
 
-		rtc.SendToComponent = OnMessage;
+		// rtc.SendToComponent = OnMessage;
 
 		rtc.SetLocalVideo = (src) => {
 			local.video.srcObject = src;
@@ -133,7 +133,12 @@
 		rtc.PlayCallCnt = () => {
 			// video_progress = false;
 
-			if (!call_cnt) local.audio.paused = false;
+			console.log();
+
+			local.audio.paused = false;
+
+			return;
+
 			call_cnt = 10;
 
 			inter = setInterval(function () {

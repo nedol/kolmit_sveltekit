@@ -15,6 +15,6 @@
 	}
 </script>
 
-<audio bind:this={ls} autoplay src={call}>
+<audio bind:this={ls} loop src={call}>
 	<track kind="captions" />
 </audio>
