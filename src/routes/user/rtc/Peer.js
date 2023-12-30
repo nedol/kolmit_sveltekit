@@ -93,12 +93,17 @@ export class Peer {
 			};
 		}
 		this.con.oniceconnectionstatechange = function (e) {
+			console.log('oniceconnectionstatechange');
 			that.rtc.onIceStateChange(that, e);
 		};
-		this.con.onremovestream = function (e) {};
-		this.con.onsignalingstatechange = function (e) {};
+		this.con.onremovestream = function (e) {
+			console.log('onremovestream');
+		};
+		this.con.onsignalingstatechange = function (e) {
+			console.log('onsignalingstatechange');
+		};
 		this.con.onconnectionstatechange = function (e) {
-			console.log();
+			console.log('onconnectionstatechange');
 		};
 	}
 

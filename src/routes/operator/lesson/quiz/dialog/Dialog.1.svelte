@@ -35,18 +35,6 @@
 	let share_mode = false;
 	export let data;
 
-	$: if (data) {
-		if (data.html) {
-			style_button = style_button_shared;
-			share_mode = true;
-		}
-		console.log();
-	}
-
-	if (data.func) {
-		onChangeClick();
-	}
-
 	let cur_html = 0;
 	let cur_qa = 0;
 	let q, a, d;
@@ -73,6 +61,21 @@
 		border-radius: 5px;
 		cursor: pointer;`;
 
+	$: if (data.html) {
+		style_button = style_button_shared;
+		share_mode = true;
+	}
+
+	$: if (data.cur_qa) {
+		cur_qa = data.cur_qa;
+		style_button = share_mode = true;
+		Dialog();
+	}
+
+	if (data.func) {
+		onChangeClick();
+	}
+
 	$: if ($dc_oper_state) {
 		switch ($dc_oper_state) {
 			case 'open':
@@ -96,7 +99,7 @@
 		Dialog();
 	}
 
-	async function Dialog() {
+	function Dialog() {
 		if (!dialog_data.content[cur_qa]) {
 			cur_qa = 0;
 			cur_html++;
@@ -109,6 +112,9 @@
 		}
 		q = dialog_data.content[cur_qa].question;
 		a = dialog_data.content[cur_qa].answer;
+	}
+
+	async function SendData() {
 		if (share_mode && ($dc_user || $dc_oper)) {
 			let dc = $dc_user || $dc_oper;
 			await dc.SendData(
@@ -118,11 +124,12 @@
 						name: data.name,
 						html: dialog_data.html ? dialog_data.html[cur_html] : null,
 						question: dialog_data.content[cur_qa].question,
-						answer: dialog_data.content[cur_qa].answer
+						answer: dialog_data.content[cur_qa].answer,
+						cur_qa: cur_qa
 					}
 				},
-				() => {
-					console.log();
+				(ex) => {
+					console.log(ex);
 				}
 			);
 		}
@@ -152,13 +159,14 @@
 		cur_qa++;
 		visibility[1] = 'hidden';
 		Dialog();
+		SendData();
 	}
 
 	function onBackQA() {
 		// Обработчик нажатия на кнопку "<-"
 		cur_qa--;
-
 		Dialog();
+		SendData();
 	}
 
 	function onShare() {
@@ -166,6 +174,7 @@
 		share_mode = !share_mode;
 		style_button = share_mode ? style_button_shared : style_button_non_shared;
 		Dialog();
+		SendData();
 	}
 
 	function onChangeClick() {
@@ -186,7 +195,8 @@
 						name: data.name,
 						html: dialog_data.html ? dialog_data.html[cur_html] : '',
 						question: dialog_data.content[cur_qa].question,
-						answer: dialog_data.content[cur_qa].answer
+						answer: dialog_data.content[cur_qa].answer,
+						cur_qa: cur_qa
 					}
 				},
 				() => {
@@ -200,10 +210,10 @@
 	}
 </script>
 
-<link
+<!-- <link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/>
+/> -->
 
 {#if data.quiz == 'pair'}
 	{#if share_button}

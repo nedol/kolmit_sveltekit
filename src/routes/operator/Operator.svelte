@@ -582,6 +582,7 @@
 					html: data.lesson.html,
 					question: data.lesson.question,
 					answer: data.lesson.answer,
+					cur_qa: data.lesson.cur_qa,
 					func: data.lesson.func
 				};
 			}

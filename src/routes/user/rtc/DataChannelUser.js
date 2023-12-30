@@ -63,8 +63,13 @@ export class DataChannelUser {
 				// that.rtc.abonent = ab;
 				// that.rtc.trans = ab;
 
-				return true;
+				that.dc.onclose = () => {
+					msg_oper.set({ func: 'mute' });
+					dc_user_state.set(that.dc.readyState);
+				};
 			};
+
+			dc_user_state.set(that.dc.readyState);
 		};
 
 		let data = '';
