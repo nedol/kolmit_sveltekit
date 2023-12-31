@@ -426,7 +426,7 @@
 						<Content style="line-height: 2.2;">
 							{#each hints as hint}
 								<span on:click={OnClickHint}>
-									{@html hint.original.replace(' ', '&nbsp;') + '&nbsp;' + '&nbsp;'}
+									{@html hint.original + '&nbsp;' + '&nbsp;'}
 								</span>
 							{/each}
 						</Content>
