@@ -73,7 +73,8 @@
 	}
 
 	function onClickQ() {
-		visibility[visibility_cnt++] = 'visible';
+		visibility_cnt += 1;
+		visibility[visibility_cnt] = 'visible';
 	}
 </script>
 
