@@ -103,8 +103,8 @@
 				</div>
 
 				<div class="tip" style="visibility:{visibility[1]}">
-					{#if data.answer}
-						<div>{@html data.answer['nl']}</div>
+					{#if data.a_shfl}
+						<div>{@html data.a_shfl}</div>
 					{/if}
 				</div>
 

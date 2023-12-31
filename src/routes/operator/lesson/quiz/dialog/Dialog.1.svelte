@@ -37,8 +37,7 @@
 
 	let cur_html = 0;
 	let cur_qa = 0;
-	let q, a, d;
-	let containerWidth, containerHeight;
+	let q, q_shfl, a_shfl, a, d;
 
 	let bottomAppBar;
 
@@ -111,12 +110,27 @@
 			}, 0);
 		}
 		q = dialog_data.content[cur_qa].question;
+		q_shfl = q['nl'].slice(0);
+		let ar = q_shfl.toLowerCase().replaceAll('?', '').replaceAll(',', ' ').split(' ');
+		q_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 		a = dialog_data.content[cur_qa].answer;
+		a_shfl = a['nl'].slice(0);
+		ar = a_shfl.toLowerCase().replaceAll('?', '').replaceAll(',', ' ').split(' ');
+		a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 	}
 
 	async function SendData() {
 		if (share_mode && ($dc_user || $dc_oper)) {
 			let dc = $dc_user || $dc_oper;
+			const ar = dialog_data.content[cur_qa].answer['nl']
+				.toLowerCase()
+				.replaceAll('?', '')
+				.replaceAll('.', ' ')
+				.replaceAll(',', ' ')
+				.split(' ');
+			let str = shuffle(ar).toString().replaceAll(',', ' ');
+			// dialog_data.content[cur_qa].answer['nl'] = str;
+
 			await dc.SendData(
 				{
 					lesson: {
@@ -137,11 +151,11 @@
 
 	onMount(() => {
 		init();
-		const parentWidth = window.innerWidth;
-		containerWidth = parentWidth + 'px';
+		// const parentWidth = window.innerWidth;
+		// containerWidth = parentWidth + 'px';
 
-		const parentHeight = window.innerHeight;
-		containerHeight = parentHeight + 'px';
+		// const parentHeight = window.innerHeight;
+		// containerHeight = parentHeight + 'px';
 
 		style_button = style_button_non_shared;
 	});
@@ -178,15 +192,26 @@
 	}
 
 	function onChangeClick() {
+		const ar = dialog_data.content[cur_qa].answer['nl']
+			.toLowerCase()
+			.replaceAll('?', '')
+			.replaceAll(',', ' ')
+			.replaceAll('.', ' ')
+			.split(' ');
+		let str = shuffle(ar).toString().replaceAll(',', ' ');
+		// dialog_data.content[cur_qa].answer['nl'] = str;
 		data = {
 			html: dialog_data.html ? dialog_data.html[cur_html] : '',
 			question: dialog_data.content[cur_qa].question,
 			answer: dialog_data.content[cur_qa].answer,
+			a_shfl: str,
 			quiz: data.quiz
 		};
 		data.quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
 		let client_quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
 		let dc = $dc_user || $dc_oper;
+
+		console.log(str);
 		if (dc)
 			dc.SendData(
 				{
@@ -207,6 +232,14 @@
 
 	function onClickQ() {
 		visibility[1] = 'visible';
+	}
+
+	function shuffle(array) {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[array[i], array[j]] = [array[j], array[i]];
+		}
+		return array;
 	}
 </script>
 
@@ -234,7 +267,7 @@
 				</div>
 				<div style="display:inline-flex;">
 					<div class="tip" style="display:inline;visibility:{visibility[1]}">
-						{q['nl']}
+						{q_shfl}
 					</div>
 					<button on:click={onClickQ} class="toggleButton">
 						<span class="material-symbols-outlined"> ? </span>
