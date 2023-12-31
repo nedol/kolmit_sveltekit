@@ -89,9 +89,9 @@ export class DataChannelUser {
 					return;
 				}
 				data += parsed.slice;
-				if (parsed.file) {
-					document.getElementById('dataProgress').attributes.max = parsed.length;
-				}
+				// if (parsed.file) {
+				// 	document.getElementById('dataProgress').attributes.max = parsed.length;
+				// }
 				if (parsed.type === 'eof') {
 					const received = new Blob(receiveBuffer);
 					receiveBuffer = [];
@@ -108,9 +108,9 @@ export class DataChannelUser {
 						download_href.attributes.download = parsed.file;
 						download_href.click();
 					}
-					setTimeout(function () {
-						document.getElementById('dataProgress').style.display = 'none';
-					}, 2000);
+					// setTimeout(function () {
+					// 	document.getElementById('dataProgress').style.display = 'none';
+					// }, 2000);
 
 					return;
 				}
@@ -147,9 +147,9 @@ export class DataChannelUser {
 						console.log(data);
 					});
 				}
-				setTimeout(function () {
-					document.getElementById('dataProgress').style.display = 'none';
-				}, 2000);
+				// setTimeout(function () {
+				// 	document.getElementById('dataProgress').style.display = 'none';
+				// }, 2000);
 
 				this.dc.send(
 					JSON.stringify({ type: 'eof', file: name, length: data.byteLength }),

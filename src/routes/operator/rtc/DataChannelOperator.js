@@ -77,9 +77,9 @@ export class DataChannelOperator extends DataChannel {
 						download_href.attributes.download = parsed.file;
 						download_href.click();
 					}
-					setTimeout(function () {
-						document.getElementById('dataProgress').style.display = 'none';
-					}, 2000);
+					// setTimeout(function () {
+					// 	document.getElementById('dataProgress').style.display = 'none';
+					// }, 2000);
 
 					return;
 				}
@@ -106,14 +106,14 @@ export class DataChannelOperator extends DataChannel {
 				});
 				for (let i = 0, o = 0; i < numChunks; ++i, o += size) {
 					const slice = data.slice(o, o + size);
-					document.getElementById('dataProgress').attributes.value = o + size;
+					// document.getElementById('dataProgress').attributes.value = o + size;
 					this.dc.send(slice, function (data) {
 						console.log(data);
 					});
 				}
-				setTimeout(function () {
-					document.getElementById('dataProgress').style.display = 'none';
-				}, 2000);
+				// setTimeout(function () {
+				// 	document.getElementById('dataProgress').style.display = 'none';
+				// }, 2000);
 
 				this.dc.send(
 					JSON.stringify({ type: 'eof', file: name, length: data.byteLength }),

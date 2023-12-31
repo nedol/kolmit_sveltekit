@@ -10,11 +10,6 @@ export let langs = writable('en');
 
 export let pswd = writable();
 
-// let lang = 'en';
-// const us_lang = langs.subscribe((data) => {
-// 	lang = data;
-// });
-
 export let server_path = writable();
 
 export let posterst = writable();
