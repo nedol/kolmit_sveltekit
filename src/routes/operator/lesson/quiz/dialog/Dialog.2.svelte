@@ -43,15 +43,13 @@
 		console.log($lesson.visible);
 	}
 	// import pair_data from './pair_data.json';
-	let visibility = ['visible', 'hidden', 'hidden'];
+	let hint_visible;
+
 	export let data;
 
 	$: if (data) {
-		visibility = ['visible', 'hidden', 'hidden'];
-		visibility_cnt = 1;
+		hint_visible = false;
 	}
-
-	let visibility_cnt = 1;
 
 	let containerWidth, containerHeight;
 
@@ -72,16 +70,10 @@
 		lesson_display = true; // При клике на "Back" показываем компонент Lesson
 	}
 
-	function onClickQ() {
-		visibility_cnt += 1;
-		visibility[visibility_cnt] = 'visible';
+	function onClickQ(ev) {
+		hint_visible = true;
 	}
 </script>
-
-<link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/>
 
 <div class="container">
 	<div class="card">
@@ -89,7 +81,7 @@
 
 		<div style="display: flex; justify-content: center; align-items: center; margin: 0 auto;">
 			<div>
-				<div class="question" style="visibility:{visibility[0]}">
+				<div class="question">
 					{#if data.question}
 						<div>{@html data.question['nl']}</div>
 					{/if}
@@ -97,15 +89,15 @@
 
 				<div class="title">{dict['Переведи и ответь'][$langs]}:</div>
 
-				<div class="answer" style="visibility:{visibility[0]}">
+				<div class="answer">
 					{#if data.answer}
 						<div>{@html data.answer[$langs]}</div>
 					{/if}
 				</div>
 
-				<div class="tip" style="visibility:{visibility[1]}">
-					{#if data.a_shfl}
-						<div>{@html data.a_shfl}</div>
+				<div class="tip">
+					{#if data.answer['a_shfl'] && hint_visible}
+						<div>{@html data.answer['a_shfl']}</div>
 					{/if}
 				</div>
 

@@ -123,14 +123,8 @@
 	async function SendData() {
 		if (share_mode && ($dc_user || $dc_oper)) {
 			let dc = $dc_user || $dc_oper;
-			const ar = dialog_data.content[cur_qa].answer['nl']
-				.toLowerCase()
-				.replaceAll('?', '')
-				.replaceAll('.', ' ')
-				.replaceAll(',', ' ')
-				.split(' ');
-			let str = shuffle(ar).toString().replaceAll(',', ' ');
-			// dialog_data.content[cur_qa].answer['nl'] = str;
+
+			dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
 
 			await dc.SendData(
 				{
@@ -193,26 +187,26 @@
 	}
 
 	function onChangeClick() {
-		const ar = dialog_data.content[cur_qa].answer['nl']
-			.toLowerCase()
-			.replaceAll('?', '')
-			.replaceAll(',', ' ')
-			.replaceAll('.', ' ')
-			.split(' ');
-		let str = shuffle(ar).toString().replaceAll(',', ' ');
+		// const ar = dialog_data.content[cur_qa].answer['nl']
+		// 	.toLowerCase()
+		// 	.replaceAll('?', '')
+		// 	.replaceAll(',', ' ')
+		// 	.replaceAll('.', ' ')
+		// 	.split(' ');
+		// a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 		// dialog_data.content[cur_qa].answer['nl'] = str;
 		data = {
 			html: dialog_data.html ? dialog_data.html[cur_html] : '',
 			question: dialog_data.content[cur_qa].question,
 			answer: dialog_data.content[cur_qa].answer,
-			a_shfl: str,
+			a_shfl: a_shfl,
 			quiz: data.quiz
 		};
 		data.quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
 		let client_quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
 		let dc = $dc_user || $dc_oper;
 
-		console.log(str);
+		dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
 		if (dc)
 			dc.SendData(
 				{
