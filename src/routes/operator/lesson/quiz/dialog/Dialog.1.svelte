@@ -2,6 +2,7 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
+	import CircularProgress from '@smui/circular-progress';
 	import { langs } from '$lib/js/stores.js';
 	import { dicts } from '$lib/js/stores.js';
 	let dict = $dicts;
@@ -276,6 +277,12 @@
 				<div class="title">{dict['Проконтролируй ответ'][$langs]}:</div>
 				<div class="answer" style="visibility:{visibility[0]}">
 					{@html a['nl']}
+				</div>
+			{:else}
+				<div style="text-align:center">
+					<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5;">
+						<CircularProgress style="height: 50px; width: 50px;" indeterminate />
+					</span>
 				</div>
 			{/if}
 		</div>
