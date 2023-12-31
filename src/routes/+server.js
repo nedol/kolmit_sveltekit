@@ -20,12 +20,26 @@ rtcPool_st.subscribe((data) => {
 	global.rtcPool = data;
 });
 
-export const config = {
-	// runtime: 'edge'
-	// isr: {
-	// 	expiration: false // 10
-	// }
+global.interval;
+global.loop = function () {
+	try {
+		if (!global.interval)
+			global.interval = setInterval(async () => {
+				const { statusCode, headers, trailers, body } = await request(
+					`https://kolmit-service.onrender.com`
+				);
+				console.log('response received', statusCode);
+				console.log('headers', headers);
+
+				for await (const data of body) {
+					console.log('data', data);
+				}
+				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+			}, 1000 * 60 * 10);
+	} catch (ex) {}
 };
+
+global.loop();
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url, fetch, cookies }) {
@@ -45,9 +59,13 @@ export async function GET({ url, fetch, cookies }) {
 		return response;
 	} else if (func === 'cookie') {
 		if (lang) {
-			let cookie = JSON.parse(cookies.get(`abonent:${abonent}`));
-			cookie.lang = lang;
-			cookies.set(`abonent:${abonent}`, JSON.stringify(cookie));
+			try {
+				let cookie = JSON.parse(cookies.get(`abonent:${abonent}`));
+				cookie.lang = lang;
+				cookies.set(`abonent:${abonent}`, JSON.stringify(cookie));
+			} catch (ex) {
+				console.log(ex);
+			}
 		}
 		let response = new Response();
 		// response.headers.append('Access-Control-Allow-Origin', `*`);
@@ -85,27 +103,6 @@ export async function GET({ url, fetch, cookies }) {
 		return response;
 	}
 }
-
-global.interval;
-global.loop = function () {
-	try {
-		if (!global.interval)
-			global.interval = setInterval(async () => {
-				const { statusCode, headers, trailers, body } = await request(
-					`https://kolmit-service.onrender.com`
-				);
-				console.log('response received', statusCode);
-				console.log('headers', headers);
-
-				for await (const data of body) {
-					console.log('data', data);
-				}
-				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-			}, 1000 * 60 * 10);
-	} catch (ex) {}
-};
-
-global.loop();
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, url, fetch, cookies }) {
@@ -181,25 +178,25 @@ export async function POST({ request, url, fetch, cookies }) {
 
 				SendOperatorStatus(q);
 
-				let operators = { [q.em]: {} };
-				for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
-					if (uid !== 'resolve')
-						operators[q.em][uid] = {
-							type: q.type,
-							abonent: q.abonent,
-							em: q.em,
-							uid: q.uid,
-							status: global.rtcPool['operator'][q.abonent][q.em][uid].status
-							// queue: queue
-						};
-				}
+				// let operators = { [q.em]: {} };
+				// for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+				// 	if (uid !== 'resolve')
+				// 		operators[q.em][uid] = {
+				// 			type: q.type,
+				// 			abonent: q.abonent,
+				// 			em: q.em,
+				// 			uid: q.uid,
+				// 			status: global.rtcPool['operator'][q.abonent][q.em][uid].status
+				// 			// queue: queue
+				// 		};
+				// }
 
 				resp = {
 					func: q.func,
 					type: q.type,
 					check: true,
-					queue: String(cnt_queue),
-					operators: operators
+					queue: String(cnt_queue)
+					// operators: operators
 				};
 
 				// set('global.rtcPool', global.rtcPool);
