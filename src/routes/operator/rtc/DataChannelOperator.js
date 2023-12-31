@@ -1,6 +1,4 @@
 import { DataChannel } from './DataChannel';
-// import { writable } from 'svelte/store';
-
 import { msg_oper } from '$lib/js/stores.js';
 import { dc_oper } from '$lib/js/stores.js';
 import { dc_oper_state } from '$lib/js/stores.js';

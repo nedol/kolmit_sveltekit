@@ -4,7 +4,13 @@
 	import pkg from 'lodash';
 	const { find, findKey, mapValues } = pkg;
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiAccountMultiple, mdiTextBoxOutline, mdiCardTextOutline } from '@mdi/js';
+	import {
+		mdiAccountMultiple,
+		mdiTextBoxOutline,
+		mdiCardTextOutline,
+		mdiEarHearing,
+		mdiFileWordBoxOutline
+	} from '@mdi/js';
 	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
 	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
 	import Quiz from './quiz/Quiz.svelte';
@@ -130,7 +136,11 @@
 															</Icon>
 														{:else if quiz.type === 'word'}
 															<Icon tag="svg" viewBox="0 0 24 24" width="20" height="20">
-																<path fill="grey" d={mdiCardTextOutline} />
+																<path fill="grey" d={mdiFileWordBoxOutline} />
+															</Icon>
+														{:else if quiz.type === 'listen'}
+															<Icon tag="svg" viewBox="0 0 24 24" width="20" height="20">
+																<path fill="grey" d={mdiEarHearing} />
 															</Icon>
 														{/if}
 													</div>

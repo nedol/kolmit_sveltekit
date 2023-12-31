@@ -1178,22 +1178,20 @@
                 ]
             },
             {
-                "num": "8",
+                "num": "7",
                 "name": "Bij de dokter",
                 "words": {},
                 "lessons": [
                     {
                         "num": 1,
-                        "title": "",
-                        "quizes": []
-                    },
-                    {
-                        "num": 2,
-                        "title": ""
-                    },
-                    {
-                        "num": 3,
-                        "title": ""
+                        "title": "De vakantie",
+                        "quizes": [
+                            {
+                                "type": "pair",
+                                "title": "Bij de dokter.1",
+                                "name": "BijDeDokter.1"
+                            }
+                        ]
                     }
                 ]
             },

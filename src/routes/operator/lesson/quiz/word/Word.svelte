@@ -4,6 +4,8 @@
 	import { langs } from '$lib/js/stores.js';
 	import EasySpeech from 'easy-speech';
 
+	import CircularProgress from '@smui/circular-progress';
+
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -336,6 +338,14 @@
 />
 
 <main>
+	{#if !words[0]}
+		<div style="text-align:center">
+			<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5;">
+				<CircularProgress style="height: 50px; width: 50px;" indeterminate />
+			</span>
+		</div>
+	{/if}
+
 	{#if words}
 		<div style="position:relative;float:left">
 			<!-- <IconButton class="material-icons"  on:click={showHint}>
@@ -415,7 +425,9 @@
 						</Header>
 						<Content style="line-height: 2.2;">
 							{#each hints as hint}
-								<span on:click={OnClickHint}> {hint.original} </span>
+								<span on:click={OnClickHint}>
+									{@html hint.original.replace(' ', '&nbsp;') + '&nbsp;' + '&nbsp;'}
+								</span>
 							{/each}
 						</Content>
 					</Panel>
