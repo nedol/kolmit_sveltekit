@@ -9,10 +9,10 @@ const { find, findKey } = pkg;
 
 import { request } from 'undici';
 
-import { CreateServer } from '$lib/server/server.js';
+// import { CreateServer } from '$lib/server/server.js';
 // import { get, set } from 'node-global-storage';
 // set('global.rtcPool', { user: {}, operator: {} });
-CreateServer();
+// CreateServer();
 
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
@@ -140,7 +140,11 @@ export async function POST({ request, url, fetch, cookies }) {
 							psw: q.psw,
 							lang: q.lang
 						}),
-						{ maxAge: 60 * 60 * 24 * 30 }
+						{
+							maxAge: 31536000, //60 * 60 * 24 * 365,
+							path: '/',
+							httpOnly: true
+						}
 					);
 
 					resp = JSON.stringify({

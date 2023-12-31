@@ -92,32 +92,32 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 	};
 }
 
-export const actions = {
-	default: async ({ cookies, request, url }) => {
-		const abonent = url.searchParams.get('abonent');
-		const data = await request.formData();
-		if (data.get('psw') !== data.get('confirmPassword')) return;
-		let q = {
-			abonent: abonent,
-			img: data.get('oper_pic_text'),
-			name: data.get('name'),
-			email: data.get('email'),
-			psw: md5(data.get('psw')),
-			lang: data.get('lang')
-		};
+// export const actions = {
+// 	default: async ({ cookies, request, url }) => {
+// 		const abonent = url.searchParams.get('abonent');
+// 		const data = await request.formData();
+// 		if (data.get('psw') !== data.get('confirmPassword')) return;
+// 		let q = {
+// 			abonent: abonent,
+// 			img: data.get('oper_pic_text'),
+// 			name: data.get('name'),
+// 			email: data.get('email'),
+// 			psw: md5(data.get('psw')),
+// 			lang: data.get('lang')
+// 		};
 
-		cookies.set(
-			'abonent:' + q.abonent,
-			JSON.stringify({
-				name: q.name,
-				operator: q.email,
-				abonent: q.abonent,
-				psw: q.psw,
-				lang: q.lang
-			}),
-			{ maxAge: 60 * 60 * 24 * 30 * 1000 }
-		);
+// 		cookies.set(
+// 			'abonent:' + q.abonent,
+// 			JSON.stringify({
+// 				name: q.name,
+// 				operator: q.email,
+// 				abonent: q.abonent,
+// 				psw: q.psw,
+// 				lang: q.lang
+// 			}),
+// 			{ maxAge: 60 * 60 * 24 * 30 * 1000 }
+// 		);
 
-		await CreateOperator(q);
-	}
-};
+// 		await CreateOperator(q);
+// 	}
+// };

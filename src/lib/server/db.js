@@ -72,12 +72,11 @@ export async function CreateOperator(par) {
 	try {
 		if (par.abonent === par.email) return false;
 		par.psw = md5(par.psw);
-		let res = await pool.sql`
-		SELECT operators.psw as psw, users.users as users 
+		let res = await pool.sql`SELECT operators.psw as psw, users.users as users 
 			FROM operators
 			INNER JOIN users ON (users.operator = operators.abonent)
 			WHERE operators.operator=${par.email} 
-			AND operators.abonent =${par.abonent}`;
+			AND operators.abonent=${par.abonent}`;
 		if (res.rows[0]) {
 			let psw = res.rows[0].psw;
 			if (psw) {
