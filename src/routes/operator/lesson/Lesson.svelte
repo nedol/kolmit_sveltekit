@@ -89,7 +89,7 @@
 	{#if data.quiz}
 		<Quiz {data} bind:lesson_display={display} />
 	{:else}
-		<div class="lesson-container" style="width: {containerWidth}; height: {containerHeight};">
+		<div class="lesson-container" style="">
 			<div class="module_level">
 				<div>Module {level.level}</div>
 			</div>
@@ -161,6 +161,8 @@
 	}
 
 	.lesson-container {
+		height: 90vh;
+		width: 100vh;
 		overflow-y: auto;
 		overflow-x: hidden;
 		max-width: 100%;

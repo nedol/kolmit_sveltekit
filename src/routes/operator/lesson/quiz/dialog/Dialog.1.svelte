@@ -216,7 +216,7 @@
 /> -->
 
 {#if data.quiz == 'pair'}
-	{#if share_button}
+	{#if share_button && (dc_oper_state || dc_user_state)}
 		<IconButton class="material-icons" on:click={onShare} style={style_button}>
 			<Icon tag="svg" viewBox="0 0 24 24">
 				<path fill="currentColor" d={mdiShareVariant} />

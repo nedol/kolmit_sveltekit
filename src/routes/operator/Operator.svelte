@@ -146,7 +146,7 @@
 
 	onMount(async () => {
 		try {
-			await EasySpeech.init(); // required
+			await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
 			EasySpeech.on('error', () => {
 				EasySpeech.reset();
@@ -168,7 +168,9 @@
 				console.log('Web Audio API is not supported in this browser');
 			}
 
-			initSpeech();
+			let voices = EasySpeech.voices();
+
+			initSpeech(voices);
 
 			// Добавьте слушателя событий для скрытия списка команд при клике за его пределами
 			// document.addEventListener('click', handleOutsideClick);
@@ -181,16 +183,15 @@
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
 				// if (audioCtx) audioCtx.suspend();
 				setTimeout(() => {
-					EasySpeech.cancel();
+					EasySpeech.pause();
+					console.log(EasySpeech.status());
 				}, 0);
 			} else {
-				// Ваш код, выполняемый при восстановлении активности приложения
-				// EasySpeech.reset();
 				setTimeout(() => {
-					EasySpeech.init();
+					EasySpeech.resume();
+					console.log(EasySpeech.status());
 				}, 0);
 				console.log('Приложение активно');
-				// if (audioCtx) audioCtx.resume().then(() => {});
 			}
 		});
 
@@ -203,102 +204,21 @@
 		};
 	});
 
-	function initSpeech() {
-		synthesis = window.speechSynthesis;
-		let voices = synthesis.getVoices();
+	function initSpeech(voices) {
+		for (let v in voices) {
+			$tts = { voice: voices[v] };
 
-		if (!voices[0]) {
-			synthesis.onvoiceschanged = (event) => {
-				const voices = synthesis.getVoices();
-				selectVoice(voices);
-			};
-		} else {
-			selectVoice(voices);
-		}
-
-		function selectVoice(voices) {
-			for (let v in voices) {
+			if (voices[v].lang.includes('nl')) {
 				$tts = { voice: voices[v] };
 
-				if (voices[v].lang.includes('nl')) {
+				if (voices[v].lang.includes('BE')) {
+					// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
 					$tts = { voice: voices[v] };
-
-					if (voices[v].lang.includes('BE')) {
-						// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-						$tts = { voice: voices[v] };
-
-						break;
-					}
+					break;
 				}
 			}
-			debug = $tts.voice.name;
 		}
-
-		setTimeout(() => {
-			$tts = {
-				speak: function (textObj) {
-					let timer;
-					if ('speechSynthesis' in window) {
-						// Получаем доступные голоса
-						// let voices = await synthesis.getVoices();
-						// Создаем объект с параметрами речи
-						const utterance = new SpeechSynthesisUtterance(textObj.text);
-						const clear = () => {
-							clearTimeout(timer);
-						};
-						function isAndroid() {
-							return navigator.userAgent.toLowerCase().includes('android');
-						}
-						utterance.onstart = () => {
-							// detection is up to you for this article as
-							// this is an own huge topic for itself
-							if (!isAndroid) {
-								resumeInfinity(utterance);
-							}
-						};
-						utterance.onerror = clear;
-						utterance.onend = clear;
-						// utterance.lang = 'nl-BE';
-						// utterance.onerror = (event) => {
-						// 	console.log(event);
-						// 	synthesis.cancel();
-						// 	// $tts.speak(textObj);
-						// };
-						// utterance.onend = (event) => {
-						// 	synthesis.cancel();
-						// };
-
-						const resumeInfinity = (target) => {
-							// prevent memory-leak in case utterance is deleted, while this is ongoing
-							if (!target && timer) {
-								return clear();
-							}
-
-							speechSynthesis.pause();
-							speechSynthesis.resume();
-
-							timer = setTimeout(function () {
-								resumeInfinity(target);
-							}, 5000);
-						};
-						// Запускаем озвучивание
-						utterance.voice = $tts.voice;
-						utterance.lang = $tts.voice.lang;
-						utterance.rate = 1;
-						utterance.voiceURI = $tts.voiceURI;
-						console.log(`Голос: ${$tts.voice.name}, Язык: ${$tts.voice.lang}`);
-						synthesis.speak(utterance);
-						// synthesis.cancel();
-					} else {
-						alert('Web Speech API не поддерживается в вашем браузере.');
-					}
-				},
-				cancel: function () {
-					synthesis.cancel();
-				},
-				voice: $tts.voice
-			};
-		}, 100);
+		debug = $tts.voice.name;
 	}
 
 	let progress = {
