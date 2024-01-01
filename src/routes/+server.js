@@ -461,6 +461,7 @@ let remAr = [];
 async function HandleCall(q) {
 	if (q.type === 'user') {
 		if (q.desc || q.cand) {
+			remAr = [];
 			remAr.push({
 				func: q.func,
 				desc: q.desc,
@@ -474,8 +475,10 @@ async function HandleCall(q) {
 
 			if (item) {
 				await global.rtcPool['operator'][q.abonent][q.em].promise;
-				global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
-				remAr = [];
+				if (global.rtcPool['operator'][q.abonent][q.em].resolve) {
+					await global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
+					console.log('HandleCall to user', remAr);
+				}
 			}
 		} else {
 			let item = global.rtcPool['user'][q.abonent][q.em][q.uid];
@@ -503,7 +506,7 @@ async function HandleCall(q) {
 					await global.rtcPool['operator'][q.abonent][q.em].promise;
 					if (global.rtcPool['user'][q.abonent][q.operator].resolve)
 						global.rtcPool['user'][q.abonent][q.operator].resolve(remAr);
-					//console.log('after HandleCall:user '+JSON.stringify(remAr));
+					console.log('after HandleCall:user ' + JSON.stringify(remAr));
 					remAr = [];
 				} else {
 					item.status = 'wait';
@@ -513,8 +516,8 @@ async function HandleCall(q) {
 						status: 'wait'
 					});
 					await global.rtcPool['operator'][q.abonent][q.em].promise;
-					global.rtcPool['user'][q.abonent][q.em].resolve;
-					global.rtcPool['user'][q.abonent][q.em].resolve(remAr);
+					if (global.rtcPool['user'][q.abonent][q.em].resolve)
+						global.rtcPool['user'][q.abonent][q.em].resolve(remAr);
 
 					if (oper_check && oper_check.resolve) {
 						let remAr = {
