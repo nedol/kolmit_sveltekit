@@ -152,7 +152,7 @@ export default class RTCUser extends RTCBase {
 					that.pcPull[data.abonent].params['rem_cand'] = data.cand;
 					if (Array.isArray(data.cand)) {
 						for (let c in data.cand) {
-							that.pcPull[data.abonent].con.addIceCandidate(data.cand[c]);
+							if (data.cand[c]) that.pcPull[data.abonent].con.addIceCandidate(data.cand[c]);
 							console.log(
 								' Remote ICE candidate: \n' +
 									(data.cand[c] ? JSON.stringify(data.cand[c]) : '(null)'),
@@ -160,7 +160,7 @@ export default class RTCUser extends RTCBase {
 							);
 						}
 					} else {
-						that.pcPull[data.abonent].con.addIceCandidate(data.cand);
+						if (data.cand) that.pcPull[data.abonent].con.addIceCandidate(data.cand);
 						console.log(
 							' Remote ICE candidate: \n' + (data.cand ? JSON.stringify(data.cand) : '(null)'),
 							that

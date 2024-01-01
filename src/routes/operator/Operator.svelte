@@ -299,8 +299,6 @@
 		// rtc ..set(rtc .;
 		//rtc .type = "operator";
 
-		// rtc .SendToComponent = OnMessage;
-
 		rtc.PlayCallCnt = () => {
 			// video_progress = false;
 
@@ -453,6 +451,7 @@
 			}
 		}
 		if (data.func === 'talk') {
+			console.log('talk', data.em);
 			clearInterval(inter);
 			call_cnt = 10;
 			video_button_display = true;
@@ -476,6 +475,7 @@
 			remote.text.email = '';
 			remote.text.display = 'none';
 			// local.video.poster = UserSvg;
+			console.log('rtc', rtc);
 			rtc.OnInactive();
 			if ($call_but_status === 'talk') {
 				$call_but_status = 'inactive';

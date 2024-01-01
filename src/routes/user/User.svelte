@@ -251,7 +251,6 @@
 			console.log('talk', data.em);
 			if (data.em === em) {
 				status = 'talk';
-
 				video_button_display = true;
 				local.audio.paused = true;
 				remote.video.muted = false;
