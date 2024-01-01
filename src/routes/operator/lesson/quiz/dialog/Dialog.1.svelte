@@ -17,11 +17,9 @@
 	import { lesson } from '$lib/js/stores.js';
 
 	import { dc_oper } from '$lib/js/stores.js';
-	import { dc_oper_state } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
-	import { dc_user_state } from '$lib/js/stores.js';
 	// import { dialog_data } from './dialog_data.js';
-	import { msg_user } from '$lib/js/stores.js';
+	import { call_but_status } from '$lib/js/stores.js';
 
 	import Dialog2 from './Dialog.2.svelte';
 	import { initial } from 'lodash';
@@ -79,21 +77,15 @@
 		onChangeClick();
 	}
 
-	$: if ($dc_oper_state) {
-		switch ($dc_oper_state) {
-			case 'open':
-				share_button = true;
-				break;
-			case 'closed':
-				share_button = false;
-				share_mode = false;
-				style_button = style_button_non_shared;
-				break;
-		}
-	}
-
-	$: if ($dc_user_state) {
-		share_button = true;
+	$: switch ($call_but_status) {
+		case 'talk':
+			share_button = true;
+			break;
+		default:
+			share_button = false;
+			share_mode = false;
+			style_button = style_button_non_shared;
+			break;
 	}
 
 	async function init() {
@@ -238,7 +230,7 @@
 /> -->
 
 {#if data.quiz == 'pair'}
-	{#if share_button && (dc_oper_state || dc_user_state)}
+	{#if share_button && $call_but_status === 'talk'}
 		<IconButton class="material-icons" on:click={onShare} style={style_button}>
 			<Icon tag="svg" viewBox="0 0 24 24">
 				<path fill="currentColor" d={mdiShareVariant} />

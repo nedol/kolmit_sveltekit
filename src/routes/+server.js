@@ -110,9 +110,10 @@ export async function GET({ url, fetch, cookies }) {
 export async function POST({ request, url, fetch, cookies }) {
 	//debugger;
 	let resp;
-	let abonent = url.searchParams.get('abonent');
+
 	const { par } = await request.json();
 	const q = par;
+	let abonent = q['abonent'];
 	let res = cookies.get('abonent:' + abonent);
 	let kolmit;
 	if (res) {

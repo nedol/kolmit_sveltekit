@@ -68,7 +68,7 @@ export class RTCBase {
 	}
 
 	onIceStateChange(pc, event) {
-		if (pc && pc.con) {
+		if (pc && pc.con !== null) {
 			if (pc.con.iceConnectionState === 'new') {
 				console.log(pc.pc_key + ' ICE state change event: new', this);
 			}
