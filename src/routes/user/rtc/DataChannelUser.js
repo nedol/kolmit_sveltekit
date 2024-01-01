@@ -23,7 +23,7 @@ export class DataChannelUser {
 		this.rtc = rtc;
 		this.pc = pc;
 		this.call_num = 3;
-		this.dc = pc.con.createDataChannel(pc.pc_key + ' data channel');
+		this.dc = pc.con.createDataChannel(pc.pc_key + ' data channel', { maxRetransmits: 100 });
 		this.forward;
 
 		let that = this;

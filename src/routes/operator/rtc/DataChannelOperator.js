@@ -13,7 +13,7 @@ export class DataChannelOperator extends DataChannel {
 		//     console.log('OnOpenDataChannel');
 		// }
 
-		this.dc = pc.con.createDataChannel(pc.pc_key + ' data channel');
+		this.dc = pc.con.createDataChannel(pc.pc_key + ' data channel', { maxRetransmits: 100 });
 
 		this.dc.onopen = () => {
 			//this.dc.onopen = null;
