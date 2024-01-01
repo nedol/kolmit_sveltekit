@@ -224,11 +224,18 @@ export class RTCOperator extends RTCBase {
 					if (Array.isArray(data.cand)) {
 						for (let c in data.cand) {
 							that.pcPull[data.abonent].con.addIceCandidate(data.cand[c]);
-							//log(' Remote ICE candidate: \n' + (data.cand[c] ? JSON.stringify(data.cand[c]) : '(null)'), that);
+							console.log(
+								' Remote ICE candidate: \n' +
+									(data.cand[c] ? JSON.stringify(data.cand[c]) : '(null)'),
+								that
+							);
 						}
 					} else {
 						that.pcPull[data.abonent].con.addIceCandidate(data.cand);
-						//log(' Remote ICE candidate: \n' + (data.cand ? JSON.stringify(data.cand) : '(null)'), that);
+						console.log(
+							' Remote ICE candidate: \n' + (data.cand ? JSON.stringify(data.cand) : '(null)'),
+							that
+						);
 					}
 				} catch (ex) {
 					log(ex);

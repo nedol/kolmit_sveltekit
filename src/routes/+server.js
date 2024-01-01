@@ -57,7 +57,8 @@ export async function GET({ url, fetch, cookies }) {
 	} else if (func === 'cookie') {
 		if (lang) {
 			try {
-				let cookie = JSON.parse(cookies.get(`abonent:${abonent}`));
+				let cookie = cookies.get(`abonent:${abonent}`);
+				cookie = JSON.parse(cookie);
 				cookie.lang = lang;
 				cookies.set(`abonent:${abonent}`, JSON.stringify(cookie));
 			} catch (ex) {
