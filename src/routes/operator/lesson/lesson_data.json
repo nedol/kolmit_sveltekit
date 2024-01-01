@@ -1192,11 +1192,6 @@
                                 "name": "Alex bij de dokter"
                             },
                             {
-                                "type": "text",
-                                "title": "Alex bij de dokter.1",
-                                "name": "Alex bij de dokter.1"
-                            },
-                            {
                                 "type": "pair",
                                 "title": "Bij de dokter.1",
                                 "name": "BijDeDokter.1"
