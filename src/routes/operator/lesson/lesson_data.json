@@ -1184,8 +1184,18 @@
                 "lessons": [
                     {
                         "num": 1,
-                        "title": "De vakantie",
+                        "title": "Bij de dokter",
                         "quizes": [
+                            {
+                                "type": "text",
+                                "title": "Alex bij de dokter",
+                                "name": "Alex bij de dokter"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Alex bij de dokter.1",
+                                "name": "Alex bij de dokter.1"
+                            },
                             {
                                 "type": "pair",
                                 "title": "Bij de dokter.1",

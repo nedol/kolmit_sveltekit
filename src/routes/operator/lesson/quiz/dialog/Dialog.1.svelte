@@ -61,6 +61,10 @@
 		border-radius: 5px;
 		cursor: pointer;`;
 
+	$: if (data.name) {
+		init();
+	}
+
 	$: if (data.html) {
 		style_button = style_button_shared;
 		share_mode = true;
@@ -69,7 +73,6 @@
 	$: if (data.cur_qa) {
 		cur_qa = data.cur_qa;
 		style_button = share_mode = true;
-		Dialog();
 	}
 
 	if (data.func) {
@@ -96,6 +99,7 @@
 	async function init() {
 		const module = await import(`../../../../assets/dialog/${data.name}.js`);
 		dialog_data = await module['dialog_data'];
+		dialog_data.name = data.name;
 		Dialog();
 	}
 
@@ -120,32 +124,7 @@
 		a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 	}
 
-	async function SendData() {
-		if (share_mode && ($dc_user || $dc_oper)) {
-			let dc = $dc_user || $dc_oper;
-
-			dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
-
-			await dc.SendData(
-				{
-					lesson: {
-						quiz: 'pair.client',
-						name: data.name,
-						html: dialog_data.html ? dialog_data.html[cur_html] : null,
-						question: dialog_data.content[cur_qa].question,
-						answer: dialog_data.content[cur_qa].answer,
-						cur_qa: cur_qa
-					}
-				},
-				(ex) => {
-					console.log(ex);
-				}
-			);
-		}
-	}
-
 	onMount(() => {
-		init();
 		// const parentWidth = window.innerWidth;
 		// containerWidth = parentWidth + 'px';
 
@@ -186,15 +165,30 @@
 		SendData();
 	}
 
+	async function SendData() {
+		let dc = $dc_user || $dc_oper;
+		if (share_mode && dc) {
+			dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
+
+			await dc.SendData(
+				{
+					lesson: {
+						quiz: 'pair.client',
+						name: dialog_data.name,
+						html: dialog_data.html ? dialog_data.html[cur_html] : null,
+						question: dialog_data.content[cur_qa].question,
+						answer: dialog_data.content[cur_qa].answer,
+						cur_qa: cur_qa
+					}
+				},
+				(ex) => {
+					console.log(ex);
+				}
+			);
+		}
+	}
+
 	function onChangeClick() {
-		// const ar = dialog_data.content[cur_qa].answer['nl']
-		// 	.toLowerCase()
-		// 	.replaceAll('?', '')
-		// 	.replaceAll(',', ' ')
-		// 	.replaceAll('.', ' ')
-		// 	.split(' ');
-		// a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
-		// dialog_data.content[cur_qa].answer['nl'] = str;
 		data = {
 			html: dialog_data.html ? dialog_data.html[cur_html] : '',
 			question: dialog_data.content[cur_qa].question,
@@ -207,12 +201,12 @@
 		let dc = $dc_user || $dc_oper;
 
 		dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
-		if (dc)
+		if (dc && share_mode)
 			dc.SendData(
 				{
 					lesson: {
 						quiz: client_quiz,
-						name: data.name,
+						name: dialog_data.name,
 						html: dialog_data.html ? dialog_data.html[cur_html] : '',
 						question: dialog_data.content[cur_qa].question,
 						answer: dialog_data.content[cur_qa].answer,
