@@ -104,6 +104,7 @@ export class Peer {
 		};
 		this.con.onconnectionstatechange = function (e) {
 			console.log('onconnectionstatechange');
+			that.rtc.onIceStateChange(that, e);
 		};
 	}
 

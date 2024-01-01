@@ -112,6 +112,7 @@ export class Peer {
 		};
 
 		this.con.oniceconnectionstatechange = function (e) {
+			console.log('oniceconnectionstatechange');
 			that.rtc.onIceStateChange(that, e);
 		};
 		this.con.onremovestream = function (e) {
@@ -122,6 +123,7 @@ export class Peer {
 		};
 		this.con.onconnectionstatechange = function (e) {
 			console.log('onconnectionstatechange');
+			that.rtc.onIceStateChange(that, e);
 		};
 	}
 
