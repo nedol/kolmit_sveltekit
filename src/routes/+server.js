@@ -198,7 +198,7 @@ export async function POST({ request, url, fetch, cookies }) {
 
 				// set('global.rtcPool', global.rtcPool);
 
-				return new Response(JSON.stringify({ resp }));
+				// return new Response(JSON.stringify({ resp }));
 			} else if (q.type === 'operator') {
 				q.psw = kolmit.psw;
 				// console.log(q.em)
