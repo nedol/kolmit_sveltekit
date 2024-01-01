@@ -99,6 +99,10 @@ export async function GET({ url, fetch, cookies }) {
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	}
+
+	let response = new Response();
+	response.headers.append('Access-Control-Allow-Origin', `*`);
+	return response;
 }
 
 /** @type {import('./$types').RequestHandler} */
