@@ -55,7 +55,7 @@ export async function GET({ url, fetch, cookies }) {
 	if (func === 'reset') {
 		cookies.delete('abonent:' + abonent);
 		let response = new Response();
-		// response.headers.append('Access-Control-Allow-Origin', `*`);
+		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	} else if (func === 'cookie') {
 		if (lang) {
@@ -68,7 +68,7 @@ export async function GET({ url, fetch, cookies }) {
 			}
 		}
 		let response = new Response();
-		// response.headers.append('Access-Control-Allow-Origin', `*`);
+		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	} else if (text) {
 		// let resp = await fetch('/src/routes/operator/lesson/' + path);
@@ -80,7 +80,7 @@ export async function GET({ url, fetch, cookies }) {
 		// let items = text.split('\r\n');
 		let obj = { text: text };
 		let response = new Response(JSON.stringify({ obj }));
-		// response.headers.append('Access-Control-Allow-Origin', `*`);
+		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	} else if (dict) {
 		const level = url.searchParams.get('level');
@@ -92,14 +92,14 @@ export async function GET({ url, fetch, cookies }) {
 		//debugger;
 		if (data) {
 			let response = new Response(JSON.stringify({ data }));
-			// response.headers.append('Access-Control-Allow-Origin', `*`);
+			response.headers.append('Access-Control-Allow-Origin', `*`);
 			return response;
 		}
 	} else if (key) {
 		const audio = await ReadSpeech({ key: key });
 
 		let response = new Response(JSON.stringify({ audio }));
-		// response.headers.append('Access-Control-Allow-Origin', `*`);
+		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
 	}
 }

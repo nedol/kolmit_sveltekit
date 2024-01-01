@@ -64,7 +64,7 @@ export class DataChannelUser {
 				// that.rtc.trans = ab;
 
 				that.dc.onclose = () => {
-					msg_oper.set({ func: 'mute' });
+					msg_user.set({ func: 'mute' });
 					dc_user_state.set(that.dc.readyState);
 				};
 			};
