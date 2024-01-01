@@ -32,7 +32,7 @@ global.loop = function () {
 				console.log('headers', headers);
 
 				for await (const data of body) {
-					console.log('data', data);
+					// console.log('data', data);
 				}
 				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
 			}, 1000 * 60 * 10);
@@ -181,35 +181,32 @@ export async function POST({ request, url, fetch, cookies }) {
 
 				SendOperatorStatus(q);
 
-				// let operators = { [q.em]: {} };
-				// for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
-				// 	if (uid !== 'resolve')
-				// 		operators[q.em][uid] = {
-				// 			type: q.type,
-				// 			abonent: q.abonent,
-				// 			em: q.em,
-				// 			uid: q.uid,
-				// 			status: global.rtcPool['operator'][q.abonent][q.em][uid].status
-				// 			// queue: queue
-				// 		};
-				// }
+				let operators = { [q.em]: {} };
+				for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+					if (uid !== 'resolve')
+						operators[q.em][uid] = {
+							type: q.type,
+							abonent: q.abonent,
+							em: q.em,
+							uid: q.uid,
+							status: global.rtcPool['operator'][q.abonent][q.em][uid].status
+							// queue: queue
+						};
+				}
 
 				resp = {
 					func: q.func,
 					type: q.type,
 					check: true,
-					queue: String(cnt_queue)
-					// operators: operators
+					queue: String(cnt_queue),
+					operators: operators
 				};
 
 				// set('global.rtcPool', global.rtcPool);
-
-				// return new Response(JSON.stringify({ resp }));
 			} else if (q.type === 'operator') {
 				q.psw = kolmit.psw;
 				// console.log(q.em)
 				resp = await CheckOperator(q);
-				console.log(resp);
 			}
 
 			break;
@@ -257,6 +254,8 @@ export async function POST({ request, url, fetch, cookies }) {
 
 	// set('global.rtcPool', global.rtcPool);
 	// rtcPool_st.set(global.rtcPool);
+
+	console.log(JSON.stringify(resp));
 
 	let response = new Response(JSON.stringify({ resp }));
 	response.headers.append('Access-Control-Allow-Origin', `*`);
