@@ -250,7 +250,7 @@ export async function POST({ request, url, fetch, cookies }) {
 	}
 
 	// set('global.rtcPool', global.rtcPool);
-	rtcPool_st.set(global.rtcPool);
+	// rtcPool_st.set(global.rtcPool);
 
 	let response = new Response(JSON.stringify({ resp }));
 	response.headers.append('Access-Control-Allow-Origin', `*`);
