@@ -54,9 +54,6 @@ export async function GET({ url, fetch, cookies }) {
 	// debugger;
 	if (func === 'reset') {
 		cookies.delete('abonent:' + abonent);
-		let response = new Response();
-		response.headers.append('Access-Control-Allow-Origin', `*`);
-		return response;
 	} else if (func === 'cookie') {
 		if (lang) {
 			try {

@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	import call from '$lib/mp3/call.wav';
+	import call from '$lib/mp3/call.mp3';
 
 	export let paused = true;
 	let ls;
