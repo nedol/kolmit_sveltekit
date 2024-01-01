@@ -181,25 +181,25 @@ export async function POST({ request, url, fetch, cookies }) {
 
 				SendOperatorStatus(q);
 
-				let operators = { [q.em]: {} };
-				for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
-					if (uid !== 'resolve')
-						operators[q.em][uid] = {
-							type: q.type,
-							abonent: q.abonent,
-							em: q.em,
-							uid: q.uid,
-							status: global.rtcPool['operator'][q.abonent][q.em][uid].status
-							// queue: queue
-						};
-				}
+				// let operators = { [q.em]: {} };
+				// for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+				// 	if (uid !== 'resolve')
+				// 		operators[q.em][uid] = {
+				// 			type: q.type,
+				// 			abonent: q.abonent,
+				// 			em: q.em,
+				// 			uid: q.uid,
+				// 			status: global.rtcPool['operator'][q.abonent][q.em][uid].status
+				// 			// queue: queue
+				// 		};
+				// }
 
 				resp = {
 					func: q.func,
 					type: q.type,
 					check: true,
-					queue: String(cnt_queue),
-					operators: operators
+					queue: String(cnt_queue)
+					// operators: operators
 				};
 
 				// set('global.rtcPool', global.rtcPool);
