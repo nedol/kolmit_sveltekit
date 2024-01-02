@@ -43,14 +43,14 @@ export class DataChannelOperator extends DataChannel {
 		let receiveBuffer = [];
 		let receivedSize = 0;
 		// this.dc.removeEventListener("message",this.dc.onmessage);
-		this.dc.onmessage = function (event) {
+		this.dc.onmessage = async (event) => {
 			try {
 				// debugger;
 				let parsed = JSON.parse(event.data);
 				if (parsed.type === 'eom') {
 					if (data) {
 						that.rtc.OnMessage(JSON.parse(data), that);
-						msg_oper.set(JSON.parse(data));
+						await msg_oper.set(JSON.parse(data));
 					}
 					data = '';
 					return;

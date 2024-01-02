@@ -76,14 +76,14 @@ export class DataChannelUser {
 		let receiveBuffer = [];
 		let receivedSize = 0;
 		this.dc.removeEventListener('message', this.dc.onmessage);
-		this.dc.onmessage = (event) => {
+		this.dc.onmessage = async (event) => {
 			try {
 				let parsed = JSON.parse(event.data);
 				if (parsed.type === 'eom') {
 					data = JSON.parse(data);
 					data.em = this.rtc.em;
 					that.rtc.OnMessage(data, that);
-					msg_user.set(data);
+					await msg_user.set(data);
 					data = '';
 					return;
 				}
