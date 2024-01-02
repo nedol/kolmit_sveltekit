@@ -99,7 +99,7 @@
 	}
 
 	$: if (remote.text.msg) {
-		console.log(remote.text.msg);
+		// console.log(remote.text.msg);
 	}
 
 	let container;
@@ -452,9 +452,7 @@
 		}
 		if (data.func === 'talk') {
 			console.log('talk', data.em);
-			clearInterval(inter);
-			call_cnt = 10;
-			video_button_display = true;
+
 			$call_but_status = 'talk';
 
 			video_button_display = 'block';

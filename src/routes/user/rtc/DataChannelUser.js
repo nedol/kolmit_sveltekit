@@ -84,6 +84,7 @@ export class DataChannelUser {
 
 					data = JSON.parse(data);
 					data.em = this.rtc.em;
+					console.log('$msg_user:', data);
 					await msg_user.set(data);
 					data = '';
 					return;

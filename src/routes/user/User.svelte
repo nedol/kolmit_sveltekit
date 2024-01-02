@@ -34,7 +34,9 @@
 		// if ($msg_user.em) {
 		// 	if ($msg_user.em === em) OnMessage($msg_user);
 		// } else {
+		// console.log('$msg_user:', $msg_user);
 		OnMessage($msg_user);
+
 		// }
 	}
 

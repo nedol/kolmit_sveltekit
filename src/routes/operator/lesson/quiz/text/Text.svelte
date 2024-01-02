@@ -134,7 +134,7 @@
 	function TTSSpeak(text) {
 		setTimeout(() => {
 			EasySpeech.speak({
-				text: text,
+				text: text.replace(/<[^>]*>/g, ''),
 				voice: $tts.voice,
 				rate: 0,
 				end: (e) => {

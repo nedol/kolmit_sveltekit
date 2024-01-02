@@ -76,6 +76,7 @@
 	async function handleSubmit() {
 		// Здесь вы можете обработать данные формы
 		let par = formData;
+		par.email = par.email.trim();
 		passwordMatch = par.confirmPassword === par.psw;
 		if (!passwordMatch) return;
 		par.func = 'operator';
