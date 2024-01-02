@@ -94,14 +94,14 @@ export class Peer {
 				if (!this.params['loc_cand']) this.params['loc_cand'] = [];
 				this.params['loc_cand'].push(e.candidate);
 
-				this.SendOffer(e.candidate);
+				// this.SendOffer(e.candidate);
 
-				// if (!timr) {
-				// 	timr = setTimeout(() => {
-				// 		this.SendOffer();
-				// 		clearTimeout(timr);
-				// 	}, 500);
-				// }
+				if (!timr) {
+					timr = setTimeout(() => {
+						this.SendOffer();
+						clearTimeout(timr);
+					}, 500);
+				}
 			}
 		};
 
