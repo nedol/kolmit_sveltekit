@@ -81,10 +81,6 @@ export class RTCBase {
 
 			if (pc.con.iceConnectionState === 'disconnected') {
 				console.log(pc.pc_key + ' ICE state change event: disconnected', this);
-				this.checking_tmr = setTimeout(() => {
-					pc.con.restartIce();
-				}, 1000);
-				call_but_status.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'connected') {
@@ -100,10 +96,7 @@ export class RTCBase {
 				/* possibly reconfigure the connection in some way here */
 				console.log(pc.pc_key + ' ICE state change event: failed', this);
 				/* then request ICE restart */
-				this.checking_tmr = setTimeout(() => {
-					pc.con.restartIce();
-				}, 1000);
-				call_but_status.set('inactive');
+				pc.con.restartIce();
 			}
 
 			if (pc.con.iceConnectionState === 'completed') {
