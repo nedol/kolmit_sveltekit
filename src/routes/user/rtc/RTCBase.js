@@ -2,6 +2,8 @@
 import { Peer } from './Peer';
 import { DataChannelUser } from './DataChannelUser';
 import { ice_conf } from '$lib/ice_conf';
+
+import { dc_user_state } from '$lib/js/stores.js';
 // import {host_port, host_ws, host_server } from './host'
 
 // const host_port = 'https://delivery-angels.com/server/';
@@ -79,9 +81,6 @@ export class RTCBase {
 
 			if (pc.con.iceConnectionState === 'checking') {
 				console.log(pc.pc_key + ' ICE state change event: checking', that);
-				that.checking_tmr = setTimeout(function () {
-					pc.con.restartIce();
-				}, 1000);
 			}
 
 			if (pc.con.iceConnectionState === 'disconnected') {
@@ -89,6 +88,7 @@ export class RTCBase {
 				this.checking_tmr = setTimeout(() => {
 					pc.con.restartIce();
 				}, 1000);
+				dc_user_state.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'connected') {
@@ -96,7 +96,7 @@ export class RTCBase {
 				clearTimeout(that.checking_tmr);
 				console.log(pc.pc_key + ' ICE state change event: connected', that);
 				that.main_pc = pc.pc_key;
-
+				dc_user_state.set('active');
 				//that.DC = new DataChannelUser(that, pc);
 			}
 
@@ -104,7 +104,11 @@ export class RTCBase {
 				/* possibly reconfigure the connection in some way here */
 				console.log(pc.pc_key + ' ICE state change event: failed', that);
 				/* then request ICE restart */
-				pc.con.restartIce();
+				this.checking_tmr = setTimeout(() => {
+					pc.con.restartIce();
+				}, 1000);
+
+				dc_user_state.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'completed') {
