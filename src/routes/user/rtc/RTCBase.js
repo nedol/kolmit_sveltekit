@@ -3,7 +3,7 @@ import { Peer } from './Peer';
 import { DataChannelUser } from './DataChannelUser';
 import { ice_conf } from '$lib/ice_conf';
 
-import { dc_user_state } from '$lib/js/stores.js';
+import { call_but_status } from '$lib/js/stores.js';
 // import {host_port, host_ws, host_server } from './host'
 
 // const host_port = 'https://delivery-angels.com/server/';
@@ -88,7 +88,7 @@ export class RTCBase {
 				this.checking_tmr = setTimeout(() => {
 					pc.con.restartIce();
 				}, 1000);
-				dc_user_state.set('inactive');
+				call_but_status.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'connected') {
@@ -96,7 +96,7 @@ export class RTCBase {
 				clearTimeout(that.checking_tmr);
 				console.log(pc.pc_key + ' ICE state change event: connected', that);
 				that.main_pc = pc.pc_key;
-				dc_user_state.set('active');
+				// call_but_status.set('active');
 				//that.DC = new DataChannelUser(that, pc);
 			}
 
@@ -108,7 +108,7 @@ export class RTCBase {
 					pc.con.restartIce();
 				}, 1000);
 
-				dc_user_state.set('inactive');
+				call_but_status.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'completed') {

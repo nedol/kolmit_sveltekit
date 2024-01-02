@@ -3,7 +3,7 @@ import { DataChannelOperator } from './DataChannelOperator';
 import md5 from 'md5';
 import { ice_conf } from '$lib/ice_conf';
 
-import { dc_oper_state } from '$lib/js/stores.js';
+import { call_but_status } from '$lib/js/stores.js';
 
 // import {host_port, host_server, host_ws } from './host'
 
@@ -84,7 +84,7 @@ export class RTCBase {
 				this.checking_tmr = setTimeout(() => {
 					pc.con.restartIce();
 				}, 1000);
-				dc_oper_state.set('inactive');
+				call_but_status.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'connected') {
@@ -92,7 +92,7 @@ export class RTCBase {
 				clearTimeout(this.checking_tmr);
 				console.log(pc.pc_key + ' ICE state change event: connected', this);
 				this.main_pc = pc.pc_key;
-				dc_oper_state.set('active');
+				// call_but_status.set('active');
 				//this.DC = new DataChannelOperator(this, pc);
 			}
 
@@ -103,7 +103,7 @@ export class RTCBase {
 				this.checking_tmr = setTimeout(() => {
 					pc.con.restartIce();
 				}, 1000);
-				dc_oper_state.set('inactive');
+				call_but_status.set('inactive');
 			}
 
 			if (pc.con.iceConnectionState === 'completed') {
