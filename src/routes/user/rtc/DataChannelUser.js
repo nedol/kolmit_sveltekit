@@ -80,9 +80,10 @@ export class DataChannelUser {
 			try {
 				let parsed = JSON.parse(event.data);
 				if (parsed.type === 'eom') {
+					that.rtc.OnMessage(JSON.parse(data), that);
+
 					data = JSON.parse(data);
 					data.em = this.rtc.em;
-					that.rtc.OnMessage(data, that);
 					await msg_user.set(data);
 					data = '';
 					return;

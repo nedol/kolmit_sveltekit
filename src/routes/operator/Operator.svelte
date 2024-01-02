@@ -293,7 +293,7 @@
 
 	setContext('abonent', abonent);
 
-	// const SendToComponent = OnMessage;
+	const SendToComponent = OnMessage;
 
 	async function initRTC() {
 		// rtc ..set(rtc .;

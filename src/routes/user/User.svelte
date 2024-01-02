@@ -113,7 +113,7 @@
 			console.log('OnOpenDataChannel');
 		};
 
-		// rtc.SendToComponent = OnMessage;
+		rtc.SendToComponent = OnMessage;
 
 		rtc.SetLocalVideo = (src) => {
 			local.video.srcObject = src;
