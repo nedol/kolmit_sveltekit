@@ -81,12 +81,14 @@ export class RTCBase {
 				console.log(pc.pc_key + ' ICE state change event: checking', that);
 				that.checking_tmr = setTimeout(function () {
 					pc.con.restartIce();
-				}, 5000);
+				}, 1000);
 			}
 
 			if (pc.con.iceConnectionState === 'disconnected') {
 				console.log(pc.pc_key + ' ICE state change event: disconnected', that);
-				pc.con.restartIce();
+				this.checking_tmr = setTimeout(() => {
+					pc.con.restartIce();
+				}, 1000);
 			}
 
 			if (pc.con.iceConnectionState === 'connected') {
