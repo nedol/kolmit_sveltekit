@@ -41,7 +41,7 @@ export class Peer {
 		return await this.signal.SendMessage(par);
 	}
 
-	async SendOffer(cand) {
+	async SendOffer(candidate) {
 		let that = this;
 		let par = {};
 		par.proj = 'kolmit';
@@ -51,7 +51,7 @@ export class Peer {
 		par.uid = this.rtc.uid;
 		par.em = this.rtc.em;
 		par.desc = this.params['loc_desc']; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
-		par.cand = this.params['loc_cand']; //cand;
+		par.cand = candidate || this.params['loc_cand']; //cand;
 		par.status = 'offer';
 
 		return await this.signal.SendMessage(par);
@@ -94,20 +94,14 @@ export class Peer {
 				if (!this.params['loc_cand']) this.params['loc_cand'] = [];
 				this.params['loc_cand'].push(e.candidate);
 
+				this.SendOffer(e.candidate);
+
 				// if (!timr) {
 				// 	timr = setTimeout(() => {
-				if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
-					let msg = '';
-					// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
-					// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
-					this.rtc.DC.SendDCOffer(that.pc_key, msg);
-					// clearTimeout(timr);
-				} else {
-					this.SendOffer(e.candidate);
-					// clearTimeout(timr);
-				}
-				// }, 500);
-				//}
+				// 		this.SendOffer();
+				// 		clearTimeout(timr);
+				// 	}, 500);
+				// }
 			}
 		};
 
