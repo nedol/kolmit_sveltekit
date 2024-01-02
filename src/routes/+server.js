@@ -475,8 +475,8 @@ async function HandleCall(q) {
 			if (item) {
 				await global.rtcPool['operator'][q.abonent][q.em].promise;
 				if (global.rtcPool['operator'][q.abonent][q.em].resolve) {
-					await global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
 					console.log('HandleCall to operator', remAr.length);
+					global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
 				}
 			}
 		} else {
