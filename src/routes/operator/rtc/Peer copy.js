@@ -1,12 +1,15 @@
+// import {log} from './utils'
+
 export class Peer {
 	constructor(rtc, pc_config, pc_key) {
 		this.con = new RTCPeerConnection(pc_config);
+		this.signal = rtc.signal;
 		this.rtc = rtc;
 		this.pc_key = pc_key;
 		this.params = {};
 	}
 
-	SendDesc(desc, cb) {
+	async SendDesc(desc) {
 		let that = this;
 		let par = {};
 		par.proj = 'kolmit';
@@ -17,15 +20,12 @@ export class Peer {
 		par.uid = this.rtc.uid;
 		par.desc = desc; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
 		par.status = 'call';
-		par.abonent = this.rtc.abonent;
 		par.oper_uid = this.rtc.oper_uid;
-		this.rtc.status = 'call';
-		this.rtc.signal.SendMessage(par, function () {
-			cb();
-		});
+
+		return await this.signal.SendMessage(par);
 	}
 
-	SendCand(candAr, cb) {
+	async SendCand(cand) {
 		let that = this;
 		let par = {};
 		par.proj = 'kolmit';
@@ -33,15 +33,28 @@ export class Peer {
 		par.type = this.rtc.type;
 		par.uid = this.rtc.uid;
 		par.em = this.rtc.em;
-		par.cand = candAr;
+		par.cand = cand;
 		par.status = 'call';
-		par.abonent = this.rtc.abonent;
+		par.abonent = that.rtc.abonent;
 		par.oper_uid = this.rtc.oper_uid;
-		this.rtc.status = 'call';
 
-		this.rtc.signal.SendMessage(par, function () {
-			cb();
-		});
+		return await this.signal.SendMessage(par);
+	}
+
+	async SendOffer(candAr) {
+		let that = this;
+		let par = {};
+		par.proj = 'kolmit';
+		par.func = 'offer';
+		par.abonent = this.rtc.abonent;
+		par.type = this.rtc.type;
+		par.uid = this.rtc.uid;
+		par.em = this.rtc.em;
+		par.desc = this.params['loc_desc']; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
+		par.cand = candAr;
+		par.status = 'offer';
+
+		return await this.signal.SendMessage(par);
 	}
 
 	StartEvents() {
@@ -74,33 +87,39 @@ export class Peer {
 		};
 
 		let timr;
-		if (that.rtc.type === 'user') {
-			this.con.onicecandidate = (e) => {
-				let that = this;
-				if (e.candidate) {
-					if (!this.params['loc_cand']) this.params['loc_cand'] = [];
-					this.params['loc_cand'].push(e.candidate);
 
-					if (!timr) {
-						timr = setTimeout(() => {
-							if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
-								this.rtc.DC.SendDCOffer(that.pc_key, msg);
-								clearTimeout(timr);
-							} else if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
-								this.SendOffer(this.params['loc_cand']);
-								clearTimeout(timr);
-							}
-						}, 1000);
-					}
+		this.con.onicecandidate = (e) => {
+			let that = this;
+			if (e.candidate) {
+				if (!this.params['loc_cand']) this.params['loc_cand'] = [];
+				this.params['loc_cand'].push(e.candidate);
+
+				if (!timr) {
+					timr = setTimeout(async () => {
+						if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
+							let msg = '';
+							// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
+							// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
+							this.rtc.DC.SendDCOffer(that.pc_key, msg);
+							clearTimeout(timr);
+						} else if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
+							await this.SendOffer(this.params['loc_cand']);
+							console.log('loc_cand', that.params['loc_cand'].length);
+							that.params['loc_cand'] = [];
+							clearTimeout(timr);
+							timr = '';
+						}
+					}, 1000);
 				}
-			};
-		}
+			}
+		};
+
 		this.con.oniceconnectionstatechange = function (e) {
 			console.log('oniceconnectionstatechange');
 			that.rtc.onIceStateChange(that, e);
 		};
 		this.con.onremovestream = function (e) {
-			console.log('onremovestream');
+			console.log('onsignalingstatechange');
 		};
 		this.con.onsignalingstatechange = function (e) {
 			console.log('onsignalingstatechange');
@@ -118,7 +137,7 @@ export class Peer {
 		that.con.setLocalDescription(desc).then(function () {
 			that.params['loc_desc'] = that.con.localDescription;
 			console.log('onSetLocalDescriptionSuccess', that);
-			that.SendDesc(desc, function () {});
+			that.SendDesc(desc);
 		}, that.onSetAnswerError);
 	}
 
@@ -167,7 +186,7 @@ export class Peer {
 
 		that.con.setLocalDescription(desc).then(function () {
 			that.params['loc_desc'] = that.con.localDescription;
-			log(' setLocalDescription complete', that);
+			console.log(' setLocalDescription complete', that);
 			that.rtc.DC.SendDCDesc(desc, that.pc_key);
 		}, that.onSetOfferError);
 	}

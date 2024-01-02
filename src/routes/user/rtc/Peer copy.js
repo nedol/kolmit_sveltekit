@@ -82,15 +82,22 @@ export class Peer {
 					this.params['loc_cand'].push(e.candidate);
 
 					if (!timr) {
-						timr = setTimeout(() => {
+						timr = setTimeout(async () => {
 							if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
-								this.rtc.DC.SendDCOffer(that.pc_key, msg);
-								clearTimeout(timr);
-							} else if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
-								this.SendOffer(this.params['loc_cand']);
-								clearTimeout(timr);
+								let msg = '';
+								// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
+								// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
+								this.rtc.DC.SendDCCand(e.candidate, that.pc_key, msg);
+							} else {
+								if (this.params['loc_cand'][0]) {
+									await this.SendCand(this.params['loc_cand'], function () {});
+									console.log('loc_cand', that.params['loc_cand'].length);
+									that.params['loc_cand'] = [];
+									clearTimeout(timr);
+									timr = '';
+								}
 							}
-						}, 1000);
+						}, 100);
 					}
 				}
 			};
