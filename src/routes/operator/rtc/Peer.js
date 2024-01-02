@@ -41,7 +41,7 @@ export class Peer {
 		return await this.signal.SendMessage(par);
 	}
 
-	async SendOffer(cand) {
+	async SendOffer(candAr) {
 		let that = this;
 		let par = {};
 		par.proj = 'kolmit';
@@ -51,7 +51,7 @@ export class Peer {
 		par.uid = this.rtc.uid;
 		par.em = this.rtc.em;
 		par.desc = this.params['loc_desc']; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
-		par.cand = this.params['loc_cand']; //cand;
+		par.cand = candAr;
 		par.status = 'offer';
 
 		return await this.signal.SendMessage(par);
@@ -109,7 +109,7 @@ export class Peer {
 							clearTimeout(timr);
 							timr = '';
 						}
-					}, 100);
+					}, 1000);
 				}
 			}
 		};
