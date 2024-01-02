@@ -28,8 +28,8 @@ global.loop = function () {
 				const { statusCode, headers, trailers, body } = await request(
 					`https://kolmit-service.onrender.com`
 				);
-				console.log('response received', statusCode);
-				console.log('headers', headers);
+				// console.log('response received', statusCode);
+				// console.log('headers', headers);
 
 				for await (const data of body) {
 					// console.log('data', data);
@@ -62,7 +62,7 @@ export async function GET({ url, fetch, cookies }) {
 				cookie.lang = lang;
 				cookies.set(`abonent:${abonent}`, JSON.stringify(cookie));
 			} catch (ex) {
-				console.log(ex);
+				// console.log(ex);
 			}
 		}
 		let response = new Response();
@@ -181,18 +181,18 @@ export async function POST({ request, url, fetch, cookies }) {
 
 				SendOperatorStatus(q);
 
-				// let operators = { [q.em]: {} };
-				// for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
-				// 	if (uid !== 'resolve')
-				// 		operators[q.em][uid] = {
-				// 			type: q.type,
-				// 			abonent: q.abonent,
-				// 			em: q.em,
-				// 			uid: q.uid,
-				// 			status: global.rtcPool['operator'][q.abonent][q.em][uid].status
-				// 			// queue: queue
-				// 		};
-				// }
+				let operators = { [q.em]: {} };
+				for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+					if (uid !== 'resolve')
+						operators[q.em][uid] = {
+							type: q.type,
+							abonent: q.abonent,
+							em: q.em,
+							uid: q.uid,
+							status: global.rtcPool['operator'][q.abonent][q.em][uid].status
+							// queue: queue
+						};
+				}
 
 				resp = {
 					func: q.func,
@@ -215,7 +215,7 @@ export async function POST({ request, url, fetch, cookies }) {
 				SetParams(q);
 				BroadcastOperatorStatus(q);
 			} catch (ex) {
-				console.log();
+				// console.log();
 			}
 
 			break;
@@ -255,7 +255,7 @@ export async function POST({ request, url, fetch, cookies }) {
 	// set('global.rtcPool', global.rtcPool);
 	// rtcPool_st.set(global.rtcPool);
 
-	console.log(JSON.stringify(resp));
+	// console.log(JSON.stringify(resp));
 
 	let response = new Response(JSON.stringify({ resp }));
 	response.headers.append('Access-Control-Allow-Origin', `*`);
@@ -292,7 +292,7 @@ function SendEmail(q, new_email) {
 		}[q.lang],
 		html,
 		(result) => {
-			console.log();
+			// console.log();
 		}
 	);
 }
@@ -426,7 +426,7 @@ function BroadcastOperatorStatus(q, check) {
 
 		operators = '';
 	} catch (ex) {
-		console.log(ex);
+		// console.log(ex);
 	}
 }
 
@@ -457,11 +457,10 @@ function SendOperatorStatus(q) {
 	}
 }
 
-let remAr = [];
 async function HandleCall(q) {
+	let remAr = [];
 	if (q.type === 'user') {
 		if (q.desc || q.cand) {
-			remAr = [];
 			remAr.push({
 				func: q.func,
 				desc: q.desc,
@@ -477,7 +476,7 @@ async function HandleCall(q) {
 				await global.rtcPool['operator'][q.abonent][q.em].promise;
 				if (global.rtcPool['operator'][q.abonent][q.em].resolve) {
 					await global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
-					console.log('HandleCall to user', remAr);
+					// console.log('HandleCall to user', remAr);
 				}
 			}
 		} else {
@@ -506,8 +505,7 @@ async function HandleCall(q) {
 					await global.rtcPool['operator'][q.abonent][q.em].promise;
 					if (global.rtcPool['user'][q.abonent][q.operator].resolve)
 						global.rtcPool['user'][q.abonent][q.operator].resolve(remAr);
-					console.log('after HandleCall:user ' + JSON.stringify(remAr));
-					remAr = [];
+					// console.log('after HandleCall:user ' + JSON.stringify(remAr));
 				} else {
 					item.status = 'wait';
 					remAr.push({
@@ -527,7 +525,6 @@ async function HandleCall(q) {
 							status: 'wait'
 						};
 						oper_check.resolve(remAr);
-						remAr = [];
 					}
 				}
 			}
