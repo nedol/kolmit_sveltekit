@@ -83,8 +83,8 @@ export class Peer {
 
 					if (this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
 						let msg = '';
-						if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
-							msg = { confirm: 'Do you mind to turn on the cameras?' };
+						// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
+						// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
 						this.rtc.DC.SendDCCand(e.candidate, that.pc_key, msg);
 					} else {
 						this.SendCand(e.candidate, function () {});
