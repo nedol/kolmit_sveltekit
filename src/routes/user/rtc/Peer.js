@@ -81,7 +81,7 @@ export class Peer {
 					if (!this.params['loc_cand']) this.params['loc_cand'] = [];
 					this.params['loc_cand'].push(e.candidate);
 
-					if (this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
+					if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
 						let msg = '';
 						// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
 						// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
