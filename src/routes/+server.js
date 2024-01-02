@@ -476,7 +476,7 @@ async function HandleCall(q) {
 				await global.rtcPool['operator'][q.abonent][q.em].promise;
 				if (global.rtcPool['operator'][q.abonent][q.em].resolve) {
 					await global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
-					// console.log('HandleCall to user', remAr);
+					console.log('HandleCall to operator', remAr.length);
 				}
 			}
 		} else {
@@ -505,7 +505,7 @@ async function HandleCall(q) {
 					await global.rtcPool['operator'][q.abonent][q.em].promise;
 					if (global.rtcPool['user'][q.abonent][q.operator].resolve)
 						global.rtcPool['user'][q.abonent][q.operator].resolve(remAr);
-					// console.log('after HandleCall:user ' + JSON.stringify(remAr));
+					console.log('HandleCall to user', remAr.length);
 				} else {
 					item.status = 'wait';
 					remAr.push({
