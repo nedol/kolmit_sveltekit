@@ -8,9 +8,9 @@ export let ice_conf = {
 		]
 	},
 	turn: {
-		urls: ['turn:localhost:3478?transport=udp', 'turn:localhost:3478?transport=tcp'],
-		username: 'username',
-		credential: 'password'
+		urls: 'turn:openrelay.metered.ca:80',
+		username: 'openrelayproject',
+		credentials: 'openrelayproject'
 	},
 	lifetimeDuration: '86400s'
 };
