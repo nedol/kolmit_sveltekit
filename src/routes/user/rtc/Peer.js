@@ -25,7 +25,7 @@ export class Peer {
 		});
 	}
 
-	SendCand(cand, cb) {
+	SendCand(candAr, cb) {
 		let that = this;
 		let par = {};
 		par.proj = 'kolmit';
@@ -33,7 +33,7 @@ export class Peer {
 		par.type = this.rtc.type;
 		par.uid = this.rtc.uid;
 		par.em = this.rtc.em;
-		par.cand = cand;
+		par.cand = candAr;
 		par.status = 'call';
 		par.abonent = this.rtc.abonent;
 		par.oper_uid = this.rtc.oper_uid;
@@ -81,13 +81,23 @@ export class Peer {
 					if (!this.params['loc_cand']) this.params['loc_cand'] = [];
 					this.params['loc_cand'].push(e.candidate);
 
-					if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
-						let msg = '';
-						// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
-						// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
-						this.rtc.DC.SendDCCand(e.candidate, that.pc_key, msg);
-					} else {
-						this.SendCand(this.params['loc_cand'], function () {});
+					if (!timr) {
+						timr = setTimeout(async () => {
+							if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
+								let msg = '';
+								// if (this.rtc.type && this.rtc.type.offerToReceiveVideo === 1)
+								// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
+								this.rtc.DC.SendDCCand(e.candidate, that.pc_key, msg);
+							} else {
+								if (this.params['loc_cand'][0]) {
+									await this.SendCand(this.params['loc_cand'], function () {});
+									console.log('loc_cand', that.params['loc_cand'].length);
+									that.params['loc_cand'] = [];
+									clearTimeout(timr);
+									timr = '';
+								}
+							}
+						}, 100);
 					}
 				}
 			};
