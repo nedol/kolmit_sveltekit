@@ -87,7 +87,7 @@ export class Peer {
 						// 	msg = { confirm: 'Do you mind to turn on the cameras?' };
 						this.rtc.DC.SendDCCand(e.candidate, that.pc_key, msg);
 					} else {
-						this.SendCand(e.candidate, function () {});
+						this.SendCand(this.params['loc_cand'], function () {});
 					}
 				}
 			};
