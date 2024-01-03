@@ -133,27 +133,7 @@
 		};
 
 		rtc.PlayCallCnt = () => {
-			// video_progress = false;
-
-			// console.log();
-
 			local.audio.paused = false;
-
-			return;
-
-			call_cnt = 10;
-
-			inter = setInterval(function () {
-				call_cnt--;
-
-				if (call_cnt === 0) {
-					clearInterval(inter);
-					call_cnt = 10;
-					local.audio.paused = true;
-				}
-			}, 2000);
-
-			return;
 		};
 
 		// $call_but_status = status;

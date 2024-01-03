@@ -207,8 +207,6 @@ export class RTCOperator extends RTCBase {
 			if (that.pcPull[data.abonent]) {
 				that.pcPull[data.abonent].params['rem_desc'] = data.desc;
 				that.pcPull[data.abonent].setRemoteDesc(data.desc);
-
-				// that.PlayCallCnt(); //->Operator.svelte
 			}
 		}
 		if (data.cand && that.pcPull[data.abonent]) {
