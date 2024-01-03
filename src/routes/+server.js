@@ -60,7 +60,7 @@ export async function GET({ url, fetch, cookies }) {
 				let cookie = cookies.get(`abonent:${abonent}`);
 				cookie = JSON.parse(cookie);
 				cookie.lang = lang;
-				cookies.set(`abonent:${abonent}`, JSON.stringify(cookie), { maxAge: 60 * 60 * 24 * 30 });
+				cookies.set(`abonent:${abonent}`, JSON.stringify(cookie), { maxAge: 60 * 60 * 24 * 400 });
 			} catch (ex) {
 				// console.log(ex);
 			}
@@ -134,7 +134,7 @@ export async function POST({ request, url, fetch, cookies }) {
 							psw: q.psw,
 							lang: q.lang
 						}),
-						{ maxAge: 60 * 60 * 24 * 30 }
+						{ maxAge: 60 * 60 * 24 * 400 }
 					);
 
 					resp = JSON.stringify({
