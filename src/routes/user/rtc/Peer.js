@@ -83,10 +83,7 @@ export class Peer {
 
 					if (!timr) {
 						timr = setTimeout(() => {
-							if (false && this.rtc.DC && this.rtc.DC.dc.readyState === 'open') {
-								this.rtc.DC.SendDCOffer(that.pc_key, msg);
-								clearTimeout(timr);
-							} else if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
+							if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
 								this.SendOffer(this.params['loc_cand']);
 								clearTimeout(timr);
 							}

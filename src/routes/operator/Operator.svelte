@@ -423,6 +423,7 @@
 		if (data.call || data.func === 'call') {
 			if ($call_but_status === 'active') {
 				$call_but_status = 'call';
+				local.audio.paused = false;
 			}
 
 			rtc.OnCall();
