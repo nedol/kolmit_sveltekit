@@ -98,8 +98,8 @@
 
 	const token = 'CPkJ1MYWC7DMlvw6MvtV0yBw';
 	const headers = {
-		'Content-Type': 'application/json',
-		Authorization: `Bearer ${token}`
+		'Content-Type': 'application/json'
+		// Authorization: `Bearer ${token}`
 	};
 
 	async function CallWaiting(par) {
@@ -117,14 +117,12 @@
 					data.resp.map((resp) => {
 						$msg_oper = resp;
 					});
-				} else {
-					$msg_oper = data.resp;
 				}
-				if (true /*!rtc.DC.dc*/) {
-					CallWaiting(par);
-				}
+
+				CallWaiting(par);
 			})
 			.catch((error) => {
+				CallWaiting(par);
 				console.log(error);
 				return [];
 			});
@@ -443,7 +441,7 @@
 			}
 		}
 		if (data.func === 'talk') {
-			console.log('talk', data.em);
+			console.log('oper talk', data.em);
 
 			$call_but_status = 'talk';
 

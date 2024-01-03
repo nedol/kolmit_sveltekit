@@ -369,37 +369,43 @@ function BroadcastOperatorStatus(q, check) {
 					if (item.status === 'wait') {
 						let oper = global.rtcPool['operator'][q.abonent][q.em][q.uid];
 
-						let remAr = {
-							func: q.func,
-							type: type,
-							abonent: q.abonent,
-							oper_uid: q.uid,
-							desc: oper.desc,
-							cand: oper.cand
-						};
+						let remAr = [
+							{
+								func: q.func,
+								type: type,
+								abonent: q.abonent,
+								oper_uid: q.uid,
+								desc: oper.desc,
+								cand: oper.cand
+							}
+						];
 						if (global.rtcPool[type][q.abonent][em].resolve)
 							global.rtcPool[type][q.abonent][em].resolve(remAr);
 					} else {
 						if (global.rtcPool[type][q.abonent][em].resolve)
-							global.rtcPool[type][q.abonent][em].resolve({
-								func: q.func,
-								type: type,
-								abonent: q.abonent,
-								em: q.em,
-								uid: q.uid,
-								operators: operators
-							});
+							global.rtcPool[type][q.abonent][em].resolve([
+								{
+									func: q.func,
+									type: type,
+									abonent: q.abonent,
+									em: q.em,
+									uid: q.uid,
+									operators: operators
+								}
+							]);
 					}
 				} else {
 					if (global.rtcPool[type][q.abonent][em].resolve)
-						global.rtcPool[type][q.abonent][em].resolve({
-							func: q.func,
-							type: type,
-							abonent: q.abonent,
-							em: em,
-							uid: q.uid,
-							operators: operators
-						});
+						global.rtcPool[type][q.abonent][em].resolve([
+							{
+								func: q.func,
+								type: type,
+								abonent: q.abonent,
+								em: em,
+								uid: q.uid,
+								operators: operators
+							}
+						]);
 				}
 			}
 		}
@@ -429,8 +435,7 @@ function SendOperatorStatus(q) {
 
 				if (q.type === 'user') {
 					let item = global.rtcPool['user'][q.abonent][q.em][q.uid];
-
-					global.rtcPool['user'][q.abonent][q.em].resolve({ operator: operator });
+					global.rtcPool['user'][q.abonent][q.em].resolve([{ operator: operator }]);
 				}
 			}
 		}
@@ -498,12 +503,14 @@ async function HandleCall(q) {
 						global.rtcPool['user'][q.abonent][q.em].resolve(remAr);
 
 					if (oper_check && oper_check.resolve) {
-						let remAr = {
-							func: q.func,
-							abonent: q.abonent,
-							user_uid: item.uid,
-							status: 'wait'
-						};
+						let remAr = [
+							{
+								func: q.func,
+								abonent: q.abonent,
+								user_uid: item.uid,
+								status: 'wait'
+							}
+						];
 						oper_check.resolve(remAr);
 					}
 				}

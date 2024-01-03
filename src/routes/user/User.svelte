@@ -135,7 +135,7 @@
 		rtc.PlayCallCnt = () => {
 			// video_progress = false;
 
-			console.log();
+			// console.log();
 
 			local.audio.paused = false;
 
@@ -249,9 +249,9 @@
 		}
 
 		if (data.func === 'talk') {
-			$call_but_status = 'talk';
-			console.log('talk', data.em);
+			console.log('user talk', data.em);
 			if (data.em === em) {
+				$call_but_status = 'talk';
 				status = 'talk';
 				video_button_display = true;
 				local.audio.paused = true;

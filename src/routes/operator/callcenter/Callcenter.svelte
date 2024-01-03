@@ -66,12 +66,11 @@
 		})
 			.then((response) => response.json())
 			.then((data) => {
+				console.log('cc from oper:', data);
 				if (Array.isArray(data.resp)) {
 					data.resp.map((resp) => {
 						$msg_user = resp;
 					});
-				} else {
-					$msg_user = data.resp;
 				}
 
 				OperatorWaiting(par);
