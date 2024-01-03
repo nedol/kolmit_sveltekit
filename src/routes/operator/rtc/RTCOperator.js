@@ -47,8 +47,8 @@ export class RTCOperator extends RTCBase {
 			.createOffer(
 				(this.mode = {
 					offerToReceiveAudio: 1,
-					offerToReceiveVideo: 0, // test 0
-					iceRestart: 1
+					offerToReceiveVideo: 0 // test 0
+					// iceRestart: 1
 				})
 			)
 			.then(
