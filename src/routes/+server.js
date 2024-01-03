@@ -7,31 +7,12 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
-import { request } from 'undici';
+// import { request } from 'undici';
 
-global.interval;
-global.loop = function () {
-	try {
-		if (!global.interval)
-			global.interval = setInterval(async () => {
-				const { statusCode, headers, trailers, body } = await request(
-					`https://kolmit-service.onrender.com`
-				);
-				// console.log('response received', statusCode);
-				// console.log('headers', headers);
-
-				for await (const data of body) {
-					// console.log('data', data);
-				}
-				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-			}, 1000 * 60 * 10);
-	} catch (ex) {}
-};
-
-global.loop();
-
+// import { CreateServer } from '$lib/server/server.js';
 // import { get, set } from 'node-global-storage';
 // set('global.rtcPool', { user: {}, operator: {} });
+// CreateServer();
 
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
@@ -39,12 +20,26 @@ rtcPool_st.subscribe((data) => {
 	global.rtcPool = data;
 });
 
-export const config = {
-	// runtime: 'edge'
-	// isr: {
-	// 	expiration: false // 10
-	// }
-};
+// global.interval;
+// global.loop = function () {
+// 	try {
+// 		if (!global.interval)
+// 			global.interval = setInterval(async () => {
+// 				const { statusCode, headers, trailers, body } = await request(
+// 					`https://kolmit-service.onrender.com`
+// 				);
+// 				// console.log('response received', statusCode);
+// 				// console.log('headers', headers);
+
+// 				for await (const data of body) {
+// 					// console.log('data', data);
+// 				}
+// 				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+// 			}, 1000 * 60 * 10);
+// 	} catch (ex) {}
+// };
+
+// global.loop();
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url, fetch, cookies }) {
@@ -53,9 +48,27 @@ export async function GET({ url, fetch, cookies }) {
 	const text = url.searchParams.get('text');
 	const dict = url.searchParams.get('dict');
 	const key = url.searchParams.get('key');
+	const func = url.searchParams.get('func');
+	const lang = url.searchParams.get('lang');
 
 	// debugger;
-	if (text) {
+	if (func === 'reset') {
+		cookies.delete('abonent:' + abonent);
+	} else if (func === 'cookie') {
+		if (lang) {
+			try {
+				let cookie = cookies.get(`abonent:${abonent}`);
+				cookie = JSON.parse(cookie);
+				cookie.lang = lang;
+				cookies.set(`abonent:${abonent}`, JSON.stringify(cookie), { maxAge: 60 * 60 * 24 * 30 });
+			} catch (ex) {
+				// console.log(ex);
+			}
+		}
+		let response = new Response();
+		response.headers.append('Access-Control-Allow-Origin', `*`);
+		return response;
+	} else if (text) {
 		// let resp = await fetch('/src/routes/operator/lesson/' + path);
 		const level = url.searchParams.get('level');
 		const theme = url.searchParams.get('theme');
@@ -82,10 +95,7 @@ export async function GET({ url, fetch, cookies }) {
 		}
 	} else if (key) {
 		const audio = await ReadSpeech({ key: key });
-		//let resp = await fetch('/src/routes/operator/lesson/audio.json');
-		// resp = await resp.json();
-		// let audio = resp[key];
-		//debugger;
+
 		let response = new Response(JSON.stringify({ audio }));
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
@@ -95,14 +105,6 @@ export async function GET({ url, fetch, cookies }) {
 	response.headers.append('Access-Control-Allow-Origin', `*`);
 	return response;
 }
-
-// global.interval;
-// global.loop = function () {
-// 	if (!global.interval)
-// 		global.interval = setInterval(async () => {
-// 			let resp = await fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-// 		}, 1000 * 10 * 60);
-// };
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, url, fetch, cookies }) {
@@ -118,8 +120,6 @@ export async function POST({ request, url, fetch, cookies }) {
 	} else {
 		kolmit = { psw: md5('demo') };
 	}
-
-	if (!global.interval) global.loop();
 
 	switch (q.func) {
 		case 'operator':
@@ -272,7 +272,7 @@ function SendEmail(q, new_email) {
 		}[q.lang],
 		html,
 		(result) => {
-			console.log();
+			// console.log();
 		}
 	);
 }
@@ -330,7 +330,7 @@ function SetParams(q) {
 	// };
 }
 
-function BroadcastOperatorStatus(q, status) {
+function BroadcastOperatorStatus(q, check) {
 	try {
 		let queue = 0;
 		if (!global.rtcPool['user'][q.abonent]) return;
@@ -406,7 +406,7 @@ function BroadcastOperatorStatus(q, status) {
 
 		operators = '';
 	} catch (ex) {
-		console.log(ex);
+		// console.log(ex);
 	}
 }
 
@@ -437,8 +437,8 @@ function SendOperatorStatus(q) {
 	}
 }
 
-let remAr = [];
 async function HandleCall(q) {
+	let remAr = [];
 	if (q.type === 'user') {
 		if (q.desc || q.cand) {
 			remAr.push({
@@ -454,8 +454,10 @@ async function HandleCall(q) {
 
 			if (item) {
 				await global.rtcPool['operator'][q.abonent][q.em].promise;
-				global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
-				remAr = [];
+				if (global.rtcPool['operator'][q.abonent][q.em].resolve) {
+					console.log('HandleCall to operator', remAr.length);
+					global.rtcPool['operator'][q.abonent][q.em].resolve(remAr);
+				}
 			}
 		} else {
 			let item = global.rtcPool['user'][q.abonent][q.em][q.uid];
@@ -483,8 +485,7 @@ async function HandleCall(q) {
 					await global.rtcPool['operator'][q.abonent][q.em].promise;
 					if (global.rtcPool['user'][q.abonent][q.operator].resolve)
 						global.rtcPool['user'][q.abonent][q.operator].resolve(remAr);
-					//console.log('after HandleCall:user '+JSON.stringify(remAr));
-					remAr = [];
+					console.log('HandleCall to user', remAr.length);
 				} else {
 					item.status = 'wait';
 					remAr.push({
@@ -493,8 +494,8 @@ async function HandleCall(q) {
 						status: 'wait'
 					});
 					await global.rtcPool['operator'][q.abonent][q.em].promise;
-					global.rtcPool['user'][q.abonent][q.em].resolve;
-					global.rtcPool['user'][q.abonent][q.em].resolve(remAr);
+					if (global.rtcPool['user'][q.abonent][q.em].resolve)
+						global.rtcPool['user'][q.abonent][q.em].resolve(remAr);
 
 					if (oper_check && oper_check.resolve) {
 						let remAr = {
@@ -504,7 +505,6 @@ async function HandleCall(q) {
 							status: 'wait'
 						};
 						oper_check.resolve(remAr);
-						remAr = [];
 					}
 				}
 			}

@@ -30,8 +30,12 @@
 	let menu = 'menu';
 
 	let topAppBar;
+	let abonent;
 
-	onMount(async () => {});
+	onMount(async () => {
+		let params = new URL(document.location).searchParams;
+		abonent = params.get('abonent');
+	});
 
 	let lang_menu = false;
 
@@ -51,6 +55,14 @@
 			`,
 		ru: ru_flag
 	};
+
+	function setLang(lang) {
+		fetch(`./?func=cookie&abonent=${abonent}&lang=${lang}`)
+			.then(() => console.log())
+			.catch((error) => {
+				console.log(error);
+			});
+	}
 </script>
 
 {#if $dicts && $dicts['CLASS'][$langs]}
@@ -92,6 +104,7 @@
 									<Item
 										on:SMUI:action={() => {
 											$langs = 'en';
+											setLang($langs);
 											lang_menu = false;
 										}}
 									>
@@ -101,6 +114,7 @@
 									<Item
 										on:SMUI:action={() => {
 											$langs = 'fr';
+											setLang($langs);
 											lang_menu = false;
 										}}
 									>
@@ -110,6 +124,7 @@
 									<Item
 										on:SMUI:action={() => {
 											$langs = 'nl';
+											setLang($langs);
 											lang_menu = false;
 										}}
 									>
@@ -119,6 +134,7 @@
 									<Item
 										on:SMUI:action={() => {
 											$langs = 'de';
+											setLang($langs);
 											lang_menu = false;
 										}}
 									>
@@ -128,6 +144,7 @@
 									<Item
 										on:SMUI:action={() => {
 											$langs = 'uk';
+											setLang($langs);
 											lang_menu = false;
 										}}
 									>
@@ -137,6 +154,7 @@
 									<Item
 										on:SMUI:action={() => {
 											$langs = 'ru';
+											setLang($langs);
 											lang_menu = false;
 										}}
 									>

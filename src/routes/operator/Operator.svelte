@@ -90,14 +90,6 @@
 	export let email, abonent, name;
 	const uid = md5(email);
 
-	$: if ($langs) {
-		fetch(`./?func=cookie&abonent=${abonent}&lang=${$langs}`)
-			.then(() => console.log())
-			.catch((error) => {
-				console.log(error);
-			});
-	}
-
 	$: if (remote.text.msg) {
 		// console.log(remote.text.msg);
 	}
