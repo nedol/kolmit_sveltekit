@@ -99,11 +99,9 @@ export class Peer {
 
 				if (!timr) {
 					timr = setTimeout(() => {
-						if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
-							this.SendOffer();
-							clearTimeout(timr);
-						}
-					}, 2000);
+						this.SendOffer();
+						clearTimeout(timr);
+					}, 1000);
 				}
 			}
 		};
@@ -131,7 +129,7 @@ export class Peer {
 		that.con.setLocalDescription(desc).then(function () {
 			that.params['loc_desc'] = that.con.localDescription;
 			console.log('onSetLocalDescriptionSuccess', that);
-			that.SendDesc(desc);
+			// that.SendDesc(desc);
 		}, that.onSetAnswerError);
 	}
 
