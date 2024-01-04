@@ -16,7 +16,9 @@ export class RTCOperator extends RTCBase {
 
 		msg_oper.subscribe((data) => {
 			try {
-				if (data) this.OnMessage(data);
+				if (data) {
+					this.OnMessage(data);
+				}
 			} catch (ex) {
 				console.log(ex);
 			}

@@ -112,7 +112,7 @@ export class Peer {
 		that.con.setLocalDescription(desc).then(function () {
 			that.params['loc_desc'] = that.con.localDescription;
 			console.log('onSetLocalDescriptionSuccess', that);
-			that.SendDesc(desc, function () {});
+			// that.SendDesc(desc, function () {});
 		}, that.onSetAnswerError);
 	}
 
@@ -124,6 +124,7 @@ export class Peer {
 		par.abonent = this.rtc.abonent;
 		par.type = this.rtc.type;
 		par.uid = this.rtc.uid;
+		par.oper_uid = this.rtc.oper_uid;
 		par.em = this.rtc.em;
 		par.desc = this.params['loc_desc']; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
 		par.cand = this.params['loc_cand'];
