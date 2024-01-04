@@ -39,9 +39,7 @@ export class Peer {
 		par.oper_uid = this.rtc.oper_uid;
 		this.rtc.status = 'call';
 
-		this.rtc.signal.SendMessage(par, function () {
-			cb();
-		});
+		this.rtc.signal.SendMessage(par);
 	}
 
 	StartEvents() {
@@ -83,10 +81,8 @@ export class Peer {
 
 					if (!timr) {
 						timr = setTimeout(() => {
-							// if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
-							this.SendCand();
+							this.SendAnswer();
 							clearTimeout(timr);
-							// }
 						}, 1000);
 					}
 				}
@@ -130,7 +126,6 @@ export class Peer {
 		par.em = this.rtc.em;
 		par.desc = this.params['loc_desc']; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
 		par.cand = this.params['loc_cand'];
-		par.status = 'call';
 		par.status = 'call';
 
 		return await this.signal.SendMessage(par);
