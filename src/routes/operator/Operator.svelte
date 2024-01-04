@@ -113,11 +113,9 @@
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (Array.isArray(data.resp)) {
-					data.resp.map((resp) => {
-						$msg_oper = resp;
-					});
-				}
+				data.resp.map((resp) => {
+					$msg_oper = resp;
+				});
 
 				CallWaiting(par);
 			})

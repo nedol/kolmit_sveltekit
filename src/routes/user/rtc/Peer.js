@@ -25,7 +25,7 @@ export class Peer {
 		});
 	}
 
-	SendCand(candAr, cb) {
+	SendCand(cb) {
 		let that = this;
 		let par = {};
 		par.proj = 'kolmit';
@@ -33,7 +33,7 @@ export class Peer {
 		par.type = this.rtc.type;
 		par.uid = this.rtc.uid;
 		par.em = this.rtc.em;
-		par.cand = candAr;
+		par.cand = this.params['loc_cand'];
 		par.status = 'call';
 		par.abonent = this.rtc.abonent;
 		par.oper_uid = this.rtc.oper_uid;
@@ -83,10 +83,10 @@ export class Peer {
 
 					if (!timr) {
 						timr = setTimeout(() => {
-							if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
-								this.SendOffer(this.params['loc_cand']);
-								clearTimeout(timr);
-							}
+							// if (this.rtc.DC && this.rtc.DC.dc.readyState !== 'open') {
+							this.SendCand();
+							clearTimeout(timr);
+							// }
 						}, 1000);
 					}
 				}
@@ -117,6 +117,23 @@ export class Peer {
 			console.log('onSetLocalDescriptionSuccess', that);
 			that.SendDesc(desc, function () {});
 		}, that.onSetAnswerError);
+	}
+
+	async SendAnswer() {
+		let that = this;
+		let par = {};
+		par.proj = 'kolmit';
+		par.func = 'call';
+		par.abonent = this.rtc.abonent;
+		par.type = this.rtc.type;
+		par.uid = this.rtc.uid;
+		par.em = this.rtc.em;
+		par.desc = this.params['loc_desc']; //.sdp.replace(/max-message-size:([0-9]+)/g, 'max-message-size:'+262144+'\r\n');
+		par.cand = this.params['loc_cand'];
+		par.status = 'call';
+		par.status = 'call';
+
+		return await this.signal.SendMessage(par);
 	}
 
 	setRemoteDesc(desc) {
