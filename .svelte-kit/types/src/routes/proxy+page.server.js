@@ -21,6 +21,7 @@ if (!global.turn_server) {
 	});
 	global.turn_server.start();
 	global.turn_server.addUser('username', 'password');
+	console.log('Turn server started');
 }
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
