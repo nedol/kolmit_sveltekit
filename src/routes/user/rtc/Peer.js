@@ -76,6 +76,9 @@ export class Peer {
 			this.con.onicecandidate = (e) => {
 				let that = this;
 				if (e.candidate) {
+					if (e.candidate.type == 'relay') {
+						console.log('The TURN server is reachable !');
+					}
 					if (!this.params['loc_cand']) this.params['loc_cand'] = [];
 					this.params['loc_cand'].push(e.candidate);
 
