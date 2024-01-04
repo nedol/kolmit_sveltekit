@@ -165,6 +165,8 @@ export class RTCBase {
 			iceServers: this.conf.stun.concat(this.conf.turn)
 		};
 
+		console.log('iceServers:', this.conf.stun.concat(this.conf.turn));
+
 		if (that.pcPull[pc_key]) {
 			if (that.DC) {
 				that.DC.dc.close();
