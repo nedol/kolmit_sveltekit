@@ -82,6 +82,7 @@ export class Peer {
 					if (!timr) {
 						timr = setTimeout(() => {
 							this.SendAnswer();
+							console.log('user send answer', this.params['loc_cand'].length);
 							clearTimeout(timr);
 						}, 1000);
 					}
