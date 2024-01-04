@@ -162,7 +162,7 @@ export class RTCBase {
 			lifetimeDuration: this.conf.lifetimeDuration,
 			rtcpMuxPolicy: 'require',
 			bundlePolicy: 'balanced',
-			iceServers: [this.conf.stun, this.conf.turn]
+			iceServers: this.conf.stun.concat(this.conf.turn)
 		};
 
 		if (that.pcPull[pc_key]) {
