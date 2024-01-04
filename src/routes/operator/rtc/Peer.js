@@ -100,7 +100,7 @@ export class Peer {
 							this.SendOffer();
 							clearTimeout(timr);
 						}
-					}, 1000);
+					}, 2000);
 				}
 			}
 		};
