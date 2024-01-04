@@ -28,7 +28,7 @@ export let ice_conf = {
 		// 	credential: 'Veamdb+7k9Zf/C/W'
 		// },
 		{
-			urls: 'turn:relay1.expressturn.com:3478',
+			urls: 'turn:relay1.expressturn.com:3478?transport=tcp',
 			username: 'ef5N75GPIIOV97AS3J',
 			credential: 'sIWl6OqxV67ZogkM'
 		}
