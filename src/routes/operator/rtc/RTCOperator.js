@@ -198,6 +198,20 @@ export class RTCOperator extends RTCBase {
 		if (data.func === 'video') {
 		}
 
+		if (data.desc && that.pcPull[data.abonent]) {
+			if (
+				that.pcPull[data.abonent].con &&
+				(that.pcPull[data.abonent].con.connectionState === 'failed' ||
+					that.pcPull[data.abonent].con.connectionState === 'disconnected')
+			)
+				that.pcPull[data.abonent].con.restartIce();
+
+			if (that.pcPull[data.abonent]) {
+				that.pcPull[data.abonent].params['rem_desc'] = data.desc;
+				that.pcPull[data.abonent].setRemoteDesc(data.desc);
+			}
+		}
+
 		if (data.cand && that.pcPull[data.abonent]) {
 			if (that.pcPull[data.abonent]) {
 				if (
@@ -227,20 +241,6 @@ export class RTCOperator extends RTCBase {
 				} catch (ex) {
 					log(ex);
 				}
-			}
-		}
-
-		if (data.desc && that.pcPull[data.abonent]) {
-			if (
-				that.pcPull[data.abonent].con &&
-				(that.pcPull[data.abonent].con.connectionState === 'failed' ||
-					that.pcPull[data.abonent].con.connectionState === 'disconnected')
-			)
-				that.pcPull[data.abonent].con.restartIce();
-
-			if (that.pcPull[data.abonent]) {
-				that.pcPull[data.abonent].params['rem_desc'] = data.desc;
-				that.pcPull[data.abonent].setRemoteDesc(data.desc);
 			}
 		}
 	}
