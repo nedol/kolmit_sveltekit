@@ -132,6 +132,17 @@ export default class RTCUser extends RTCBase {
 			that.oper_uid = data.oper_uid;
 		}
 
+		if (data.desc && that.pcPull[data.abonent]) {
+			if (that.pcPull[data.abonent].con.connectionState === 'failed')
+				that.pcPull[data.abonent].con.restartIce();
+
+			if (that.pcPull[data.abonent]) {
+				that.pcPull[data.abonent].params['rem_desc'] = data.desc;
+				that.pcPull[data.abonent].setRemoteDesc(data.desc);
+			}
+
+			that.PlayCallCnt(); //->User.svelte
+		}
 		if (data.cand && that.pcPull[data.abonent]) {
 			if (that.pcPull[data.abonent]) {
 				if (that.pcPull[data.abonent].con.signalingState === 'closed') {
@@ -159,18 +170,6 @@ export default class RTCUser extends RTCBase {
 					console.log(ex);
 				}
 			}
-		}
-
-		if (data.desc && that.pcPull[data.abonent]) {
-			if (that.pcPull[data.abonent].con.connectionState === 'failed')
-				that.pcPull[data.abonent].con.restartIce();
-
-			if (that.pcPull[data.abonent]) {
-				that.pcPull[data.abonent].params['rem_desc'] = data.desc;
-				that.pcPull[data.abonent].setRemoteDesc(data.desc);
-			}
-
-			that.PlayCallCnt(); //->User.svelte
 		}
 
 		// msg.set(data);
