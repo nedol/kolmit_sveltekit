@@ -9,8 +9,8 @@
   },
   "turn": {
     "urls": [
-      "turn:kolmit-service.onrender.com:3478?transport=udp",
-      "turn:kolmit-service.onrender.com:3478?transport=tcp"
+      "turn:0.0.0.0:3478?transport=udp",
+      "turn:0.0.0.0:3478?transport=tcp"
     ],
     "username": "username",
     "credential": "password"
