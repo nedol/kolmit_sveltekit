@@ -160,7 +160,7 @@ export class RTCBase {
 		let pc_config = {
 			iceTransportPolicy: 'all',
 			lifetimeDuration: this.conf.lifetimeDuration,
-			rtcpMuxPolicy: 'negotiate',
+			rtcpMuxPolicy: 'require',
 			bundlePolicy: 'balanced',
 			iceServers: this.conf.stun.concat(this.conf.turn)
 		};
