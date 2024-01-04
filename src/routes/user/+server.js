@@ -2,18 +2,6 @@ import { json } from '@sveltejs/kit';
 // import { OperatorWaiting } from '$lib/server/db.js'; //src\lib\server\server.db.js
 import Turn from 'node-turn';
 
-if (!global.turn_server) {
-	global.turn_server = new Turn({
-		// set options
-		authMech: 'long-term',
-		credentials: {
-			username: 'password'
-		},
-		listeningPort: 3478
-	});
-	global.turn_server.start();
-}
-
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
 rtcPool_st.subscribe((data) => {

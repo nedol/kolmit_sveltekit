@@ -13,17 +13,15 @@ import { CreatePool, GetUsers } from '$lib/server/db.js'; //src\lib\server\serve
 
 let kolmit;
 
-if (!global.server) {
-	global.server = new Turn({
+if (!global.turn_server) {
+	global.turn_server = new Turn({
 		// set options
 		authMech: 'long-term',
-		credentials: {
-			username: 'password'
-		}
+		listeningPort: 3478
 	});
+	global.turn_server.start();
+	global.turn_server.addUser('username', 'password');
 }
-
-// global.server.start();
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
 export async function load({ fetch, cookies, route, url, stuff }) {
