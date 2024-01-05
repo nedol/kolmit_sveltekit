@@ -144,7 +144,7 @@
 	}
 
 	.question {
-		color: #333;
+		color: #2196f3;
 		font-size: 1.3em;
 		margin-bottom: 10px;
 		text-align: center;

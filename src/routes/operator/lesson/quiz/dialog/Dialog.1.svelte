@@ -361,6 +361,7 @@
 		color: grey;
 		position: relative;
 		text-align: center;
+		margin: 20px;
 	}
 
 	.question {
@@ -371,7 +372,7 @@
 
 	.answer {
 		font-size: 1.2em;
-		color: #555;
+		color: #2196f3;
 		text-align: center;
 	}
 
