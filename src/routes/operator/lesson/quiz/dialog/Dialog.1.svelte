@@ -254,8 +254,10 @@
 						<span class="material-symbols-outlined"> ? </span>
 					</button>
 				</div>
-				<div class="title">{dict['Проконтролируй ответ'][$langs]}:</div>
-				<div class="answer" style="visibility:{visibility[0]}">
+				<div class="title">
+					{dict['Проконтролируй ответ'][$langs]}:
+				</div>
+				<div class="answer" style="visibility:{visibility[1]}">
 					{@html a['nl']}
 				</div>
 			{:else}

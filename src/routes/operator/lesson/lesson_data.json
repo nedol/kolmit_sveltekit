@@ -402,13 +402,8 @@
                             },
                             {
                                 "type": "pair",
-                                "title": "Verhuisd.Dialog.1",
-                                "name": "Verhuisd.Dialog.1"
-                            },
-                            {
-                                "type": "pair",
-                                "title": "Verhuisd.Dialog.2",
-                                "name": "Verhuisd.Dialog.2"
+                                "title": "Verhuisd.Dialog",
+                                "name": "Verhuisd.Dialog"
                             }
                         ]
                     },
