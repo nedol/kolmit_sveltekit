@@ -7,7 +7,7 @@ import md5 from 'md5';
 import pkg from 'lodash';
 const { find, findKey } = pkg;
 
-// import { request } from 'undici';
+import { request } from 'undici';
 
 // import { CreateServer } from '$lib/server/server.js';
 // import { get, set } from 'node-global-storage';
@@ -20,26 +20,26 @@ rtcPool_st.subscribe((data) => {
 	global.rtcPool = data;
 });
 
-// global.interval;
-// global.loop = function () {
-// 	try {
-// 		if (!global.interval)
-// 			global.interval = setInterval(async () => {
-// 				const { statusCode, headers, trailers, body } = await request(
-// 					`https://kolmit-service.onrender.com`
-// 				);
-// 				// console.log('response received', statusCode);
-// 				// console.log('headers', headers);
+global.interval;
+global.loop = function () {
+	try {
+		if (!global.interval)
+			global.interval = setInterval(async () => {
+				const { statusCode, headers, trailers, body } = await request(
+					`https://kolmit-service.onrender.com`
+				);
+				// console.log('response received', statusCode);
+				// console.log('headers', headers);
 
-// 				for await (const data of body) {
-// 					// console.log('data', data);
-// 				}
-// 				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
-// 			}, 1000 * 60 * 10);
-// 	} catch (ex) {}
-// };
+				for await (const data of body) {
+					// console.log('data', data);
+				}
+				//let resp = fetch('https://kolmit-service.onrender.com/?abonent=nedooleg@gmail.com');
+			}, 1000 * 60 * 10);
+	} catch (ex) {}
+};
 
-// global.loop();
+global.loop();
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url, fetch, cookies }) {
@@ -93,12 +93,6 @@ export async function GET({ url, fetch, cookies }) {
 			response.headers.append('Access-Control-Allow-Origin', `*`);
 			return response;
 		}
-	} else if (key) {
-		const audio = await ReadSpeech({ key: key });
-
-		let response = new Response(JSON.stringify({ audio }));
-		response.headers.append('Access-Control-Allow-Origin', `*`);
-		return response;
 	}
 
 	let response = new Response();
@@ -172,11 +166,23 @@ export async function POST({ request, url, fetch, cookies }) {
 				// 	});
 				// }
 
+				let operators = { [q.em]: {} };
+				for (let uid in global.rtcPool['operator'][q.abonent][q.em]) {
+					if (uid !== 'resolve')
+						operators[q.em][uid] = {
+							type: q.type,
+							abonent: q.abonent,
+							em: q.em,
+							uid: q.uid,
+							status: global.rtcPool['operator'][q.abonent][q.em][uid].status
+						};
+				}
+
 				resp = {
 					func: q.func,
 					type: q.type,
 					check: true,
-					queue: String(cnt_queue)
+					operators: operators
 				};
 
 				SendOperatorStatus(q);

@@ -30,6 +30,7 @@ export class SignalingChannel {
 			.then((response) => response.json())
 			.then((data) => {
 				// console.log(resp);
+				msg_user.set(data.resp);
 				if (cb) cb(data);
 			})
 			.catch((error) => {
