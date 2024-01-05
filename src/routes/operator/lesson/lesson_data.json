@@ -44,6 +44,11 @@
                                 "name": "Familie 2"
                             },
                             {
+                                "type": "text",
+                                "title": "James extra luisteroefening",
+                                "name": "James_extra luisteroefening"
+                            },
+                            {
                                 "type": "pair",
                                 "title": "Familie Dialog 1",
                                 "name": "Familie.Dialog.1"
@@ -75,7 +80,8 @@
                             },
                             {
                                 "type": "text",
-                                "name": "In Het Restorant 1"
+                                "title": "Afwezig",
+                                "name": "Afwezig"
                             },
                             {
                                 "type": "text",

@@ -7,7 +7,15 @@
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
-	import { mdiPagePreviousOutline, mdiVolumeHigh, mdiPause, mdiPlay } from '@mdi/js';
+	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
+	import {
+		mdiPagePreviousOutline,
+		mdiChevronDownCircleOutline,
+		mdiHelp,
+		mdiVolumeHigh,
+		mdiPause,
+		mdiPlay
+	} from '@mdi/js';
 
 	import pkg from 'lodash';
 	const { merge } = pkg;
@@ -273,8 +281,6 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
 
-<h3>{data.title}</h3>
-
 <!-- <button  class="speaker-button"> -->
 
 {#if !text}
@@ -290,13 +296,28 @@
 {/if}
 
 <!-- </button> -->
-
-<div
-	style="height:{window.innerHeight}; line-height:50px"
-	on:touchend={onSelectionEnd}
-	on:mouseup={onSelectionEnd}
->
-	{@html text}
+<div class="accordion-container">
+	<Accordion>
+		<Panel>
+			<Header>
+				<h3>{data.title}</h3>
+				<IconButton class="material-icons">
+					<Icon tag="svg" viewBox="0 0 24 24">
+						<path fill="currentColor" d={mdiChevronDownCircleOutline} />
+					</Icon>
+				</IconButton>
+			</Header>
+			<Content style="line-height: 2.2;">
+				<div
+					style="height:{window.innerHeight}; line-height:50px"
+					on:touchend={onSelectionEnd}
+					on:mouseup={onSelectionEnd}
+				>
+					{@html text}
+				</div>
+			</Content>
+		</Panel>
+	</Accordion>
 </div>
 
 <div id="translationOverlay" bind:this={trans_div}>{trans}</div>
