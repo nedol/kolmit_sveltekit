@@ -250,15 +250,21 @@
 					<div class="tip" style="display:inline;visibility:{visibility[1]}">
 						{q_shfl}
 					</div>
-					<button on:click={onClickQ} class="toggleButton">
+					<!-- <button on:click={onClickQ} class="toggleButton">
 						<span class="material-symbols-outlined"> ? </span>
-					</button>
+					</button> -->
 				</div>
 				<div class="title">
 					{dict['Проконтролируй ответ'][$langs]}:
 				</div>
 				<div class="answer" style="visibility:{visibility[1]}">
 					{@html a['nl']}
+				</div>
+
+				<div>
+					<button on:click={onClickQ} class="toggleButton">
+						<span class="material-symbols-outlined"> ? </span>
+					</button>
 				</div>
 			{:else}
 				<div style="text-align:center">
@@ -408,6 +414,7 @@
 
 	.toggleButton {
 		position: relative;
+		float: right;
 		margin-left: 10px;
 		background-color: #2196f3;
 		color: #fff;
