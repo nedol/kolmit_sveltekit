@@ -40,16 +40,16 @@ export let dialog_data = {
 		{
 			question: {
 				nl: 'Wat kan Simon in de namiddag doen?',
-				ru: 'Что Саймон может сделать днем?',
-				uk: 'Що Саймон може зробити вдень?',
+				ru: 'Что Саймон может днем сделать?',
+				uk: 'Що Саймон може вдень зробити?',
 				fr: "Que peut faire Simon l'après-midi?",
 				en: 'What can Simon do in the afternoon?',
 				de: 'Was kann Simon am Nachmittag tun?'
 			},
 			answer: {
 				nl: 'Simon kan In de namiddag de dozen uitpakken.',
-				ru: 'Саймон может распаковать коробки днем.',
-				uk: 'Саймон може розпакувати коробки вдень.',
+				ru: 'Саймон может днем распаковать коробки.',
+				uk: 'Саймон може вдень розпакувати коробки.',
 				fr: "Simon peut déballer les boîtes l'après-midi.",
 				en: 'Simon can unpack the boxes in the afternoon.',
 				de: 'Simon kann am Nachmittag die Kisten auspacken.'
@@ -58,7 +58,7 @@ export let dialog_data = {
 		{
 			question: {
 				nl: 'Wat kunnen Bart en Ricky in de voormiddag doen?',
-				ru: 'Что могут делать Барт и Рики утром?',
+				ru: 'Что могут утром делать Барт и Рики ?',
 				uk: 'Що можуть робити Барт і Рікі вранці?',
 				fr: 'Que peuvent faire Bart et Ricky le matin?',
 				en: 'What can Bart and Ricky do in the morning?',
@@ -94,7 +94,7 @@ export let dialog_data = {
 		{
 			question: {
 				nl: 'Wat wil Marc in de voormiddag doen?',
-				ru: 'Что хочет сделать Марк утром?',
+				ru: 'Что хочет утром сделать Марк?',
 				uk: 'Що хоче зробити Марк вранці?',
 				fr: 'Que veut faire Marc le matin?',
 				en: 'What does Marc want to do in the morning?',
@@ -138,7 +138,7 @@ export let dialog_data = {
 			},
 			answer: {
 				nl: 'Dave kan in de namiddag de verhuiswagen uitladen.',
-				ru: 'Дейв может разгрузить грузовик для переезда днем.',
+				ru: 'Дейв может днем разгрузить грузовик для переезда.',
 				uk: 'Дейв може розгрузити вантажівку для переїзду вдень.',
 				fr: "Dave peut décharger le camion de déménagement l'après-midi.",
 				en: 'Dave can unload the moving truck in the afternoon.',
@@ -148,16 +148,16 @@ export let dialog_data = {
 		{
 			question: {
 				nl: 'Wat wil Simon in de voormiddag doen?',
-				ru: 'Что хочет сделать Саймон утром?',
-				uk: 'Що хоче зробити Саймон вранці?',
+				ru: 'Что хочет утром сделать Саймон?',
+				uk: 'Що хоче вранці зробити Саймон?',
 				fr: 'Que veut faire Simon le matin?',
 				en: 'What does Simon want to do in the morning?',
 				de: 'Was will Simon am Morgen tun?'
 			},
 			answer: {
 				nl: 'Simon wil in de voormiddag het zware materiaal verplaatsen.',
-				ru: 'Саймон хочет переместить тяжелое оборудование утром.',
-				uk: 'Саймон хоче перемістити важке обладнання вранці.',
+				ru: 'Саймон хочет утром перенести тяжелые вещи.',
+				uk: 'Саймон хоче вранці перенести важкі речі.',
 				fr: 'Simon veut déplacer le matériel lourd le matin.',
 				en: 'Simon wants to move the heavy equipment in the morning.',
 				de: 'Simon möchte am Morgen das schwere Material bewegen.'
@@ -257,7 +257,7 @@ export let dialog_data = {
 		{
 			question: {
 				nl: 'Wat wil Pauline in de namiddag doen?',
-				ru: 'Что хочет Полин в послеполуденный период?',
+				ru: 'Что хочет днем сделать Полин?',
 				uk: 'Що хоче Полін вдень?',
 				fr: "Que veut faire Pauline dans l'après-midi?",
 				en: 'What does Pauline want to do in the afternoon?',
@@ -283,8 +283,8 @@ export let dialog_data = {
 			},
 			answer: {
 				nl: 'Marc moet in de namiddag het zware materiaal verplaatsen.',
-				ru: 'Марк должен перемещать тяжелый материал днем.',
-				uk: 'Марк повинен переміщувати важкий матеріал вдень.',
+				ru: 'Марк должен перенести тяжелые вещи днем.',
+				uk: 'Марк має перенести важкі речі вдень.',
 				fr: "Marc doit déplacer le matériel lourd dans l'après-midi.",
 				en: 'Marc has to move the heavy equipment in the afternoon.',
 				de: 'Marc muss am Nachmittag das schwere Material verschieben.'
@@ -293,16 +293,16 @@ export let dialog_data = {
 		{
 			question: {
 				nl: 'Wat wil Amelia ’sAvonds doen?',
-				ru: 'Что хочет Амелия делать вечером?',
-				uk: 'Що хоче Емілія робити ввечері?',
+				ru: 'Что хочет вечером делать Амелия?',
+				uk: 'Що хоче Амілія робити ввечері?',
 				fr: 'Que veut faire Amelia le soir?',
 				en: 'What does Amelia want to do in the evening?',
 				de: 'Was möchte Amelia abends tun?'
 			},
 			answer: {
 				nl: 'Amelia wil ’sAvonds in het vorige huis poetsen.',
-				ru: 'Амелия хочет вечером убирать в предыдущем доме.',
-				uk: 'Емілія хоче ввечері прибирати в попередньому будинку.',
+				ru: 'Амелия хочет вечером убраться в старом доме.',
+				uk: 'Амелія хоче ввечері прибрати в старому будинку.',
 				fr: 'Amelia veut nettoyer la maison précédente le soir.',
 				en: 'Amelia wants to clean the previous house in the evening.',
 				de: 'Amelia möchte abends im vorherigen Haus putzen.'
@@ -346,7 +346,7 @@ export let dialog_data = {
 		},
 		{
 			question: {
-				nl: "Wat moeten Bart en Ricky 's avonds doen?",
+				nl: "Wat moeten Bart en Ricky 'sAvonds doen?",
 				ru: 'Что должны делать Барт и Рики вечером?',
 				uk: 'Що повинні робити Барт і Ріккі ввечері?',
 				fr: 'Que doivent faire Bart et Ricky le soir?',
@@ -420,7 +420,7 @@ export let dialog_data = {
 			question: {
 				nl: 'Wat kan Amelia in de namiddag doen?',
 				ru: 'Что может делать Амелия днем?',
-				uk: 'Що може робити Емілія вдень?',
+				uk: 'Що може робити Амілія вдень?',
 				fr: "Que peut faire Amelia dans l'après-midi?",
 				en: 'What can Amelia do in the afternoon?',
 				de: 'Was kann Amelia am Nachmittag tun?'
@@ -428,7 +428,7 @@ export let dialog_data = {
 			answer: {
 				nl: 'Amelia kan in de namiddag boodschappen doen.',
 				ru: 'Амелия может делать покупки днем.',
-				uk: 'Емілія може робити покупки вдень.',
+				uk: 'Амілія може робити покупки вдень.',
 				fr: "Amelia peut faire des courses dans l'après-midi.",
 				en: 'Amelia can go grocery shopping in the afternoon.',
 				de: 'Amelia kann am Nachmittag einkaufen gehen.'

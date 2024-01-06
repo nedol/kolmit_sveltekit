@@ -401,6 +401,11 @@
                                 "name": "Mail.1"
                             },
                             {
+                                "type": "text",
+                                "title": "Verhuizen.7",
+                                "name": "Verhuizen.7"
+                            },
+                            {
                                 "type": "pair",
                                 "title": "Verhuisd.Dialog",
                                 "name": "Verhuisd.Dialog"

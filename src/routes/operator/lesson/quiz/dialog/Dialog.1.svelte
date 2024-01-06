@@ -28,6 +28,12 @@
 
 	let dialog_data;
 
+	let isFlipped = false;
+
+	function flipCard() {
+		isFlipped = !isFlipped;
+	}
+
 	let visibility = ['visible', 'hidden', 'hidden'];
 	let visibility_cnt = 1;
 
@@ -209,6 +215,8 @@
 					console.log();
 				}
 			);
+
+		flipCard();
 	}
 
 	function onClickQ() {
@@ -229,62 +237,74 @@
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 /> -->
 
-{#if data.quiz == 'pair'}
-	{#if share_button && $call_but_status === 'talk'}
-		<IconButton class="material-icons" on:click={onShare} style={style_button}>
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiShareVariant} />
-			</Icon>
-		</IconButton>
-	{/if}
+{#if share_button && $call_but_status === 'talk'}
+	<IconButton class="material-icons" on:click={onShare} style={style_button}>
+		<Icon tag="svg" viewBox="0 0 24 24">
+			<path fill="currentColor" d={mdiShareVariant} />
+		</Icon>
+	</IconButton>
+{/if}
+<div class="card-container">
+	<div class="card {isFlipped ? 'flipped' : ''}">
+		<div class="front">
+			{#if data.quiz == 'pair'}
+				<!-- Ваш контент для лицевой стороны -->
 
-	<div class="container">
-		<div class="card">
-			{#if q || a}
-				<div class="cnt">{cur_qa + 1}</div>
-				<div class="title">{dict['Переведи'][$langs]}:</div>
-				<div class="question">
-					{q[$langs]}
-				</div>
-				<div style="display:inline-flex;">
-					<div class="tip" style="display:inline;visibility:{visibility[1]}">
-						{q_shfl}
-					</div>
-					<!-- <button on:click={onClickQ} class="toggleButton">
+				<div class="card">
+					{#if q || a}
+						<div class="cnt">{cur_qa + 1}</div>
+						<div class="title">{dict['Переведи'][$langs]}:</div>
+						<div class="question">
+							{q[$langs]}
+						</div>
+						<div style="display:inline-flex;">
+							<div class="tip" style="display:inline;visibility:{visibility[1]}">
+								{q_shfl}
+							</div>
+							<!-- <button on:click={onClickQ} class="toggleButton">
 						<span class="material-symbols-outlined"> ? </span>
 					</button> -->
-				</div>
-				<div class="title">
-					{dict['Проконтролируй ответ'][$langs]}:
-				</div>
-				<div class="answer" style="visibility:{visibility[1]}">
-					{@html a['nl']}
+						</div>
+						<div class="title">
+							{dict['Проконтролируй ответ'][$langs]}:
+						</div>
+						<div class="answer" style="visibility:{visibility[1]}">
+							{@html a['nl']}
+						</div>
+
+						<div>
+							<button on:click={onClickQ} class="toggleButton">
+								<span class="material-symbols-outlined"> ? </span>
+							</button>
+						</div>
+					{:else}
+						<div style="text-align:center">
+							<span
+								class="material-symbols-outlined"
+								style="font-size: 20px; color: blue; scale:1.5;"
+							>
+								<CircularProgress style="height: 50px; width: 50px;" indeterminate />
+							</span>
+						</div>
+					{/if}
 				</div>
 
-				<div>
-					<button on:click={onClickQ} class="toggleButton">
-						<span class="material-symbols-outlined"> ? </span>
-					</button>
-				</div>
-			{:else}
-				<div style="text-align:center">
-					<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5;">
-						<CircularProgress style="height: 50px; width: 50px;" indeterminate />
-					</span>
+				<div class="arrow-buttons">
+					{#if cur_qa > 0}
+						<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+					{/if}
+					<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 				</div>
 			{/if}
 		</div>
-	</div>
-
-	<div class="arrow-buttons">
-		{#if cur_qa > 0}
-			<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+		{#if data.quiz == 'pair.client'}
+			<div class="back">
+				<!-- Ваш контент для обратной стороны -->
+				<Dialog2 {data} />
+			</div>
 		{/if}
-		<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 	</div>
-{:else}
-	<Dialog2 {data} />
-{/if}
+</div>
 
 {#if data.quiz}
 	<BottomAppBar bind:this={bottomAppBar}>
@@ -309,8 +329,6 @@
 {/if}
 
 <style>
-	/* Добавленные стили для улучшения визуального восприятия */
-
 	body {
 		font-family: 'Arial', sans-serif;
 		background-color: #f8f8f8;
@@ -322,32 +340,12 @@
 		height: 100vh;
 	}
 
-	.container {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 20px;
-		padding: 20px;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.card {
-		background-color: #fff;
-		border: 1px solid #ddd;
-		border-radius: 8px;
-		padding: 16px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		transition: transform 0.3s ease-in-out;
-		width: 90%;
-		text-align: center;
-	}
-
 	/* .card:hover {
 		transform: scale(1.05);
 	} */
 
 	.cnt {
-		position: relative;
+		position: absolute;
 		text-align: left;
 		left: 15px;
 		top: 3px;
@@ -384,7 +382,7 @@
 	}
 
 	.arrow-buttons {
-		position: relative;
+		/* position: relative; */
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -416,12 +414,68 @@
 	.toggleButton {
 		position: relative;
 		float: right;
-		margin-left: 10px;
+		margin: 30px;
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
 		padding: 10px;
 		border-radius: 5px;
 		cursor: pointer;
+	}
+	.card-container {
+		perspective: 1000px;
+
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		padding: 20px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.card {
+		background-color: #fff;
+		/* border: 1px solid #ddd;
+		border-radius: 8px; */
+		padding: 16px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease-in-out;
+		width: 95%;
+		text-align: center;
+		height: 100vh;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.5s;
+	}
+
+	.card.flipped {
+		transform: rotateY(180deg);
+	}
+
+	.front,
+	.back {
+		width: 95%;
+		height: 100%;
+		position: absolute;
+		backface-visibility: hidden;
+	}
+
+	.front {
+		/* Стили для лицевой стороны карточки */
+		background-color: #ececec;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 24px;
+	}
+
+	.back {
+		/* Стили для обратной стороны карточки */
+		background-color: #a0a0a0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 18px;
+		transform: rotateY(180deg);
 	}
 </style>
