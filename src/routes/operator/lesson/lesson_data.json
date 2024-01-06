@@ -406,9 +406,39 @@
                                 "name": "Verhuizen.7"
                             },
                             {
+                                "type": "text",
+                                "name": "Verhuizen.9"
+                            },
+                            {
                                 "type": "pair",
                                 "title": "Verhuisd.Dialog",
                                 "name": "Verhuisd.Dialog"
+                            }
+                        ]
+                    },
+                    {
+                        "num": 2,
+                        "title": ""
+                    },
+                    {
+                        "num": 3,
+                        "title": ""
+                    }
+                ]
+            },
+            {
+                "num": "5.1",
+                "name": "Housewarming",
+                "words": {},
+                "lessons": [
+                    {
+                        "num": 1,
+                        "title": "",
+                        "quizes": [
+                            {
+                                "type": "text",
+                                "title": "Housewarming",
+                                "name": "Housewarming.1"
                             }
                         ]
                     },

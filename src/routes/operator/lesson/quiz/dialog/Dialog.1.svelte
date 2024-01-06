@@ -272,18 +272,17 @@
 						</div>
 
 						<div>
-							<div class="arrow-buttons">
-								{#if cur_qa > 0}
-									<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button
-									>
-								{/if}
-								<div>
-									<button on:click={onClickQ} class="toggleButton">
-										<span class="material-symbols-outlined"> ? </span>
-									</button>
-								</div>
-								<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
-							</div>
+							<button on:click={onClickQ} class="toggleButton">
+								<span class="material-symbols-outlined"> ? </span>
+							</button>
+						</div>
+
+						<div class="arrow-buttons">
+							{#if cur_qa > 0}
+								<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+							{/if}
+
+							<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 						</div>
 					{:else}
 						<div style="text-align:center">
@@ -384,14 +383,13 @@
 
 	.arrow-buttons {
 		/* position: relative; */
-		display: flex;
+		/* display: flex; */
 		justify-content: space-between;
 		align-items: center;
 	}
 
 	.arrow-button {
-		position: absolute;
-		top: 60%;
+		position: relative;
 		margin: 10px;
 		padding: 10px 20px;
 		font-size: 1.5em;
@@ -403,20 +401,21 @@
 	}
 
 	.arrow-button-left {
-		left: 0;
+		position: relative;
+		float: left;
 		transform: translateY(-50%);
 	}
 
 	.arrow-button-right {
-		right: 0;
+		position: relative;
+		float: right;
 		transform: translateY(-50%);
 	}
 
 	.toggleButton {
-		position: absolute;
+		position: relative;
 		left: 45%;
-		top: 60%;
-
+		margin-top: 40px;
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
@@ -443,7 +442,7 @@
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-in-out;
 		width: 95%;
-		text-align: center;
+
 		height: 100vh;
 		position: relative;
 		transform-style: preserve-3d;

@@ -41,18 +41,25 @@
 	const abonent = getContext('abonent');
 	let speaker = mdiVolumeHigh;
 
-	fetch(
-		`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
-	)
-		.then((response) => response.json())
-		.then((data) => {
-			orig_text = text = data.obj.text;
-			fetchText();
-		})
-		.catch((error) => {
-			console.log(error);
-			return [];
-		});
+	$: if (data.name) {
+		init();
+	}
+
+	async function init() {
+		if (!orig_text)
+			fetch(
+				`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					orig_text = text = data.obj.text;
+					fetchText();
+				})
+				.catch((error) => {
+					console.log(error);
+					return [];
+				});
+	}
 
 	function fetchText() {
 		fetch(`/operator/lesson?dict=theme&level=${data.level}&theme=${data.theme}&abonent=${abonent}`)
