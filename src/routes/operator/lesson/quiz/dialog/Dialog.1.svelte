@@ -256,8 +256,8 @@
 						<div class="question">
 							{q[$langs]}
 						</div>
-						<div style="display:inline-flex;">
-							<div class="tip" style="display:inline;visibility:{visibility[1]}">
+						<div style="">
+							<div class="tip" style="visibility:{visibility[1]}">
 								{q_shfl}
 							</div>
 							<!-- <button on:click={onClickQ} class="toggleButton">
@@ -363,18 +363,21 @@
 	}
 
 	.question {
+		text-align: center;
 		font-size: 1.3em;
 		margin-bottom: 10px;
 		color: #333;
 	}
 
 	.answer {
+		text-align: center;
 		font-size: 1.2em;
 		color: #2196f3;
 		text-align: center;
 	}
 
 	.tip {
+		text-align: center;
 		font-size: 1.2em;
 		margin-bottom: 10px;
 		margin-left: 20px;
@@ -438,6 +441,7 @@
 		background-color: #fff;
 		/* border: 1px solid #ddd;
 		border-radius: 8px; */
+
 		padding: 16px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-in-out;
@@ -467,7 +471,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 24px;
+		font-size: 16px;
 	}
 
 	.back {
