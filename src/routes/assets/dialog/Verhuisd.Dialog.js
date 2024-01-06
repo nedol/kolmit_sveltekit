@@ -217,7 +217,6 @@ export let dialog_data = {
 				de: 'Bart und Ricky wollen die Kisten tagsüber transportieren.'
 			}
 		},
-
 		{
 			question: {
 				nl: 'Wat kan Sam ’sAvonds doen?',
