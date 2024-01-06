@@ -249,7 +249,6 @@
 		<div class="front">
 			{#if data.quiz == 'pair'}
 				<!-- Ваш контент для лицевой стороны -->
-
 				<div class="card">
 					{#if q || a}
 						<div class="cnt">{cur_qa + 1}</div>
@@ -273,9 +272,18 @@
 						</div>
 
 						<div>
-							<button on:click={onClickQ} class="toggleButton">
-								<span class="material-symbols-outlined"> ? </span>
-							</button>
+							<div class="arrow-buttons">
+								{#if cur_qa > 0}
+									<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button
+									>
+								{/if}
+
+								<button on:click={onClickQ} class="toggleButton">
+									<span class="material-symbols-outlined"> ? </span>
+								</button>
+
+								<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
+							</div>
 						</div>
 					{:else}
 						<div style="text-align:center">
@@ -287,13 +295,6 @@
 							</span>
 						</div>
 					{/if}
-				</div>
-
-				<div class="arrow-buttons">
-					{#if cur_qa > 0}
-						<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
-					{/if}
-					<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 				</div>
 			{/if}
 		</div>
@@ -412,13 +413,14 @@
 	}
 
 	.toggleButton {
-		position: relative;
-		float: right;
-		margin: 30px;
+		position: absolute;
+		/* margin: 0 auto; */
+		left: 45%;
+		top: 60%;
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
-		padding: 10px;
+		padding: 15px;
 		border-radius: 5px;
 		cursor: pointer;
 	}
