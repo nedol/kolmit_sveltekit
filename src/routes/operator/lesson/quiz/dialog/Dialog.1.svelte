@@ -277,11 +277,11 @@
 									<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button
 									>
 								{/if}
-
-								<button on:click={onClickQ} class="toggleButton">
-									<span class="material-symbols-outlined"> ? </span>
-								</button>
-
+								<div>
+									<button on:click={onClickQ} class="toggleButton">
+										<span class="material-symbols-outlined"> ? </span>
+									</button>
+								</div>
 								<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
 							</div>
 						</div>
@@ -414,13 +414,13 @@
 
 	.toggleButton {
 		position: absolute;
-		/* margin: 0 auto; */
 		left: 45%;
 		top: 60%;
+
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
-		padding: 15px;
+		padding: 10px;
 		border-radius: 5px;
 		cursor: pointer;
 	}
@@ -473,7 +473,7 @@
 
 	.back {
 		/* Стили для обратной стороны карточки */
-		background-color: #a0a0a0;
+		/* background-color: #a0a0a0; */
 		display: flex;
 		align-items: center;
 		justify-content: center;

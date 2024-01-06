@@ -45,12 +45,6 @@
 	// import pair_data from './pair_data.json';
 	let hint_visible;
 
-	let isFlipped = false;
-
-	function flipCard() {
-		isFlipped = !isFlipped;
-	}
-
 	export let data;
 
 	$: if (data) {
@@ -81,73 +75,67 @@
 	}
 </script>
 
-<div class="card-container">
-	<div class="card {isFlipped ? 'flipped' : ''}">
-		<div class="front">
-			<div class="title">{dict['Проконтролируй вопрос'][$langs]}:</div>
+<div class="container">
+	<div class="card">
+		<div class="title">{dict['Проконтролируй вопрос'][$langs]}:</div>
 
-			<div style="display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+		<div style="display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+			<div>
+				<div class="question">
+					{#if data.question}
+						<div>{@html data.question['nl']}</div>
+					{/if}
+				</div>
+
+				<div class="title">{dict['Переведи и ответь'][$langs]}:</div>
+
+				<div class="answer">
+					{#if data.answer}
+						<div>{@html data.answer[$langs]}</div>
+					{/if}
+				</div>
+
+				<div class="tip">
+					{#if data.answer['a_shfl'] && hint_visible}
+						<div>{@html data.answer['a_shfl']}</div>
+					{/if}
+				</div>
+
 				<div>
-					<div class="question">
-						{#if data.question}
-							<div>{@html data.question['nl']}</div>
-						{/if}
-					</div>
-
-					<div class="title">{dict['Переведи и ответь'][$langs]}:</div>
-
-					<div class="answer">
-						{#if data.answer}
-							<div>{@html data.answer[$langs]}</div>
-						{/if}
-					</div>
-
-					<div class="tip">
-						{#if data.answer['a_shfl'] && hint_visible}
-							<div>{@html data.answer['a_shfl']}</div>
-						{/if}
-					</div>
-
-					<div>
-						<button on:click={onClickQ} class="toggleButton">
-							<span class="material-symbols-outlined"> ? </span>
-						</button>
-					</div>
+					<button on:click={onClickQ} class="toggleButton">
+						<span class="material-symbols-outlined"> ? </span>
+					</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	{#if data.html}
+		<div>{@html data.html}</div>
+	{/if}
 </div>
 
-{#if data.html}
-	<div>{@html data.html}</div>
-{/if}
-
 <style>
-	.card-container {
-		perspective: 1000px;
-		background-color: transparent;
+	.container {
+		position: absolute;
+		top: 0;
 		display: flex;
-		flex-wrap: wrap;
-		gap: 20px;
-		padding: 0px;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		margin: 0;
+		padding: 20px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
 	}
 
 	.card {
 		background-color: #fff;
-		/* border: 1px solid #ddd;
-		border-radius: 8px; */
+		border: 1px solid #ddd;
+		border-radius: 8px;
 		padding: 16px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-in-out;
-		width: 95%;
-		text-align: center;
-		height: 100vh;
-		position: relative;
-		transform-style: preserve-3d;
-		transition: transform 0.5s;
+		width: 90%;
 	}
 
 	.title {
@@ -157,7 +145,7 @@
 	}
 
 	.question {
-		color: #2196f3;
+		color: #333;
 		font-size: 1.3em;
 		margin-bottom: 10px;
 		text-align: center;

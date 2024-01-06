@@ -10,14 +10,14 @@ export let dialog_data = {
 			padding: 0;
 	}
 
-		.container {
+		.html_container {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-around;
 			margin: 20px;
 	}
 
-		.card {
+		.html_card {
 			flex-basis: 35%;
 			max-width: 400px;
 			padding: 20px;
@@ -60,26 +60,26 @@ export let dialog_data = {
 
 		<div class="header">Mijn familie (James) &#8594; Trinidad</div>
 
-		<div class="container">
-			<div class="card">
+		<div class="html_container">
+			<div class="html_card">
 				Vader: Ross<br />
 				84-pensioen;<br />
 				met zijn vrouw praten
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Moeder: Rachel<br />
 				78-gepensioeneerd<br />
 				met haar man praten
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Broer: Joey<br />
 				51-kantoor<br />
 				modelvliegtuigen bouwen Janice
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Zus: Monica<br />
 				48-verpleegster<br />
 				koffie zetten
@@ -96,14 +96,14 @@ export let dialog_data = {
 			padding: 0;
 	}
 
-		.container {
+		.html_container {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-around;
 			margin: 20px;
 	}
 
-		.card {
+		.html_card {
 			flex-basis: 35%;
 			max-width: 400px;
 			padding: 20px;
@@ -144,27 +144,27 @@ export let dialog_data = {
 	<body>
 		<div class="header">Mijn familie (Mimi) &#8594; Libanon</div>
 
-		<div class="container">
-			<div class="card">
+		<div class="html_container">
+			<div class="html_card">
 				Vader: Noah<br />
 				58-tandarts;<br />
 				puzzelen
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Moeder: Nimra<br />
 				56-huisvrouw<br />
 				in de tuin werken
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Broer: Rami<br />
 				32-gemeente<br />
 				tekenen<br />
 				Dina
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Zus: Aya<br />
 				29-kokkin<br />
 				Engels spreken
@@ -180,14 +180,14 @@ export let dialog_data = {
 			padding: 0;
 	}
 
-		.container {
+		.html_container {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-around;
 			margin: 20px;
 	}
 
-		.card {
+		.html_card {
 			flex-basis: 35%;
 			max-width: 400px;
 			padding: 20px;
@@ -230,26 +230,26 @@ export let dialog_data = {
 
 		<div class="header">Mijn familie (Thomas) &#8594; Engeland</div>
 
-		<div class="container">
-			<div class="card">
+		<div class="html_container">
+			<div class="html_card">
 				Vader: George<br />
 				60-bouwakker;<br />
 				piano spellen
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Moeder: Karen<br />
 				57-arts<br />
 				naar de cinema gaan
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Broer: Devon<br />
 				22-zinger<br />
 				Sarah
 			</div>
 
-			<div class="card">
+			<div class="html_card">
 				Zus: Diana<br />
 				16-school<br />
 				kleren strijken
