@@ -436,30 +436,30 @@ export let dialog_data = {
 	]
 };
 
-'Wat wil Dave ’sAvonds doen?' - 'Dave wil ’sAvonds voor iedereen pizza halen.';
-'Wat kunnen Bart en Ricky in de voormiddag doen?' -
-	'Bart en Ricky kunnen in de voormiddag de dozen inpakken';
-'Wat moet Marc in de namiddag doen?' - 'Marc moet in de namiddag het zware materiaal verplaatsen.';
-'Wat moet Amelia in de voormiddag doen?' - 'Amelia moet in de voormiddag de verhuiswagen inladen';
-'Wat wil Sam in de voormiddag doen?' - 'Sam wil in de voormiddag uitslapen.';
-'Wat wil Pauline in de namiddag doen?' - 'Pauline wil in de namiddag de meubels monteren.';
-'Wat kan Amelia in de namiddag doen?' - 'Amelia kan in de namiddag boodschappen doen.';
-'Wat willen Bart en Ricky in de namiddag doen?' -
-	'Bart en Ricky willen in de namiddag de dozen dragen.';
-'Wat moet Simon ’sAvonds doen?' - 'Simon moet ’sAvonds de gordijnen ophangen.';
-'Wat kan Marc ’sAvonds doen?' - 'Marc kan ’sAvonds alles opruimen.';
-'Wat kan Dave in de namiddag doen?' - 'Dave kan in de namiddag de verhuiswagen uitladen.';
-'Wat kan Sam ’sAvonds doen?' - 'Sam kan ’sAvonds de dozen uitpakken.';
-'Wat moet Pauline ’sAvonds doen?' - 'Pauline moet ’sAvonds de foto’s ophangen.';
-'Wat wil Marc in de voormiddag doen?' - 'Marc wil in de voormiddag de andere kasten demonteren.';
-'Wat wil Amelia ’sAvonds doen?' - 'Amelia wil ’sAvonds het vorige huis poetsen.';
-'Wat moeten Bart en Ricky ’sAvonds doen?' -
-	'Bart en Ricky moeten ’sAvonds de tv en het internet aansluiten.';
-'Wat kan Simon in de namiddag doen?' - 'Simon kan in de namiddag de dozen uitpakken.';
-'Wat willen Nina en Pippa ’sAvonds doen?' - 'Nina en Pippa willen ’sAvonds de bedden opmaken.';
-'Wat wil Simon in de voormiddag doen?' -
-	'Simon wil in de voormiddag het zware materiaal verplaatsen.';
-'Wat moet Sam in de namiddag doen?' - 'Sam moet in de namiddag de apparaten installeren.';
-'Wat kan Pauline in de voormiddag doen?' - 'Pauline kan in de voormiddag de lunch klaarmaken.';
-'Wat moeten Nina en Pippa in de namiddag doen?' -
-	'Nina en Pippa moeten in de namiddag de meubels monteren.';
+// 'Wat wil Dave ’sAvonds doen?' - 'Dave wil ’sAvonds voor iedereen pizza halen.';
+// 'Wat kunnen Bart en Ricky in de voormiddag doen?' -
+// 	'Bart en Ricky kunnen in de voormiddag de dozen inpakken';
+// 'Wat moet Marc in de namiddag doen?' - 'Marc moet in de namiddag het zware materiaal verplaatsen.';
+// 'Wat moet Amelia in de voormiddag doen?' - 'Amelia moet in de voormiddag de verhuiswagen inladen';
+// 'Wat wil Sam in de voormiddag doen?' - 'Sam wil in de voormiddag uitslapen.';
+// 'Wat wil Pauline in de namiddag doen?' - 'Pauline wil in de namiddag de meubels monteren.';
+// 'Wat kan Amelia in de namiddag doen?' - 'Amelia kan in de namiddag boodschappen doen.';
+// 'Wat willen Bart en Ricky in de namiddag doen?' -
+// 	'Bart en Ricky willen in de namiddag de dozen dragen.';
+// 'Wat moet Simon ’sAvonds doen?' - 'Simon moet ’sAvonds de gordijnen ophangen.';
+// 'Wat kan Marc ’sAvonds doen?' - 'Marc kan ’sAvonds alles opruimen.';
+// 'Wat kan Dave in de namiddag doen?' - 'Dave kan in de namiddag de verhuiswagen uitladen.';
+// 'Wat kan Sam ’sAvonds doen?' - 'Sam kan ’sAvonds de dozen uitpakken.';
+// 'Wat moet Pauline ’sAvonds doen?' - 'Pauline moet ’sAvonds de foto’s ophangen.';
+// 'Wat wil Marc in de voormiddag doen?' - 'Marc wil in de voormiddag de andere kasten demonteren.';
+// 'Wat wil Amelia ’sAvonds doen?' - 'Amelia wil ’sAvonds het vorige huis poetsen.';
+// 'Wat moeten Bart en Ricky ’sAvonds doen?' -
+// 	'Bart en Ricky moeten ’sAvonds de tv en het internet aansluiten.';
+// 'Wat kan Simon in de namiddag doen?' - 'Simon kan in de namiddag de dozen uitpakken.';
+// 'Wat willen Nina en Pippa ’sAvonds doen?' - 'Nina en Pippa willen ’sAvonds de bedden opmaken.';
+// 'Wat wil Simon in de voormiddag doen?' -
+// 	'Simon wil in de voormiddag het zware materiaal verplaatsen.';
+// 'Wat moet Sam in de namiddag doen?' - 'Sam moet in de namiddag de apparaten installeren.';
+// 'Wat kan Pauline in de voormiddag doen?' - 'Pauline kan in de voormiddag de lunch klaarmaken.';
+// 'Wat moeten Nina en Pippa in de namiddag doen?' -
+// 	'Nina en Pippa moeten in de namiddag de meubels monteren.';
