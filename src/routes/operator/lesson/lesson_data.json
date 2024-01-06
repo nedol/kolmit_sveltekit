@@ -1426,6 +1426,11 @@
                                 "type": "pair",
                                 "title": "In het restorant. Extra",
                                 "name": "In het restorant.Dialog.extra"
+                            },
+                            {
+                                "type": "pair",
+                                "title": "Verhuisd.7.Dialog",
+                                "name": "Verhuisd.7.Dialog"
                             }
                         ]
                     }
