@@ -153,42 +153,32 @@ export let dialog_data = {
 				fr: "Mettez les tasses à droite, en haut dans l'armoire de cuisine.",
 				en: 'Put the cups on the right, at the top in the kitchen cabinet.',
 				de: 'Stellen Sie die Tassen einfach rechts oben in den Küchenschrank.'
-			}
-		},
-		{
-			question: {
+			},
+			answer: {
 				nl: 'Ai, dat gaat niet. Daar staan de glazen al.',
 				ru: 'Эй, это не получится. Там уже стоят стаканы.',
 				uk: 'Ай, це не вийде. Там вже стоять склянки.',
 				fr: 'Oh, ça ne va pas. Les verres y sont déjà.',
 				en: "Oh, that won't work. The glasses are already there.",
 				de: 'Oh, das geht nicht. Dort stehen bereits die Gläser.'
-			},
-			answer: {
+			}
+		},
+		{
+			question: {
 				nl: 'Oké, zet ze dan maar in de kelder.',
 				ru: 'Хорошо, поставьте их в подвал.',
 				uk: 'Добре, поставте їх у підвал.',
 				fr: "D'accord, mettez-les alors dans la cave.",
 				en: 'Okay, put them in the cellar then.',
 				de: 'Okay, stellen Sie sie dann einfach in den Keller.'
-			}
-		},
-		{
-			question: {
+			},
+			answer: {
 				nl: 'Voila, dat was de eerste lading. Wij rijden nu terug naar Kapelle om de verhuiswagen een tweede keer vol te laden. Tot straks.',
 				ru: 'Вуаля, это была первая загрузка. Мы сейчас едем обратно в Каппеле, чтобы второй раз загрузить грузовик. До скорого.',
 				uk: 'Вуаля, це було перше завантаження. Ми зараз їдемо назад до Каппеле, щоб другий раз завантажити вантажівку. До зустрічі.',
 				fr: "Voilà, c'était la première livraison. Nous retournons maintenant à Kapelle pour charger à nouveau le camion de déménagement. À tout à l'heure.",
 				en: "There you go, that was the first load. We're now heading back to Kapelle to load the moving truck for the second time. See you soon.",
 				de: 'Voila, das war die erste Ladung. Wir fahren jetzt zurück nach Kapelle, um den Umzugswagen ein zweites Mal zu beladen. Bis gleich.'
-			},
-			answer: {
-				nl: 'Ja, tot straks.',
-				ru: 'Да, до скорого.',
-				uk: 'Так, до зустрічі.',
-				fr: "Oui, à tout à l'heure.",
-				en: 'Yes, see you soon.',
-				de: 'Ja, bis bald.'
 			}
 		}
 	]
