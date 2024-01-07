@@ -1255,6 +1255,11 @@
                                 "name": "met Chris"
                             },
                             {
+                                "type": "word",
+                                "title": "Alex bij de dokter. Instructie",
+                                "name": "Alex bij de dokter. Instructie"
+                            },
+                            {
                                 "type": "pair",
                                 "title": "Bij de dokter.1",
                                 "name": "BijDeDokter.1"

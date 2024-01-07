@@ -200,7 +200,7 @@
 		const trimmedUserContent = userContent.trim();
 		focus_pos = 0;
 
-		if (trimmedUserContent.toLowerCase() === targetWord) {
+		if (trimmedUserContent.toLowerCase() === targetWord.toLowerCase()) {
 			showCheckMark = true; // Показываем галочку
 			showNextButton = true;
 			speak(currentWord.original);
