@@ -295,11 +295,16 @@
 		<CircularProgress style="height: 30px; width: 30px;" indeterminate />
 	</span>
 {:else}
-	<IconButton class="material-icons" on:click={onSpeach}>
-		<Icon tag="svg" viewBox="0 0 24 24">
-			<path fill="currentColor" d={speaker} />
-		</Icon>
-	</IconButton>
+	<div
+		on:click|preventDefault|stopPropagation={onSpeach}
+		style="position:fixed; top:22vh;z-index:2"
+	>
+		<IconButton class="material-icons">
+			<Icon tag="svg" viewBox="0 0 24 24">
+				<path fill="currentColor" d={speaker} />
+			</Icon>
+		</IconButton>
+	</div>
 {/if}
 
 <!-- </button> -->

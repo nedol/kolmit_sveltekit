@@ -1216,7 +1216,14 @@
             {
                 "num": "7",
                 "name": "Bij de dokter",
-                "words": {},
+                "words": {
+                    "tof": {
+                        "ru": "здорово!"
+                    },
+                    "doodmoe": {
+                        "ru": "смертельно устал"
+                    }
+                },
                 "lessons": [
                     {
                         "num": 1,
@@ -1224,8 +1231,28 @@
                         "quizes": [
                             {
                                 "type": "text",
-                                "title": "Alex bij de dokter",
-                                "name": "Alex bij de dokter"
+                                "title": "Alex bij de dokter. met Mama",
+                                "name": "Alex bij de dokter.1"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Alex bij de dokter. met Dokter",
+                                "name": "Alex bij de dokter.2"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Wat scheelt er met Tanja?",
+                                "name": "met Tanja"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Wat scheelt er met Usain?",
+                                "name": "met Usain"
+                            },
+                            {
+                                "type": "text",
+                                "title": "Wat scheelt er met Chris?",
+                                "name": "met Chris"
                             },
                             {
                                 "type": "pair",
