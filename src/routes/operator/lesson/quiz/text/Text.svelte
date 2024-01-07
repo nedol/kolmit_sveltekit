@@ -297,7 +297,7 @@
 {:else}
 	<div
 		on:click|preventDefault|stopPropagation={onSpeach}
-		style="position:fixed; top:22vh;z-index:2"
+		style="position:fixed; right:12px; top:22vh;z-index:2"
 	>
 		<IconButton class="material-icons">
 			<Icon tag="svg" viewBox="0 0 24 24">
