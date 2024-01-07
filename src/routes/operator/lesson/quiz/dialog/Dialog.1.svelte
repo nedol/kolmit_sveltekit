@@ -238,12 +238,13 @@
 /> -->
 
 {#if share_button && $call_but_status === 'talk'}
-	<IconButton class="material-icons" on:click={onShare} style={style_button}>
+	<div class="share-button" on:click={onShare}>
 		<Icon tag="svg" viewBox="0 0 24 24">
 			<path fill="currentColor" d={mdiShareVariant} />
 		</Icon>
-	</IconButton>
+	</div>
 {/if}
+
 <div class="card-container">
 	<div class="card {isFlipped ? 'flipped' : ''}">
 		<div class="front">
@@ -297,12 +298,13 @@
 				</div>
 			{/if}
 		</div>
-		{#if data.quiz == 'pair.client'}
-			<div class="back">
+
+		<div class="back">
+			{#if data.quiz == 'pair.client'}
 				<!-- Ваш контент для обратной стороны -->
 				<Dialog2 {data} />
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 </div>
 
@@ -329,15 +331,17 @@
 {/if}
 
 <style>
-	body {
-		font-family: 'Arial', sans-serif;
-		background-color: #f8f8f8;
-		margin: 0;
-		padding: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100vh;
+	.share-button {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		background-color: #2196f3;
+		color: #fff;
+		border: none;
+		padding: 10px;
+		border-radius: 5px;
+		cursor: pointer;
+		z-index: 1000;
 	}
 
 	/* .card:hover {
@@ -396,9 +400,10 @@
 		margin: 10px;
 		padding: 10px 20px;
 		font-size: 1.5em;
-		background-color: #2196f3;
-		color: #fff;
-		border: none;
+		font-weight: 600;
+		background-color: white;
+		color: #101c88;
+		border: 1px solid;
 		border-radius: 5px;
 		cursor: pointer;
 	}
@@ -417,8 +422,9 @@
 
 	.toggleButton {
 		position: relative;
-		left: 45%;
-		margin-top: 40px;
+		margin: 40px auto 0;
+		left: 50%;
+		transform: translateX(-50%);
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
@@ -428,9 +434,9 @@
 	}
 	.card-container {
 		perspective: 1000px;
-
 		display: flex;
 		flex-wrap: wrap;
+		position: relative;
 		gap: 20px;
 		padding: 20px;
 		justify-content: center;
@@ -439,15 +445,11 @@
 
 	.card {
 		background-color: #fff;
-		/* border: 1px solid #ddd;
-		border-radius: 8px; */
-
-		padding: 16px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		/* margin-left: 15px; */
 		transition: transform 0.3s ease-in-out;
 		width: 95%;
+		top: 11vh;
 
-		height: 100vh;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
@@ -467,11 +469,11 @@
 
 	.front {
 		/* Стили для лицевой стороны карточки */
-		background-color: #ececec;
+		/* background-color: #ececec; */
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 16px;
+		font-size: 12px;
 	}
 
 	.back {
@@ -480,7 +482,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 18px;
+		font-size: 12px;
 		transform: rotateY(180deg);
 	}
 </style>

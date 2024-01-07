@@ -18,8 +18,8 @@ export let dialog_data = {
 	}
 
 		.html_card {
-			flex-basis: 35%;
-			max-width: 400px;
+			flex-basis: 80%;
+	
 			padding: 20px;
 			border: 1px solid #3498db;
 			border-radius: 10px;
@@ -38,7 +38,7 @@ export let dialog_data = {
 			border: 1px solid #3498db;
 			border-radius: 5px;
 			background-color: white;
-			nl-align: center;
+			text-align: center;
 			margin: 0px;
 	}
 

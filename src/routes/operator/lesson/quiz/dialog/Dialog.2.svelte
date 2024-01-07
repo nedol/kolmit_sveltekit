@@ -117,15 +117,15 @@
 <style>
 	.container {
 		position: absolute;
-		top: 0;
+		top: -15vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		margin: 0;
 		padding: 20px;
-		border: 1px solid #ccc;
-		border-radius: 5px;
+		/* border: 1px solid #ccc; */
+		/* border-radius: 5px; */
 	}
 
 	.card {
@@ -135,7 +135,7 @@
 		padding: 16px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-in-out;
-		width: 90%;
+		width: 95%;
 	}
 
 	.title {
@@ -145,7 +145,7 @@
 	}
 
 	.question {
-		color: #333;
+		color: #2196f3;
 		font-size: 1.3em;
 		margin-bottom: 10px;
 		text-align: center;

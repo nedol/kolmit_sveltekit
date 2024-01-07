@@ -597,7 +597,7 @@
 	<div
 		class="videolocal_div"
 		on:click|preventDefault|stopPropagation={handleCommandClick}
-		style="position:relative; right: 5px; width: 70px;	height: 70px;"
+		style="position:relative; right: 5px; width: 70px;"
 	>
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">
