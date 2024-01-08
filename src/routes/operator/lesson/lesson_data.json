@@ -1402,6 +1402,11 @@
                                 "title": "Praag"
                             },
                             {
+                                "type": "text",
+                                "name": "De vakantie.Noorwegen",
+                                "title": "Noorwegen"
+                            },
+                            {
                                 "type": "pair",
                                 "name": "Op vakantie.Barcelona",
                                 "title": "Barcelona"
