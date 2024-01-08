@@ -117,6 +117,7 @@
 <style>
 	.container {
 		position: absolute;
+		width: 90%;
 		top: -15vh;
 		display: flex;
 		flex-direction: column;
@@ -124,6 +125,7 @@
 		align-items: center;
 		margin: 0;
 		padding: 20px;
+
 		/* border: 1px solid #ccc; */
 		/* border-radius: 5px; */
 	}

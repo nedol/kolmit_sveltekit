@@ -22,7 +22,6 @@
 	import { call_but_status } from '$lib/js/stores.js';
 
 	import Dialog2 from './Dialog.2.svelte';
-	import { initial } from 'lodash';
 	// import js from './Familie.Dialog.1.js';
 	// import js_ from './In het restorant.Dialog.1.js';
 

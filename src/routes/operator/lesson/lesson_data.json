@@ -54,14 +54,6 @@
                                 "name": "Familie.Dialog.1"
                             }
                         ]
-                    },
-                    {
-                        "num": 2,
-                        "title": ""
-                    },
-                    {
-                        "num": 3,
-                        "title": ""
                     }
                 ]
             },
@@ -276,14 +268,6 @@
                                 "name": "Wonen.Dialog"
                             }
                         ]
-                    },
-                    {
-                        "num": 2,
-                        "title": ""
-                    },
-                    {
-                        "num": 3,
-                        "title": ""
                     }
                 ]
             },
@@ -506,14 +490,6 @@
                                 "name": "Verhuisd.Dialog"
                             }
                         ]
-                    },
-                    {
-                        "num": 2,
-                        "title": ""
-                    },
-                    {
-                        "num": 3,
-                        "title": ""
                     }
                 ]
             },
@@ -1363,18 +1339,300 @@
                 "num": "9",
                 "name": "Op vakantie",
                 "words": {
-                    "amfitheater": {},
-                    "marktplein": {},
-                    "tempels": {},
-                    "basiliek": {},
-                    "kathedralen": {},
-                    "kerken": {},
-                    "plein": {},
-                    "fonteinen": {},
-                    "de botanische tuinen": {},
-                    "musea": {},
-                    "park": {},
-                    "kindermuseum": {}
+                    "amfitheater": {
+                        "ru": "амфитеатр",
+                        "fr": "amphithéâtre",
+                        "en": "amphitheater",
+                        "de": "Amphitheater",
+                        "uk": "амфітеатр"
+                    },
+                    "marktplein": {
+                        "ru": "рыночная площадь",
+                        "fr": "place du marché",
+                        "en": "market square",
+                        "de": "Marktplatz",
+                        "uk": "ринкова площа"
+                    },
+                    "tempels": {
+                        "ru": "храмы",
+                        "fr": "les temples",
+                        "en": "temples",
+                        "de": "Tempel",
+                        "uk": "храми"
+                    },
+                    "basiliek": {
+                        "ru": "базилика",
+                        "fr": "basilique",
+                        "en": "basilica",
+                        "de": "Basilika",
+                        "uk": "базиліка"
+                    },
+                    "kathedralen": {
+                        "ru": "катедралы",
+                        "fr": "les cathédrales",
+                        "en": "cathedrals",
+                        "de": "Kathedralen",
+                        "uk": "катедрали"
+                    },
+                    "kerken": {
+                        "ru": "церкви",
+                        "fr": "les églises",
+                        "en": "churches",
+                        "de": "Kirchen",
+                        "uk": "церкви"
+                    },
+                    "plein": {
+                        "ru": "площадь",
+                        "fr": "la place",
+                        "en": "square",
+                        "de": "Platz",
+                        "uk": "площа"
+                    },
+                    "fonteinen": {
+                        "ru": "фонтаны",
+                        "fr": "les fontaines",
+                        "en": "fountains",
+                        "de": "Fontänen",
+                        "uk": "фонтани"
+                    },
+                    "de botanische tuinen": {
+                        "ru": "ботанические сады",
+                        "fr": "les jardins botaniques",
+                        "en": "botanical gardens",
+                        "de": "Botanische Gärten",
+                        "uk": "ботанічні сади"
+                    },
+                    "musea": {
+                        "ru": "музеи",
+                        "fr": "les musées",
+                        "en": "museums",
+                        "de": "Museen",
+                        "uk": "музеї"
+                    },
+                    "park": {
+                        "ru": "парк",
+                        "fr": "le parc",
+                        "en": "park",
+                        "de": "Park",
+                        "uk": "парк"
+                    },
+                    "kindermuseum": {
+                        "ru": "детский музей",
+                        "fr": "le musée pour enfants",
+                        "en": "children's museum",
+                        "de": "Kindermuseum",
+                        "uk": "дитячий музей"
+                    },
+                    "citytrip": {
+                        "ru": "городская поездка",
+                        "fr": "le citytrip",
+                        "en": "city trip",
+                        "de": "Städtereise",
+                        "uk": "міська поїздка"
+                    },
+                    "skivakantie": {
+                        "ru": "горнолыжный отдых",
+                        "fr": "le séjour au ski",
+                        "en": "ski vacation",
+                        "de": "Skiurlaub",
+                        "uk": "гірськолижний відпочинок"
+                    },
+                    "strandvakantie": {
+                        "ru": "пляжный отдых",
+                        "fr": "les vacances à la plage",
+                        "en": "beach vacation",
+                        "de": "Strandurlaub",
+                        "uk": "відпочинок на пляжі"
+                    },
+                    "cruise": {
+                        "ru": "круиз",
+                        "fr": "la croisière",
+                        "en": "cruise",
+                        "de": "Kreuzfahrt",
+                        "uk": "круїз"
+                    },
+                    "golfen": {
+                        "ru": "гольф",
+                        "fr": "le golf",
+                        "en": "golf",
+                        "de": "Golf",
+                        "uk": "гольф"
+                    },
+                    "wandelen": {
+                        "ru": "прогулка",
+                        "fr": "la promenade",
+                        "en": "walk",
+                        "de": "Wandern",
+                        "uk": "прогулянка"
+                    },
+                    "souvenirs": {
+                        "ru": "сувениры",
+                        "fr": "l'achat de souvenirs",
+                        "en": "buying souvenirs",
+                        "de": "Souvenirs kaufen",
+                        "uk": "сувенірі"
+                    },
+                    "tuinen": {
+                        "ru": "сады",
+                        "fr": "les jardins",
+                        "en": "gardens",
+                        "de": "Gärten",
+                        "uk": "сади"
+                    },
+                    "bibliotheek": {
+                        "ru": "библиотека",
+                        "fr": "la bibliothèque",
+                        "en": "library",
+                        "de": "Bibliothek",
+                        "uk": "бібліотека"
+                    },
+                    "klooster": {
+                        "ru": "монастырь",
+                        "fr": "le monastère",
+                        "en": "monastery",
+                        "de": "Kloster",
+                        "uk": "монастир"
+                    },
+                    "watervallen": {
+                        "ru": "водопады",
+                        "fr": "les cascades",
+                        "en": "waterfalls",
+                        "de": "Wasserfälle",
+                        "uk": "водоспади"
+                    },
+                    "tempel": {
+                        "ru": "храм",
+                        "fr": "le temple",
+                        "en": "temple",
+                        "de": "Tempel",
+                        "uk": "храм"
+                    },
+                    "museum": {
+                        "ru": "музей",
+                        "fr": "le musée",
+                        "en": "museum",
+                        "de": "Museum",
+                        "uk": "музей"
+                    },
+                    "markt": {
+                        "ru": "рынок",
+                        "fr": "le marché",
+                        "en": "market",
+                        "de": "Markt",
+                        "uk": "ринок"
+                    },
+                    "boerderij": {
+                        "ru": "ферма",
+                        "fr": "la ferme",
+                        "en": "farm",
+                        "de": "Bauernhof",
+                        "uk": "ферма"
+                    },
+                    "paleis": {
+                        "ru": "дворец",
+                        "fr": "le palais",
+                        "en": "palace",
+                        "de": "Palast",
+                        "uk": "палац"
+                    },
+                    "momumentum": {
+                        "ru": "памятник",
+                        "fr": "le monument",
+                        "en": "monument",
+                        "de": "Denkmal",
+                        "uk": "пам'ятник"
+                    },
+                    "synagoge": {
+                        "ru": "синагога",
+                        "fr": "la synagogue",
+                        "en": "synagogue",
+                        "de": "Synagoge",
+                        "uk": "синагога"
+                    },
+                    "kerk": {
+                        "ru": "церковь",
+                        "fr": "l'église",
+                        "en": "church",
+                        "de": "Kirche",
+                        "uk": "церква"
+                    },
+                    "dorp": {
+                        "ru": "деревня",
+                        "fr": "le village",
+                        "en": "village",
+                        "de": "Dorf",
+                        "uk": "село"
+                    },
+                    "kathedraal": {
+                        "ru": "кафедральный собор",
+                        "fr": "la cathédrale",
+                        "en": "cathedral",
+                        "de": "Kathedrale",
+                        "uk": "кафедральний собор"
+                    },
+                    "theater": {
+                        "ru": "театр",
+                        "fr": "le théâtre",
+                        "en": "theater",
+                        "de": "Theater",
+                        "uk": "театр"
+                    },
+                    "winkelcentrum": {
+                        "ru": "торговый центр",
+                        "fr": "le centre commercial",
+                        "en": "shopping center",
+                        "de": "Einkaufszentrum",
+                        "uk": "торговельний центр"
+                    },
+                    "vissen": {
+                        "ru": "рыбалка",
+                        "fr": "la pêche",
+                        "en": "fishing",
+                        "de": "Angeln",
+                        "uk": "риболовля"
+                    },
+                    "surfen": {
+                        "ru": "сёрфинг",
+                        "fr": "le surf",
+                        "en": "surfing",
+                        "de": "Surfen",
+                        "uk": "серфінг"
+                    },
+                    "zeilboot": {
+                        "ru": "парусная лодка",
+                        "fr": "le voilier",
+                        "en": "sailing boat",
+                        "de": "Segelboot",
+                        "uk": "вітрильник"
+                    },
+                    "burcht": {
+                        "ru": "замок",
+                        "fr": "le château",
+                        "en": "castle",
+                        "de": "Burg",
+                        "uk": "замок"
+                    },
+                    "kastelencomplex": {
+                        "ru": "замковый комплекс",
+                        "fr": "le complexe de châteaux",
+                        "en": "castle complex",
+                        "de": "Schlosskomplex",
+                        "uk": "замковий комплекс"
+                    },
+                    "begraafplaats": {
+                        "ru": "кладбище",
+                        "fr": "le cimetière",
+                        "en": "cemetery",
+                        "de": "Friedhof",
+                        "uk": "цвинтар"
+                    },
+                    "vissershaven": {
+                        "ru": "рыбацкий порт",
+                        "fr": "le port de pêche",
+                        "en": "fishing port",
+                        "de": "Fischerhafen",
+                        "uk": "рибацький порт"
+                    }
                 },
                 "lessons": [
                     {
@@ -1410,6 +1668,11 @@
                                 "type": "pair",
                                 "name": "Op vakantie.Barcelona",
                                 "title": "Barcelona"
+                            },
+                            {
+                                "type": "pair",
+                                "name": "Vakantie.Dialog",
+                                "title": "Vakantie.Dialog"
                             }
                         ]
                     },
