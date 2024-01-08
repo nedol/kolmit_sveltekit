@@ -388,6 +388,97 @@
                         "en": "dining table",
                         "de": "Esstisch",
                         "uk": "стіл для обіду"
+                    },
+                    "bovenaan": {
+                        "ru": "вверху",
+                        "fr": "en haut",
+                        "en": "at the top",
+                        "de": "oben",
+                        "uk": "вгорі"
+                    },
+                    "handdoeken": {
+                        "ru": "полотенца",
+                        "fr": "les serviettes",
+                        "en": "towels",
+                        "de": "Handtücher",
+                        "uk": "рушники"
+                    },
+                    "keukenkast": {
+                        "ru": "кухонный шкаф",
+                        "fr": "l'armoire de cuisine",
+                        "en": "kitchen cabinet",
+                        "de": "Küchenschrank",
+                        "uk": "кухонний шафа"
+                    },
+                    "tapijt": {
+                        "ru": "ковер",
+                        "fr": "le tapis",
+                        "en": "carpet",
+                        "de": "Teppich",
+                        "uk": "ковер"
+                    },
+                    "toiletgerief": {
+                        "ru": "туалетные принадлежности",
+                        "fr": "les articles de toilette",
+                        "en": "toiletries",
+                        "de": "Toilettenartikel",
+                        "uk": "туалетні приналежності"
+                    },
+                    "tassen": {
+                        "ru": "сумки",
+                        "fr": "les sacs",
+                        "en": "bags",
+                        "de": "Taschen",
+                        "uk": "сумки"
+                    },
+                    "zolder": {
+                        "ru": "чердак",
+                        "fr": "le grenier",
+                        "en": "attic",
+                        "de": "Dachboden",
+                        "uk": "горище"
+                    },
+                    "kashestuin": {
+                        "ru": "огород в теплице",
+                        "fr": "le potager de serre",
+                        "en": "greenhouse garden",
+                        "de": "Gewächshausgarten",
+                        "uk": "огород в теплиці"
+                    },
+                    "slaapkamer": {
+                        "ru": "спальня",
+                        "fr": "la chambre à coucher",
+                        "en": "bedroom",
+                        "de": "Schlafzimmer",
+                        "uk": "спальня"
+                    },
+                    "woonkamer": {
+                        "ru": "гостиная",
+                        "fr": "le salon",
+                        "en": "living room",
+                        "de": "Wohnzimmer",
+                        "uk": "вітальня"
+                    },
+                    "keuken": {
+                        "ru": "кухня",
+                        "fr": "la cuisine",
+                        "en": "kitchen",
+                        "de": "Küche",
+                        "uk": "кухня"
+                    },
+                    "badkamer": {
+                        "ru": "ванная комната",
+                        "fr": "la salle de bains",
+                        "en": "bathroom",
+                        "de": "Badezimmer",
+                        "uk": "ванна кімната"
+                    },
+                    "garage": {
+                        "ru": "гараж",
+                        "fr": "le garage",
+                        "en": "garage",
+                        "de": "Garage",
+                        "uk": "гараж"
                     }
                 },
                 "lessons": [
@@ -1299,6 +1390,21 @@
                                 "type": "text",
                                 "name": "Op vakantie.Rome",
                                 "title": "Rome"
+                            },
+                            {
+                                "type": "text",
+                                "name": "De vakantie.Djerba",
+                                "title": "Djerba"
+                            },
+                            {
+                                "type": "text",
+                                "name": "De vakantie.Praag",
+                                "title": "Praag"
+                            },
+                            {
+                                "type": "pair",
+                                "name": "Op vakantie.Barcelona",
+                                "title": "Barcelona"
                             }
                         ]
                     },

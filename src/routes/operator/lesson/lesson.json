@@ -1,5 +1,5 @@
 [
-    "Ontspan je!": {
+    {
         "infinitive": "ontspannen",
         "original": "Ontspan je!",
         "translation": {
@@ -11,19 +11,19 @@
         },
         "example": "Ontspan je na een lange dag werk."
     },
-    "Maak een vuist!": {
+    {
         "infinitive": "een vuist maken",
         "original": "Maak een vuist!",
         "translation": {
-            "ru": "сделать кулак",
+            "ru": "сжать кулак",
             "en": "make a fist",
-            "fr": "faire un poing",
-            "de": "eine Faust machen",
-            "uk": "зробити кулак"
+            "fr": "serrer le poing",
+            "de": "ballen Sie die Faust",
+            "uk": "стиснути кулак"
         },
         "example": "Maak een vuist als je boos bent."
     },
-    "Hef je arm op!": {
+    {
         "infinitive": "de arm opheffen",
         "original": "Hef je arm op!",
         "translation": {
@@ -35,35 +35,35 @@
         },
         "example": "Hef je arm op als je een vraag wilt stellen."
     },
-    "Zeg eens AAAA!": {
+    {
         "infinitive": "zeggen",
-        "original": "Zeg eens AAAA!",
+        "original": "Zeg eens A!",
         "translation": {
-            "ru": "сказать",
-            "en": "say",
-            "fr": "dis",
-            "de": "sag mal",
-            "uk": "сказати"
+            "ru": "скажи A",
+            "en": "say A",
+            "fr": "dis A",
+            "de": "sag mal A",
+            "uk": "скажи A"
         },
-        "example": "Zeg eens AAAA bij de dokter."
+        "example": "Zeg eens A bij de dokter."
     },
-    "Hoest eens!": {
+    {
         "infinitive": "hoesten",
         "original": "Hoest eens!",
         "translation": {
-            "ru": "кашлять",
+            "ru": "покашлей",
             "en": "cough",
             "fr": "tousse",
             "de": "huste mal",
-            "uk": "кашляй"
+            "uk": "покашляй"
         },
         "example": "Hoest eens als je last hebt van irritatie."
     },
-    "Ga zitten!": {
+    {
         "infinitive": "zitten",
         "original": "Ga zitten!",
         "translation": {
-            "ru": "садиться",
+            "ru": "садись",
             "en": "sit down",
             "fr": "assieds-toi",
             "de": "setz dich",
@@ -71,7 +71,7 @@
         },
         "example": "Ga zitten en neem wat rust."
     },
-    "Doe je broek uit!": {
+    {
         "infinitive": "de broek uittrekken",
         "original": "Doe je broek uit!",
         "translation": {
@@ -83,7 +83,7 @@
         },
         "example": "Doe je broek uit als je gaat slapen."
     },
-    "Sta recht!": {
+    {
         "infinitive": "recht staan",
         "original": "Sta recht!",
         "translation": {
@@ -95,7 +95,7 @@
         },
         "example": "Sta recht als de leraar binnenkomt."
     },
-    "Doe je mond open!": {
+    {
         "infinitive": "de mond opendoen",
         "original": "Doe je mond open!",
         "translation": {
@@ -107,11 +107,11 @@
         },
         "example": "Doe je mond open bij de tandartscontrole."
     },
-    "Adem diep in en uit!": {
+    {
         "infinitive": "diep ademhalen en uitademen",
         "original": "Adem diep in en uit!",
         "translation": {
-            "ru": "глубоко дыши внутрь и наружу",
+            "ru": "глубоко вдохни и выдохни",
             "en": "take a deep breath in and out",
             "fr": "respirez profondément",
             "de": "atme tief ein und aus",
@@ -119,19 +119,19 @@
         },
         "example": "Adem diep in en uit om te ontspannen."
     },
-    "Steek je tong uit!": {
+    {
         "infinitive": "de tong uitsteken",
         "original": "Steek je tong uit!",
         "translation": {
-            "ru": "высунь язык",
+            "ru": "покажи язык",
             "en": "stick out your tongue",
             "fr": "tire la langue",
             "de": "streck die Zunge heraus",
-            "uk": "висунь язик"
+            "uk": "покажи язик"
         },
         "example": "Steek je tong uit bij de dokter voor controle."
     },
-    "Doe je mouw omhoog!": {
+    {
         "infinitive": "de mouw omhoog doen",
         "original": "Doe je mouw omhoog!",
         "translation": {
@@ -142,5 +142,77 @@
             "uk": "підніми рукав"
         },
         "example": "Doe je mouw omhoog voor een vaccinatie."
+    },
+    {
+        "infinitive": "de neusspray",
+        "original": "de neusspray",
+        "translation": {
+            "ru": "насальный спрей",
+            "fr": "le spray nasal",
+            "en": "nasal spray",
+            "de": "das Nasenspray",
+            "uk": "назальний спрей"
+        },
+        "example": "Gebruik de neusspray bij een verstopte neus."
+    },
+    {
+        "infinitive": "de zuigtablet",
+        "original": "de zuigtablet",
+        "translation": {
+            "ru": "леденец для рассасывания",
+            "fr": "la pastille à sucer",
+            "en": "throat lozenge",
+            "de": "das Lutschtabletten",
+            "uk": "сироп для сосання"
+        },
+        "example": "Neem een zuigtablet bij keelpijn."
+    },
+    {
+        "infinitive": "de geneesmiddelen",
+        "original": "de geneesmiddelen",
+        "translation": {
+            "ru": "лекарства",
+            "fr": "les médicaments",
+            "en": "medicines",
+            "de": "die Arzneimittel",
+            "uk": "ліки"
+        },
+        "example": "Bewaar de geneesmiddelen op een droge plek."
+    },
+    {
+        "infinitive": "de ontsteking",
+        "original": "de ontsteking",
+        "translation": {
+            "ru": "воспаление",
+            "fr": "l'inflammation",
+            "en": "inflammation",
+            "de": "die Entzündung",
+            "uk": "запалення"
+        },
+        "example": "Een ontsteking kan pijn veroorzaken."
+    },
+    {
+        "infinitive": "de bruistablet",
+        "original": "de bruistablet",
+        "translation": {
+            "ru": "шипучий таблетка",
+            "fr": "le comprimé effervescent",
+            "en": "effervescent tablet",
+            "de": "die Brausetablette",
+            "uk": "шипуча таблетка"
+        },
+        "example": "Los de bruistablet op in een glas water."
+    },
+    {
+        "infinitive": "de hoestsiroop",
+        "original": "de hoestsiroop",
+        "translation": {
+            "ru": "кашельный сироп",
+            "fr": "le sirop contre la toux",
+            "en": "cough syrup",
+            "de": "der Hustensaft",
+            "uk": "сироп від кашлю"
+        },
+        "example": "Neem wat hoestsiroop als je last hebt van hoest."
     }
 ]
