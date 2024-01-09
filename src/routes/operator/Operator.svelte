@@ -166,22 +166,20 @@
 			console.log();
 		}
 
-		document.addEventListener('visibilitychange', () => {
+		document.addEventListener('visibilitychange', async () => {
 			if (document.hidden) {
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
 				// if (audioCtx) audioCtx.suspend();
-				setTimeout(() => {
-					EasySpeech.pause();
-					// EasySpeech.cancel();
-					console.log(EasySpeech.status());
-				}, 0);
-			} else {
-				setTimeout(() => {
-					EasySpeech.reset();
-					EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
-					console.log(EasySpeech.status());
-				}, 0);
+				EasySpeech.pause();
+				// await EasySpeech.cancel();
+				await EasySpeech.reset();
+				console.log(EasySpeech.status());
+			} else {
+				await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
+
+				console.log(EasySpeech.status());
+
 				console.log('Приложение активно');
 			}
 		});
