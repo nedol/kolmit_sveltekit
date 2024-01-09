@@ -176,20 +176,14 @@
 				}, 0);
 			} else {
 				setTimeout(() => {
-					EasySpeech.resume();
+					EasySpeech.reset();
+					EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
+
 					console.log(EasySpeech.status());
 				}, 0);
 				console.log('Приложение активно');
 			}
 		});
-
-		return () => {
-			// Удалите слушателя событий при размонтировании компонента
-			// document.removeEventListener('click', handleOutsideClick);
-			setTimeout(() => {
-				EasySpeech.cancel();
-			}, 0);
-		};
 	});
 
 	function initSpeech(voices) {

@@ -155,6 +155,9 @@
 				end: (e) => {
 					speaker = mdiVolumeHigh;
 				},
+				start: (e) => {
+					// speaker = mdiVolumeHigh;
+				},
 				error: (e) => console.log(e)
 			});
 		}, 0);
