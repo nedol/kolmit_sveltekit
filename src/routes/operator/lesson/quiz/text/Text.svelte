@@ -116,6 +116,12 @@
 
 		const parentHeight = window.innerHeight;
 		containerHeight = parentHeight + 'px';
+
+		document.addEventListener('visibilitychange', () => {
+			if (document.hidden) {
+				speaker = mdiVolumeHigh;
+			}
+		});
 	});
 
 	onDestroy(() => {});
@@ -151,12 +157,21 @@
 			EasySpeech.speak({
 				text: text.replace(/<[^>]*>/g, ''),
 				voice: $tts.voice,
-				rate: 0,
+				rate: 1,
+				boundary: (e) => {
+					// console.log(e);
+				},
 				end: (e) => {
 					speaker = mdiVolumeHigh;
 				},
 				start: (e) => {
-					// speaker = mdiVolumeHigh;
+					console.log(e);
+				},
+				pause: (e) => {
+					console.log(e);
+				},
+				mark: (e) => {
+					console.log(e);
 				},
 				error: (e) => console.log(e)
 			});

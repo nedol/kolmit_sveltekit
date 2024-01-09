@@ -172,6 +172,7 @@
 				// if (audioCtx) audioCtx.suspend();
 				setTimeout(() => {
 					EasySpeech.pause();
+					// EasySpeech.cancel();
 					console.log(EasySpeech.status());
 				}, 0);
 			} else {
