@@ -318,6 +318,7 @@
 		// } else {
 
 		setTimeout(() => {
+			EasySpeech.cancel();
 			EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => EasySpeech.reset() });
 		}, 0);
 

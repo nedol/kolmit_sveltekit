@@ -134,7 +134,8 @@
 
 	onMount(async () => {
 		try {
-			await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
+			const es_det = EasySpeech.detect();
+			await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 0.7 }); // required
 
 			EasySpeech.on('error', () => {
 				EasySpeech.reset();

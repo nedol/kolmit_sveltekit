@@ -315,8 +315,10 @@
 	}
 
 	async function speak(text) {
+		EasySpeech.cancel();
 		await EasySpeech.speak({
 			text: text,
+			rate: 0.7,
 			voice: $tts.voice,
 			error: (e) => {
 				console.log(e);
