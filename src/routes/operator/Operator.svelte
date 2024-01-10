@@ -177,6 +177,7 @@
 				await EasySpeech.reset();
 				console.log(EasySpeech.status());
 			} else {
+				// EasySpeech.cancel();
 				await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
 				console.log(EasySpeech.status());

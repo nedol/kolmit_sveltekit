@@ -1,218 +1,422 @@
 [
     {
-        "infinitive": "ontspannen",
-        "original": "Ontspan je!",
+        "infinitive": "bestuurder",
+        "original": "bestuurder",
         "translation": {
-            "ru": "расслабься",
-            "en": "relax",
-            "fr": "détends-toi",
-            "de": "entspann dich",
-            "uk": "розслабся"
+            "ru": "водитель",
+            "uk": "водій",
+            "en": "driver",
+            "fr": "conducteur",
+            "de": "Fahrer"
         },
-        "example": "Ontspan je na een lange dag werk."
+        "example": "De bestuurder verloor de controle over het stuur."
     },
     {
-        "infinitive": "een vuist maken",
-        "original": "Maak een vuist!",
+        "infinitive": "ziekenhuis",
+        "original": "ziekenhuis",
         "translation": {
-            "ru": "сжать кулак",
-            "en": "make a fist",
-            "fr": "serrer le poing",
-            "de": "ballen Sie die Faust",
-            "uk": "стиснути кулак"
+            "ru": "больница",
+            "uk": "лікарня",
+            "en": "hospital",
+            "fr": "hôpital",
+            "de": "Krankenhaus"
         },
-        "example": "Maak een vuist als je boos bent."
+        "example": "De gewonde werd naar het ziekenhuis gebracht."
     },
     {
-        "infinitive": "de arm opheffen",
-        "original": "Hef je arm op!",
+        "infinitive": "besteligst",
+        "original": "besteligst",
         "translation": {
-            "ru": "подними руку",
-            "en": "lift your arm",
-            "fr": "lève ton bras",
-            "de": "hebe deinen Arm",
-            "uk": "підніми руку"
+            "ru": "срочно",
+            "uk": "негайно",
+            "en": "urgently",
+            "fr": "urgemment",
+            "de": "dringend"
         },
-        "example": "Hef je arm op als je een vraag wilt stellen."
+        "example": "Bel de ambulance besteligst!"
     },
     {
-        "infinitive": "zeggen",
-        "original": "Zeg eens A!",
+        "infinitive": "onmiddellijk",
+        "original": "onmiddellijk",
         "translation": {
-            "ru": "скажи A",
-            "en": "say A",
-            "fr": "dis A",
-            "de": "sag mal A",
-            "uk": "скажи A"
+            "ru": "немедленно",
+            "uk": "негайно",
+            "en": "immediately",
+            "fr": "immédiatement",
+            "de": "sofort"
         },
-        "example": "Zeg eens A bij de dokter."
+        "example": "Roep de hulpdiensten onmiddellijk!"
     },
     {
-        "infinitive": "hoesten",
-        "original": "Hoest eens!",
+        "infinitive": "in kritieke toestand",
+        "original": "in kritieke toestand",
         "translation": {
-            "ru": "покашлей",
-            "en": "cough",
-            "fr": "tousse",
-            "de": "huste mal",
-            "uk": "покашляй"
+            "ru": "в критическом состоянии",
+            "uk": "у критичному стані",
+            "en": "in critical condition",
+            "fr": "en état critique",
+            "de": "in kritischem Zustand"
         },
-        "example": "Hoest eens als je last hebt van irritatie."
+        "example": "De patiënt verkeert in kritieke toestand."
     },
     {
-        "infinitive": "zitten",
-        "original": "Ga zitten!",
+        "infinitive": "motorrijder",
+        "original": "motorrijder",
         "translation": {
-            "ru": "садись",
-            "en": "sit down",
-            "fr": "assieds-toi",
-            "de": "setz dich",
-            "uk": "сідай"
+            "ru": "мотоциклист",
+            "uk": "мотоцикліст",
+            "en": "motorcyclist",
+            "fr": "motocycliste",
+            "de": "Motorradfahrer"
         },
-        "example": "Ga zitten en neem wat rust."
+        "example": "Een motorrijder was betrokken bij het ongeluk."
     },
     {
-        "infinitive": "de broek uittrekken",
-        "original": "Doe je broek uit!",
+        "infinitive": "obstakel",
+        "original": "obstakel",
         "translation": {
-            "ru": "сними штаны",
-            "en": "take off your pants",
-            "fr": "enlève ton pantalon",
-            "de": "zieh deine Hose aus",
-            "uk": "зніми штани"
+            "ru": "препядствие",
+            "uk": "перешкода",
+            "en": "obstacle",
+            "fr": "obstacle",
+            "de": "Hindernis"
         },
-        "example": "Doe je broek uit als je gaat slapen."
+        "example": "Een boom op de weg vormde een gevaarlijk obstakel."
     },
     {
-        "infinitive": "recht staan",
-        "original": "Sta recht!",
+        "infinitive": "chauffeur",
+        "original": "chauffeur",
         "translation": {
-            "ru": "стой прямо",
-            "en": "stand up straight",
-            "fr": "tiens-toi droit",
-            "de": "steh gerade",
-            "uk": "встань прямо"
+            "ru": "шофер",
+            "uk": "шофер",
+            "en": "driver",
+            "fr": "chauffeur",
+            "de": "Fahrer"
         },
-        "example": "Sta recht als de leraar binnenkomt."
+        "example": "De chauffeur vertraagde abrupt om een botsing te voorkomen."
     },
     {
-        "infinitive": "de mond opendoen",
-        "original": "Doe je mond open!",
+        "infinitive": "medepassagiers",
+        "original": "medepassagiers",
         "translation": {
-            "ru": "открой рот",
-            "en": "open your mouth",
-            "fr": "ouvre la bouche",
-            "de": "mach den Mund auf",
-            "uk": "відкрий рот"
+            "ru": "попутчики",
+            "uk": "спіткачі",
+            "en": "passengers",
+            "fr": "passagers",
+            "de": "Mitfahrer"
         },
-        "example": "Doe je mond open bij de tandartscontrole."
+        "example": "De medepassagiers raakten ook gewond bij het ongeluk."
     },
     {
-        "infinitive": "diep ademhalen en uitademen",
-        "original": "Adem diep in en uit!",
+        "infinitive": "brandwonden",
+        "original": "brandwonden",
         "translation": {
-            "ru": "глубоко вдохни и выдохни",
-            "en": "take a deep breath in and out",
-            "fr": "respirez profondément",
-            "de": "atme tief ein und aus",
-            "uk": "глибоко вдихай і видихай"
+            "ru": "ожоги",
+            "uk": "опіки",
+            "en": "burns",
+            "fr": "brûlures",
+            "de": "Verbrennungen"
         },
-        "example": "Adem diep in en uit om te ontspannen."
+        "example": "De slachtoffers hadden ernstige brandwonden."
     },
     {
-        "infinitive": "de tong uitsteken",
-        "original": "Steek je tong uit!",
+        "infinitive": "de brand",
+        "original": "de brand",
         "translation": {
-            "ru": "покажи язык",
-            "en": "stick out your tongue",
-            "fr": "tire la langue",
-            "de": "streck die Zunge heraus",
-            "uk": "покажи язик"
+            "ru": "пожар",
+            "en": "fire",
+            "fr": "feu",
+            "de": "Brand",
+            "uk": "пожежа"
         },
-        "example": "Steek je tong uit bij de dokter voor controle."
+        "example": "Er was brand in het huis."
     },
     {
-        "infinitive": "de mouw omhoog doen",
-        "original": "Doe je mouw omhoog!",
+        "infinitive": "de breuk",
+        "original": "de breuk",
         "translation": {
-            "ru": "подними рукав",
-            "en": "roll up your sleeve",
-            "fr": "remonte ta manche",
-            "de": "krempel deinen Ärmel hoch",
-            "uk": "підніми рукав"
+            "ru": "перелом",
+            "en": "fracture",
+            "fr": "fracture",
+            "de": "Bruch",
+            "uk": "перелом"
         },
-        "example": "Doe je mouw omhoog voor een vaccinatie."
+        "example": "Hij heeft een breuk in zijn arm."
     },
     {
-        "infinitive": "de neusspray",
-        "original": "de neusspray",
+        "infinitive": "de file",
+        "original": "de file",
         "translation": {
-            "ru": "насальный спрей",
-            "fr": "le spray nasal",
-            "en": "nasal spray",
-            "de": "das Nasenspray",
-            "uk": "назальний спрей"
+            "ru": "пробка",
+            "en": "traffic jam",
+            "fr": "embouteillage",
+            "de": "Stau",
+            "uk": "затор"
         },
-        "example": "Gebruik de neusspray bij een verstopte neus."
+        "example": "We zaten vast in de file."
     },
     {
-        "infinitive": "de zuigtablet",
-        "original": "de zuigtablet",
+        "infinitive": "overkop",
+        "original": "overkop",
         "translation": {
-            "ru": "леденец для рассасывания",
-            "fr": "la pastille à sucer",
-            "en": "throat lozenge",
-            "de": "das Lutschtabletten",
-            "uk": "сироп для сосання"
+            "ru": "переворот",
+            "en": "rollover",
+            "fr": "renversement",
+            "de": "Überschlag",
+            "uk": "перекид"
         },
-        "example": "Neem een zuigtablet bij keelpijn."
+        "example": "Het voertuig ging overkop."
     },
     {
-        "infinitive": "de geneesmiddelen",
-        "original": "de geneesmiddelen",
+        "infinitive": "het gipsverband",
+        "original": "het gipsverband",
         "translation": {
-            "ru": "лекарства",
-            "fr": "les médicaments",
-            "en": "medicines",
-            "de": "die Arzneimittel",
-            "uk": "ліки"
+            "ru": "гипсовая повязка",
+            "en": "plaster cast",
+            "fr": "plâtre",
+            "de": "Gipsverband",
+            "uk": "гіпсовий бандаж"
         },
-        "example": "Bewaar de geneesmiddelen op een droge plek."
+        "example": "Na het ongeluk kreeg hij een gipsverband om zijn been."
     },
     {
-        "infinitive": "de ontsteking",
-        "original": "de ontsteking",
+        "infinitive": "slippen",
+        "original": "slippen",
         "translation": {
-            "ru": "воспаление",
-            "fr": "l'inflammation",
-            "en": "inflammation",
-            "de": "die Entzündung",
-            "uk": "запалення"
+            "ru": "скользить",
+            "en": "to skid",
+            "fr": "glisser",
+            "de": "rutschen",
+            "uk": "слідити"
         },
-        "example": "Een ontsteking kan pijn veroorzaken."
+        "example": "De auto begon te slippen op het gladde wegdek."
     },
     {
-        "infinitive": "de bruistablet",
-        "original": "de bruistablet",
+        "infinitive": "zwaargewond",
+        "original": "zwaargewond",
         "translation": {
-            "ru": "шипучий таблетка",
-            "fr": "le comprimé effervescent",
-            "en": "effervescent tablet",
-            "de": "die Brausetablette",
-            "uk": "шипуча таблетка"
+            "ru": "с тяжёлыми травмами",
+            "en": "seriously injured",
+            "fr": "gravement blessé",
+            "de": "schwer verletzt",
+            "uk": "важко травмований"
         },
-        "example": "Los de bruistablet op in een glas water."
+        "example": "De slachtoffers zijn zwaargewond naar het ziekenhuis gebracht."
     },
     {
-        "infinitive": "de hoestsiroop",
-        "original": "de hoestsiroop",
+        "infinitive": "het stuur",
+        "original": "het stuur",
         "translation": {
-            "ru": "кашельный сироп",
-            "fr": "le sirop contre la toux",
-            "en": "cough syrup",
-            "de": "der Hustensaft",
-            "uk": "сироп від кашлю"
+            "ru": "руль",
+            "en": "steering wheel",
+            "fr": "volant",
+            "de": "Lenkrad",
+            "uk": "кермо"
         },
-        "example": "Neem wat hoestsiroop als je last hebt van hoest."
+        "example": "Hij verloor de controle over het stuur."
+    },
+    {
+        "infinitive": "de rolstoel",
+        "original": "de rolstoel",
+        "translation": {
+            "ru": "инвалидное кресло",
+            "en": "wheelchair",
+            "fr": "fauteuil roulant",
+            "de": "Rollstuhl",
+            "uk": "інвалідне крісло"
+        },
+        "example": "Na het ongeluk moest hij in een rolstoel zitten."
+    },
+    {
+        "infinitive": "de schade",
+        "original": "de schade",
+        "translation": {
+            "ru": "ущерб",
+            "en": "damage",
+            "fr": "dommages",
+            "de": "Schaden",
+            "uk": "шкода"
+        },
+        "example": "De auto liep aanzienlijke schade op bij het ongeluk."
+    },
+    {
+        "infinitive": "de botsing",
+        "original": "de botsing",
+        "translation": {
+            "ru": "столкновение",
+            "en": "collision",
+            "fr": "collision",
+            "de": "Zusammenstoß",
+            "uk": "зіткнення"
+        },
+        "example": "De botsing tussen de twee auto's veroorzaakte veel schade."
+    },
+    {
+        "infinitive": "dronken",
+        "original": "dronken",
+        "translation": {
+            "ru": "пьяный",
+            "en": "drunk",
+            "fr": "ivre",
+            "de": "betrunken",
+            "uk": "п'яний"
+        },
+        "example": "De bestuurder was dronken tijdens het ongeluk."
+    },
+    {
+        "infinitive": "het bloed",
+        "original": "het bloed",
+        "translation": {
+            "ru": "кровь",
+            "en": "blood",
+            "fr": "le sang",
+            "de": "Blut",
+            "uk": "кров"
+        },
+        "example": "Er was veel bloed na het ongeval."
+    },
+    {
+        "infinitive": "de bocht",
+        "original": "de bocht",
+        "translation": {
+            "ru": "поворот",
+            "en": "bend",
+            "fr": "virage",
+            "de": "Kurve",
+            "uk": "поворот"
+        },
+        "example": "De auto vloog uit de bocht."
+    },
+    {
+        "infinitive": "lichtgewond",
+        "original": "lichtgewond",
+        "translation": {
+            "ru": "легко раненый",
+            "en": "lightly injured",
+            "fr": "légèrement blessé",
+            "de": "leicht verletzt",
+            "uk": "легко травмований"
+        },
+        "example": "De inzittenden raakten lichtgewond bij het ongeluk."
+    },
+    {
+        "infinitive": "de spoedgevallen",
+        "original": "de spoedgevallen",
+        "translation": {
+            "ru": "скорая помощь",
+            "en": "emergency",
+            "fr": "les urgences",
+            "de": "Notaufnahme",
+            "uk": "невідкладна допомога"
+        },
+        "example": "Na het ongeluk werden ze naar de spoedgevallen gebracht."
+    },
+    {
+        "infinitive": "remmen",
+        "original": "remmen",
+        "translation": {
+            "ru": "тормозить",
+            "en": "to brake",
+            "fr": "freiner",
+            "de": "bremsen",
+            "uk": "гальмувати"
+        },
+        "example": "Hij probeerde te remmen, maar het was te laat."
+    },
+    {
+        "infinitive": "bewusteloos",
+        "original": "bewusteloos",
+        "translation": {
+            "ru": "беспомощный",
+            "en": "unconscious",
+            "fr": "inconscient",
+            "de": "bewusstlos",
+            "uk": "безпорадний"
+        },
+        "example": "Na de klap was hij even bewusteloos."
+    },
+    {
+        "infinitive": "verlamd",
+        "original": "verlamd",
+        "translation": {
+            "ru": "парализованный",
+            "en": "paralyzed",
+            "fr": "paralysé",
+            "de": "gelähmt",
+            "uk": "паралізований"
+        },
+        "example": "Hij raakte verlamd aan zijn linkerarm na het ongeluk."
+    },
+    {
+        "infinitive": "de dode",
+        "original": "de dode",
+        "translation": {
+            "ru": "мертвый",
+            "en": "dead",
+            "fr": "mort",
+            "de": "Toter",
+            "uk": "мертвий"
+        },
+        "example": "Helaas was er één dode bij het ongeval."
+    },
+    {
+        "infinitive": "revalideren",
+        "original": "revalideren",
+        "translation": {
+            "ru": "реабилитироваться",
+            "en": "to rehabilitate",
+            "fr": "rééduquer",
+            "de": "rehabilitieren",
+            "uk": "реабілітуватися"
+        },
+        "example": "Na het ongeluk moest hij revalideren om weer te kunnen lopen."
+    },
+    {
+        "infinitive": "de verzekering",
+        "original": "de verzekering",
+        "translation": {
+            "ru": "страховка",
+            "en": "insurance",
+            "fr": "l'assurance",
+            "de": "Versicherung",
+            "uk": "страхування"
+        },
+        "example": "De verzekering dekt de kosten van het ongeluk."
+    },
+    {
+        "infinitive": "de getuige",
+        "original": "de getuige",
+        "translation": {
+            "ru": "свидетель",
+            "en": "witness",
+            "fr": "le témoin",
+            "de": "Zeuge",
+            "uk": "свідок"
+        },
+        "example": "Er waren verschillende getuigen van het ongeluk."
+    },
+    {
+        "infinitive": "de wonde",
+        "original": "de wonde",
+        "translation": {
+            "ru": "рана",
+            "en": "wound",
+            "fr": "la plaie",
+            "de": "Wunde",
+            "uk": "рана"
+        },
+        "example": "Hij had een diepe wonde aan zijn been na het ongeluk."
+    },
+    {
+        "infinitive": "het litteken",
+        "original": "het litteken",
+        "translation": {
+            "ru": "шрам",
+            "en": "scar",
+            "fr": "cicatrice",
+            "de": "Narbe",
+            "uk": "шрам"
+        },
+        "example": "Na de operatie bleef er een litteken achter."
     }
 ]

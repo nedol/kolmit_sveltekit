@@ -154,7 +154,7 @@
 
 	function TTSSpeak(text) {
 		setTimeout(() => {
-			EasySpeech.cancel();
+			window.speechSynthesis.cancel();
 			EasySpeech.speak({
 				text: text.replace(/<[^>]*>/g, ''),
 				voice: $tts.voice,

@@ -1690,6 +1690,48 @@
                 "num": "12",
                 "name": "Een ongeval",
                 "words": {
+                    "ongeval": {
+                        "ru": "происшествие",
+                        "uk": "аварія",
+                        "en": "accident",
+                        "fr": "accident",
+                        "de": "unfall"
+                    },
+                    "ongeluk": {
+                        "ru": "несчастный случай",
+                        "uk": "нещасний випадок",
+                        "en": "accident",
+                        "fr": "accident",
+                        "de": "unfall"
+                    },
+                    "op dezelfde plaats": {
+                        "ru": "в том же месте",
+                        "uk": "в тому ж місці",
+                        "en": "in the same place",
+                        "fr": "au même endroit",
+                        "de": "am selben ort"
+                    },
+                    "verkeersongevallen": {
+                        "ru": "дорожные происшествия",
+                        "uk": "дорожні пригоди",
+                        "en": "road accidents",
+                        "fr": "accidents de la route",
+                        "de": "verkehrsunfälle"
+                    },
+                    "slachtoffers ": {
+                        "ru": "пострадавшшие",
+                        "uk": "постраждалі",
+                        "en": "victims",
+                        "fr": "victimes",
+                        "de": "opfer"
+                    },
+                    "een bocht": {
+                        "ru": "поворот",
+                        "uk": "поворот",
+                        "en": "turn",
+                        "fr": "tourner",
+                        "de": "drehen"
+                    },
                     "bestuurder": {
                         "ru": "водитель",
                         "uk": "водій",
@@ -1766,6 +1808,181 @@
                         "en": "specialized burn center",
                         "fr": "centre spécialisé des brûlures",
                         "de": "spezialisiertes Verbrennungszentrum"
+                    },
+                    "de brand": {
+                        "ru": "пожар",
+                        "fr": "l'incendie",
+                        "en": "fire",
+                        "de": "Brand",
+                        "uk": "пожежа"
+                    },
+                    "de breuk": {
+                        "ru": "перелом",
+                        "fr": "la fracture",
+                        "en": "fracture",
+                        "de": "Bruch",
+                        "uk": "перелом"
+                    },
+                    "de file": {
+                        "ru": "пробка",
+                        "fr": "le bouchon",
+                        "en": "traffic jam",
+                        "de": "Stau",
+                        "uk": "затор"
+                    },
+                    "overkop": {
+                        "ru": "переворот",
+                        "fr": "renversement",
+                        "en": "overturn",
+                        "de": "Überschlag",
+                        "uk": "перевертень"
+                    },
+                    "het gipsverband": {
+                        "ru": "гипсовая повязка",
+                        "fr": "le plâtre",
+                        "en": "plaster cast",
+                        "de": "Gipsverband",
+                        "uk": "гіпсова пов'язка"
+                    },
+                    "slippen": {
+                        "ru": "скольжение",
+                        "fr": "glisser",
+                        "en": "skid",
+                        "de": "rutschen",
+                        "uk": "похибати"
+                    },
+                    "zwaargewond": {
+                        "ru": "с тяжелыми травмами",
+                        "fr": "gravement blessé",
+                        "en": "seriously injured",
+                        "de": "schwer verletzt",
+                        "uk": "серйозно поранений"
+                    },
+                    "het stuur": {
+                        "ru": "руль",
+                        "fr": "le volant",
+                        "en": "steering wheel",
+                        "de": "Lenkrad",
+                        "uk": "кермо"
+                    },
+                    "de rolstoel": {
+                        "ru": "кресло-коляска",
+                        "fr": "la chaise roulante",
+                        "en": "wheelchair",
+                        "de": "Rollstuhl",
+                        "uk": "інвалідне крісло"
+                    },
+                    "de schade": {
+                        "ru": "ущерб",
+                        "fr": "les dégâts",
+                        "en": "damage",
+                        "de": "Schaden",
+                        "uk": "шкода"
+                    },
+                    "de botsing": {
+                        "ru": "столкновение",
+                        "fr": "la collision",
+                        "en": "collision",
+                        "de": "Zusammenstoß",
+                        "uk": "зіткнення"
+                    },
+                    "dronken": {
+                        "ru": "пьяный",
+                        "fr": "ivre",
+                        "en": "drunk",
+                        "de": "betrunken",
+                        "uk": "п'яний"
+                    },
+                    "het bloed": {
+                        "ru": "кровь",
+                        "fr": "le sang",
+                        "en": "blood",
+                        "de": "Blut",
+                        "uk": "кров"
+                    },
+                    "de bocht": {
+                        "ru": "поворот",
+                        "fr": "le virage",
+                        "en": "curve",
+                        "de": "Kurve",
+                        "uk": "поворот"
+                    },
+                    "lichtgewond": {
+                        "ru": "легкораненый",
+                        "fr": "légèrement blessé",
+                        "en": "lightly injured",
+                        "de": "leicht verletzt",
+                        "uk": "легко поранений"
+                    },
+                    "de spoedgevallen": {
+                        "ru": "скорая помощь",
+                        "fr": "les urgences",
+                        "en": "emergency",
+                        "de": "Notaufnahme",
+                        "uk": "екстрена допомога"
+                    },
+                    "remmen": {
+                        "ru": "тормозить",
+                        "fr": "freiner",
+                        "en": "brake",
+                        "de": "bremsen",
+                        "uk": "гальмувати"
+                    },
+                    "bewusteloos": {
+                        "ru": "бессознательный",
+                        "fr": "inconscient",
+                        "en": "unconscious",
+                        "de": "bewusstlos",
+                        "uk": "без свідомості"
+                    },
+                    "verlamd": {
+                        "ru": "парализованный",
+                        "fr": "paralysé",
+                        "en": "paralyzed",
+                        "de": "gelähmt",
+                        "uk": "паралізований"
+                    },
+                    "de dode": {
+                        "ru": "погибший",
+                        "fr": "le mort",
+                        "en": "dead person",
+                        "de": "Toter",
+                        "uk": "померлий"
+                    },
+                    "revalideren": {
+                        "ru": "реабилитироваться",
+                        "fr": "réhabiliter",
+                        "en": "rehabilitate",
+                        "de": "rehabilitieren",
+                        "uk": "реабілітуватися"
+                    },
+                    "de verzekering": {
+                        "ru": "страховка",
+                        "fr": "l'assurance",
+                        "en": "insurance",
+                        "de": "Versicherung",
+                        "uk": "страхування"
+                    },
+                    "de getuige": {
+                        "ru": "свидетель",
+                        "fr": "le témoin",
+                        "en": "witness",
+                        "de": "Zeuge",
+                        "uk": "свідок"
+                    },
+                    "de wonde": {
+                        "ru": "рана",
+                        "fr": "la plaie",
+                        "en": "wound",
+                        "de": "Wunde",
+                        "uk": "рана"
+                    },
+                    "het litteken": {
+                        "ru": "шрам",
+                        "fr": "la cicatrice",
+                        "en": "scar",
+                        "de": "Narbe",
+                        "uk": "шрам"
                     }
                 },
                 "lessons": [
@@ -1792,6 +2009,21 @@
                                 "type": "text",
                                 "name": "Een ongeval.4",
                                 "title": "Een ongeval.4"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.5",
+                                "title": "Een ongeval.5"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.6",
+                                "title": "Een ongeval.6"
+                            },
+                            {
+                                "type": "word",
+                                "name": "Ongeval",
+                                "title": "Ongeval.Worden"
                             }
                         ]
                     },
@@ -1832,6 +2064,11 @@
                                 "type": "pair",
                                 "title": "In het restorant. Extra",
                                 "name": "In het restorant.Dialog.extra"
+                            },
+                            {
+                                "type": "pair",
+                                "title": "Verhuisd.Dialog",
+                                "name": "Verhuisd.Dialog.extra"
                             },
                             {
                                 "type": "pair",

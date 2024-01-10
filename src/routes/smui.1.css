@@ -11,8 +11,9 @@
 	font-size: small;
 }
 
-.smui-accordion .smui-accordion__panel > .smui-accordion__header {
+.smui-accordion .smui-accordion__panel > .smui-accordion__header.smui-accordion__header__title {
 	height: 65px;
+	padding: 0x 10px;
 }
 
 body {
