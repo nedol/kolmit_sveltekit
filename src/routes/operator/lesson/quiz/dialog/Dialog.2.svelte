@@ -54,17 +54,14 @@
 	let containerWidth, containerHeight;
 
 	onMount(() => {
-		// Получаем ширину родительского окна при загрузке компонента
-		const parentWidth = window.innerWidth; // Может потребоваться window.innerWidth - некоторое смещение, если у вас есть другие элементы на странице
-
-		// Устанавливаем ширину контейнера равной ширине родительского окна
-		containerWidth = parentWidth + 'px';
-
-		// Получаем высоту родительского окна при загрузке компонента
-		const parentHeight = window.innerHeight; // Может потребоваться window.innerHeight - некоторое смещение, если у вас есть другие элементы на странице
-
-		// Устанавливаем высоту контейнера равной высоте родительского окна
-		containerHeight = parentHeight + 'px';
+		// // Получаем ширину родительского окна при загрузке компонента
+		// const parentWidth = window.innerWidth; // Может потребоваться window.innerWidth - некоторое смещение, если у вас есть другие элементы на странице
+		// // Устанавливаем ширину контейнера равной ширине родительского окна
+		// containerWidth = parentWidth + 'px';
+		// // Получаем высоту родительского окна при загрузке компонента
+		// const parentHeight = window.innerHeight; // Может потребоваться window.innerHeight - некоторое смещение, если у вас есть другие элементы на странице
+		// // Устанавливаем высоту контейнера равной высоте родительского окна
+		// containerHeight = parentHeight + 'px';
 	});
 	function handleBackClick() {
 		lesson_display = true; // При клике на "Back" показываем компонент Lesson
@@ -118,7 +115,7 @@
 	.container {
 		position: absolute;
 		width: 90%;
-		top: -15vh;
+		/* top: -15vh; */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -132,12 +129,13 @@
 
 	.card {
 		background-color: #fff;
-		border: 1px solid #ddd;
-		border-radius: 8px;
-		padding: 16px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease-in-out;
-		width: 95%;
+		width: 90%;
+		/* top: 13vh; */
+		margin: 0 auto;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.5s;
 	}
 
 	.title {

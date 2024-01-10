@@ -157,7 +157,7 @@
 			EasySpeech.speak({
 				text: text.replace(/<[^>]*>/g, ''),
 				voice: $tts.voice,
-				rate: 1,
+				rate: 0.7,
 				boundary: (e) => {
 					// console.log(e);
 				},

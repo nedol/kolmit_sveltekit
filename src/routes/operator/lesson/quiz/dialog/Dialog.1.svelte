@@ -47,22 +47,22 @@
 
 	let share_button = false;
 	let style_button;
-	let style_button_non_shared = `position: relative;
-		padding: 10px;
+	let style_button_non_shared = `position: absolute;
 		font-size: 1.5em;
-		background-color: white;
+		    left: 3px;
 		color: grey;
 		border: none;
 		border-radius: 5px;
-		cursor: pointer;`;
-	let style_button_shared = `position: relative;
-		padding: 10px;
+		cursor: pointer;
+		width: 50px`;
+	let style_button_shared = `position: absolute;
 		font-size: 1.5em;
-		background-color: #2196f3;
-		color: #fff;
+		    left: 3px;
+		color: blue;
 		border: none;
 		border-radius: 5px;
-		cursor: pointer;`;
+		cursor: pointer;
+		width: 50px`;
 
 	$: if (data.name) {
 		init();
@@ -237,75 +237,65 @@
 /> -->
 
 {#if share_button && $call_but_status === 'talk'}
-	<div class="share-button" on:click={onShare}>
-		<Icon tag="svg" viewBox="0 0 24 24">
-			<path fill="currentColor" d={mdiShareVariant} />
-		</Icon>
+	<div style={style_button} on:click={onShare}>
+		<IconButton>
+			<Icon tag="svg" viewBox="0 0 24 24">
+				<path fill="currentColor" d={mdiShareVariant} />
+			</Icon>
+		</IconButton>
 	</div>
 {/if}
 
-<div class="card-container">
-	<div class="card {isFlipped ? 'flipped' : ''}">
-		<div class="front">
-			{#if data.quiz == 'pair'}
-				<!-- Ваш контент для лицевой стороны -->
-				<div class="card">
-					{#if q || a}
-						<div class="cnt">{cur_qa + 1}</div>
-						<div class="title">{dict['Переведи'][$langs]}:</div>
-						<div class="question">
-							{q[$langs]}
-						</div>
-						<div style="">
-							<div class="tip" style="visibility:{visibility[1]}">
-								{q_shfl}
-							</div>
-							<!-- <button on:click={onClickQ} class="toggleButton">
+{#if data.quiz == 'pair'}
+	<!-- Ваш контент для лицевой стороны -->
+	<div class="card">
+		{#if q || a}
+			<div class="cnt">{cur_qa + 1}</div>
+			<div class="title">{dict['Переведи'][$langs]}:</div>
+			<div class="question">
+				{q[$langs]}
+			</div>
+			<div style="">
+				<div class="tip" style="visibility:{visibility[1]}">
+					{q_shfl}
+				</div>
+				<!-- <button on:click={onClickQ} class="toggleButton">
 						<span class="material-symbols-outlined"> ? </span>
 					</button> -->
-						</div>
-						<div class="title">
-							{dict['Проконтролируй ответ'][$langs]}:
-						</div>
-						<div class="answer" style="visibility:{visibility[1]}">
-							{@html a['nl']}
-						</div>
+			</div>
+			<div class="title">
+				{dict['Проконтролируй ответ'][$langs]}:
+			</div>
+			<div class="answer" style="visibility:{visibility[1]}">
+				{@html a['nl']}
+			</div>
 
-						<div>
-							<button on:click={onClickQ} class="toggleButton">
-								<span class="material-symbols-outlined"> ? </span>
-							</button>
-						</div>
+			<div>
+				<button on:click={onClickQ} class="toggleButton">
+					<span class="material-symbols-outlined"> ? </span>
+				</button>
+			</div>
 
-						<div class="arrow-buttons">
-							{#if cur_qa > 0}
-								<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
-							{/if}
+			<div class="arrow-buttons">
+				{#if cur_qa > 0}
+					<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+				{/if}
 
-							<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
-						</div>
-					{:else}
-						<div style="text-align:center">
-							<span
-								class="material-symbols-outlined"
-								style="font-size: 20px; color: blue; scale:1.5;"
-							>
-								<CircularProgress style="height: 50px; width: 50px;" indeterminate />
-							</span>
-						</div>
-					{/if}
-				</div>
-			{/if}
-		</div>
-
-		<div class="back">
-			{#if data.quiz == 'pair.client'}
-				<!-- Ваш контент для обратной стороны -->
-				<Dialog2 {data} />
-			{/if}
-		</div>
+				<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
+			</div>
+		{:else}
+			<div style="text-align:center">
+				<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5;">
+					<CircularProgress style="height: 50px; width: 50px;" indeterminate />
+				</span>
+			</div>
+		{/if}
 	</div>
-</div>
+{/if}
+
+{#if data.quiz == 'pair.client'}
+	<Dialog2 {data} />
+{/if}
 
 {#if data.quiz}
 	<BottomAppBar bind:this={bottomAppBar}>
@@ -331,16 +321,15 @@
 
 <style>
 	.share-button {
-		position: fixed;
-		bottom: 20px;
-		right: 20px;
-		background-color: #2196f3;
-		color: #fff;
+		position: absolute;
+		top: 156px;
+		left: 10px;
+		/* background-color: #2196f3; */
+		color: grey;
 		border: none;
-		padding: 10px;
 		border-radius: 5px;
 		cursor: pointer;
-		z-index: 1000;
+		z-index: 3;
 	}
 
 	/* .card:hover {
@@ -396,8 +385,7 @@
 
 	.arrow-button {
 		position: relative;
-		margin: 10px;
-		padding: 10px 20px;
+		/* margin: 10px */
 		font-size: 1.5em;
 		font-weight: 600;
 		background-color: white;
@@ -431,24 +419,13 @@
 		border-radius: 5px;
 		cursor: pointer;
 	}
-	.card-container {
-		perspective: 1000px;
-		display: flex;
-		flex-wrap: wrap;
-		position: relative;
-		gap: 20px;
-		padding: 20px;
-		justify-content: center;
-		align-items: center;
-	}
 
 	.card {
 		background-color: #fff;
-		/* margin-left: 15px; */
 		transition: transform 0.3s ease-in-out;
-		width: 95%;
-		top: 11vh;
-
+		width: 80%;
+		/* top: 13vh; */
+		margin: 0 auto;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
