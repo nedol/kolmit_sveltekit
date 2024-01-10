@@ -1767,6 +1767,13 @@
                         "fr": "en état critique",
                         "de": "in kritischem Zustand"
                     },
+                    "zijdelings aangereden": {
+                        "ru": "столкнулись боком",
+                        "uk": "зіткнулися боком",
+                        "en": "side-impacted",
+                        "fr": "collision latérale",
+                        "de": "seitlich kollidiert"
+                    },
                     "motorrijder": {
                         "ru": "мотоциклист",
                         "uk": "мотоцикліст",
@@ -2019,6 +2026,16 @@
                                 "type": "text",
                                 "name": "Een ongeval.6",
                                 "title": "Een ongeval.6"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.7",
+                                "title": "Een ongeval.7"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Een ongeval.112belt",
+                                "title": "Een ongeval.112belt"
                             },
                             {
                                 "type": "word",
