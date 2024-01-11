@@ -172,7 +172,7 @@
 	}
 
 	.lesson-container {
-		height: 120vh;
+		/* height: 120vh; */
 		width: 100vh;
 		overflow-y: auto;
 		overflow-x: hidden;
