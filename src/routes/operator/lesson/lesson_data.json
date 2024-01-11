@@ -1666,6 +1666,11 @@
                             },
                             {
                                 "type": "text",
+                                "name": "De vakantie.Antwerpen",
+                                "title": "Antwerpen"
+                            },
+                            {
+                                "type": "text",
                                 "name": "Weerbericht.Djerba",
                                 "title": "Weerbericht.Djerba"
                             },
@@ -1673,6 +1678,11 @@
                                 "type": "text",
                                 "name": "Weerbericht.Praag",
                                 "title": "Weerbericht.Praag"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Weerbericht.Bergen",
+                                "title": "Weerbericht.Bergen"
                             },
                             {
                                 "type": "pair",
