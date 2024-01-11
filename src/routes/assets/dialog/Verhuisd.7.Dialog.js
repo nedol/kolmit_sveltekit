@@ -3,12 +3,12 @@ export let dialog_data = {
 	content: [
 		{
 			question: {
-				nl: 'Amelia, we zijn er met de eerste lading. Als de verhuis waar je uitgeladen is, halen we de rest van de spullen op. Waar moet de zetel naartoe?',
-				ru: 'Амелия, мы здесь с первой партией. Когда вы выгрузите мебель, мы заберем остальные вещи. Куда поставить диван?',
-				uk: 'Амелія, ми тут із першим завантаженням. Якщо переїзд, з якого ви розгружаєтеся, завершиться, ми заберемо решту речей. Куди поставити диван?',
-				fr: 'Amelia, nous sommes là avec le premier chargement. Une fois le déménagement où vous déchargez terminé, nous récupérerons le reste des affaires. Où doit aller le canapé ?',
-				en: "Amelia, we're here with the first load. Once the move where you're unloading is finished, we'll pick up the rest of the stuff. Where should the couch go?",
-				de: 'Amelia, wir sind hier mit der ersten Ladung. Sobald der Umzug, bei dem du auslädst, abgeschlossen ist, holen wir den Rest der Sachen ab. Wohin soll das Sofa?'
+				nl: 'Amelia, waar moet de zetel naartoe?',
+				ru: 'Амелия, куда поставить диван?',
+				uk: 'Амелія, куди поставити диван?',
+				fr: 'Amelia, Où doit aller le canapé ?',
+				en: 'Amelia, Where should the couch go?',
+				de: 'Amelia, Wohin soll das Sofa?'
 			},
 			answer: {
 				nl: 'Zet de zetel, maar tegen de muur in de woonkamer.',

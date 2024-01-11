@@ -1665,6 +1665,16 @@
                                 "title": "Noorwegen"
                             },
                             {
+                                "type": "text",
+                                "name": "Weerbericht.Djerba",
+                                "title": "Weerbericht.Djerba"
+                            },
+                            {
+                                "type": "text",
+                                "name": "Weerbericht.Praag",
+                                "title": "Weerbericht.Praag"
+                            },
+                            {
                                 "type": "pair",
                                 "name": "Op vakantie.Barcelona",
                                 "title": "Barcelona"

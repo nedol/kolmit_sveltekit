@@ -114,7 +114,7 @@
 <style>
 	.container {
 		position: absolute;
-		width: 90%;
+		max-width: 90%;
 		/* top: -15vh; */
 		display: flex;
 		flex-direction: column;
