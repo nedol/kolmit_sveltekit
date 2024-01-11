@@ -172,13 +172,13 @@
 				// Ваш код, выполняемый при переходе приложения в неактивное состояние
 				// if (audioCtx) audioCtx.suspend();
 
-				EasySpeech.pause();
+				// EasySpeech.pause();
 				// await EasySpeech.cancel();
-				await EasySpeech.reset();
+				// await EasySpeech.reset();
 				console.log(EasySpeech.status());
 			} else {
 				// EasySpeech.cancel();
-				await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
+				// await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
 				console.log(EasySpeech.status());
 

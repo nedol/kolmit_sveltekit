@@ -1710,6 +1710,41 @@
                 "num": "12",
                 "name": "Een ongeval",
                 "words": {
+                    "omstandigheden": {
+                        "ru": "обстоятельства",
+                        "fr": "les circonstances",
+                        "en": "circumstances",
+                        "de": "Umstände",
+                        "uk": "обставини"
+                    },
+                    "appartementsgebouw": {
+                        "ru": "жилой дом",
+                        "fr": "l'immeuble d'appartements",
+                        "en": "apartment building",
+                        "de": "Wohnhaus",
+                        "uk": "будинок з квартирами"
+                    },
+                    "bevestigt": {
+                        "ru": "подтверждено",
+                        "fr": "confirmé",
+                        "en": "confirmed",
+                        "de": "bestätigt",
+                        "uk": "підтверджено"
+                    },
+                    "beperkte": {
+                        "ru": "ограниченный",
+                        "fr": "limité",
+                        "en": "limited",
+                        "de": "begrenzt",
+                        "uk": "обмежений"
+                    },
+                    "slachtoffer": {
+                        "ru": "жертва",
+                        "fr": "la victime",
+                        "en": "victim",
+                        "de": "Opfer",
+                        "uk": "жертва"
+                    },
                     "ongeval": {
                         "ru": "происшествие",
                         "uk": "аварія",
@@ -2032,11 +2067,11 @@
                                 "name": "Een ongeval.3",
                                 "title": "Een ongeval.3"
                             },
-                            {
-                                "type": "text",
-                                "name": "Een ongeval.4",
-                                "title": "Een ongeval.4"
-                            },
+                            // {
+                            //     "type": "text",
+                            //     "name": "Een ongeval.4",
+                            //     "title": "Een ongeval.4"
+                            // },
                             {
                                 "type": "text",
                                 "name": "Een ongeval.5",
