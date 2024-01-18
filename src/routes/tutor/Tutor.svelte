@@ -5,7 +5,9 @@
 	import CallButtonUser from './CallButtonUser.svelte';
 	import { view } from '$lib/js/stores.js';
 
-	export let abonent, em, operator, poster, name;
+	export let abonent, em, name;
+
+	import poster from '$lib/images/tutor.png';
 
 	import { call_but_status } from '$lib/js/stores.js';
 
@@ -192,7 +194,7 @@
 						class="user_video_remote"
 						bind:this={video_element}
 						on:click
-						poster="./src/lib/images/tutor.png"
+						{poster}
 						autoplay
 						playsinline
 						on:click={OnClickCallButton}
