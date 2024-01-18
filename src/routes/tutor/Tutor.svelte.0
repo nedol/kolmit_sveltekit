@@ -1,20 +1,11 @@
 <script>
-	import { onMount, onDestroy } from 'svelte';
-	import md5 from 'md5';
-	import RTCUser from './rtc/RTCUser';
-	import Profile from './modal/Profile.svelte';
-	import DropdownList from './DropdownList.svelte';
-	import VideoLocal from './Video.local.svelte';
-	import VideoRemote from './Video.remote.svelte';
+	
+	import { onMount } from 'svelte';
+	import Card, { Content, PrimaryAction, Media, MediaContent } from '@smui/card';
+
 	import CallButtonUser from './CallButtonUser.svelte';
-	import Download from './Download.svelte';
-	import AudioLocal from './Audio.local.svelte';
-	import AudioRemote from './Audio.remote.svelte';
-	import RecordedVideo from './RecordedVideo.svelte';
 
 	export let abonent, em, operator, poster, name;
-
-	import { signal } from '$lib/js/stores.js';
 
 	import { call_but_status } from '$lib/js/stores.js';
 
@@ -29,26 +20,7 @@
 	import pkg from 'lodash';
 	const { groupBy, find } = pkg;
 
-	import './lib/icofont/icofont.min.css';
-
-	import { msg_user } from '$lib/js/stores.js';
-	$: if ($msg_user) {
-		// if ($msg_user.em) {
-		// 	if ($msg_user.em === em) OnMessage($msg_user);
-		// } else {
-		// console.log('$msg_user:', $msg_user);
-		OnMessage($msg_user);
-	}
-
-	let dc = false;
-	// import { dc_msg } from '$lib/js/stores.js';
-	// $: if ($dc_msg) {
-	// 	OnMessage($dc_msg);
-	// }
-
 	let checked = false;
-
-	const uid = md5(abonent + em + operator);
 
 	let rtc;
 
@@ -105,34 +77,6 @@
 	};
 
 	onMount(async () => {
-		rtc = new RTCUser(user, uid, $signal);
-		rtc.SendCheck();
-
-		rtc.OnOpenDataChannel = () => {
-			console.log('OnOpenDataChannel');
-		};
-
-		rtc.SendToComponent = OnMessage;
-
-		rtc.SetLocalVideo = (src) => {
-			local.video.srcObject = src;
-		};
-
-		rtc.GetRemoteVideo = () => {
-			return remote.video.srcObject;
-		};
-
-		rtc.SetRemoteVideo = (src) => {
-			remote.video.srcObject = src;
-			remote.video.display = 'block';
-			// status = 'talk';
-			// $call_but_status = 'talk';
-		};
-
-		rtc.PlayCallCnt = () => {
-			local.audio.paused = false;
-		};
-
 		// $call_but_status = status;
 	});
 
@@ -142,22 +86,7 @@
 		select.display = true;
 	}
 
-	// function OnMute() {
-	// 	status = 'talk';
-	// 	// $call_but_status = 'talk';
-	// 	OnClickCallButton();
-	// }
 
-	function OnChangeFile(e) {
-		try {
-			let file = e.target.files[0];
-			let reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = function (file) {
-				rtc.DC.SendFile(file);
-			};
-		} catch (ex) {}
-	}
 
 	function OnMessage(data) {
 		if (data.operators && data.operators[em]) {
@@ -344,18 +273,42 @@
 			default:
 				break;
 		}
-	};
+	}
 </script>
 
-<VideoRemote
-	{...remote.video}
-	{name}
-	{em}
-	bind:parent_div
-	bind:video_element
-	bind:card
-	bind:status
-	on:click={OnClickCallButton}
-/>
+<!-- <div class="card-display" bind:this={parent_div}>
+	<div class="card-container" bind:this={card}>
+		<Card style="width: 50px;">
+			<Media class="card-media-square" aspectRatio="square">
+				<MediaContent>
+				 <video
+						class="user_video_remote"
+						bind:this={video_element}
+						on:click
+						{status}
+						{poster}
+						autoplay
+						playsinline
+					>
+						<track kind="captions" />
+				 </video> 
+				</MediaContent>
+			</Media>
+			<h3
+				class="mdc-typography--subtitle2"
+				style="margin: 0; color: #888;font-size:x-small;text-align:center;z-index:1"
+			></h3>
+		</Card>
+	</div>
+</div> -->
 
-<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
+<style>
+	video {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+		margin-top: auto;
+		max-width: 50px;
+		max-height: 50px;
+    }
+</style>

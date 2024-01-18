@@ -5,13 +5,12 @@
 	import 'blueimp-load-image/js/load-image-scale.js';
 	import VideoLocal from '../Video.local.svelte';
 	import User from '../../user/User.svelte';
+	import Tutor from '../../tutor/Tutor.svelte';
 
 	import Forward from './Forward.svelte';
 	import FileTransfer from './FileTransfer.svelte';
 
 	import { langs } from '$lib/js/stores.js';
-
-	import { server_path } from '$lib/js/stores.js';
 
 	export let operator;
 	export let id;
@@ -80,7 +79,7 @@
 	let oper_admin_div;
 
 	$: if (user.email && operator.em === user.email) {
-		console.log(operator.em + ' ' + user.email);
+		// console.log(operator.em + ' ' + user.email);
 		$posterst = user_pic; //oper_admin_div;
 	}
 
@@ -225,14 +224,18 @@
 			<!-- {@debug dep, user} -->
 			<!-- {#if user.email && operator.em !== user.email} -->
 			<!-- {@debug user} -->
-			<User
-				em={user.email}
-				name={user.name}
-				operator={operator.em}
-				abonent={user.abonent}
-				poster={user_pic}
-				{OnClickUpload}
-			/>
+			{#if user.role === 'admin' || user.role === 'operator'}
+				<User
+					em={user.email}
+					name={user.name}
+					operator={operator.em}
+					abonent={user.abonent}
+					poster={user_pic}
+					{OnClickUpload}
+				/>
+			{:else if user.role === 'tutor'}
+				<Tutor name={user.name} abonent={user.abonent} poster={user_pic}></Tutor>
+			{/if}
 			<!-- {/if} -->
 			<!-- {/if} -->
 

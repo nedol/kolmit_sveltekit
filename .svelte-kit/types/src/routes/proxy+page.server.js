@@ -5,6 +5,9 @@ import { ice_conf } from '$lib/ice_conf';
 import os from 'os';
 import Turn from 'node-turn';
 
+import cc from './cc.json';
+import qu from './qu.json';
+
 import { CreateOperator, CheckOperator } from '$lib/server/db.js';
 
 global.rtcPull = { user: {}, operator: {} };
@@ -75,7 +78,12 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 		psw: kolmit.psw
 	};
 
-	res = await GetUsers(params);
+	res = await GetUsers(params); //cc[0]; //
+
+	// res = {
+	// 	users: cc,
+	// 	qu: qu.quiz_users
+	// };
 
 	return {
 		check: true,
@@ -87,6 +95,7 @@ export async function load({ fetch, cookies, route, url, stuff }) {
 		lang: kolmit.lang,
 		dict: dict,
 		users: res && res.users ? res.users : '',
+		quiz_users: res && res.quiz_users ? res.quiz_users : '',
 		ice_conf: ice_conf
 	};
 }

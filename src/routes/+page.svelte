@@ -36,6 +36,11 @@
 		$users = data.users;
 	}
 
+	import { quiz_users_ } from '$lib/js/stores.js';
+	if (data.quiz_users) {
+		$quiz_users_ = data.quiz_users;
+	}
+
 	onMount(async () => {});
 </script>
 

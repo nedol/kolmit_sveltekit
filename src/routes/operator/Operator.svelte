@@ -29,6 +29,8 @@
 
 	import Lesson from './lesson/Lesson.svelte';
 
+	import Chat from '../chatGPT/Сhat.svelte';
+
 	import pkg from 'lodash';
 	const { find } = pkg;
 
@@ -457,7 +459,7 @@
 			remote.text.email = '';
 			remote.text.display = 'none';
 			// local.video.poster = UserSvg;
-			console.log('rtc', rtc);
+			// console.log('rtc', rtc);
 			rtc.OnInactive();
 			if ($call_but_status === 'talk') {
 				$call_but_status = 'inactive';
@@ -496,13 +498,14 @@
 		else debug_div.style.opacity = '10';
 	}
 
-	function handleChangeProfile(ev) {
+	function handleChatOpen(ev) {
 		console.log();
-		fetch(`./?abonent=${abonent}&func=reset`)
-			.then(() => location.reload())
-			.catch((error) => {
-				console.log(error);
-			});
+		$view = 'chat';
+		// fetch(`./?abonent=${abonent}&func=reset`)
+		// 	.then(() => location.reload())
+		// 	.catch((error) => {
+		// 		console.log(error);
+		// 	});
 	}
 
 	const handleCommandClick = (event) => {
@@ -603,7 +606,7 @@
 	{#if showCommands}
 		<!-- Список команд -->
 		<div bind:this={commandsList}>
-			<div on:click={handleChangeProfile}>{$dicts['Изменить профиль'][$langs]}</div>
+			<div on:click={handleChatOpen}>chat open</div>
 		</div>
 	{/if}
 </div>
@@ -613,36 +616,17 @@
 <progress class="progress" value={progress.value} max="100" duration="200" />
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="chat-container" bind:this={debug_div} on:click={onDebug}>
+<!-- <div class="chat-container" bind:this={debug_div} on:click={onDebug}>
 	<div class="debug">{debug}</div>
-</div>
+</div> -->
 <!-- {@debug $view} -->
 <Callcenter view={$view} bind:this={callcenter} bind:$call_but_status bind:operator={$operator} />
 
 <Lesson view={$view} data={$users[0].staff} />
 
+<Chat view={$view}></Chat>
+
 <style>
-	.chat-container {
-		display: none;
-		position: absolute;
-		width: 50%;
-		bottom: 50px;
-		right: 0;
-		height: 100px;
-		overflow-y: auto;
-		border: 1px solid #ccc;
-		padding: 10px;
-		direction: rtl;
-		pointer-events: auto;
-		text-align: right;
-		opacity: 0; /* Делаем элемент видимым */
-		/* z-index: 1; */
-	}
-	.debug {
-		font-size: small;
-		display: flex;
-		flex-direction: column-reverse; /* Используем стиль column-reverse для отображения дочерних элементов в обратном порядке */
-	}
 	.video {
 		position: relative;
 		top: 5px;

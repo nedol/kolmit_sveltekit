@@ -32,13 +32,6 @@
 		}
 	}
 
-	// (async ()=>{
-	//   tarif.params =
-	//   (await (await fetch('./src/lib/tarifs.json')).json())[tarif.name];
-	//   if(tarif.params && dep.staff)
-	//     tarif.deps = tarif.params['Total Depts']['en'].split('up to ')[1]>=dep.staff.length || tarif.params['Total Depts']['en']==='unlim' ;
-	// })();
-
 	let readonly = false;
 	let content;
 
@@ -202,6 +195,19 @@
 			/>
 		</div>
 	{/if}
+	{#if dep.tutor}
+		<div>
+			<Oper
+				id={dep.tutor.id}
+				bind:status={$call_but_status}
+				{operator}
+				bind:dep
+				bind:user={dep.tutor}
+				{update}
+				{readonly}
+			/>
+		</div>
+	{/if}
 	{#if dep.staff}
 		<div class="horizontal-container">
 			{#each dep.staff as user, u}
@@ -210,8 +216,6 @@
 		</div>
 	{/if}
 	{#if edited_display}
-		<!-- {#if tarif.deps} -->
-
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div class="add_oper" on:click={AddOper} style="display:{isAddOper}">
@@ -227,15 +231,9 @@
 				<!-- </g> -->
 			</svg>
 		</div>
-		<!-- {/if} -->
 	{/if}
 </div>
 
-<!-- {/if} -->
-
-<!-- {/if} -->
-
-<!-- </Collapse> -->
 <style>
 	.horizontal-container {
 		display: flex;

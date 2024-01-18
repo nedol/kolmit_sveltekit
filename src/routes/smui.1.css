@@ -5,6 +5,8 @@
 	flex-direction: row;
 	width: 100%;
 	--smui-bottom-app-bar--fab-offset: 0px;
+	background-color: #4609a8;
+	background-color: var(--mdc-theme-primary, #4609a8);
 }
 
 .mdc-top-app-bar__title {
@@ -18,4 +20,9 @@
 
 body {
 	overflow-y: auto;
+}
+
+.mdc-top-app-bar {
+	background-color: #4609a8;
+	background-color: var(--mdc-theme-primary, #4609a8);
 }

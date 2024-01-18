@@ -14,6 +14,17 @@ import { request } from 'undici';
 // set('global.rtcPool', { user: {}, operator: {} });
 // CreateServer();
 
+import Chat from 'chatgpt-unlimited';
+
+async function chat() {
+	const prompt = 'Hello! How Are you? Can you speak Dutch?';
+
+	const response = await Chat.create(prompt);
+	console.log(response);
+}
+
+chat();
+
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
 rtcPool_st.subscribe((data) => {
@@ -185,7 +196,7 @@ export async function POST({ request, url, fetch, cookies }) {
 					operators: operators
 				};
 
-				SendOperatorStatus(q);
+				SendOperatorOffer(q);
 
 				// set('global.rtcPool', global.rtcPool);
 
@@ -422,7 +433,7 @@ function BroadcastOperatorStatus(q, check) {
 	}
 }
 
-function SendOperatorStatus(q) {
+function SendOperatorOffer(q) {
 	if (
 		global.rtcPool['operator'] &&
 		global.rtcPool['operator'][q.abonent] &&

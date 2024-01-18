@@ -26,6 +26,10 @@ export let credentials = writable();
 
 export let users = writable();
 
+export let users_status = writable({});
+
+export let quiz_users_ = writable();
+
 export let call_but_status = writable('inactive');
 
 export let ice_conf = writable();

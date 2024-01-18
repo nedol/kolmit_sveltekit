@@ -75,9 +75,8 @@
 	}
 
 	async function handleBackClick() {
-		setTimeout(() => {
-			EasySpeech.cancel();
-		}, 0);
+		EasySpeech.cancel();
+
 		$lesson.data = { quiz: '' }; // При клике на "Back" показываем компонент Lesson
 	}
 

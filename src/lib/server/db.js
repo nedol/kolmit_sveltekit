@@ -150,14 +150,14 @@ export async function GetUsers(par) {
 
 	if (par.abonent) {
 		users = await pool.sql`
-		SELECT  users
+		SELECT  users, quiz_users
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator)
 			WHERE  operators.operator=${par.operator} AND operators.abonent=${par.abonent}  
 				AND operators.psw=${par.psw};`;
 	} else {
 		users = await pool.sql`
-		SELECT  users 
+		SELECT  users, quiz_users 
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator = operators.operator) 
 			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} 
@@ -408,6 +408,31 @@ export async function GetWords(q) {
 	} catch (ex) {
 		await pool.sql`ROLLBACK;`;
 		return JSON.stringify({ func: q.func, res: ex });
+	}
+}
+
+export async function UpdateQuizUsers(q) {
+	await pool.sql`BEGIN;`;
+	try {
+		let res = await pool.sql`SELECT quiz_users FROM users 
+		WHERE operator=${q.abonent}`;
+		let qu = res.rows[0].quiz_users;
+		if (!qu[q.quiz]) qu[q.quiz] = [];
+		if (q.add && !qu[q.quiz].includes(q.add)) {
+			qu[q.quiz].push(q.add);
+		} else if (q.rem && qu[q.quiz].includes(q.rem)) {
+			let ind = qu[q.quiz].indexOf(q.rem);
+			qu[q.quiz].splice(1, ind);
+		}
+
+		res = await pool.sql`UPDATE users SET quiz_users=${qu}
+		WHERE operator=${q.abonent}`;
+
+		return qu;
+		//debugger;
+		await pool.sql`COMMIT;`;
+	} catch (ex) {
+		await pool.sql`ROLLBACK;`;
 	}
 }
 

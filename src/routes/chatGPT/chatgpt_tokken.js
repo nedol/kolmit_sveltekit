@@ -1,1 +1,1 @@
-export let authToken = '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';
+export let authToken = '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';

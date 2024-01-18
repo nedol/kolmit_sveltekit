@@ -20,8 +20,6 @@
 
 	let cnt;
 
-	import { server_path } from '$lib/js/stores.js';
-
 	import { langs } from '$lib/js/stores.js';
 	let lang = $langs;
 

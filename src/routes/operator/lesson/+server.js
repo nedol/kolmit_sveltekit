@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import fs from 'fs';
 // import { path } from '$lib/js/server.path.js';
-import { GetText, GetDict, GetWords } from '$lib/server/db.js';
+import { GetText, GetDict, GetWords, UpdateQuizUsers } from '$lib/server/db.js';
 // import { getContext } from 'svelte';
 
 export const config = {
@@ -56,27 +56,34 @@ export async function GET({ url, fetch, cookies }) {
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, url, fetch }) {
-	const { voice } = await request.json();
+	let resp;
+	let abonent = url.searchParams.get('abonent');
+	const { par } = await request.json();
+	const q = par;
 
-	let admin = voice['admin'];
-	let key = voice['key'];
-	let data = voice['data'];
-	// let resp = await fetch('/src/routes/operator/operator/lesson/audio.json');
+	switch (q.func) {
+		case 'quiz_users':
+			resp = await BroadcastQuizUsers(q);
+			break;
+	}
 
-	// try {
-	// 	audio = await resp.json();
-	// } catch (ex) {}
+	let response = new Response(JSON.stringify({ resp }));
+	response.headers.append('Access-Control-Allow-Origin', `*`);
+	return response;
+}
 
-	//audio[key] = voice[key];
-	// fs.writeFile('./src/routes/operator/operator/lesson/audio.json', JSON.stringify(audio), (err) => {
-	// 	if (err) {
-	// 		return new Response(json('Error writing file:' + err));
-	// 	} else {
-	// 		return new Response(json('Successfully wrote file'));
-	// 	}
-	// });
+async function BroadcastQuizUsers(q) {
+	let qu = await UpdateQuizUsers(q);
+	let remAr = [{ quiz_users: qu }];
 
-	WriteSpeech({ admin: 'admin', key: key, data: data });
+	for (let em in global.rtcPool['operator'][q.abonent]) {
+		if (em === q.em && q.status === 'inactive')
+			//not to send to yourself
+			continue;
 
-	return new Response('Successfully post file');
+		if (global.rtcPool['operator'][q.abonent][em].resolve)
+			global.rtcPool['operator'][q.abonent][em].resolve(remAr);
+	}
+
+	return remAr;
 }

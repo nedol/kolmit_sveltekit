@@ -4,8 +4,7 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"prepare": "npm run smui-theme",
-	"smui-theme": "smui-theme compile static/smui.css -i src/theme",
+	"smui-theme": "smui-theme compile ./src/routes/smui.css -i src/theme",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -15,14 +14,15 @@
 		"lint": "prettier --check --plugin-search-dir=. . && eslint .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"start": "node build/index.js",
-		"smui-theme": "smui-theme compile static/smui.css -i src/theme",
-		"prepare": "npm run smui-theme"
+		"smui-theme": "smui-theme compile ./src/routes/smui.css -i src/theme"
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
 		"@mdi/js": "^7.3.67",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@smui/button": "^7.0.0-beta.15",
+		"@smui/checkbox": "^7.0.0-beta.16",
+		"@smui/form-field": "^7.0.0-beta.16",
 		"@smui/icon-button": "^7.0.0-beta.15",
 		"@smui/list": "^7.0.0-beta.15",
 		"@smui/textfield": "^7.0.0-beta.15",
@@ -55,6 +55,7 @@
 		"@vercel/postgres": "^0.4.2",
 		"ai": "^2.2.30",
 		"blueimp-load-image": "^5.16.0",
+		"chatgpt-unlimited": "^1.0.0",
 		"dotenv": "^16.3.1",
 		"easy-speech": "^2.2.0",
 		"express": "^4.18.2",
@@ -71,6 +72,7 @@
 		"npm": "^9.8.1",
 		"numeral": "^2.0.6",
 		"openai": "^4.0.0",
+		"playht": "^0.9.6",
 		"readline-sync": "^1.4.10",
 		"render-cli": "^0.3.2",
 		"string-hash": "^1.1.3",
