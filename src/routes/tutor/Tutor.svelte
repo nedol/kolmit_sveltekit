@@ -192,7 +192,7 @@
 						class="user_video_remote"
 						bind:this={video_element}
 						on:click
-						{poster}
+						poster="./src/lib/images/tutor.png"
 						autoplay
 						playsinline
 						on:click={OnClickCallButton}
