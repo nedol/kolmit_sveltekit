@@ -3,25 +3,20 @@
 	import EasySpeech from 'easy-speech';
 	import prompt_data from './prompt/prompt_data.json';
 	import { tts } from '$lib/js/stores.js';
-	// import * as PlayHT from 'playht';
-	// PlayHT.init({
-	// 	apiKey: 'a0f45d3ac9a34b94a47e1c3390415f98',
-	// 	userId: '616JDkizH4P9yZNeOzOOlaAKbKi2'
-	// });
 
 	let userInput = '';
 	let messages = [];
-	let prompt = prompt_data['2'];
+	let prompt = 'I want to get answers in json.'; // Default prompt
 	export let view;
 
+	// Function to call ChatGPT
 	async function callChatGPT() {
 		try {
-			let question = prompt || userInput;
-			if (!question) return;
+			if (!userInput) return;
 
 			const response = await fetch(`/chatGPT`, {
 				method: 'POST',
-				body: JSON.stringify({ question: question }),
+				body: JSON.stringify({ question: userInput + prompt }),
 				headers: { 'Content-Type': 'application/json' }
 			});
 
@@ -29,33 +24,8 @@
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
 
-			prompt = '';
-			question = '';
-
 			const data = await response.json();
 			const answer = data.resp;
-
-			// const generated = await PlayHT.generate(answer.replace(/<[^>]*>/g, ''));
-
-			// EasySpeech.speak({
-			// 	text: answer.replace(/<[^>]*>/g, ''),
-			// 	voice: $tts.voice,
-			// 	rate: 0.7,
-			// 	boundary: (e) => {
-			// 		// console.log(e);
-			// 	},
-			// 	end: (e) => {},
-			// 	start: (e) => {
-			// 		console.log(e);
-			// 	},
-			// 	pause: (e) => {
-			// 		console.log(e);
-			// 	},
-			// 	mark: (e) => {
-			// 		console.log(e);
-			// 	},
-			// 	error: (e) => console.log(e)
-			// });
 
 			messages = [
 				...messages,
@@ -69,8 +39,7 @@
 	}
 
 	onMount(() => {
-		// Пример начального вопроса
-		//callChatGPT();
+		callChatGPT(); // Call on component mount for initial question
 	});
 </script>
 
@@ -101,6 +70,15 @@
 		overflow-y: auto;
 		max-height: 70vh;
 		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		max-height: 70vh;
+		overflow-y: auto;
+		padding: 10px;
+		background-color: #f4f4f8; /* Светлый фон */
+		border-radius: 10px; /* Скругленные углы */
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
 	}
 
 	.userMessage {

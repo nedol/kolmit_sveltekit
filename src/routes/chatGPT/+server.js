@@ -1,16 +1,21 @@
-import Chat from 'chatgpt-unlimited';
-import { authToken } from './chatgpt_tokken.js';
+// import Chat from 'chatgpt-unlimited';
+// import { authToken } from './chatgpt_tokken.js';
+import { Hercai } from 'hercai';
+const herc = new Hercai();
 // Функция для взаимодействия с ChatGPT Unlimited
-async function chatGPT(prompt) {
+async function chatGPT(question) {
 	try {
 		// Создаем запрос на сервер
-		const response = await Chat.create(prompt);
+		/* Available Models */
+		/* "v3" , "v3-32k" , "turbo" , "turbo-16k" , "gemini" */
+		/* Default Model; "v3" */
+		let response = await herc.question({ model: 'v3', content: question });
 
 		// Выводим ответ в консоль
-		console.log(response.chat);
-		return response.chat;
+
+		return response.reply;
 	} catch (error) {
-		console.error('Ошибка при взаимодействии с ChatGPT:', error);
+		console.error('Ошибка при взаимодействии с Hercai:', error);
 	}
 }
 

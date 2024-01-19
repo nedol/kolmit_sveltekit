@@ -1,6 +1,7 @@
 {
     "1": {
-        "Задача для chatGPT": "Поиск грамматических ошибок в последующих сообщениях."
+        "Request": "Answering in json",
+        "Please": "Correct all mistakes you've found in the current message."
     },
     "2": "Язык - голландский. Поиск грамматических ошибок в последующих сообщениях."
 }
