@@ -319,7 +319,7 @@ export let dialog_data = {
 		{
 			num: '4',
 			question: {
-				nl: 'Werk hij?',
+				nl: 'Werkt hij?',
 				ru: 'Работает ли он?',
 				uk: 'Чи працює він?',
 				fr: 'Travaille-t-il?',

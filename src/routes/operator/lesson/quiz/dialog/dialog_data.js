@@ -291,7 +291,7 @@ export let dialog_data = {
 		{
 			num: '4',
 			question: {
-				text: 'Werk hij?'
+				text: 'Werkt hij?'
 			},
 			answer: {
 				text: 'Nee, hij is gepensioneerd./ Ja, hij werkt als … ./ Ja, hij is …',
