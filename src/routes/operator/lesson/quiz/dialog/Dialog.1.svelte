@@ -272,6 +272,7 @@
 		tr_input = '';
 
 		let text = dialog_data.content[cur_qa].question['nl'].replace(/[^\w\s]/gi, '');
+		annyang.removeCommands();
 		annyang.addCommands({ [text]: helloFunction });
 		isListening = true;
 		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
@@ -279,7 +280,7 @@
 
 			console.log(commandText); // sample output: 'hello (there)'
 			console.log(phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
-			annyang.removeCommands();
+
 			annyang.pause();
 			isListening = false;
 		});
