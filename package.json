@@ -54,6 +54,7 @@
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@vercel/postgres": "^0.4.2",
 		"ai": "^2.2.30",
+		"annyang": "^2.6.1",
 		"blueimp-load-image": "^5.16.0",
 		"chatgpt-unlimited": "^1.0.0",
 		"dotenv": "^16.3.1",

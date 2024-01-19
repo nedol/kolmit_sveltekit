@@ -66,16 +66,10 @@
 <style>
 	.chat-container {
 		position: absolute;
+		bottom: 0;
 		width: 100%;
 		overflow-y: auto;
 		max-height: 70vh;
-		bottom: 0;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		max-height: 70vh;
-		overflow-y: auto;
-		padding: 10px;
 		background-color: #f4f4f8; /* Светлый фон */
 		border-radius: 10px; /* Скругленные углы */
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
@@ -85,7 +79,7 @@
 		margin: 5px;
 		padding: 8px;
 		border-radius: 8px;
-		width: 60%;
+		width: 80%;
 	}
 
 	.userMessage.question {
@@ -97,6 +91,7 @@
 	.userMessage.answer {
 		background-color: #e0e0e0; /* Цвет для ответов */
 		position: relative;
+		margin-right: 20px;
 		float: right;
 	}
 

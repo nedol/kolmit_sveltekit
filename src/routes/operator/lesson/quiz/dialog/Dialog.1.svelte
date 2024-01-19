@@ -1,7 +1,15 @@
 <script>
 	import { onMount, onDestroy, getContext } from 'svelte';
+	import EasySpeech from 'easy-speech';
+	import annyang from 'annyang';
+	annyang.setLanguage('nl-NL');
+	annyang.start({ autoRestart: false, continuous: false });
+	annyang.pause();
+	annyang.debug(true);
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
+	import Textfield from '@smui/textfield';
+	import HelperText from '@smui/textfield/helper-text';
 	import CircularProgress from '@smui/circular-progress';
 	import { langs } from '$lib/js/stores.js';
 	import { dicts } from '$lib/js/stores.js';
@@ -11,11 +19,13 @@
 		mdiArrowRight,
 		mdiArrowLeft,
 		mdiShareVariant,
-		mdiShuffle,
-		mdiAccountConvertOutline
+		mdiMicrophone,
+		mdiMicrophoneOutline,
+		mdiAccountConvertOutline,
+		mdiVolumeHigh
 	} from '@mdi/js';
 	import { lesson } from '$lib/js/stores.js';
-
+	import { tts } from '$lib/js/stores.js';
 	import { dc_oper } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
 	// import { dialog_data } from './dialog_data.js';
@@ -36,12 +46,16 @@
 
 	let share_mode = false;
 	export let data;
-
+	let showSpeakerButton = false;
+	let tr_input = '';
+	let tf_label = '';
 	let cur_html = 0;
 	let cur_qa = 0;
 	let q, q_shfl, a_shfl, a, d;
 
 	let bottomAppBar;
+
+	let isListening = false;
 
 	let share_button = false;
 	let style_button;
@@ -96,6 +110,7 @@
 		dialog_data = await module['dialog_data'];
 		dialog_data.name = data.name;
 		Dialog();
+		onClickMicrophone();
 	}
 
 	function Dialog() {
@@ -131,6 +146,7 @@
 
 	onDestroy(() => {
 		// share_button = false;
+		annyang.abort();
 	});
 
 	function handleBackClick() {
@@ -141,8 +157,11 @@
 	function onNextQA() {
 		cur_qa++;
 		visibility[1] = 'hidden';
+		tr_input = '';
 		Dialog();
 		SendData();
+		onClickMicrophone();
+		showSpeakerButton = false;
 	}
 
 	function onBackQA() {
@@ -150,6 +169,7 @@
 		cur_qa--;
 		Dialog();
 		SendData();
+		onClickMicrophone();
 	}
 
 	function onShare() {
@@ -218,6 +238,7 @@
 
 	function onClickQ() {
 		visibility[1] = 'visible';
+		showSpeakerButton = true;
 	}
 
 	function shuffle(array) {
@@ -226,6 +247,42 @@
 			[array[i], array[j]] = [array[j], array[i]];
 		}
 		return array;
+	}
+
+	async function speak() {
+		setTimeout(() => {
+			EasySpeech.cancel();
+			EasySpeech.speak({
+				text: dialog_data.content[cur_qa].question['nl'],
+				voice: $tts.voice,
+				volume: 1,
+				rate: 0.7,
+				error: (e) => EasySpeech.reset()
+			});
+		}, 0);
+
+		// }
+	}
+
+	function onClickMicrophone() {
+		let helloFunction = (text) => {
+			console.log(text);
+		};
+		annyang.resume();
+		tr_input = '';
+
+		let text = dialog_data.content[cur_qa].question['nl'].replace(/[^\w\s]/gi, '');
+		annyang.addCommands({ [text]: helloFunction });
+		isListening = true;
+		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
+			tr_input = dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
+
+			console.log(commandText); // sample output: 'hello (there)'
+			console.log(phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
+			annyang.removeCommands();
+			annyang.pause();
+			isListening = false;
+		});
 	}
 </script>
 
@@ -255,11 +312,31 @@
 			</div>
 			<div style="">
 				<div class="tip" style="visibility:{visibility[1]}">
-					{q_shfl}
+					{dialog_data.content[cur_qa].question['nl']}
 				</div>
-				<!-- <button on:click={onClickQ} class="toggleButton">
-						<span class="material-symbols-outlined"> ? </span>
-					</button> -->
+				{#if showSpeakerButton}
+					<div class="speaker-button">
+						<IconButton on:click={speak}>
+							<Icon tag="svg" viewBox="0 0 24 24">
+								<path fill="currentColor" d={mdiVolumeHigh} />
+							</Icon>
+						</IconButton>
+					</div>
+				{/if}
+				<div class="margins" style="text-align: center;">
+					<IconButton class="material-icons" aria-label="Back" on:click={onClickMicrophone}>
+						<Icon tag="svg" viewBox="0 0 24 24">
+							{#if isListening}
+								<path fill="currentColor" d={mdiMicrophone} />
+							{:else}
+								<path fill="currentColor" d={mdiMicrophoneOutline} />
+							{/if}
+						</Icon>
+					</IconButton>
+					<Textfield textarea bind:value={tr_input} label="Говори!" style="width:80%">
+						<HelperText slot="helper">Переведи и скажи</HelperText>
+					</Textfield>
+				</div>
 			</div>
 			<div class="title">
 				{dict['Проконтролируй ответ'][$langs]}:
@@ -330,9 +407,14 @@
 		z-index: 3;
 	}
 
-	/* .card:hover {
-		transform: scale(1.05);
-	} */
+	.speaker-button {
+		position: absolute;
+		flex: auto;
+		top: 60px;
+		right: 10px;
+		transform: translate(50%, 0%);
+		font-size: large;
+	}
 
 	.cnt {
 		position: absolute;

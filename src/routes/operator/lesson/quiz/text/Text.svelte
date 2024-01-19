@@ -1,6 +1,5 @@
 <script>
 	import { onMount, getContext, onDestroy } from 'svelte';
-	import md5 from 'md5';
 	import translate from 'translate';
 	import EasySpeech from 'easy-speech';
 	import CircularProgress from '@smui/circular-progress';

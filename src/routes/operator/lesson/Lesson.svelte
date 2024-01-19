@@ -81,15 +81,19 @@
 
 	function BuildQuizUsers(qu) {
 		Object.keys(qu).map((quiz) => {
-			console.log(qu[quiz]);
-			quiz_users[quiz] = [];
+			quiz_users[quiz] = [
+				{
+					name: 'Tutor',
+					src: './src/lib/images/tutor.png'
+				}
+			];
 			qu[quiz].map((user) => {
 				if (user === $operator.em) {
 					checked[quiz] = true;
 					return false;
 				}
 				let obj = find(usersPic, { email: user });
-				// let obj = find(usersPic, { email: user });
+				console.log(obj);
 				if ($users_status[user] !== 'inactive') quiz_users[quiz].push(obj);
 			});
 		});
@@ -197,7 +201,11 @@
 	}
 
 	function OnClickUserCard(ev) {
-		const em = ev.currentTarget.attributes['email'].value;
+		if (ev.currentTarget.attributes['email']) {
+			const em = ev.currentTarget.attributes['email'].value;
+		} else {
+			onClickQuiz(ev);
+		}
 	}
 </script>
 
@@ -280,7 +288,17 @@
 														<div class="user-cards">
 															{#each quiz_users[quiz.name] as qu, q}
 																{#if qu.email !== $operator.em}
-																	<div on:click={OnClickUserCard} email={qu.email}>
+																	<div
+																		on:click={OnClickUserCard}
+																		email={qu.email}
+																		{t}
+																		type={quiz.type}
+																		name={quiz.name}
+																		level={level.level}
+																		theme={theme.num}
+																		theme_name={theme.name}
+																		title={quiz.title}
+																	>
 																		<Card style="width:35px; height:35px; margin-right:15px">
 																			<Media class="card-media-square" aspectRatio="square">
 																				<MediaContent>
@@ -361,7 +379,7 @@
 	.form-field-container {
 		display: flex;
 		justify-content: flex-end;
-		align-items: center;
+		align-items: right;
 		width: 100%; /* Занимать всю доступную ширину */
 		z-index: 2;
 	}
