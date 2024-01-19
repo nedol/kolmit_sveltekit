@@ -32,6 +32,7 @@
 		status: item.status
 	}));
 
+	import tutor_src from '$lib/images/tutor.png';
 	// import { view } from '$lib/js/stores.js';
 	export let view;
 
@@ -84,7 +85,7 @@
 			quiz_users[quiz] = [
 				{
 					name: 'Tutor',
-					src: './src/lib/images/tutor.png'
+					src: tutor_src
 				}
 			];
 			qu[quiz].map((user) => {
