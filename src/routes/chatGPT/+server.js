@@ -9,7 +9,7 @@ async function chatGPT(question) {
 		/* Available Models */
 		/* "v3" , "v3-32k" , "turbo" , "turbo-16k" , "gemini" */
 		/* Default Model; "v3" */
-		let response = await herc.question({ model: 'v3', content: question });
+		let response = await herc.question({ model: 'gemini', content: question });
 
 		// Выводим ответ в консоль
 

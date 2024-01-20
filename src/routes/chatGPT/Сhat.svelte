@@ -16,7 +16,7 @@
 
 			const response = await fetch(`/chatGPT`, {
 				method: 'POST',
-				body: JSON.stringify({ question: userInput + prompt }),
+				body: JSON.stringify({ question: userInput }),
 				headers: { 'Content-Type': 'application/json' }
 			});
 

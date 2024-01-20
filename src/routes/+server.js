@@ -14,16 +14,16 @@ import { request } from 'undici';
 // set('global.rtcPool', { user: {}, operator: {} });
 // CreateServer();
 
-import Chat from 'chatgpt-unlimited';
+// import Chat from 'chatgpt-unlimited';
 
-async function chat() {
-	const prompt = 'Hello! How Are you? Can you speak Dutch?';
+// async function chat() {
+// 	const prompt = 'Hello! How Are you? Can you speak Dutch?';
 
-	const response = await Chat.create(prompt);
-	console.log(response);
-}
+// 	const response = await Chat.create(prompt);
+// 	console.log(response);
+// }
 
-chat();
+// chat();
 
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';

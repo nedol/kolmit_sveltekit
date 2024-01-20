@@ -2,10 +2,14 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import EasySpeech from 'easy-speech';
 	import annyang from 'annyang';
-	annyang.setLanguage('nl-NL');
-	annyang.start({ autoRestart: false, continuous: false });
-	annyang.pause();
-	annyang.debug(true);
+	// const ElevenLabs = require('elevenlabs-node');
+	// const fs = require('fs-extra');
+
+	// const voice = new ElevenLabs({
+	// 	apiKey: 'c6eb3b1bd5e2b1efffc104fc0a356935', // Your API key from Elevenlabs
+	// 	voiceId: 'pNInz6obpgDQGcFmaJgB' // A Voice ID from Elevenlabs
+	// });
+
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Textfield from '@smui/textfield';
@@ -30,6 +34,9 @@
 	import { dc_user } from '$lib/js/stores.js';
 	// import { dialog_data } from './dialog_data.js';
 	import { call_but_status } from '$lib/js/stores.js';
+
+	import pkg from 'lodash';
+	const { maxBy } = pkg;
 
 	import Dialog2 from './Dialog.2.svelte';
 
@@ -134,16 +141,6 @@
 		a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 	}
 
-	onMount(() => {
-		// const parentWidth = window.innerWidth;
-		// containerWidth = parentWidth + 'px';
-
-		// const parentHeight = window.innerHeight;
-		// containerHeight = parentHeight + 'px';
-
-		style_button = style_button_non_shared;
-	});
-
 	onDestroy(() => {
 		// share_button = false;
 		annyang.abort();
@@ -160,6 +157,7 @@
 		tr_input = '';
 		Dialog();
 		SendData();
+		annyang.pause();
 		onClickMicrophone();
 		showSpeakerButton = false;
 	}
@@ -271,20 +269,85 @@
 		annyang.resume();
 		tr_input = '';
 
-		let text = dialog_data.content[cur_qa].question['nl'].replace(/[^\w\s]/gi, '');
+		let text = dialog_data.content[cur_qa].question['nl'].replace(/[^\w\s]/gi, ''); //.split(' ');
+
 		annyang.removeCommands();
-		annyang.addCommands({ [text]: helloFunction });
+		annyang.addCommands({ 'Waar woont jouw familie': helloFunction });
 		isListening = true;
 		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-			tr_input = dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
+			tr_input = userSaid; //dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
 
-			console.log(commandText); // sample output: 'hello (there)'
-			console.log(phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
+			console.log('commandText', commandText); // sample output: 'hello (there)'
+			console.log('phrases', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
 
 			annyang.pause();
 			isListening = false;
 		});
+		let speechRecognizer = annyang.getSpeechRecognizer();
+
+		speechRecognizer.addEventListener(
+			'result',
+			async function (event) {
+				const maxConfidenceItem = maxBy(event.results[0], 'confidence');
+				tr_input = maxConfidenceItem.transcript;
+
+				const response = await fetch(`/chatGPT`, {
+					method: 'POST',
+					body: JSON.stringify({
+						question: `Выяви ошибки в порядоке слов в предложении, исходя из синтаксиса голландского языка. 
+						
+						Если есть ошибки пришли ТОЛЬКО правильный вариант, и ничего больше:${maxConfidenceItem.transcript}`
+					}),
+					headers: { 'Content-Type': 'application/json' }
+				});
+
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+
+				const data = await response.json();
+				tr_input = data.resp;
+
+				isListening = false;
+			},
+			{ once: true }
+		);
+
+		annyang.addCallback('error', (er) => {
+			console.log(er);
+		});
 	}
+
+	function TTS11lab(text) {
+		const voiceResponse = voice
+			.textToSpeechStream({
+				// Required Parameters
+				textInput: 'mozzy is cool', // The text you wish to convert to speech
+
+				// Optional Parameters
+				voiceId: '21m00Tcm4TlvDq8ikWAM', // A different Voice ID from the default
+				stability: 0.5, // The stability for the converted speech
+				similarityBoost: 0.5, // The similarity boost for the converted speech
+				modelId: 'eleven_multilingual_v2', // The ElevenLabs Model ID
+				style: 1, // The style exaggeration for the converted speech
+				responseType: 'stream', // The streaming type (arraybuffer, stream, json)
+				speakerBoost: true // The speaker boost for the converted speech
+			})
+			.then((res) => {
+				res.pipe(fs.createWriteStream(fileName));
+			});
+	}
+
+	onMount(() => {
+		annyang.setLanguage('nl-NL');
+		annyang.start({ autoRestart: false, continuous: false });
+		annyang.pause();
+		annyang.debug(true);
+
+		// TTS11lab();
+
+		style_button = style_button_non_shared;
+	});
 </script>
 
 <!-- <link
@@ -311,7 +374,7 @@
 			<div class="question">
 				{q[$langs]}
 			</div>
-			<div style="">
+			<div style="text-align: center;">
 				<div class="tip" style="visibility:{visibility[1]}">
 					{dialog_data.content[cur_qa].question['nl']}
 				</div>
@@ -324,26 +387,28 @@
 						</IconButton>
 					</div>
 				{/if}
-				<div class="margins" style="text-align: center;">
-					<IconButton class="material-icons" aria-label="Back" on:click={onClickMicrophone}>
-						<Icon tag="svg" viewBox="0 0 24 24">
-							{#if isListening}
-								<path fill="currentColor" d={mdiMicrophone} />
-							{:else}
-								<path fill="currentColor" d={mdiMicrophoneOutline} />
-							{/if}
-						</Icon>
-					</IconButton>
-					<Textfield textarea bind:value={tr_input} label="Говори!" style="width:80%">
-						<HelperText slot="helper">Переведи и скажи</HelperText>
-					</Textfield>
-				</div>
 			</div>
 			<div class="title">
 				{dict['Проконтролируй ответ'][$langs]}:
 			</div>
 			<div class="answer" style="visibility:{visibility[1]}">
 				{@html a['nl']}
+			</div>
+
+			<div class="margins" style="text-align: center;">
+				<IconButton class="material-icons" aria-label="Back" on:click={onClickMicrophone}>
+					<Icon tag="svg" viewBox="0 0 24 24">
+						{#if isListening}
+							<path fill="currentColor" d={mdiMicrophone} />
+						{:else}
+							<path fill="currentColor" d={mdiMicrophoneOutline} />
+						{/if}
+					</Icon>
+				</IconButton>
+				{@html tr_input}
+				<!-- <Textfield textarea bind:value={tr_input} label="Говори!" style="width:80%">
+						<HelperText slot="helper">Переведи и скажи</HelperText>
+					</Textfield> -->
 			</div>
 
 			<div>
@@ -396,22 +461,30 @@
 {/if}
 
 <style>
-	.share-button {
-		position: absolute;
-		top: 156px;
-		left: 10px;
-		/* background-color: #2196f3; */
-		color: grey;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
-		z-index: 3;
+	.marg_tip {
+		display: flex; /* Используем flexbox для выравнивания в ряд */
+		align-items: center; /* Выравнивание элементов по вертикали по центру */
+		justify-content: end; /* Выравнивание элементов по горизонтали по центру */
+	}
+	/* Если вы хотите добавить пространство между элементами, вы можете использовать margin */
+	.marg_tip > * {
+		margin-right: 10px; /* Пример: 10px пространства между элементами */
+	}
+	.margins {
+		display: flex; /* Используем flexbox для выравнивания в ряд */
+		align-items: center; /* Выравнивание элементов по вертикали по центру */
+		justify-content: start; /* Выравнивание элементов по горизонтали по центру */
+	}
+
+	/* Если вы хотите добавить пространство между элементами, вы можете использовать margin */
+	.margins > * {
+		margin-right: 10px; /* Пример: 10px пространства между элементами */
 	}
 
 	.speaker-button {
 		position: absolute;
 		flex: auto;
-		top: 60px;
+		top: 45px;
 		right: 10px;
 		transform: translate(50%, 0%);
 		font-size: large;
@@ -432,7 +505,7 @@
 		color: grey;
 		position: relative;
 		text-align: center;
-		margin: 20px;
+		margin: 5px;
 	}
 
 	.question {
