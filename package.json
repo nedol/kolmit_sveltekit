@@ -63,7 +63,7 @@
 		"elevenlabs-node": "^2.0.3",
 		"express": "^4.18.2",
 		"fs-extra": "^11.2.0",
-		"hercai": "^12.0.1",
+		"hercai": "^12.1.0",
 		"lodash": "^4.17.21",
 		"lucide-svelte": "^0.291.0",
 		"luxon": "^3.4.4",
