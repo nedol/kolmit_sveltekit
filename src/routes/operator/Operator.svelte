@@ -3,6 +3,8 @@
 	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
 
+	import bell from '$lib/mp3/bell.mp3';
+
 	import EasySpeech from 'easy-speech';
 
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -183,6 +185,11 @@
 				// await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
 				console.log(EasySpeech.status());
+
+				let audio = new Audio(); // Создаем объект Audio
+
+				audio.src = bell;
+				audio.play(); // Воспроизводим звук
 
 				console.log('Приложение активно');
 			}
@@ -520,7 +527,7 @@
 	};
 </script>
 
-<div style="display:flex; height:60px; flex-wrap: nowrap;justify-content: space-between;">
+<div style="display:flex; height:40px; flex-wrap: nowrap;justify-content: space-between;">
 	<!-- <VideoLocal {...local.video} /> -->
 	<div bind:this={$user_placeholder}>
 		{#if remote.text.display}
@@ -595,7 +602,7 @@
 	<div
 		class="videolocal_div"
 		on:click|preventDefault|stopPropagation={handleCommandClick}
-		style="position:relative; right: 5px; width: 70px;"
+		style="position:relative; right: 5px; width: 50px;"
 	>
 		<VideoLocal {...local.video}>
 			<svelte:fragment slot="footer">

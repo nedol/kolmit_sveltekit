@@ -2,13 +2,9 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import EasySpeech from 'easy-speech';
 	import annyang from 'annyang';
-	// const ElevenLabs = require('elevenlabs-node');
-	// const fs = require('fs-extra');
 
-	// const voice = new ElevenLabs({
-	// 	apiKey: 'c6eb3b1bd5e2b1efffc104fc0a356935', // Your API key from Elevenlabs
-	// 	voiceId: 'pNInz6obpgDQGcFmaJgB' // A Voice ID from Elevenlabs
-	// });
+	// import '$lib/js/talkify.js';
+	// import 'talkify-tts/dist/talkify.min.js';
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -272,7 +268,7 @@
 		let text = dialog_data.content[cur_qa].question['nl'].replace(/[^\w\s]/gi, ''); //.split(' ');
 
 		annyang.removeCommands();
-		annyang.addCommands({ 'Waar woont jouw familie': helloFunction });
+		annyang.addCommands({ [text]: helloFunction });
 		isListening = true;
 		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
 			tr_input = userSaid; //dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
@@ -291,22 +287,22 @@
 				const maxConfidenceItem = maxBy(event.results[0], 'confidence');
 				tr_input = maxConfidenceItem.transcript;
 
-				const response = await fetch(`/chatGPT`, {
-					method: 'POST',
-					body: JSON.stringify({
-						question: `Выяви ошибки в порядоке слов в предложении, исходя из синтаксиса голландского языка. 
-						
-						Если есть ошибки пришли ТОЛЬКО правильный вариант, и ничего больше:${maxConfidenceItem.transcript}`
-					}),
-					headers: { 'Content-Type': 'application/json' }
-				});
+				// const response = await fetch(`/chatGPT`, {
+				// 	method: 'POST',
+				// 	body: JSON.stringify({
+				// 		question: `Выяви ошибки в порядоке слов в предложении, исходя из грамматики голландского языка.
 
-				if (!response.ok) {
-					throw new Error(`HTTP error! Status: ${response.status}`);
-				}
+				// 		Если есть ошибки пришли ТОЛЬКО правильный вариант, если ошибок нет - пришли 'noerrors'б:${maxConfidenceItem.transcript}`
+				// 	}),
+				// 	headers: { 'Content-Type': 'application/json' }
+				// });
 
-				const data = await response.json();
-				tr_input = data.resp;
+				// if (!response.ok) {
+				// 	throw new Error(`HTTP error! Status: ${response.status}`);
+				// }
+
+				// const data = await response.json();
+				// tr_input = data.resp;
 
 				isListening = false;
 			},
@@ -318,42 +314,39 @@
 		});
 	}
 
-	function TTS11lab(text) {
-		const voiceResponse = voice
-			.textToSpeechStream({
-				// Required Parameters
-				textInput: 'mozzy is cool', // The text you wish to convert to speech
-
-				// Optional Parameters
-				voiceId: '21m00Tcm4TlvDq8ikWAM', // A different Voice ID from the default
-				stability: 0.5, // The stability for the converted speech
-				similarityBoost: 0.5, // The similarity boost for the converted speech
-				modelId: 'eleven_multilingual_v2', // The ElevenLabs Model ID
-				style: 1, // The style exaggeration for the converted speech
-				responseType: 'stream', // The streaming type (arraybuffer, stream, json)
-				speakerBoost: true // The speaker boost for the converted speech
-			})
-			.then((res) => {
-				res.pipe(fs.createWriteStream(fileName));
-			});
-	}
-
 	onMount(() => {
 		annyang.setLanguage('nl-NL');
 		annyang.start({ autoRestart: false, continuous: false });
 		annyang.pause();
 		annyang.debug(true);
 
-		// TTS11lab();
+		// let player = new talkify.TtsPlayer(); //or new talkify.Html5Player()
+		// player.playText('Hello world');
 
 		style_button = style_button_non_shared;
+
+		// document.addEventListener('visibilitychange', async () => {
+		// 	if (document.hidden) {
+		// 		// Ваш код, выполняемый при переходе приложения в неактивное состояние
+		// 		// if (audioCtx) audioCtx.suspend();
+
+		// 		// EasySpeech.pause();
+		// 		await EasySpeech.cancel();
+		// 		// await EasySpeech.reset();
+		// 		console.log(EasySpeech.status());
+		// 	} else {
+		// 		// EasySpeech.cancel();
+		// 		// await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
+
+		// 		console.log(EasySpeech.status());
+
+		// 		console.log('Приложение активно');
+		// 	}
+		// });
 	});
 </script>
 
-<!-- <link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/> -->
+{@html '<script src="talkify-tts/dist/talkify.min.js"></script>'}
 
 {#if share_button && $call_but_status === 'talk'}
 	<div style={style_button} on:click={onShare}>

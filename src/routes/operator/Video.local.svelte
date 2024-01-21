@@ -29,7 +29,7 @@
 
 <div class="card-display" bind:this={parent_div}>
 	<div class="card-container" bind:this={card}>
-		<Card style="min-width: 50px;">
+		<Card style="min-width: 40px;">
 			<Media class="card-media-square" aspectRatio="square">
 				<MediaContent>
 					<video
@@ -60,7 +60,7 @@
 		margin-right: auto;
 		margin-left: auto;
 		margin-top: auto;
-		max-width: 50px;
-		max-height: 50px;
+		max-width: 40px;
+		max-height: 40px;
 	}
 </style>

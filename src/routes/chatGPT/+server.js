@@ -1,5 +1,6 @@
 // import Chat from 'chatgpt-unlimited';
 // import { authToken } from './chatgpt_tokken.js';
+
 import { Hercai } from 'hercai';
 const herc = new Hercai();
 // Функция для взаимодействия с ChatGPT Unlimited
