@@ -3,13 +3,10 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
-import commonjs from '@rollup/plugin-commonjs';
+import commonjs from 'vite-plugin-commonjs';
 
 export default defineConfig({
-	plugins: [
-		sveltekit()
-		// ,commonjs()
-	],
+	plugins: [sveltekit(), commonjs()],
 	assetsInclude: ['**/*.html'],
 
 	server: {
@@ -29,9 +26,5 @@ export default defineConfig({
 		// ]
 	}
 });
-// module.exports = {
-// 	server: {
 
-// 	}
-// };
 //# sourceMappingURL=vite.config.js.map

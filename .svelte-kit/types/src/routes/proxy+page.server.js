@@ -5,6 +5,8 @@ import { ice_conf } from '$lib/ice_conf';
 import os from 'os';
 import Turn from 'node-turn';
 
+const ElevenLabs = require('elevenlabs-node');
+
 import cc from './cc.json';
 import qu from './qu.json';
 
@@ -20,12 +22,12 @@ if (!global.turn_server) {
 	global.turn_server = new Turn({
 		// set options
 		authMech: 'long-term',
-		listeningPort: 80
+		listeningPort: 443
 	});
 	global.turn_server.start();
 	global.turn_server.addUser('username', 'password');
 	global.turn_server.log();
-	console.log('Turn server started');
+	console.log('Turn server started on ' + global.turn_server.listeningPort);
 }
 
 /** @param {Parameters<import('./$types').PageServerLoad>[0]} event */
