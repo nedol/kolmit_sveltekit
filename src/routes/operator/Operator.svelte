@@ -3,10 +3,6 @@
 	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
 
-	import bell from '$lib/mp3/bell.mp3';
-
-	import EasySpeech from 'easy-speech';
-
 	import IconButton, { Icon } from '@smui/icon-button';
 	import { mdiAccountBox } from '@mdi/js';
 	import CircularProgress from '@smui/circular-progress';
@@ -29,7 +25,7 @@
 
 	import RecordedVideo from './RecordedVideo.svelte';
 
-	import Lesson from './lesson/Lesson.svelte';
+	import Lesson from '../lesson/Lesson.svelte';
 
 	import Chat from '../chatGPT/Сhat.svelte';
 
@@ -80,7 +76,7 @@
 	let synthesis;
 	let commandsList;
 	let showCommands = false;
-	let debug = 'debug';
+
 	let debug_div;
 
 	import { call_but_status } from '$lib/js/stores.js';
@@ -130,21 +126,12 @@
 			});
 	}
 
-	onDestroy(() => {
-		debug = 'onDestroy';
-	});
+	onDestroy(() => {});
 
 	let audioCtx;
 
 	onMount(async () => {
 		try {
-			const es_det = EasySpeech.detect();
-			await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 0.7 }); // required
-
-			EasySpeech.on('error', () => {
-				EasySpeech.reset();
-			});
-
 			rtc = new RTCOperator($operator, uid, $signal);
 			initRTC();
 			rtc.SendCheck();
@@ -161,57 +148,12 @@
 				console.log('Web Audio API is not supported in this browser');
 			}
 
-			let voices = EasySpeech.voices();
-
-			initSpeech(voices);
-
 			// Добавьте слушателя событий для скрытия списка команд при клике за его пределами
 			// document.addEventListener('click', handleOutsideClick);
 		} catch (ex) {
 			console.log();
 		}
-
-		document.addEventListener('visibilitychange', async () => {
-			if (document.hidden) {
-				// Ваш код, выполняемый при переходе приложения в неактивное состояние
-				// if (audioCtx) audioCtx.suspend();
-
-				// EasySpeech.pause();
-				// await EasySpeech.cancel();
-				// await EasySpeech.reset();
-				console.log(EasySpeech.status());
-			} else {
-				// EasySpeech.cancel();
-				// await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
-
-				console.log(EasySpeech.status());
-
-				let audio = new Audio(); // Создаем объект Audio
-
-				audio.src = bell;
-				audio.play(); // Воспроизводим звук
-
-				console.log('Приложение активно');
-			}
-		});
 	});
-
-	function initSpeech(voices) {
-		for (let v in voices) {
-			$tts = { voice: voices[v] };
-
-			if (voices[v].lang.includes('nl')) {
-				$tts = { voice: voices[v] };
-
-				if (voices[v].lang.includes('BE')) {
-					// utterance.voice = voices[index]; //'Microsoft Bart - Dutch (Belgium)';
-					$tts = { voice: voices[v] };
-					break;
-				}
-			}
-		}
-		debug = $tts.voice.name;
-	}
 
 	let progress = {
 		display: 'block',

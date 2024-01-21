@@ -5,8 +5,6 @@ import { ice_conf } from '$lib/ice_conf';
 import os from 'os';
 import Turn from 'node-turn';
 
-const ElevenLabs = require('elevenlabs-node');
-
 import cc from './cc.json';
 import qu from './qu.json';
 

@@ -1,2 +1,2 @@
-import * as universal from "../../../../src/routes/operator/lesson/+page.js";
+import * as universal from "../../../../src/routes/lesson/+page.js";
 export { universal };

@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy, getContext } from 'svelte';
-	import EasySpeech from 'easy-speech';
+
 	import annyang from 'annyang';
 
 	// import '$lib/js/talkify.js';
@@ -35,6 +35,8 @@
 	const { maxBy } = pkg;
 
 	import Dialog2 from './Dialog.2.svelte';
+	import EasySpeech from '../../tts/EasySpeech.svelte';
+	let easyspeech;
 
 	let dialog_data;
 
@@ -109,7 +111,7 @@
 	}
 
 	async function init() {
-		const module = await import(`../../../../assets/dialog/${data.name}.js`);
+		const module = await import(`../../../assets/dialog/${data.name}.js`);
 		dialog_data = await module['dialog_data'];
 		dialog_data.name = data.name;
 		Dialog();
@@ -245,16 +247,39 @@
 
 	async function speak() {
 		setTimeout(() => {
-			EasySpeech.cancel();
-			EasySpeech.speak({
-				text: dialog_data.content[cur_qa].question['nl'],
-				voice: $tts.voice,
-				volume: 1,
-				rate: 0.7,
-				error: (e) => EasySpeech.reset()
-			});
+			easyspeech.Speak(dialog_data.content[cur_qa].question['nl']);
 		}, 0);
 
+		return;
+
+		const headers = {
+			'Content-Type': 'application/json'
+			// Authorization: `Bearer ${token}`
+		};
+
+		let par = {};
+		par.proj = 'kolmit';
+		par.func = 'tts';
+		par.text = dialog_data.content[cur_qa].question['nl'];
+
+		fetch('/tts', {
+			method: 'POST',
+			// mode: 'no-cors',
+			body: JSON.stringify({ par }),
+			headers: { headers }
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log();
+
+				let audio = new Audio();
+				audio.src = './src/routes/tts/audio.mp3';
+				audio.play();
+			})
+			.catch((error) => {
+				console.log(error);
+				return [];
+			});
 		// }
 	}
 
@@ -314,37 +339,17 @@
 		});
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		annyang.setLanguage('nl-NL');
 		annyang.start({ autoRestart: false, continuous: false });
 		annyang.pause();
 		annyang.debug(true);
 
-		// let player = new talkify.TtsPlayer(); //or new talkify.Html5Player()
-		// player.playText('Hello world');
-
 		style_button = style_button_non_shared;
-
-		document.addEventListener('visibilitychange', async () => {
-			if (document.hidden) {
-				// Ваш код, выполняемый при переходе приложения в неактивное состояние
-				// if (audioCtx) audioCtx.suspend();
-
-				// EasySpeech.pause();
-				EasySpeech.cancel();
-				// await EasySpeech.reset();
-				console.log('EasySpeech.status:' + EasySpeech.status());
-			} else {
-				// EasySpeech.cancel();
-				await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
-
-				console.log('EasySpeech.status:' + EasySpeech.status());
-
-				console.log('Приложение активно');
-			}
-		});
 	});
 </script>
+
+<EasySpeech bind:this={easyspeech}></EasySpeech>
 
 {#if share_button && $call_but_status === 'talk'}
 	<div style={style_button} on:click={onShare}>

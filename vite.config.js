@@ -8,7 +8,13 @@ import commonjs from 'vite-plugin-commonjs';
 export default defineConfig({
 	plugins: [sveltekit(), commonjs()],
 	assetsInclude: ['**/*.html'],
-
+	resolve: {
+		alias: {
+			// создание алиаса
+			$src: path.resolve('./src'),
+			$assets: path.resolve('./src/routes/assets')
+		}
+	},
 	server: {
 		//port: 3478, // Измените этот порт по вашему усмотрению
 		https: {

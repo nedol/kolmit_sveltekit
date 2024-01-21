@@ -1,7 +1,8 @@
 <script>
 	import { onMount, getContext, onDestroy } from 'svelte';
 	import translate from 'translate';
-	import EasySpeech from 'easy-speech';
+	import EasySpeech from '../../tts/EasySpeech.svelte';
+	let easyspeech;
 	import CircularProgress from '@smui/circular-progress';
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
@@ -47,7 +48,7 @@
 	async function init() {
 		if (!orig_text)
 			fetch(
-				`/operator/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
+				`/lesson?text=theme&level=${data.level}&theme=${data.theme}&title=${data.name}&abonent=${abonent}`
 			)
 				.then((response) => response.json())
 				.then((data) => {
@@ -61,7 +62,7 @@
 	}
 
 	function fetchText() {
-		fetch(`/operator/lesson?dict=theme&level=${data.level}&theme=${data.theme}&abonent=${abonent}`)
+		fetch(`/lesson?dict=theme&level=${data.level}&theme=${data.theme}&abonent=${abonent}`)
 			.then((response) => response.json())
 			.then((data) => {
 				woorden = merge(woorden, JSON.parse(data.data));
@@ -74,8 +75,6 @@
 	}
 
 	async function handleBackClick() {
-		EasySpeech.cancel();
-
 		$lesson.data = { quiz: '' }; // При клике на "Back" показываем компонент Lesson
 	}
 
@@ -153,39 +152,19 @@
 	function TTSSpeak(text) {
 		setTimeout(() => {
 			window.speechSynthesis.cancel();
-			EasySpeech.speak({
-				text: text.replace(/<[^>]*>/g, ''),
-				voice: $tts.voice,
-				rate: 0.7,
-				boundary: (e) => {
-					// console.log(e);
-				},
-				end: (e) => {
-					speaker = mdiVolumeHigh;
-				},
-				start: (e) => {
-					console.log(e);
-				},
-				pause: (e) => {
-					console.log(e);
-				},
-				mark: (e) => {
-					console.log(e);
-				},
-				error: (e) => console.log(e)
-			});
+			easyspeech.Speak(text.replace(/<[^>]*>/g, ''));
 		}, 0);
 	}
 
 	function TTSPause() {
 		setTimeout(() => {
-			EasySpeech.pause();
+			easyspeech.Pause();
 		}, 0);
 	}
 
 	function TTSResume() {
 		setTimeout(() => {
-			EasySpeech.resume();
+			easyspeech.Resume();
 		}, 0);
 	}
 	async function onClickText(event) {
@@ -304,6 +283,7 @@
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
+<EasySpeech bind:this={easyspeech}></EasySpeech>
 
 <!-- <button  class="speaker-button"> -->
 

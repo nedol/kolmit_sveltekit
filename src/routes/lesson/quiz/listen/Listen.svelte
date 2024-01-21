@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import EasySpeech from 'easy-speech';
+
 	import Speak from './Speak.svelte';
 	import moment from 'moment';
 	moment.locale('nl-be');
@@ -15,6 +15,9 @@
 		mdiShareVariant,
 		mdiShuffle
 	} from '@mdi/js';
+
+	import EasySpeech from '../../tts/EasySpeech.svelte';
+	let easyspeech;
 
 	import { tts } from '$lib/js/stores.js';
 
@@ -315,16 +318,7 @@
 	}
 
 	async function speak(text) {
-		EasySpeech.cancel();
-		await EasySpeech.speak({
-			text: text,
-			rate: 0.7,
-			voice: $tts.voice,
-			error: (e) => {
-				console.log(e);
-				EasySpeech.reset();
-			}
-		});
+		easyspeech.Speak(text);
 	}
 
 	function repeat() {
@@ -413,6 +407,9 @@
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
+
+<EasySpeech bind:this={easyspeech}></EasySpeech>
+
 {#if share_button}
 	<IconButton class="material-icons" on:click={onShare} style={style_button}>
 		<Icon tag="svg" viewBox="0 0 24 24">

@@ -2,9 +2,11 @@
 	import { onMount, onDestroy } from 'svelte';
 	// import words from './80.json';
 	import { langs } from '$lib/js/stores.js';
-	import EasySpeech from 'easy-speech';
 
 	import CircularProgress from '@smui/circular-progress';
+
+	import EasySpeech from '../../tts/EasySpeech.svelte';
+	let easyspeech;
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
@@ -58,7 +60,7 @@
 	for (let n in names) {
 		// Создаем массив промисов для каждого запроса
 		const fetchPromises = names.map((name) => {
-			return fetch(`./operator/lesson?words=theme&name=${name}&owner=nedooleg@gmail.com`)
+			return fetch(`./lesson?words=theme&name=${name}&owner=nedooleg@gmail.com`)
 				.then((response) => response.json())
 				.then((data) => data.data)
 				.catch((error) => {
@@ -318,8 +320,7 @@
 		// } else {
 
 		setTimeout(() => {
-			EasySpeech.cancel();
-			EasySpeech.speak({ text: text, voice: $tts.voice, error: (e) => EasySpeech.reset() });
+			easyspeech.Speak(text);
 		}, 0);
 
 		// }
@@ -337,6 +338,8 @@
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
+
+<EasySpeech bind:this={easyspeech}></EasySpeech>
 
 <main>
 	{#if !words[0]}

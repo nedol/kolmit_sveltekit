@@ -9,22 +9,6 @@ const { find, findKey } = pkg;
 
 import { request } from 'undici';
 
-// import { CreateServer } from '$lib/server/server.js';
-// import { get, set } from 'node-global-storage';
-// set('global.rtcPool', { user: {}, operator: {} });
-// CreateServer();
-
-// import Chat from 'chatgpt-unlimited';
-
-// async function chat() {
-// 	const prompt = 'Hello! How Are you? Can you speak Dutch?';
-
-// 	const response = await Chat.create(prompt);
-// 	console.log(response);
-// }
-
-// chat();
-
 global.rtcPool;
 import { rtcPool_st } from '$lib/js/stores.js';
 rtcPool_st.subscribe((data) => {
