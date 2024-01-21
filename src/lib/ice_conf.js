@@ -10,6 +10,11 @@ export let ice_conf = {
 			urls: 'turn:kolmit-service.onrender.com:80?transport=udp',
 			username: 'username',
 			credential: 'password'
+		},
+		{
+			urls: 'turn:kolmit-service.onrender.com:80?transport=tcp',
+			username: 'username',
+			credential: 'password'
 		}
 	],
 	lifetimeDuration: '86400s'
