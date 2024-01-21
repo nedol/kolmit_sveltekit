@@ -34,8 +34,6 @@
 
 	import md5 from 'md5';
 
-	import { tts } from '$lib/js/stores.js';
-
 	import { lesson } from '$lib/js/stores.js';
 
 	import { signal } from '$lib/js/stores.js';

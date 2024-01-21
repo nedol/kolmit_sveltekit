@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	import Speak from './Speak.svelte';
 	import moment from 'moment';
@@ -18,8 +18,6 @@
 
 	import EasySpeech from '../../tts/EasySpeech.svelte';
 	let easyspeech;
-
-	import { tts } from '$lib/js/stores.js';
 
 	import { lesson } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
@@ -102,6 +100,10 @@
 	let div_input;
 
 	onMount(async () => {});
+
+	onDestroy(() => {
+		easyspeech.Cancel();
+	});
 
 	async function SendToPartner() {
 		if (share_mode && ($dc_user || $dc_oper)) {

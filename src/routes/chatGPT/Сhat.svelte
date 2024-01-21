@@ -1,8 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
-	import EasySpeech from 'easy-speech';
+
 	import prompt_data from './prompt/prompt_data.json';
-	import { tts } from '$lib/js/stores.js';
 
 	let userInput = '';
 	let messages = [];

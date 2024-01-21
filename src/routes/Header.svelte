@@ -6,7 +6,6 @@
 	import TopAppBar, { Row, Section, Title, AutoAdjust } from '@smui/top-app-bar';
 	import IconButton from '@smui/icon-button';
 
-	import EasySpeech from 'easy-speech';
 	import { lesson } from '$lib/js/stores.js';
 
 	import ru_flag from '$lib/images/flag-square-250_ru.png';
@@ -82,9 +81,6 @@
 								on:click={async () => {
 									console.log();
 									$lesson.data = { quiz: '' };
-									setTimeout(() => {
-										EasySpeech.cancel();
-									}, 0);
 									$view = 'lesson';
 								}}>{$dicts ? $dicts['LESSON'][$langs] : 'LESSON'}</Title
 							>

@@ -50,6 +50,4 @@ export let dc_user_state = writable();
 
 export let share_mode = writable(false);
 
-export let tts = writable();
-
 export let user_placeholder = writable();

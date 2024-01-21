@@ -25,7 +25,6 @@
 	import { langs } from '$lib/js/stores.js';
 
 	import { lesson } from '$lib/js/stores.js';
-	import { tts } from '$lib/js/stores.js';
 
 	export let data;
 	let bottomAppBar;
@@ -121,7 +120,9 @@
 		});
 	});
 
-	onDestroy(() => {});
+	onDestroy(() => {
+		easyspeech.Cancel();
+	});
 
 	function measureTextSize(text, cb) {
 		const measureElement = trans_div;
@@ -150,22 +151,15 @@
 	}
 
 	function TTSSpeak(text) {
-		setTimeout(() => {
-			window.speechSynthesis.cancel();
-			easyspeech.Speak(text.replace(/<[^>]*>/g, ''));
-		}, 0);
+		easyspeech.Speak(text.replace(/<[^>]*>/g, ''));
 	}
 
 	function TTSPause() {
-		setTimeout(() => {
-			easyspeech.Pause();
-		}, 0);
+		easyspeech.Pause();
 	}
 
 	function TTSResume() {
-		setTimeout(() => {
-			easyspeech.Resume();
-		}, 0);
+		easyspeech.Resume();
 	}
 	async function onClickText(event) {
 		let x, y;
@@ -279,10 +273,6 @@
 	}
 </script>
 
-<link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/>
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 
 <!-- <button  class="speaker-button"> -->

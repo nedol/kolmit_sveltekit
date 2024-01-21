@@ -26,10 +26,6 @@
 
 	export let data;
 
-	import { tts } from '$lib/js/stores.js';
-	let voice_name = '';
-	if ($tts && $tts.voice) voice_name = $tts.voice.name;
-
 	let words = [],
 		word;
 	let shuffleWords;
@@ -129,6 +125,8 @@
 
 	onDestroy(() => {
 		// Очищаем интервал при размонтировании компонента
+
+		easyspeech.Cancel();
 
 		console.log('Компонент размонтирован');
 	});
@@ -306,19 +304,7 @@
 		speak(currentWord.original);
 	}
 
-	async function speak(text) {
-		// if ($tts.speak) {
-		// 	$tts.speak({
-		// 		text: text
-		// 	});
-		// .then(() => {
-		// 	console.log('speak Success !');
-		// })
-		// .catch((e) => {
-		// 	console.error('An error occurred :', e);
-		// });
-		// } else {
-
+	function speak(text) {
 		setTimeout(() => {
 			easyspeech.Speak(text);
 		}, 0);

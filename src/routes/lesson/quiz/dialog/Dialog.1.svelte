@@ -25,7 +25,7 @@
 		mdiVolumeHigh
 	} from '@mdi/js';
 	import { lesson } from '$lib/js/stores.js';
-	import { tts } from '$lib/js/stores.js';
+
 	import { dc_oper } from '$lib/js/stores.js';
 	import { dc_user } from '$lib/js/stores.js';
 	// import { dialog_data } from './dialog_data.js';
