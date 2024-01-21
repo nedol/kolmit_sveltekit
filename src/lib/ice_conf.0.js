@@ -7,7 +7,7 @@ export let ice_conf = {
 	],
 	turn: [
 		{
-			urls: 'turn:0.0.0.0:3478?transport=tcp',
+			urls: 'turn:0.0.0.0:3478/turn?transport=tcp',
 			username: 'username',
 			credential: 'password'
 		}

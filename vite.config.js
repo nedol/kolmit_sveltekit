@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import path from 'path';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 import commonjs from '@rollup/plugin-commonjs';
 
@@ -16,7 +17,21 @@ export default defineConfig({
 		https: {
 			key: path.resolve('./key.pem'),
 			cert: path.resolve('./cert.pem')
-		}
+		},
+		middleware: [
+			createProxyMiddleware('/turn', {
+				target: 'http://0.0.0.0:3478',
+				pathRewrite: {
+					'^/turn': '' // Удалить префикс /turn из URL перед отправкой на сервер TURN
+				},
+				changeOrigin: true // Включить изменение происхождения запросов
+			})
+		]
 	}
 });
+// module.exports = {
+// 	server: {
+
+// 	}
+// };
 //# sourceMappingURL=vite.config.js.map

@@ -325,28 +325,26 @@
 
 		style_button = style_button_non_shared;
 
-		// document.addEventListener('visibilitychange', async () => {
-		// 	if (document.hidden) {
-		// 		// Ваш код, выполняемый при переходе приложения в неактивное состояние
-		// 		// if (audioCtx) audioCtx.suspend();
+		document.addEventListener('visibilitychange', async () => {
+			if (document.hidden) {
+				// Ваш код, выполняемый при переходе приложения в неактивное состояние
+				// if (audioCtx) audioCtx.suspend();
 
-		// 		// EasySpeech.pause();
-		// 		await EasySpeech.cancel();
-		// 		// await EasySpeech.reset();
-		// 		console.log(EasySpeech.status());
-		// 	} else {
-		// 		// EasySpeech.cancel();
-		// 		// await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
+				// EasySpeech.pause();
+				EasySpeech.cancel();
+				// await EasySpeech.reset();
+				console.log('EasySpeech.status:' + EasySpeech.status());
+			} else {
+				// EasySpeech.cancel();
+				// await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
-		// 		console.log(EasySpeech.status());
+				console.log('EasySpeech.status:' + EasySpeech.status());
 
-		// 		console.log('Приложение активно');
-		// 	}
-		// });
+				console.log('Приложение активно');
+			}
+		});
 	});
 </script>
-
-{@html '<script src="talkify-tts/dist/talkify.min.js"></script>'}
 
 {#if share_button && $call_but_status === 'talk'}
 	<div style={style_button} on:click={onShare}>

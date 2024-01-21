@@ -39,8 +39,8 @@ global.loop = function () {
 				const { statusCode, headers, trailers, body } = await request(
 					`https://kolmit-service.onrender.com`
 				);
-				console.log('response received', statusCode);
-				console.log('headers', headers);
+				// console.log('response received', statusCode);
+				// console.log('headers', headers);
 
 				for await (const data of body) {
 					// console.log('data', data);
