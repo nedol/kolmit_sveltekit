@@ -7,9 +7,9 @@ export let ice_conf = {
 	],
 	turn: [
 		{
-			urls: 'turn:0.0.0.0:3478/turn?transport=tcp',
-			username: 'username',
-			credential: 'password'
+			urls: 'turn:relay1.expressturn.com:3478?transport=tcp',
+			username: 'ef5N75GPIIOV97AS3J',
+			credential: 'sIWl6OqxV67ZogkM'
 		}
 	],
 	lifetimeDuration: '86400s'

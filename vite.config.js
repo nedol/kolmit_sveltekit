@@ -17,16 +17,16 @@ export default defineConfig({
 		https: {
 			key: path.resolve('./key.pem'),
 			cert: path.resolve('./cert.pem')
-		},
-		middleware: [
-			createProxyMiddleware('/turn', {
-				target: 'http://0.0.0.0:3478',
-				pathRewrite: {
-					'^/turn': '' // Удалить префикс /turn из URL перед отправкой на сервер TURN
-				},
-				changeOrigin: true // Включить изменение происхождения запросов
-			})
-		]
+		}
+		// middleware: [
+		// 	createProxyMiddleware('/turn', {
+		// 		target: 'http://0.0.0.0:3478',
+		// 		pathRewrite: {
+		// 			'^/turn': '' // Удалить префикс /turn из URL перед отправкой на сервер TURN
+		// 		},
+		// 		changeOrigin: true // Включить изменение происхождения запросов
+		// 	})
+		// ]
 	}
 });
 // module.exports = {

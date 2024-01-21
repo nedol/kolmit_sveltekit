@@ -20,10 +20,11 @@ if (!global.turn_server) {
 	global.turn_server = new Turn({
 		// set options
 		authMech: 'long-term',
-		listeningPort: 3478
+		listeningPort: 80
 	});
 	global.turn_server.start();
 	global.turn_server.addUser('username', 'password');
+	global.turn_server.log();
 	console.log('Turn server started');
 }
 

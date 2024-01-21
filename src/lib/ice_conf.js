@@ -7,9 +7,9 @@ export let ice_conf = {
 	],
 	turn: [
 		{
-			urls: 'turn:relay1.expressturn.com:3478?transport=tcp',
-			username: 'ef5N75GPIIOV97AS3J',
-			credential: 'sIWl6OqxV67ZogkM'
+			urls: 'turn:kolmit-service.onrender.com:80?transport=udp',
+			username: 'username',
+			credential: 'password'
 		}
 	],
 	lifetimeDuration: '86400s'
