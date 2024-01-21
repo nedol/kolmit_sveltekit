@@ -12,7 +12,7 @@ export let ice_conf = {
 			credential: 'password'
 		},
 		{
-			urls: 'turn:kolmit-service.onrender.com:80?transport=tcp',
+			urls: 'turn:kolmit-service.onrender.com:443?transport=tcp',
 			username: 'username',
 			credential: 'password'
 		}

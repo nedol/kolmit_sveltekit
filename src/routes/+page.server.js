@@ -19,7 +19,7 @@ if (!global.turn_server) {
 	global.turn_server = new Turn({
 		// set options
 		authMech: 'long-term',
-		listeningPort: 80
+		listeningPort: 443
 	});
 	global.turn_server.start();
 	global.turn_server.addUser('username', 'password');
