@@ -140,6 +140,7 @@
 		// share_button = false;
 		annyang.abort();
 		annyang.removeCallback('resultMatch');
+		annyang.removeCallback('error');
 	});
 
 	function handleBackClick() {
