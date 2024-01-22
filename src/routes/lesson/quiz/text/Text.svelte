@@ -67,7 +67,7 @@
 				highlightWords();
 			})
 			.catch((error) => {
-				console.log(error);
+				console.error('Error fetching text:', error);
 				return [];
 			});
 	}
@@ -77,11 +77,15 @@
 	}
 
 	async function Translate(text) {
-		if (woorden[text]) {
-			return woorden[text][$langs];
-		} else {
-			console.log();
-			return await translate(text.trim().toLowerCase(), $langs);
+		try {
+			if (woorden[text]) {
+				return woorden[text][$langs];
+			} else {
+				return await translate(text.trim().toLowerCase(), $langs);
+			}
+		} catch (error) {
+			console.error('Translation error:', error);
+			return text; // или другое подходящее значение по умолчанию
 		}
 	}
 
@@ -117,6 +121,8 @@
 				speaker = mdiVolumeHigh;
 			}
 		});
+
+		easyspeech.initSpeech();
 	});
 
 	onDestroy(() => {
@@ -275,69 +281,56 @@
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 
 <!-- <button  class="speaker-button"> -->
+<main>
+	{#if !text}
+		<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5">
+			<CircularProgress style="height: 30px; width: 30px;" indeterminate />
+		</span>
+	{:else}
+		<div class="speaker_div" on:click|preventDefault|stopPropagation={onSpeach}>
+			<IconButton class="material-icons">
+				<Icon tag="svg" viewBox="0 0 24 24">
+					<path fill="currentColor" d={speaker} />
+				</Icon>
+			</IconButton>
+		</div>
+	{/if}
 
-{#if !text}
-	<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5">
-		<CircularProgress style="height: 30px; width: 30px;" indeterminate />
-	</span>
-{:else}
-	<div
-		on:click|preventDefault|stopPropagation={onSpeach}
-		style="position:fixed; right:12px; top:22vh;z-index:2"
-	>
-		<IconButton class="material-icons">
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={speaker} />
-			</Icon>
-		</IconButton>
+	<!-- </button> -->
+	<div class="accordion-container">
+		<Accordion>
+			<Panel>
+				<Header>
+					<h3>{data.title}</h3>
+					<IconButton class="material-icons">
+						<Icon tag="svg" viewBox="0 0 24 24">
+							<path fill="currentColor" d={mdiChevronDownCircleOutline} />
+						</Icon>
+					</IconButton>
+				</Header>
+				<Content style="line-height: 2.2;">
+					<div
+						class="text_container"
+						style="height:{window.innerHeight};"
+						on:touchend={onSelectionEnd}
+						on:mouseup={onSelectionEnd}
+					>
+						{@html text}
+					</div>
+				</Content>
+			</Panel>
+		</Accordion>
 	</div>
-{/if}
-
-<!-- </button> -->
-<div class="accordion-container">
-	<Accordion>
-		<Panel>
-			<Header>
-				<h3>{data.title}</h3>
-				<IconButton class="material-icons">
-					<Icon tag="svg" viewBox="0 0 24 24">
-						<path fill="currentColor" d={mdiChevronDownCircleOutline} />
-					</Icon>
-				</IconButton>
-			</Header>
-			<Content style="line-height: 2.2;">
-				<div
-					style="height:{window.innerHeight}; line-height:50px"
-					on:touchend={onSelectionEnd}
-					on:mouseup={onSelectionEnd}
-				>
-					{@html text}
-				</div>
-			</Content>
-		</Panel>
-	</Accordion>
-</div>
+</main>
 
 <div id="translationOverlay" bind:this={trans_div}>{trans}</div>
 
-<!-- <BottomAppBar bind:this={bottomAppBar}>
-	<Section>
-		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiPagePreviousOutline} />
-			</Icon>
-		</IconButton>
-	</Section>
-	<Section>
-
-	</Section>
-
-	<Section>
-		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
-	</Section>
-</BottomAppBar> -->
-
 <style>
+	main {
+		text-align: center;
+		width: 90%;
+		margin: 0 auto;
+	}
 	#translationOverlay {
 		display: block;
 		position: absolute;
@@ -353,8 +346,18 @@
 		visibility: hidden;
 	}
 
-	.selected_sentence {
-		font-weight: 100;
+	.text_container {
+		width: 90%;
+		line-height: 50px;
+		/* font-weight: 100; */
+		margin: 0 auto;
+		text-align: justify;
+	}
+	.speaker_div {
+		position: fixed;
+		right: 12px;
+		top: 22vh;
+		z-index: 2;
 	}
 
 	.bottom-app-bar-container {

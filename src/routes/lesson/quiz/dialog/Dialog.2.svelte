@@ -5,6 +5,7 @@
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import {
+		mdiAccountConvertOutline,
 		mdiPagePreviousOutline,
 		mdiArrowRight,
 		mdiArrowLeft,
@@ -45,6 +46,16 @@
 	// import pair_data from './pair_data.json';
 	let hint_visible;
 
+	let style_button = `position: absolute;
+		z-index:2;
+		font-size: 1.5em;
+		left: 3px;
+		color: grey;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		width: 50px`;
+
 	export let data;
 
 	$: if (data) {
@@ -63,6 +74,39 @@
 		// // Устанавливаем высоту контейнера равной высоте родительского окна
 		// containerHeight = parentHeight + 'px';
 	});
+	function onChangeClick() {
+		data = {
+			html: dialog_data.html ? dialog_data.html[cur_html] : '',
+			question: dialog_data.content[cur_qa].question,
+			answer: dialog_data.content[cur_qa].answer,
+			a_shfl: a_shfl,
+			quiz: data.quiz
+		};
+		data.quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
+		let client_quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
+		let dc = $dc_user || $dc_oper;
+
+		dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
+		if (dc && share_mode)
+			dc.SendData(
+				{
+					lesson: {
+						quiz: client_quiz,
+						name: dialog_data.name,
+						html: dialog_data.html ? dialog_data.html[cur_html] : '',
+						question: dialog_data.content[cur_qa].question,
+						answer: dialog_data.content[cur_qa].answer,
+						cur_qa: cur_qa
+					}
+				},
+				() => {
+					console.log();
+				}
+			);
+
+		flipCard();
+	}
+
 	function handleBackClick() {
 		lesson_display = true; // При клике на "Back" показываем компонент Lesson
 	}
@@ -72,6 +116,13 @@
 	}
 </script>
 
+<div style={style_button} on:click={onChangeClick}>
+	<IconButton>
+		<Icon tag="svg" viewBox="0 0 24 24">
+			<path fill="currentColor" d={mdiAccountConvertOutline} />
+		</Icon>
+	</IconButton>
+</div>
 <div class="container">
 	<div class="card">
 		<div class="title">{dict['Проконтролируй вопрос'][$langs]}:</div>

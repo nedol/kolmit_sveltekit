@@ -45,7 +45,6 @@
 		display: block;
 		position: absolute;
 		max-width: 100%;
-		height: 100%;
 		top: -17px;
 		left: 0px;
 		z-index: 1;

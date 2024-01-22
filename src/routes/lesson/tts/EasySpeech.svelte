@@ -5,9 +5,7 @@
 
 	let voice, tts;
 
-	onMount(() => {
-		initSpeech();
-	});
+	onMount(() => {});
 
 	export function Speak(text) {
 		setTimeout(() => {
@@ -15,8 +13,8 @@
 			EasySpeech.speak({
 				text: text, //dialog_data.content[cur_qa].question['nl'],
 				voice: tts.voice,
-				volume: 1,
-				rate: 0.5,
+				volume: 9,
+				rate: 0.6,
 				error: (e) => EasySpeech.reset()
 			});
 		}, 0);
@@ -34,7 +32,7 @@
 		EasySpeech.resume();
 	}
 
-	async function initSpeech() {
+	export async function initSpeech() {
 		// const es_det = EasySpeech.detect();
 		await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 0.7 }); // required
 

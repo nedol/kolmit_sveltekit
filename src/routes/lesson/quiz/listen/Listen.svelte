@@ -99,7 +99,9 @@
 	let digit = 10;
 	let div_input;
 
-	onMount(async () => {});
+	onMount(async () => {
+		easyspeech.initSpeech();
+	});
 
 	onDestroy(() => {
 		easyspeech.Cancel();
@@ -405,10 +407,10 @@
 	}
 </script>
 
-<!-- <link
+<link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/> -->
+/>
 
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 
@@ -467,28 +469,6 @@
 		<Speak {data} />
 	{/if}
 </main>
-
-<!-- <BottomAppBar bind:this={bottomAppBar}>
-	<Section>
-		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiPagePreviousOutline} />
-			</Icon>
-		</IconButton>
-	</Section>
-
-	<Section>
-		{#if change_button}
-			<Icon tag="svg" viewBox="0 0 24 24" on:click={onChangeClick}>
-				<path fill="currentColor" d={mdiShuffle} />
-			</Icon>
-		{/if}
-	</Section>
-
-	<Section>
-		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
-	</Section>
-</BottomAppBar> -->
 
 <style>
 	main {

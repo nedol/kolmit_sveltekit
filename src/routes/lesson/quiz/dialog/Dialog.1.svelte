@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy, getContext } from 'svelte';
-
+	import BottomAppBar, { Section } from '@smui-extra/bottom-app-bar';
 	import annyang from 'annyang';
 
 	// import '$lib/js/talkify.js';
@@ -64,8 +64,7 @@
 	let share_button = false;
 	let style_button;
 	let style_button_non_shared = `position: absolute;
-		font-size: 1.5em;
-		    left: 3px;
+		font-size: 1.5em;	
 		color: grey;
 		border: none;
 		border-radius: 5px;
@@ -73,7 +72,6 @@
 		width: 50px`;
 	let style_button_shared = `position: absolute;
 		font-size: 1.5em;
-		    left: 3px;
 		color: blue;
 		border: none;
 		border-radius: 5px;
@@ -345,6 +343,7 @@
 		annyang.pause();
 		annyang.debug(true);
 
+		easyspeech.initSpeech();
 		style_button = style_button_non_shared;
 	});
 </script>
@@ -363,6 +362,7 @@
 
 {#if data.quiz == 'pair'}
 	<!-- Ваш контент для лицевой стороны -->
+
 	<div class="card">
 		{#if q || a}
 			<div class="cnt">{cur_qa + 1}</div>
@@ -405,19 +405,33 @@
 				{@html a['nl']}
 			</div>
 
-			<div>
-				<button on:click={onClickQ} class="toggleButton">
-					<span class="material-symbols-outlined"> ? </span>
-				</button>
-			</div>
+			<BottomAppBar bind:this={bottomAppBar}>
+				<Section>
+					{#if cur_qa > 0}
+						<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
+					{/if}</Section
+				>
 
-			<div class="arrow-buttons">
-				{#if cur_qa > 0}
-					<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
-				{/if}
+				<Section>
+					<button on:click={onClickQ} class="toggleButton">
+						<span class="material-symbols-outlined"> ? </span>
+					</button>
+				</Section>
 
-				<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
-			</div>
+				<Section>
+					<div style={style_button} on:click={onChangeClick}>
+						<IconButton>
+							<Icon tag="svg" viewBox="0 0 24 24">
+								<path fill="currentColor" d={mdiAccountConvertOutline} />
+							</Icon>
+						</IconButton>
+					</div>
+				</Section>
+
+				<Section>
+					<button on:click={onNextQA} class="arrow-button arrow-button-right">&#8594;</button>
+				</Section>
+			</BottomAppBar>
 		{:else}
 			<div style="text-align:center">
 				<span class="material-symbols-outlined" style="font-size: 20px; color: blue; scale:1.5;">
@@ -431,28 +445,6 @@
 {#if data.quiz == 'pair.client'}
 	<Dialog2 {data} />
 {/if}
-
-<!-- {#if data.quiz}
-	<BottomAppBar bind:this={bottomAppBar}>
-		<Section>
-			<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
-				<Icon tag="svg" viewBox="0 0 24 24">
-					<path fill="currentColor" d={mdiPagePreviousOutline} />
-				</Icon>
-			</IconButton>
-		</Section>
-
-		<Section>
-			<Icon tag="svg" viewBox="0 0 24 24" on:click={onChangeClick}>
-				<path fill="currentColor" d={mdiAccountConvertOutline} />
-			</Icon>
-		</Section>
-
-		<Section>
-			<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton> >
-		</Section>
-	</BottomAppBar>
-{/if} -->
 
 <style>
 	.marg_tip {
@@ -533,8 +525,9 @@
 
 	.arrow-button {
 		position: relative;
+		top: 15px;
 		/* margin: 10px */
-		font-size: 1.5em;
+		/* font-size: 1.5em; */
 		font-weight: 600;
 		background-color: white;
 		color: #101c88;
@@ -544,26 +537,21 @@
 	}
 
 	.arrow-button-left {
-		position: relative;
-		float: left;
 		transform: translateY(-50%);
 	}
 
 	.arrow-button-right {
-		position: relative;
-		float: right;
 		transform: translateY(-50%);
 	}
 
 	.toggleButton {
 		position: relative;
-		margin: 40px auto 0;
-		left: 50%;
-		transform: translateX(-50%);
+		/* margin: 40px auto 0; */
+		/* left: 50%; */
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
-		padding: 10px;
+
 		border-radius: 5px;
 		cursor: pointer;
 	}
@@ -571,12 +559,13 @@
 	.card {
 		background-color: #fff;
 		transition: transform 0.3s ease-in-out;
-		width: 80%;
+		width: 90%;
 		/* top: 13vh; */
 		margin: 0 auto;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
+		height: 50vh;
 	}
 
 	.card.flipped {

@@ -528,7 +528,7 @@
 				{/if}
 			</div>
 
-			<div class="videolocal_div" style="position:relative; right: 5px; width: 50px;">
+			<div class="videolocal_div">
 				<VideoLocal {...local.video}>
 					<svelte:fragment slot="footer">
 						<div bind:this={container} />
@@ -538,11 +538,9 @@
 		</Section>
 	</BottomAppBar>
 	<!-- <VideoLocal {...local.video} /> -->
-
+	<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
 	<!-- {@debug $call_but_status} -->
 </div>
-
-<AudioLocal {...local.audio} bind:paused={local.audio.paused} />
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -563,11 +561,11 @@
 		margin: auto;
 		max-height: 50px;
 	}
-	.progress {
+	.videolocal_div {
 		position: relative;
-		top: 0px;
-		width: 100%;
-		text-align: center;
+
+		width: 45px;
+		bottom: 10px;
 	}
 	.placeholder {
 		position: relative;
