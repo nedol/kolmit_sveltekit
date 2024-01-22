@@ -138,6 +138,7 @@
 
 	onDestroy(() => {
 		// share_button = false;
+		annyang.abort();
 	});
 
 	function handleBackClick() {
