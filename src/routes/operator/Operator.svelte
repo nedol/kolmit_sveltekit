@@ -2,7 +2,7 @@
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	import '../assets/icofont/icofont.min.css';
-
+	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import { mdiAccountBox } from '@mdi/js';
 	import CircularProgress from '@smui/circular-progress';
@@ -65,7 +65,7 @@
 	import { posterst } from '$lib/js/stores.js';
 
 	let rtc;
-	let voice;
+	let bottomAppBar;
 	let selected;
 	let call_cnt, inter;
 	let video_button_display = false;
@@ -73,7 +73,6 @@
 	let edited_display = false;
 	let synthesis;
 	let commandsList;
-	let showCommands = false;
 
 	let debug_div;
 
@@ -454,113 +453,97 @@
 		// 		console.log(error);
 		// 	});
 	}
-
-	const handleCommandClick = (event) => {
-		showCommands = !showCommands;
-	};
-
-	// Функция для скрытия списка команд при клике за его пределами
-	const handleOutsideClick = (event) => {
-		if (commandsList && !commandsList.contains(event.target)) {
-			showCommands = false;
-		}
-	};
 </script>
 
-<div style="display:flex; height:40px; flex-wrap: nowrap;justify-content: space-between;">
-	<!-- <VideoLocal {...local.video} /> -->
-	<div bind:this={$user_placeholder}>
-		{#if remote.text.display}
-			<VideoRemote
-				{...remote.video}
-				name={remote.text.name}
-				em={$operator.em}
-				on:click={OnClickCallButton}
-				on:mute
-				status={$call_but_status}
-			>
-				<div
-					class="remote_text_display"
-					style="display:{remote.text.display};	
+<div
+	style="position: fixed;
+    bottom: 0;
+	z-index:2"
+>
+	<BottomAppBar bind:this={bottomAppBar}>
+		<Section>
+			<div bind:this={$user_placeholder}>
+				{#if remote.text.display}
+					<VideoRemote
+						{...remote.video}
+						name={remote.text.name}
+						em={$operator.em}
+						on:click={OnClickCallButton}
+						on:mute
+						status={$call_but_status}
+					>
+						<div
+							class="remote_text_display"
+							style="display:{remote.text.display};	
 						position:relative;			
 						background-color: rgba(125, 125, 125, 0.5);
 						z-index: 1"
-				>
-					<!-- <p
+						>
+							<!-- <p
 						class="remote_msg"
 						style="font-size: .7em; white-space: nowrap; color:white; margin:auto;text-align: center;"
 					>
 						{remote.text.msg} <br />
 						{remote.text.name}
 					</p> -->
-				</div>
-			</VideoRemote>
-		{:else}
-			<div
-				style="block;
-				max-width: 50px;
-				max-height: 50px;"
-			></div>
-		{/if}
-	</div>
-
-	<div style="flex:50%" />
-
-	<div>
-		<!-- {@debug $call_but_status} -->
-		<CallButton on:click={$click_call_func} bind:status={$call_but_status} {OnLongPress}>
-			<b
-				class="call_cnt"
-				style="display:none;position: relative;left:22px;top:10px;color:#0e0cff;font-size: 12px;"
-				>100</b
-			>
-			<span
-				class="badge badge-primary badge-pill call-queue"
-				style="display:none;position: relative;right:0px;bottom:0px;color:#0e0cff;font-size: 12px;opacity:1"
-				>0</span
-			>
-		</CallButton>
-	</div>
-
-	<div style="flex:48%" />
-	<div class="video" on:click={OnClickVideoButton} on:loadstart={OnPlayVideo}>
-		{#if video_button_display}
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" style="color:grey" d={mdiAccountBox} />
-			</Icon>
-			<!-- <i class="video icofont-ui-video-chat"  on:click = {OnClickVideoButton}
-                        style="position: absolute; right: 0; top: 0; stroke:black; stroke-width: 2px; color: lightgrey; font-size: 30px; z-index: 20;"></i>  -->
-		{/if}
-
-		{#if video_progress}
-			<div style="position: absolute; top: -10px;">
-				<CircularProgress style="height: 30px; width: 30px;" indeterminate />
+						</div>
+					</VideoRemote>
+				{:else}
+					<div
+						style="block;
+								max-width: 50px;
+								max-height: 50px;"
+					></div>
+				{/if}
 			</div>
-		{/if}
-	</div>
+		</Section>
+		<Section>
+			<CallButton on:click={$click_call_func} bind:status={$call_but_status} {OnLongPress}>
+				<b
+					class="call_cnt"
+					style="display:none;position: relative;left:22px;top:10px;color:#0e0cff;font-size: 12px;"
+					>100</b
+				>
+				<span
+					class="badge badge-primary badge-pill call-queue"
+					style="display:none;position: relative;right:0px;bottom:0px;color:#0e0cff;font-size: 12px;opacity:1"
+					>0</span
+				>
+			</CallButton>
+		</Section>
+		<Section>
+			<div class="video" on:click={OnClickVideoButton} on:loadstart={OnPlayVideo}>
+				{#if video_button_display}
+					<Icon tag="svg" viewBox="0 0 24 24">
+						<path fill="currentColor" style="color:grey" d={mdiAccountBox} />
+					</Icon>
+					<!-- <i class="video icofont-ui-video-chat"  on:click = {OnClickVideoButton}
+                        style="position: absolute; right: 0; top: 0; stroke:black; stroke-width: 2px; color: lightgrey; font-size: 30px; z-index: 20;"></i>  -->
+				{/if}
 
-	<div
-		class="videolocal_div"
-		on:click|preventDefault|stopPropagation={handleCommandClick}
-		style="position:relative; right: 5px; width: 50px;"
-	>
-		<VideoLocal {...local.video}>
-			<svelte:fragment slot="footer">
-				<div bind:this={container} />
-			</svelte:fragment>
-		</VideoLocal>
-	</div>
-	{#if showCommands}
-		<!-- Список команд -->
-		<div bind:this={commandsList}>
-			<div on:click={handleChatOpen}>chat open</div>
-		</div>
-	{/if}
+				{#if video_progress}
+					<div style="position: absolute; top: -10px;">
+						<CircularProgress style="height: 30px; width: 30px;" indeterminate />
+					</div>
+				{/if}
+			</div>
+
+			<div class="videolocal_div" style="position:relative; right: 5px; width: 50px;">
+				<VideoLocal {...local.video}>
+					<svelte:fragment slot="footer">
+						<div bind:this={container} />
+					</svelte:fragment>
+				</VideoLocal>
+			</div>
+		</Section>
+	</BottomAppBar>
+	<!-- <VideoLocal {...local.video} /> -->
+
+	<!-- {@debug $call_but_status} -->
 </div>
 
 <AudioLocal {...local.audio} bind:paused={local.audio.paused} />
 
-<progress class="progress" value={progress.value} max="100" duration="200" />
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- <div class="chat-container" bind:this={debug_div} on:click={onDebug}>

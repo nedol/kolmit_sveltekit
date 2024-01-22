@@ -5,7 +5,6 @@
 	let easyspeech;
 	import CircularProgress from '@smui/circular-progress';
 
-	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Accordion, { Panel, Header, Content } from '@smui-extra/accordion';
 	import {
@@ -321,7 +320,7 @@
 
 <div id="translationOverlay" bind:this={trans_div}>{trans}</div>
 
-<BottomAppBar bind:this={bottomAppBar}>
+<!-- <BottomAppBar bind:this={bottomAppBar}>
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
 			<Icon tag="svg" viewBox="0 0 24 24">
@@ -330,13 +329,13 @@
 		</IconButton>
 	</Section>
 	<Section>
-		<!-- <IconButton class="material-icons">change_circle</IconButton> -->
+
 	</Section>
 
 	<Section>
 		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
 	</Section>
-</BottomAppBar>
+</BottomAppBar> -->
 
 <style>
 	#translationOverlay {

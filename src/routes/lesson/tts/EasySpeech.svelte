@@ -16,7 +16,7 @@
 				text: text, //dialog_data.content[cur_qa].question['nl'],
 				voice: tts.voice,
 				volume: 1,
-				rate: 0.7,
+				rate: 0.5,
 				error: (e) => EasySpeech.reset()
 			});
 		}, 0);

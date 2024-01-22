@@ -429,8 +429,7 @@
 	{/if}
 </main>
 
-<BottomAppBar bind:this={bottomAppBar}>
-	<!-- <div style="position:absolute; bottom:55px ; right:0; font-size:small">{voice_name}</div> -->
+<!-- <BottomAppBar bind:this={bottomAppBar}>
 
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
@@ -440,12 +439,12 @@
 		</IconButton>
 	</Section>
 	<Section>
-		<!-- <IconButton class="material-icons">change_circle</IconButton> -->
+
 	</Section>
 	<Section>
 		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
 	</Section>
-</BottomAppBar>
+</BottomAppBar> -->
 
 <style>
 	.title {

@@ -405,10 +405,10 @@
 	}
 </script>
 
-<link
+<!-- <link
 	rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-/>
+/> -->
 
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 
@@ -468,8 +468,7 @@
 	{/if}
 </main>
 
-<BottomAppBar bind:this={bottomAppBar}>
-	<!-- <div style="position:absolute; bottom:55px ; right:0; font-size:small">{$tts.voice.name}</div> -->
+<!-- <BottomAppBar bind:this={bottomAppBar}>
 	<Section>
 		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
 			<Icon tag="svg" viewBox="0 0 24 24">
@@ -489,7 +488,7 @@
 	<Section>
 		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
 	</Section>
-</BottomAppBar>
+</BottomAppBar> -->
 
 <style>
 	main {

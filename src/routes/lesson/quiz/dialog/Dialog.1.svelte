@@ -6,7 +6,6 @@
 	// import '$lib/js/talkify.js';
 	// import 'talkify-tts/dist/talkify.min.js';
 
-	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import Textfield from '@smui/textfield';
 	import HelperText from '@smui/textfield/helper-text';
@@ -152,6 +151,7 @@
 	function onNextQA() {
 		cur_qa++;
 		visibility[1] = 'hidden';
+		visibility[2] = 'hidden';
 		tr_input = '';
 		Dialog();
 		SendData();
@@ -300,7 +300,7 @@
 
 			console.log('commandText', commandText); // sample output: 'hello (there)'
 			console.log('phrases', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
-
+			visibility[2] = 'visible';
 			annyang.pause();
 			isListening = false;
 		});
@@ -384,13 +384,6 @@
 					</div>
 				{/if}
 			</div>
-			<div class="title">
-				{dict['Проконтролируй ответ'][$langs]}:
-			</div>
-			<div class="answer" style="visibility:{visibility[1]}">
-				{@html a['nl']}
-			</div>
-
 			<div class="margins" style="text-align: center;">
 				<IconButton class="material-icons" aria-label="Back" on:click={onClickMicrophone}>
 					<Icon tag="svg" viewBox="0 0 24 24">
@@ -401,10 +394,15 @@
 						{/if}
 					</Icon>
 				</IconButton>
-				{@html tr_input}
-				<!-- <Textfield textarea bind:value={tr_input} label="Говори!" style="width:80%">
-						<HelperText slot="helper">Переведи и скажи</HelperText>
-					</Textfield> -->
+				<span style="color: darkgreen;">
+					{@html tr_input}
+				</span>
+			</div>
+			<div class="title" style="visibility:{visibility[2]}">
+				{dict['Проконтролируй ответ'][$langs]}:
+			</div>
+			<div class="answer" style="visibility:{visibility[2]}">
+				{@html a['nl']}
 			</div>
 
 			<div>
@@ -434,7 +432,7 @@
 	<Dialog2 {data} />
 {/if}
 
-{#if data.quiz}
+<!-- {#if data.quiz}
 	<BottomAppBar bind:this={bottomAppBar}>
 		<Section>
 			<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
@@ -451,10 +449,10 @@
 		</Section>
 
 		<Section>
-			<!-- <IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton> -->
+			<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton> >
 		</Section>
 	</BottomAppBar>
-{/if}
+{/if} -->
 
 <style>
 	.marg_tip {
@@ -481,7 +479,7 @@
 		position: absolute;
 		flex: auto;
 		top: 45px;
-		right: 10px;
+		right: 0px;
 		transform: translate(50%, 0%);
 		font-size: large;
 	}
@@ -489,12 +487,12 @@
 	.cnt {
 		position: absolute;
 		text-align: left;
-		left: 15px;
+		left: 10px;
 		top: 3px;
 		z-index: 2;
-		font-size: 1.2em;
+		font-size: 1em;
 		margin-bottom: 10px;
-		color: #2196f3;
+		color: #501d94;
 	}
 
 	.title {

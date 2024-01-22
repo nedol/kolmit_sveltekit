@@ -9,6 +9,10 @@
 	background-color: var(--mdc-theme-primary, #4609a8);
 }
 
+.smui-paper.smui-paper--color-primary.smui-paper--unelevated {
+	background-color: whitesmoke;
+}
+
 .mdc-top-app-bar__title {
 	font-size: small;
 }
