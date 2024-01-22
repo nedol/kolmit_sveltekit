@@ -118,7 +118,9 @@
 
 		document.addEventListener('visibilitychange', () => {
 			if (document.hidden) {
+			} else {
 				speaker = mdiVolumeHigh;
+				easyspeech.initSpeech();
 			}
 		});
 

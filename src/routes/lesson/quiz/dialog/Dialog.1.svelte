@@ -138,7 +138,6 @@
 
 	onDestroy(() => {
 		// share_button = false;
-		annyang.abort();
 	});
 
 	function handleBackClick() {
@@ -293,15 +292,14 @@
 		annyang.removeCommands();
 		annyang.addCommands({ [text]: helloFunction });
 		isListening = true;
-		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-			tr_input = userSaid; //dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
+	}
 
-			console.log('commandText', commandText); // sample output: 'hello (there)'
-			console.log('phrases', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
-			visibility[2] = 'visible';
-			annyang.pause();
-			isListening = false;
-		});
+	onMount(async () => {
+		annyang.setLanguage('nl-NL');
+		annyang.start({ autoRestart: false, continuous: false });
+		annyang.pause();
+		annyang.debug(true);
+
 		let speechRecognizer = annyang.getSpeechRecognizer();
 
 		speechRecognizer.addEventListener(
@@ -332,16 +330,19 @@
 			{ once: true }
 		);
 
+		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
+			tr_input = userSaid; //dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
+
+			console.log('commandText', commandText); // sample output: 'hello (there)'
+			console.log('phrases', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
+			visibility[2] = 'visible';
+			annyang.pause();
+			isListening = false;
+		});
+
 		annyang.addCallback('error', (er) => {
 			console.log(er);
 		});
-	}
-
-	onMount(async () => {
-		annyang.setLanguage('nl-NL');
-		annyang.start({ autoRestart: false, continuous: false });
-		annyang.pause();
-		annyang.debug(true);
 
 		easyspeech.initSpeech();
 		style_button = style_button_non_shared;

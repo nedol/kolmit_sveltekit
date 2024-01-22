@@ -63,20 +63,18 @@
 
 				// EasySpeech.pause();
 				// EasySpeech.cancel();
-				await EasySpeech.reset();
-				console.log('EasySpeech.status:' + EasySpeech.status());
+				// await EasySpeech.reset();
+				console.log('EasySpeech.status:' + EasySpeech.status);
 			} else {
 				// EasySpeech.cancel();
 				await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
-				console.log('EasySpeech.status:' + EasySpeech.status());
+				console.log('EasySpeech.status:' + EasySpeech.status);
 
 				console.log('Приложение активно');
 			}
 		});
 	}
 
-	onDestroy(() => {
-		EasySpeech.cancel();
-	});
+	onDestroy(() => {});
 </script>
