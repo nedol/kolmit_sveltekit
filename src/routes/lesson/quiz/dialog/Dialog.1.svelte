@@ -139,6 +139,7 @@
 	onDestroy(() => {
 		// share_button = false;
 		annyang.abort();
+		annyang.removeCallback('resultMatch');
 	});
 
 	function handleBackClick() {
@@ -303,33 +304,34 @@
 
 		let speechRecognizer = annyang.getSpeechRecognizer();
 
-		speechRecognizer.addEventListener(
-			'result',
-			async function (event) {
-				const maxConfidenceItem = maxBy(event.results[0], 'confidence');
-				tr_input = maxConfidenceItem.transcript;
+		if (!speechRecognizer.onresult)
+			speechRecognizer.addEventListener(
+				'result',
+				async function (event) {
+					const maxConfidenceItem = maxBy(event.results[0], 'confidence');
+					tr_input = maxConfidenceItem.transcript;
 
-				// const response = await fetch(`/chatGPT`, {
-				// 	method: 'POST',
-				// 	body: JSON.stringify({
-				// 		question: `Выяви ошибки в порядоке слов в предложении, исходя из грамматики голландского языка.
+					// const response = await fetch(`/chatGPT`, {
+					// 	method: 'POST',
+					// 	body: JSON.stringify({
+					// 		question: `Выяви ошибки в порядоке слов в предложении, исходя из грамматики голландского языка.
 
-				// 		Если есть ошибки пришли ТОЛЬКО правильный вариант, если ошибок нет - пришли 'noerrors'б:${maxConfidenceItem.transcript}`
-				// 	}),
-				// 	headers: { 'Content-Type': 'application/json' }
-				// });
+					// 		Если есть ошибки пришли ТОЛЬКО правильный вариант, если ошибок нет - пришли 'noerrors'б:${maxConfidenceItem.transcript}`
+					// 	}),
+					// 	headers: { 'Content-Type': 'application/json' }
+					// });
 
-				// if (!response.ok) {
-				// 	throw new Error(`HTTP error! Status: ${response.status}`);
-				// }
+					// if (!response.ok) {
+					// 	throw new Error(`HTTP error! Status: ${response.status}`);
+					// }
 
-				// const data = await response.json();
-				// tr_input = data.resp;
+					// const data = await response.json();
+					// tr_input = data.resp;
 
-				isListening = false;
-			},
-			{ once: true }
-		);
+					isListening = false;
+				},
+				{ once: true }
+			);
 
 		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
 			tr_input = userSaid; //dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'

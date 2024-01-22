@@ -33,6 +33,7 @@
 	}
 
 	export async function initSpeech() {
+		console.log('EasySpeech.status before initSpeech:' + EasySpeech.status()['status']);
 		// const es_det = EasySpeech.detect();
 		await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 0.7 }); // required
 
@@ -63,18 +64,21 @@
 
 				// EasySpeech.pause();
 				// EasySpeech.cancel();
-				// await EasySpeech.reset();
-				console.log('EasySpeech.status:' + EasySpeech.status);
+				await EasySpeech.reset();
+				console.log('EasySpeech.status  before hidden:' + EasySpeech.status()['status']);
 			} else {
 				// EasySpeech.cancel();
 				await EasySpeech.init({ maxTimeout: 10000, interval: 250, quiet: false, rate: 1 }); // required
 
-				console.log('EasySpeech.status:' + EasySpeech.status);
+				console.log('EasySpeech.status  after hidden:' + EasySpeech.status()['status']);
 
 				console.log('Приложение активно');
 			}
 		});
 	}
 
-	onDestroy(() => {});
+	onDestroy(() => {
+		EasySpeech.cancel();
+		console.log('EasySpeech.status before destroy:' + EasySpeech.status()['status']);
+	});
 </script>
