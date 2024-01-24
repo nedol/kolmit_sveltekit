@@ -15,6 +15,9 @@
 		"src/routes/+layout.server.js",
 		"src/routes/lesson/+server.js"
 	],
+	"/lesson/stt": [
+		"src/routes/lesson/stt/+server.js"
+	],
 	"/operator": [
 		"src/routes/operator/+server.js"
 	],

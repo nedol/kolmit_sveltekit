@@ -244,6 +244,7 @@ export async function POST({ request, url, fetch, cookies }) {
 }
 
 function SendEmail(q, new_email) {
+	return;
 	let em = new Email();
 	const abonent = q.abonent ? '&abonent=' + q.abonent : '';
 	const mail = q.send_mail || new_email;

@@ -9,7 +9,6 @@
 
 	export function Speak(text) {
 		setTimeout(() => {
-			EasySpeech.cancel();
 			EasySpeech.speak({
 				text: text, //dialog_data.content[cur_qa].question['nl'],
 				voice: tts.voice,
@@ -21,6 +20,7 @@
 	}
 
 	export function Cancel() {
+		return;
 		EasySpeech.cancel();
 	}
 

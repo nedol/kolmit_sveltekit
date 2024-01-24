@@ -1,7 +1,6 @@
 <script>
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import BottomAppBar, { Section } from '@smui-extra/bottom-app-bar';
-	import annyang from 'annyang';
 
 	// import '$lib/js/talkify.js';
 	// import 'talkify-tts/dist/talkify.min.js';
@@ -35,7 +34,8 @@
 
 	import Dialog2 from './Dialog.2.svelte';
 	import EasySpeech from '../../tts/EasySpeech.svelte';
-	let easyspeech;
+	import Stt from '../../stt/Stt.svelte';
+	let easyspeech, stt;
 
 	let dialog_data;
 
@@ -138,9 +138,6 @@
 
 	onDestroy(() => {
 		// share_button = false;
-		annyang.abort();
-		annyang.removeCallback('resultMatch');
-		annyang.removeCallback('error');
 	});
 
 	function handleBackClick() {
@@ -155,7 +152,6 @@
 		tr_input = '';
 		Dialog();
 		SendData();
-		annyang.pause();
 		onClickMicrophone();
 		showSpeakerButton = false;
 	}
@@ -287,71 +283,22 @@
 		let helloFunction = (text) => {
 			console.log(text);
 		};
-		annyang.resume();
+
+		stt.startAudioMonitoring();
+
 		tr_input = '';
 
 		let text = dialog_data.content[cur_qa].question['nl'].replace(/[^\w\s]/gi, ''); //.split(' ');
 
-		annyang.removeCommands();
-		annyang.addCommands({ [text]: helloFunction });
 		isListening = true;
 	}
 
 	onMount(async () => {
-		annyang.setLanguage('nl-NL');
-		annyang.start({ autoRestart: false, continuous: false });
-		annyang.pause();
-		annyang.debug(true);
-
-		let speechRecognizer = annyang.getSpeechRecognizer();
-
-		if (!speechRecognizer.onresult)
-			speechRecognizer.addEventListener(
-				'result',
-				async function (event) {
-					const maxConfidenceItem = maxBy(event.results[0], 'confidence');
-					tr_input = maxConfidenceItem.transcript;
-
-					// const response = await fetch(`/chatGPT`, {
-					// 	method: 'POST',
-					// 	body: JSON.stringify({
-					// 		question: `Выяви ошибки в порядоке слов в предложении, исходя из грамматики голландского языка.
-
-					// 		Если есть ошибки пришли ТОЛЬКО правильный вариант, если ошибок нет - пришли 'noerrors'б:${maxConfidenceItem.transcript}`
-					// 	}),
-					// 	headers: { 'Content-Type': 'application/json' }
-					// });
-
-					// if (!response.ok) {
-					// 	throw new Error(`HTTP error! Status: ${response.status}`);
-					// }
-
-					// const data = await response.json();
-					// tr_input = data.resp;
-
-					isListening = false;
-				},
-				{ once: true }
-			);
-
-		annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-			tr_input = userSaid; //dialog_data.content[cur_qa].question['nl']; // sample output: 'hello'
-
-			console.log('commandText', commandText); // sample output: 'hello (there)'
-			console.log('phrases', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
-			visibility[2] = 'visible';
-			annyang.pause();
-			isListening = false;
-		});
-
-		annyang.addCallback('error', (er) => {
-			console.log(er);
-		});
-
-		easyspeech.initSpeech();
 		style_button = style_button_non_shared;
 	});
 </script>
+
+<Stt bind:this={stt}></Stt>
 
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 

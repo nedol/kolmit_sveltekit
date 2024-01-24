@@ -10,7 +10,7 @@ const voice = new ElevenLabs({
 	voiceId: 'pNInz6obpgDQGcFmaJgB' // A Voice ID from Elevenlabs
 });
 /** @type {import('./$types').RequestHandler} */
-export async function POST({ url, fetch, cookies, request }) {
+export async function POST({ url, fetch, cookies, request, response }) {
 	let resp;
 	let abonent = url.searchParams.get('abonent');
 	const { par } = await request.json();
@@ -39,9 +39,7 @@ export async function POST({ url, fetch, cookies, request }) {
 					console.log(res);
 					resp = { speech: 'audio.mp3' };
 
-					let response = new Response({ resp });
-					response.headers.append('Access-Control-Allow-Origin', `*`);
-					return response;
+					response.send(response);
 				});
 
 			break;
