@@ -33,9 +33,10 @@
 	const { maxBy } = pkg;
 
 	import Dialog2 from './Dialog.2.svelte';
-	import EasySpeech from '../../tts/EasySpeech.svelte';
-	import Stt from '../../stt/Stt.svelte';
-	let easyspeech, stt;
+	import EasySpeech from '../../../speech/tts/EasySpeech.svelte';
+	import Tts from '../../../speech/tts/Tts.svelte';
+	import Stt from '../../../speech/stt/Stt.svelte';
+	let easyspeech, stt, tts;
 
 	let dialog_data;
 
@@ -245,45 +246,15 @@
 		setTimeout(() => {
 			easyspeech.Speak(dialog_data.content[cur_qa].question['nl']);
 		}, 0);
-
-		return;
-
-		const headers = {
-			'Content-Type': 'application/json'
-			// Authorization: `Bearer ${token}`
-		};
-
-		let par = {};
-		par.proj = 'kolmit';
-		par.func = 'tts';
-		par.text = dialog_data.content[cur_qa].question['nl'];
-
-		fetch('/tts', {
-			method: 'POST',
-			// mode: 'no-cors',
-			body: JSON.stringify({ par }),
-			headers: { headers }
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				console.log();
-
-				let audio = new Audio();
-				audio.src = './src/routes/tts/audio.mp3';
-				audio.play();
-			})
-			.catch((error) => {
-				console.log(error);
-				return [];
-			});
-		// }
+		// tts.Speak(dialog_data.content[cur_qa].question['nl']);
 	}
 
 	function onClickMicrophone() {
 		let helloFunction = (text) => {
 			console.log(text);
 		};
-
+		////для тестов !!! УБРАть if!!!
+		// if (false)
 		stt.startAudioMonitoring();
 
 		tr_input = '';
@@ -299,6 +270,7 @@
 </script>
 
 <Stt bind:this={stt}></Stt>
+<Tts bind:this={tts}></Tts>
 
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 

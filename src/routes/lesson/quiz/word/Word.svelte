@@ -5,7 +5,7 @@
 
 	import CircularProgress from '@smui/circular-progress';
 
-	import EasySpeech from '../../tts/EasySpeech.svelte';
+	import EasySpeech from '../../../speech/tts/EasySpeech.svelte';
 	let easyspeech;
 
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';

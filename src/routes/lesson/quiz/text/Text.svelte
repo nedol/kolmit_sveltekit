@@ -1,7 +1,7 @@
 <script>
 	import { onMount, getContext, onDestroy } from 'svelte';
 	import translate from 'translate';
-	import EasySpeech from '../../tts/EasySpeech.svelte';
+	import EasySpeech from '../../../speech/tts/EasySpeech.svelte';
 	let easyspeech;
 	import CircularProgress from '@smui/circular-progress';
 
@@ -115,16 +115,6 @@
 
 		const parentHeight = window.innerHeight;
 		containerHeight = parentHeight + 'px';
-
-		document.addEventListener('visibilitychange', () => {
-			if (document.hidden) {
-			} else {
-				speaker = mdiVolumeHigh;
-				easyspeech.initSpeech();
-			}
-		});
-
-		easyspeech.initSpeech();
 	});
 
 	onDestroy(() => {

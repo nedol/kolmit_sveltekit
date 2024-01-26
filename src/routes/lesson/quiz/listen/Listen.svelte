@@ -16,7 +16,7 @@
 		mdiShuffle
 	} from '@mdi/js';
 
-	import EasySpeech from '../../tts/EasySpeech.svelte';
+	import EasySpeech from '../../../speech/tts/EasySpeech.svelte';
 	let easyspeech;
 
 	import { lesson } from '$lib/js/stores.js';

@@ -5,7 +5,9 @@
 
 	let voice, tts;
 
-	onMount(() => {});
+	onMount(() => {
+		initSpeech();
+	});
 
 	export function Speak(text) {
 		setTimeout(() => {
