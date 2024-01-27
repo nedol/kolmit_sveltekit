@@ -26,6 +26,10 @@
 		"src/routes/site/about/+page.js",
 		"src/routes/+layout.server.js"
 	],
+	"/site/js": [
+		"src/routes/site/js/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
 	"/speech/stt": [
 		"src/routes/speech/stt/+server.js"
 	],

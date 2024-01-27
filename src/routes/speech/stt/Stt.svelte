@@ -3,12 +3,14 @@
 	import { MediaRecorder, register } from 'extendable-media-recorder';
 	import { connect } from 'extendable-media-recorder-wav-encoder';
 
+	export let tts_text;
+
 	let audioContext,
 		mediaRecorder,
 		mediaStream,
 		audioAnalyser,
-		audioChunks = [];
-	let audioUrl,
+		audioChunks = [],
+		audioUrl,
 		audioPlayer,
 		isRecording = false,
 		soundTimer,
@@ -42,7 +44,7 @@
 			source.connect(audioAnalyser);
 
 			const noiseSuppression = audioContext.createDynamicsCompressor();
-			noiseSuppression.threshold.value = -30; // Устанавливаем порог шумоподавления
+			noiseSuppression.threshold.value = -20; // Устанавливаем порог шумоподавления
 			source.connect(noiseSuppression);
 			// дополнительные настройки audioAnalyser
 			startRecording();
@@ -99,13 +101,10 @@
 		mediaRecorder = new MediaRecorder(mediaStream, options);
 		mediaRecorder.ondataavailable = (e) => {
 			audioChunks.push(e.data);
-			// console.log(audioChunks);
 		};
 
 		mediaRecorder.onstop = (e) => {
-			// Здесь вызывается функция для преобразования данных в WAV
 			stopRecording();
-			console.log(audioChunks);
 		};
 
 		mediaRecorder.start(100);
@@ -135,7 +134,6 @@
 			const response = await fetch('/speech/stt', {
 				method: 'POST',
 				body: formData
-				// header: { 'Content-Type': 'audio/ogg' }
 			});
 
 			if (!response.ok) {
@@ -144,14 +142,17 @@
 
 			function createJsonFromString(str) {
 				// Разделение строки на массив строк по символам переноса строки и возврата каретки
-				const jsonStrings = str.trim().split(/\r?\n/);
+				// Удаление символов перевода строки и возврата каретки
+				const cleanedStr = str.replace(/[\n\r]/g, '');
 
+				// Разбиваем строку на отдельные JSON объекты
+				const jsonStrArray = cleanedStr.match(/{[\s\S]*?}(?=\{|$)/g);
 				// Преобразование каждой строки в JSON объект
-				const jsonObjects = jsonStrings.map((jsonStr) => {
+				const jsonObjects = jsonStrArray.map((jsonStr) => {
 					try {
 						return JSON.parse(jsonStr);
-					} catch (e) {
-						console.error('Ошибка при преобразовании строки в JSON:', e);
+					} catch (ex) {
+						console.log('Ошибка при преобразовании строки в JSON:', ex);
 						return null;
 					}
 				});
@@ -161,10 +162,28 @@
 			}
 
 			const recognition = await response.json();
-			const json_resp = createJsonFromString(recognition.resp);
-			console.log('Ответ сервера:', json_resp);
+			let json_resp = createJsonFromString(recognition.resp);
+
+			function findLongestText(jsonObjects) {
+				let longestText = '';
+				let longestObject = null;
+				console.log('jsonObjects:', jsonObjects);
+				jsonObjects.forEach((obj) => {
+					if (obj.text && obj.text.length > longestText.length) {
+						longestText = obj.text;
+						longestObject = obj;
+					}
+				});
+
+				return longestObject;
+			}
+
+			if (Array.isArray(json_resp)) {
+				tts_text = findLongestText(json_resp).text.replace('elite', '');
+			}
+			console.log('Ответ сервера:', tts_text);
 		} catch (error) {
-			console.error('Ошибка отправки аудио:', error);
+			console.log('Ошибка отправки аудио:', error);
 		}
 	}
 

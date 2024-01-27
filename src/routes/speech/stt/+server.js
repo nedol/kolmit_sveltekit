@@ -1,8 +1,11 @@
 const fs = require('fs');
 const { Wit } = require('node-wit');
+const { RealtimeSession } = require('speechmatics');
 
 const client = new Wit({ accessToken: 'WWJSDBA5JAVB4WP4JNKULL2CAZ7JCPL7' });
 const token = 'WWJSDBA5JAVB4WP4JNKULL2CAZ7JCPL7';
+
+const SpeechmaticksApiKey = 'GqlWUJmdE4JdQpSwU0CqNY8CfAE9oR07';
 
 // import audioEncoder from 'audio-encoder';
 
@@ -15,26 +18,6 @@ export async function POST({ url, fetch, cookies, request }) {
 	// Преобразование Blob в Buffer
 	const buffer = await fileContent.arrayBuffer();
 	let nodeBuffer = Buffer.from(buffer);
-	// for (let [key, value] of fileContent) {
-	// 	console.log({ key: key, value: value });
-	// }
-
-	// // // Путь к файлу
-	// const filePath = 'C:\\Users\\lenovo\\waar.ogg';
-	// let fileBuffer;
-	// try {
-	// 	// Чтение файла синхронно
-	// 	fileBuffer = fs.readFileSync(filePath);
-	// 	// Обработка данных файла
-	// 	console.log('Аудиофайл прочитан', fileBuffer);
-	// } catch (err) {
-	// 	console.error('Ошибка при чтении файла:', err);
-	// }
-
-	// convert as mp3 and save file using file-saver
-	// audioEncoder(buffer, 128, null, function onComplete(blob) {
-	// 	fileSaver.saveAs(blob, 'sound.mp3');
-	// });
 
 	try {
 		// const resp = await client.speech('audio/ogg', audioBlob);
@@ -84,4 +67,48 @@ async function sendAudioToWitAI(audioFile) {
 	} catch (error) {
 		console.error('Ошибка при отправке аудио в Wit.ai:', error);
 	}
+}
+
+async function sendAudioToSpeechmaticks(audioFile) {
+	const session = new RealtimeSession({ apiKey: SpeechmaticksApiKey });
+
+	session.addListener('Error', (error) => {
+		console.log('session error', error);
+	});
+
+	session.addListener('AddTranscript', (message) => {
+		process.stdout.write(message.metadata.transcript);
+	});
+
+	session.addListener('EndOfTranscript', () => {
+		process.stdout.write('\n');
+	});
+
+	session
+		.start({
+			transcription_config: {
+				language: 'en',
+				operating_point: 'enhanced',
+				enable_partials: true,
+				max_delay: 2
+			},
+			audio_format: { type: 'file' }
+		})
+		.then(() => {
+			//prepare file stream
+			const fileStream = fs.createReadStream(PATH_TO_FILE);
+
+			//send it
+			fileStream.on('data', (sample) => {
+				session.sendAudio(sample);
+			});
+
+			//end the session
+			fileStream.on('end', () => {
+				session.stop();
+			});
+		})
+		.catch((error) => {
+			console.log('error', error.message);
+		});
 }

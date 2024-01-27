@@ -49,6 +49,8 @@
 	let visibility = ['visible', 'hidden', 'hidden'];
 	let visibility_cnt = 1;
 
+	let bottomAppBar;
+
 	let share_mode = false;
 	export let data;
 	let showSpeakerButton = false;
@@ -58,7 +60,7 @@
 	let cur_qa = 0;
 	let q, q_shfl, a_shfl, a, d;
 
-	let bottomAppBar;
+	let tts_text = '';
 
 	let isListening = false;
 
@@ -269,7 +271,6 @@
 	});
 </script>
 
-<Stt bind:this={stt}></Stt>
 <Tts bind:this={tts}></Tts>
 
 <EasySpeech bind:this={easyspeech}></EasySpeech>
@@ -319,7 +320,7 @@
 					</Icon>
 				</IconButton>
 				<span style="color: darkgreen;">
-					{@html tr_input}
+					{@html tts_text}
 				</span>
 			</div>
 			<div class="title" style="visibility:{visibility[2]}">
@@ -328,6 +329,7 @@
 			<div class="answer" style="visibility:{visibility[2]}">
 				{@html a['nl']}
 			</div>
+			<Stt bind:this={stt} bind:tts_text></Stt>
 
 			<BottomAppBar bind:this={bottomAppBar}>
 				<Section>
@@ -489,7 +491,7 @@
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
-		height: 50vh;
+		height: 70vh;
 	}
 
 	.card.flipped {

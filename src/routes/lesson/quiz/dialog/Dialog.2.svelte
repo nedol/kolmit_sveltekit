@@ -187,6 +187,7 @@
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
+		height: 70vh;
 	}
 
 	.title {
