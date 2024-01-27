@@ -182,32 +182,7 @@
 <!-- {#if true} -->
 <div class="content" bind:this={content} style="max-height:80vh">
 	<!-- <br /> -->
-	{#if dep.admin}
-		<div>
-			<Oper
-				id={dep.admin.id}
-				bind:status={$call_but_status}
-				{operator}
-				bind:dep
-				bind:user={dep.admin}
-				{update}
-				{readonly}
-			/>
-		</div>
-	{/if}
-	{#if dep.tutor}
-		<div>
-			<Oper
-				id={dep.tutor.id}
-				bind:status={$call_but_status}
-				{operator}
-				bind:dep
-				bind:user={dep.tutor}
-				{update}
-				{readonly}
-			/>
-		</div>
-	{/if}
+
 	{#if dep.staff}
 		<div class="horizontal-container">
 			{#each dep.staff as user, u}
@@ -232,13 +207,39 @@
 			</svg>
 		</div>
 	{/if}
+	{#if dep.tutor}
+		<div>
+			<Oper
+				id={dep.tutor.id}
+				bind:status={$call_but_status}
+				{operator}
+				bind:dep
+				bind:user={dep.tutor}
+				{update}
+				{readonly}
+			/>
+		</div>
+	{/if}
+	{#if dep.admin}
+		<div>
+			<Oper
+				id={dep.admin.id}
+				bind:status={$call_but_status}
+				{operator}
+				bind:dep
+				bind:user={dep.admin}
+				{update}
+				{readonly}
+			/>
+		</div>
+	{/if}
 </div>
 
 <style>
 	.horizontal-container {
 		display: flex;
 		flex-wrap: wrap; /* Перенос элементов на новую строку при нехватке места */
-		gap: 20px; /* Расстояние между элементами */
+		gap: 30px; /* Расстояние между элементами */
 	}
 	.collapsible {
 		background-color: rgb(158, 158, 158);
@@ -254,10 +255,10 @@
 
 	.content {
 		padding: 0 10px;
-		max-height: 0;
-		overflow: hidden;
+		/* max-height: 0;
+		overflow: hidden; */
 		transition: max-height 0.2s ease-out;
-		background-color: #f1f1f1;
+		/* background-color: #f1f1f1; */
 	}
 
 	input:not([readonly])::placeholder {

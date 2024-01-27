@@ -9,14 +9,7 @@
 
 <div class="callObject" on:long-press={OnLongPress} style="display: block;">
 	<!-- {@debug status} -->
-	<svg
-		class="callButton"
-		{status}
-		on:click
-		width="50"
-		height="50"
-		style="left:0px;top:50px;z-index: 1;"
-	>
+	<svg class="callButton" {status} on:click width="50" height="50">
 		<!-- <rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/>
         <glyph glyph-name="phone" unicode="" horiz-adv-x="1000"/>         -->
 		<g class="currentLayer" style=" stroke:lightgrey; stroke-width:10px">
@@ -34,6 +27,12 @@
 </div>
 
 <style>
+	.callButton {
+		position: absolute;
+		left: 25%;
+		top: 5px;
+		z-index: 1;
+	}
 	[status='call'] {
 		/* -webkit-animation: rotation 1s 1 linear; */
 		transform: rotate(0deg) !important;
