@@ -3,7 +3,7 @@
 	import { MediaRecorder, register } from 'extendable-media-recorder';
 	import { connect } from 'extendable-media-recorder-wav-encoder';
 
-	export let tts_text;
+	export let SttResult, StopListening;
 
 	let audioContext,
 		mediaRecorder,
@@ -105,6 +105,7 @@
 
 		mediaRecorder.onstop = (e) => {
 			stopRecording();
+			StopListening();
 		};
 
 		mediaRecorder.start(100);
@@ -177,11 +178,12 @@
 
 				return longestObject;
 			}
-
+			let server_answer = '';
 			if (Array.isArray(json_resp)) {
-				tts_text = findLongestText(json_resp).text.replace('elite', '');
+				server_answer = findLongestText(json_resp).text.replace('elite', '');
+				SttResult(server_answer);
 			}
-			console.log('Ответ сервера:', tts_text);
+			console.log('Ответ сервера:', server_answer);
 		} catch (error) {
 			console.log('Ошибка отправки аудио:', error);
 		}

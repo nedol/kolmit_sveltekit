@@ -115,7 +115,7 @@
 		dialog_data = await module['dialog_data'];
 		dialog_data.name = data.name;
 		Dialog();
-		onClickMicrophone();
+		// onClickMicrophone();
 	}
 
 	function Dialog() {
@@ -155,7 +155,7 @@
 		tr_input = '';
 		Dialog();
 		SendData();
-		onClickMicrophone();
+		// onClickMicrophone();
 		showSpeakerButton = false;
 	}
 
@@ -164,7 +164,7 @@
 		cur_qa--;
 		Dialog();
 		SendData();
-		onClickMicrophone();
+		// onClickMicrophone();
 	}
 
 	function onShare() {
@@ -266,6 +266,14 @@
 		isListening = true;
 	}
 
+	function StopListening() {
+		isListening = false;
+	}
+
+	function SttResult(text) {
+		tts_text = text;
+	}
+
 	onMount(async () => {
 		style_button = style_button_non_shared;
 	});
@@ -329,7 +337,7 @@
 			<div class="answer" style="visibility:{visibility[2]}">
 				{@html a['nl']}
 			</div>
-			<Stt bind:this={stt} bind:tts_text></Stt>
+			<Stt bind:this={stt} {SttResult} {StopListening}></Stt>
 
 			<BottomAppBar bind:this={bottomAppBar}>
 				<Section>

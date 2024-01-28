@@ -80,7 +80,7 @@
 	}
 
 	onDestroy(() => {
-		EasySpeech.cancel();
+		// EasySpeech.cancel();
 		console.log('EasySpeech.status before destroy:' + EasySpeech.status()['status']);
 	});
 </script>

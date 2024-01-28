@@ -6,7 +6,6 @@
 	moment.locale('nl-be');
 	import { DateTime } from 'luxon';
 	// import 'moment/locale/nl';
-	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
 	import {
 		mdiPagePreviousOutline,
@@ -104,7 +103,7 @@
 	});
 
 	onDestroy(() => {
-		easyspeech.Cancel();
+		// easyspeech.Cancel();
 	});
 
 	async function SendToPartner() {

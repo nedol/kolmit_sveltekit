@@ -117,9 +117,7 @@
 		containerHeight = parentHeight + 'px';
 	});
 
-	onDestroy(() => {
-		easyspeech.Cancel();
-	});
+	onDestroy(() => {});
 
 	function measureTextSize(text, cb) {
 		const measureElement = trans_div;

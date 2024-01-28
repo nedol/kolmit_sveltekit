@@ -255,10 +255,7 @@
 
 	.content {
 		padding: 0 10px;
-		/* max-height: 0;
-		overflow: hidden; */
 		transition: max-height 0.2s ease-out;
-		/* background-color: #f1f1f1; */
 	}
 
 	input:not([readonly])::placeholder {
