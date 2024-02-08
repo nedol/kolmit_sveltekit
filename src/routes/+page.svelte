@@ -15,9 +15,12 @@
 	import { signal } from '$lib/js/stores.js';
 	$signal = new SignalingChannel(email);
 
-	//import wsConnector from './wsConnector.js';
+	import host from './assets/host.json';
 
-	//$signal = new wsConnector('ws://localhost:3001');
+	import { wss } from '$lib/js/stores.js';
+
+	// import wsConnector from './wsConnector.js';
+	// $wss = new wsConnector(host.host_wss);
 
 	import { server_path } from '$lib/js/stores.js';
 	$server_path = data.host;

@@ -20,6 +20,8 @@ export let msg_oper = writable();
 
 export let signal = writable();
 
+export let wss = writable();
+
 export let dicts = writable();
 
 export let credentials = writable();

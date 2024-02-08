@@ -1,11 +1,5 @@
 import { msg_oper, msg_user } from '$lib/js/stores.js';
 
-import { server_path } from '$lib/js/stores.js';
-let server;
-server_path.subscribe((data) => {
-	server = data;
-});
-
 const token = 'CPkJ1MYWC7DMlvw6MvtV0yBw';
 const headers = {
 	'Content-Type': 'application/json'

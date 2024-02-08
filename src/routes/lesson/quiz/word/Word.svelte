@@ -429,24 +429,18 @@
 	{/if}
 </main>
 
-<!-- <BottomAppBar bind:this={bottomAppBar}>
-
-	<Section>
-		<IconButton class="material-icons" aria-label="Back" on:click={handleBackClick}>
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiPagePreviousOutline} />
-			</Icon>
-		</IconButton>
-	</Section>
-	<Section>
-
-	</Section>
-	<Section>
-		<IconButton class="material-icons" fill="currentColor" aria-label="More">more_vert</IconButton>
-	</Section>
-</BottomAppBar> -->
-
 <style>
+	main {
+		background-color: #fff;
+		transition: transform 0.3s ease-in-out;
+		width: 90%;
+		/* top: 13vh; */
+		margin: 0 auto;
+		position: relative;
+		transform-style: preserve-3d;
+		transition: transform 0.5s;
+		height: 70vh;
+	}
 	.title {
 		color: grey;
 		position: relative;

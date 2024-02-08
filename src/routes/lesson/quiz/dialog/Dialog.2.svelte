@@ -1,6 +1,7 @@
 <script>
 	import { users } from '$lib/js/stores.js';
 	import { langs } from '$lib/js/stores.js';
+	import EasySpeech from '../../../speech/tts/EasySpeech.svelte';
 	import { onMount, getContext } from 'svelte';
 	import BottomAppBar, { Section, AutoAdjust } from '@smui-extra/bottom-app-bar';
 	import IconButton, { Icon } from '@smui/icon-button';
@@ -10,7 +11,8 @@
 		mdiArrowRight,
 		mdiArrowLeft,
 		mdiShareVariant,
-		mdiShuffle
+		mdiShuffle,
+		mdiVolumeHigh
 	} from '@mdi/js';
 
 	import { lesson } from '$lib/js/stores.js';
@@ -34,6 +36,9 @@
 	const { find, findKey, mapValues } = pkg;
 
 	let bottomAppBar;
+	let visibility = ['visible', 'hidden', 'hidden'];
+	let visibility_cnt = 1;
+	let showSpeakerButton = false;
 
 	import { msg_oper } from '$lib/js/stores.js';
 	$: if ($msg_oper) {
@@ -43,10 +48,12 @@
 	$: {
 		console.log($lesson.visible);
 	}
+
+	export let onChangeClick;
 	// import pair_data from './pair_data.json';
 	let hint_visible;
 
-	let style_button = `position: absolute;
+	let style_button = `
 		z-index:2;
 		font-size: 1.5em;
 		left: 3px;
@@ -57,6 +64,7 @@
 		width: 50px`;
 
 	export let data;
+	let easyspeech;
 
 	$: if (data) {
 		hint_visible = false;
@@ -74,38 +82,6 @@
 		// // Устанавливаем высоту контейнера равной высоте родительского окна
 		// containerHeight = parentHeight + 'px';
 	});
-	function onChangeClick() {
-		data = {
-			html: dialog_data.html ? dialog_data.html[cur_html] : '',
-			question: dialog_data.content[cur_qa].question,
-			answer: dialog_data.content[cur_qa].answer,
-			a_shfl: a_shfl,
-			quiz: data.quiz
-		};
-		data.quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
-		let client_quiz = data.quiz === 'pair.client' ? 'pair' : 'pair.client';
-		let dc = $dc_user || $dc_oper;
-
-		dialog_data.content[cur_qa].answer['a_shfl'] = a_shfl;
-		if (dc && share_mode)
-			dc.SendData(
-				{
-					lesson: {
-						quiz: client_quiz,
-						name: dialog_data.name,
-						html: dialog_data.html ? dialog_data.html[cur_html] : '',
-						question: dialog_data.content[cur_qa].question,
-						answer: dialog_data.content[cur_qa].answer,
-						cur_qa: cur_qa
-					}
-				},
-				() => {
-					console.log();
-				}
-			);
-
-		flipCard();
-	}
 
 	function handleBackClick() {
 		lesson_display = true; // При клике на "Back" показываем компонент Lesson
@@ -113,16 +89,19 @@
 
 	function onClickQ(ev) {
 		hint_visible = true;
+		showSpeakerButton = true;
+	}
+
+	async function speak() {
+		setTimeout(() => {
+			easyspeech.Speak(data.answer['a_shfl']);
+		}, 0);
+		// tts.Speak(dialog_data.content[cur_qa].question['nl']);
 	}
 </script>
 
-<div style={style_button} on:click={onChangeClick}>
-	<IconButton>
-		<Icon tag="svg" viewBox="0 0 24 24">
-			<path fill="currentColor" d={mdiAccountConvertOutline} />
-		</Icon>
-	</IconButton>
-</div>
+<EasySpeech bind:this={easyspeech}></EasySpeech>
+
 <div class="container">
 	<div class="card">
 		<div class="title">{dict['Проконтролируй вопрос'][$langs]}:</div>
@@ -149,45 +128,71 @@
 					{/if}
 				</div>
 
-				<div>
-					<button on:click={onClickQ} class="toggleButton">
-						<span class="material-symbols-outlined"> ? </span>
-					</button>
-				</div>
+				{#if data.html}
+					<div class="html_data">{@html data.html}</div>
+				{/if}
+
+				<BottomAppBar bind:this={bottomAppBar}>
+					<Section></Section>
+					<Section>
+						<div>
+							<button on:click={onClickQ} class="toggleButton">
+								<span class="material-symbols-outlined"> ? </span>
+							</button>
+						</div>
+					</Section>
+					<Section>
+						<div style={style_button} on:click={onChangeClick}>
+							<IconButton>
+								<Icon tag="svg" viewBox="0 0 24 24">
+									<path fill="currentColor" d={mdiAccountConvertOutline} />
+								</Icon>
+							</IconButton>
+						</div>
+					</Section>
+					<Section></Section>
+				</BottomAppBar>
 			</div>
 		</div>
 	</div>
-	{#if data.html}
-		<div>{@html data.html}</div>
-	{/if}
 </div>
 
 <style>
 	.container {
-		position: absolute;
-		max-width: 90%;
 		/* top: -15vh; */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		margin: 0;
-		padding: 20px;
+		padding: 2px;
 
 		/* border: 1px solid #ccc; */
 		/* border-radius: 5px; */
 	}
 
+	.speaker-button {
+		position: absolute;
+		flex: auto;
+		top: 45px;
+		right: 0px;
+		transform: translate(50%, 0%);
+		font-size: large;
+		border: darkgrey solid 1px;
+		border-radius: 25px;
+	}
+
 	.card {
-		background-color: #fff;
 		transition: transform 0.3s ease-in-out;
 		width: 90%;
 		/* top: 13vh; */
+		border: grey solid 1px;
+		border-radius: 5px;
 		margin: 0 auto;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
-		height: 70vh;
+		height: 80vh;
 	}
 
 	.title {
@@ -221,9 +226,14 @@
 		background-color: #2196f3;
 		color: #fff;
 		border: none;
-		padding: 10px;
 		border-radius: 5px;
 		cursor: pointer;
 		float: right;
+	}
+
+	.html_data {
+		position: relative;
+		overflow-y: auto;
+		height: 400px;
 	}
 </style>

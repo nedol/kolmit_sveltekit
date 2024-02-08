@@ -158,7 +158,7 @@ export async function GetUsers(par) {
 				AND operators.psw=${par.psw};`;
 	} else {
 		users = await pool.sql`
-		SELECT  users, quiz_users 
+		SELECT  users, quiz_users
 			FROM operators
 			INNER JOIN users ON (operators.abonent = users.operator = operators.operator) 
 			WHERE operators.operator=users.operators.operator AND operators.operator=${par.em} 
@@ -387,10 +387,10 @@ export async function RemoveOperator(q) {
 export async function GetText(q) {
 	await pool.sql`BEGIN;`;
 	try {
-		let res = await pool.sql`SELECT text FROM texts
+		let res = await pool.sql`SELECT text, questions FROM texts
 		WHERE level= ${q.level} AND theme=${q.theme} AND title=${q.title} AND owner=${q.owner}`;
 		//debugger;
-		return res.rows[0].text;
+		return { text: res.rows[0].text, questions: res.rows[0].questions };
 		await pool.sql`COMMIT;`;
 	} catch (ex) {
 		await pool.sql`ROLLBACK;`;

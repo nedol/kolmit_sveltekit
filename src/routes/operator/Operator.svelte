@@ -475,9 +475,9 @@
 						<div
 							class="remote_text_display"
 							style="display:{remote.text.display};	
-						position:relative;			
-						background-color: rgba(125, 125, 125, 0.5);
-						z-index: 1"
+									position:relative;			
+									background-color: rgba(125, 125, 125, 0.5);
+									z-index: 1"
 						>
 							<!-- <p
 						class="remote_msg"
@@ -566,11 +566,6 @@
 
 		width: 45px;
 		bottom: 10px;
-	}
-	.placeholder {
-		position: relative;
-		left: 5px;
-		top: 0px;
 	}
 
 	/* Стили для списка команд */

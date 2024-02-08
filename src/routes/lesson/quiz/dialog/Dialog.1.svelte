@@ -36,6 +36,7 @@
 	import EasySpeech from '../../../speech/tts/EasySpeech.svelte';
 	import Tts from '../../../speech/tts/Tts.svelte';
 	import Stt from '../../../speech/stt/Stt.svelte';
+	import Vosk from '../../../speech/stt/Vosk.svelte';
 	let easyspeech, stt, tts;
 
 	let dialog_data;
@@ -60,20 +61,22 @@
 	let cur_qa = 0;
 	let q, q_shfl, a_shfl, a, d;
 
+	let display_audio = 'none';
+
 	let tts_text = '';
 
 	let isListening = false;
 
 	let share_button = false;
 	let style_button;
-	let style_button_non_shared = `position: absolute;
+	let style_button_non_shared = `position: relative;
 		font-size: 1.5em;	
 		color: grey;
 		border: none;
 		border-radius: 5px;
 		cursor: pointer;
 		width: 50px`;
-	let style_button_shared = `position: absolute;
+	let style_button_shared = `position: relative;
 		font-size: 1.5em;
 		color: blue;
 		border: none;
@@ -132,11 +135,11 @@
 		q = dialog_data.content[cur_qa].question;
 		q_shfl = q['nl'].slice(0);
 		let ar = q_shfl.toLowerCase().replaceAll('?', '').replaceAll(',', ' ').split(' ');
-		q_shfl = shuffle(ar).toString().replaceAll(',', ' ');
+		// q_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 		a = dialog_data.content[cur_qa].answer;
 		a_shfl = a['nl'].slice(0);
 		ar = a_shfl.toLowerCase().replaceAll('?', '').replaceAll(',', ' ').split(' ');
-		a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
+		// a_shfl = shuffle(ar).toString().replaceAll(',', ' ');
 	}
 
 	onDestroy(() => {
@@ -152,6 +155,7 @@
 		cur_qa++;
 		visibility[1] = 'hidden';
 		visibility[2] = 'hidden';
+		display_audio = 'none';
 		tr_input = '';
 		Dialog();
 		SendData();
@@ -252,9 +256,12 @@
 	}
 
 	function onClickMicrophone() {
-		let helloFunction = (text) => {
-			console.log(text);
-		};
+		if (isListening) {
+			stt.MediaRecorderStop();
+			isListening = false;
+			return;
+		}
+
 		////для тестов !!! УБРАть if!!!
 		// if (false)
 		stt.startAudioMonitoring();
@@ -283,19 +290,8 @@
 
 <EasySpeech bind:this={easyspeech}></EasySpeech>
 
-{#if share_button && $call_but_status === 'talk'}
-	<div style={style_button} on:click={onShare}>
-		<IconButton>
-			<Icon tag="svg" viewBox="0 0 24 24">
-				<path fill="currentColor" d={mdiShareVariant} />
-			</Icon>
-		</IconButton>
-	</div>
-{/if}
-
 {#if data.quiz == 'pair'}
 	<!-- Ваш контент для лицевой стороны -->
-
 	<div class="card">
 		{#if q || a}
 			<div class="cnt">{cur_qa + 1}</div>
@@ -327,17 +323,22 @@
 						{/if}
 					</Icon>
 				</IconButton>
+
+				<Stt bind:this={stt} {SttResult} {StopListening} bind:display_audio></Stt>
+
 				<span style="color: darkgreen;">
 					{@html tts_text}
 				</span>
 			</div>
-			<div class="title" style="visibility:{visibility[2]}">
+
+			<div class="title" style="visibility:{visibility[1]}">
 				{dict['Проконтролируй ответ'][$langs]}:
 			</div>
-			<div class="answer" style="visibility:{visibility[2]}">
+			<div class="answer" style="visibility:{visibility[1]}">
 				{@html a['nl']}
 			</div>
-			<Stt bind:this={stt} {SttResult} {StopListening}></Stt>
+
+			<!-- <Vosk bind:this={stt} {SttResult} {StopListening}></Vosk> -->
 
 			<BottomAppBar bind:this={bottomAppBar}>
 				<Section>
@@ -345,7 +346,6 @@
 						<button on:click={onBackQA} class="arrow-button arrow-button-left">&#8592;</button>
 					{/if}</Section
 				>
-
 				<Section>
 					<button on:click={onClickQ} class="toggleButton">
 						<span class="material-symbols-outlined"> ? </span>
@@ -374,10 +374,20 @@
 			</div>
 		{/if}
 	</div>
+
+	{#if share_button && $call_but_status === 'talk'}
+		<div style={style_button} on:click={onShare}>
+			<IconButton>
+				<Icon tag="svg" viewBox="0 0 24 24">
+					<path fill="currentColor" d={mdiShareVariant} />
+				</Icon>
+			</IconButton>
+		</div>
+	{/if}
 {/if}
 
 {#if data.quiz == 'pair.client'}
-	<Dialog2 {data} />
+	<Dialog2 {data} {onChangeClick} />
 {/if}
 
 <style>
@@ -408,6 +418,8 @@
 		right: 0px;
 		transform: translate(50%, 0%);
 		font-size: large;
+		border: darkgrey solid 1px;
+		border-radius: 25px;
 	}
 
 	.cnt {
@@ -450,13 +462,6 @@
 		color: #2196f3;
 	}
 
-	.arrow-buttons {
-		/* position: relative; */
-		/* display: flex; */
-		justify-content: space-between;
-		align-items: center;
-	}
-
 	.arrow-button {
 		position: relative;
 		top: 15px;
@@ -491,45 +496,15 @@
 	}
 
 	.card {
-		background-color: #fff;
 		transition: transform 0.3s ease-in-out;
 		width: 90%;
 		/* top: 13vh; */
+		border: grey solid 1px;
+		border-radius: 5px;
 		margin: 0 auto;
 		position: relative;
 		transform-style: preserve-3d;
 		transition: transform 0.5s;
-		height: 70vh;
-	}
-
-	.card.flipped {
-		transform: rotateY(180deg);
-	}
-
-	.front,
-	.back {
-		width: 95%;
-		height: 100%;
-		position: absolute;
-		backface-visibility: hidden;
-	}
-
-	.front {
-		/* Стили для лицевой стороны карточки */
-		/* background-color: #ececec; */
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 12px;
-	}
-
-	.back {
-		/* Стили для обратной стороны карточки */
-		/* background-color: #a0a0a0; */
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 12px;
-		transform: rotateY(180deg);
+		height: 80vh;
 	}
 </style>

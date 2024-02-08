@@ -5,12 +5,6 @@ import { ice_conf } from '$lib/ice_conf';
 
 import { call_but_status } from '$lib/js/stores.js';
 
-// import {host_port, host_server, host_ws } from './host'
-
-// const host_port = 'https://delivery-angels.com/server/';
-// const host_ws = 'wss://nedol.ru/web-socket';
-// let host_ws ='ws://localhost:3000/server/';// //
-
 export class RTCBase {
 	constructor(operator, uid, signal) {
 		this.signal = signal;

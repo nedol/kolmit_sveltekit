@@ -33,13 +33,13 @@ export let dialog_data = {
 
 		.header,
 		.q {
-			width: 95%;
+			width: 80%;
 			padding: 10px;
 			border: 1px solid #3498db;
 			border-radius: 5px;
 			background-color: white;
 			text-align: center;
-			margin: 0px;
+			margin: 0 auto;
 	}
 
 		.toggleButton {

@@ -315,7 +315,7 @@
 																			<!-- <Content style="color: #888; font-size:smaller">{name}</Content> -->
 																			<h3
 																				class="mdc-typography--subtitle2"
-																				style="margin: 0; color: #888;font-size:x-small;text-align:center;z-index:1"
+																				style="margin: -7px; color: #888;font-size:x-small;text-align:center;z-index:1"
 																			>
 																				{#if qu.name}
 																					{qu.name.slice(0, 8)}

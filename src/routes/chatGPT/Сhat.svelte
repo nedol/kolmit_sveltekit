@@ -6,7 +6,14 @@
 	let userInput = '';
 	let messages = [];
 	let prompt = 'I want to get answers in json.'; // Default prompt
+	let display = 'none';
 	export let view;
+
+	$: if (view === 'chat') {
+		display = 'block';
+	} else {
+		display = 'none';
+	}
 
 	// Function to call ChatGPT
 	async function callChatGPT() {
@@ -37,6 +44,13 @@
 		}
 	}
 
+	function handleKeyDown(event) {
+		if (event.key === 'Enter' && !event.shiftKey) {
+			event.preventDefault();
+			callChatGPT();
+		}
+	}
+
 	onMount(() => {
 		callChatGPT(); // Call on component mount for initial question
 	});
@@ -44,34 +58,31 @@
 
 <div
 	class="chat-container"
-	style="visibility: {view === 'chat' ? 'visible' : 'hidden'}; overflow-y: auto;"
+	style="display:{display};visibility: {view === 'chat' ? 'visible' : 'hidden'}; overflow-y: auto;"
 >
 	{#each messages as { text, isQuestion }, index (index)}
 		<div class="userMessage {isQuestion}" key={index}>
 			{text}
 		</div>
 	{/each}
-
-	<div>
-		<textarea
-			bind:value={userInput}
-			placeholder="Задайте вопрос..."
-			style="width: 90%; min-width: 90%;"
-		></textarea>
-		<button on:click={callChatGPT}>Отправить</button>
-	</div>
+</div>
+<div class="input-container" style="display:{display}">
+	<button on:click={callChatGPT}>Отправить</button>
+	<textarea bind:value={userInput} on:keydown={handleKeyDown} placeholder="Задайте вопрос..."
+	></textarea>
 </div>
 
 <style>
 	.chat-container {
-		position: absolute;
-		bottom: 0;
+		display: flex;
+		flex-direction: column-reverse;
+		position: relative;
 		width: 100%;
-		overflow-y: auto;
-		max-height: 70vh;
-		background-color: #f4f4f8; /* Светлый фон */
-		border-radius: 10px; /* Скругленные углы */
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+		height: 65vh;
+		background-color: #f4f4f8;
+		border-radius: 10px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		padding-bottom: 60px; /* Оставляем место для поля ввода и кнопки */
 	}
 
 	.userMessage {
@@ -82,19 +93,32 @@
 	}
 
 	.userMessage.question {
-		background-color: #cce5ff; /* Цвет для вопросов */
-		position: relative;
+		background-color: #cce5ff;
 		float: left;
 	}
 
 	.userMessage.answer {
-		background-color: #e0e0e0; /* Цвет для ответов */
-		position: relative;
+		background-color: #e0e0e0;
 		margin-right: 20px;
 		float: right;
 	}
 
+	.input-container {
+		position: relative;
+		bottom: -150px;
+		width: 95%;
+		padding: 0 10px; /* Добавляем отступы */
+	}
+
+	button {
+		position: relative;
+		bottom: 0px; /* Кнопка выше нижней границы на 30px */
+	}
+
 	textarea {
+		width: 100%;
 		height: 10vh;
+		position: relative;
+		bottom: 0;
 	}
 </style>

@@ -332,7 +332,6 @@
 		/* white-space: nowrap; */
 		height: auto;
 		color: green;
-
 		visibility: hidden;
 	}
 
@@ -348,35 +347,12 @@
 		right: 12px;
 		top: 22vh;
 		z-index: 2;
+		border: darkgrey solid 1px;
+		border-radius: 25px;
 	}
 
-	.bottom-app-bar-container {
-		border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.1));
-		margin: 0 18px 18px 0;
-		background-color: var(--mdc-theme-background, #fff);
-	}
-
-	@media (max-width: 480px) {
-		.bottom-app-bar-container {
-			margin-right: 0;
-		}
-	}
-
-	.flexy {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.flexor {
-		overflow: hidden;
-		display: inline-flex;
-		flex-direction: column;
-	}
-
-	.flexor-content {
-		flex-basis: 0;
-		height: 0;
-		flex-grow: 1;
-		overflow: auto;
+	::selection {
+		color: rgb(27, 155, 49);
+		background: yellow;
 	}
 </style>

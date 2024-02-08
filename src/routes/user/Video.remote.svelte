@@ -69,6 +69,11 @@
 <slot />
 
 <style>
+	.card-container {
+		position: relative;
+		scale: 0.8;
+		bottom: 22px;
+	}
 	video {
 		display: block;
 		margin-right: auto;

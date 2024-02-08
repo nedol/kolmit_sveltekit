@@ -1,88 +1,74 @@
 'use strict';
 
 export default class wsConnector {
-	constructor(host) {
-		this.host = host;
-		this.cb;
-		this.timeout = 10000;
-		this.cb = {};
-		this.openSocket();
+	constructor(url) {
+		this.url = url;
+		this.websocket = null;
+		this.reconnectInterval = 5000; // Интервал переподключения в мс
+		this.keepAliveInterval = 10000; // Интервал keep-alive сообщений
+		this.keepAliveTimer = null;
+		this.connect();
 	}
 
-	openSocket() {
-		if (!this.ws) {
-			try {
-				this.ws = new WebSocket(this.host);
-			} catch (ex) {
-				console.log(ex);
-			}
+	connect() {
+		this.websocket = new WebSocket(this.url);
+
+		this.websocket.onopen = () => {
+			console.log('WebSocket connection established');
+			this.onOpen();
+		};
+
+		this.websocket.onerror = (error) => {
+			console.error('WebSocket error observed:', error);
+		};
+
+		this.websocket.onclose = (event) => {
+			console.log('WebSocket is closed now:', event);
+			this.onClose();
+			setTimeout(() => this.connect(), this.reconnectInterval);
+		};
+
+		this.websocket.onmessage = (event) => {
+			this.onMessage(JSON.parse(event.data));
+		};
+	}
+
+	onOpen() {
+		this.startKeepAlive();
+	}
+
+	onClose() {
+		this.stopKeepAlive();
+	}
+
+	onMessage(data) {
+		console.log('Message from server ', data);
+		// Обработка входящего сообщения
+	}
+
+	sendMessage(message) {
+		if (this.websocket.readyState === WebSocket.OPEN) {
+			this.websocket.send(JSON.stringify(message));
+		} else {
+			console.error('WebSocket is not open. Message not sent.');
 		}
-
-		this.ws.onerror = function (error) {
-			console.log('Connect Error: ' + error.toString());
-		};
-
-		this.ws.onopen = () => {
-			this.waitForSocketConnection(this.ws, () => {
-				signal.set(this);
-			});
-			this.keepAlive();
-		};
-
-		this.ws.onclose = function () {
-			console.log('echo-protocol Connection Closed');
-			this.ws = new WebSocket(this.url);
-		};
 	}
 
-	keepAlive() {
-		setInterval(() => {
-			if (this.ws.readyState === 1) this.ws.send(encodeURIComponent('kolmit'));
-		}, this.timeout);
+	startKeepAlive() {
+		if (this.keepAliveTimer) {
+			clearInterval(this.keepAliveTimer);
+		}
+		this.keepAliveTimer = setInterval(() => {
+			if (this.websocket.readyState === WebSocket.OPEN) {
+				this.sendMessage({ type: 'keepalive' });
+			}
+		}, this.keepAliveInterval);
 	}
 
-	waitForSocketConnection(socket, callback) {
-		let that = this;
-		setTimeout(function () {
-			if (socket.readyState === 1) {
-				if (callback != null) {
-					callback();
-				}
-			} else {
-				console.log('wait for connection...');
-				that.waitForSocketConnection(socket, callback);
-			}
-		}, 5); // wait 5 milisecond for the connection...
-	}
-
-	SendMessage(rtc_par, cb) {
-		let that = this;
-		this.cb[rtc_par.func] = cb;
-		this.ws.onmessage = (message) => {
-			if (message.type === 'message') {
-				// log("Received: '" + message.originalEvent.data + "'");
-				const data = JSON.parse(decodeURIComponent(message.data));
-				if (that.cb[data.func]) {
-					that.cb[data.func](data);
-					delete that.cb[data.func];
-				}
-
-				// msg.set(data);
-				msg_1.set(data);
-				if (window.operator) {
-					window.operator.OnMessage(data);
-				}
-				cb(data);
-			}
-		};
-		try {
-			if (that.ws.readyState === 1) that.ws.send(encodeURIComponent(JSON.stringify(rtc_par)));
-			else {
-				that.openSocket();
-				that.ws.send(encodeURIComponent(JSON.stringify(rtc_par)));
-			}
-		} catch (ex) {
-			return false;
+	stopKeepAlive() {
+		if (this.keepAliveTimer) {
+			clearInterval(this.keepAliveTimer);
+			this.keepAliveTimer = null;
 		}
 	}
 }

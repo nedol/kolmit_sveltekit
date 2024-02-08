@@ -26,31 +26,6 @@
  * ```
  */
 declare module '$env/static/private' {
-	export const OPENAI_SECRET_KEY: string;
-	export const NX_DAEMON: string;
-	export const POSTGRES_DATABASE: string;
-	export const POSTGRES_HOST: string;
-	export const POSTGRES_PASSWORD: string;
-	export const POSTGRES_PRISMA_URL: string;
-	export const POSTGRES_URL: string;
-	export const POSTGRES_URL_NON_POOLING: string;
-	export const POSTGRES_USER: string;
-	export const TURBO_REMOTE_ONLY: string;
-	export const TURBO_RUN_SUMMARY: string;
-	export const VERCEL: string;
-	export const VERCEL_ENV: string;
-	export const VERCEL_GIT_COMMIT_AUTHOR_LOGIN: string;
-	export const VERCEL_GIT_COMMIT_AUTHOR_NAME: string;
-	export const VERCEL_GIT_COMMIT_MESSAGE: string;
-	export const VERCEL_GIT_COMMIT_REF: string;
-	export const VERCEL_GIT_COMMIT_SHA: string;
-	export const VERCEL_GIT_PREVIOUS_SHA: string;
-	export const VERCEL_GIT_PROVIDER: string;
-	export const VERCEL_GIT_PULL_REQUEST_ID: string;
-	export const VERCEL_GIT_REPO_ID: string;
-	export const VERCEL_GIT_REPO_OWNER: string;
-	export const VERCEL_GIT_REPO_SLUG: string;
-	export const VERCEL_URL: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
 	export const ChocolateyInstall: string;
@@ -171,31 +146,6 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
-		OPENAI_SECRET_KEY: string;
-		NX_DAEMON: string;
-		POSTGRES_DATABASE: string;
-		POSTGRES_HOST: string;
-		POSTGRES_PASSWORD: string;
-		POSTGRES_PRISMA_URL: string;
-		POSTGRES_URL: string;
-		POSTGRES_URL_NON_POOLING: string;
-		POSTGRES_USER: string;
-		TURBO_REMOTE_ONLY: string;
-		TURBO_RUN_SUMMARY: string;
-		VERCEL: string;
-		VERCEL_ENV: string;
-		VERCEL_GIT_COMMIT_AUTHOR_LOGIN: string;
-		VERCEL_GIT_COMMIT_AUTHOR_NAME: string;
-		VERCEL_GIT_COMMIT_MESSAGE: string;
-		VERCEL_GIT_COMMIT_REF: string;
-		VERCEL_GIT_COMMIT_SHA: string;
-		VERCEL_GIT_PREVIOUS_SHA: string;
-		VERCEL_GIT_PROVIDER: string;
-		VERCEL_GIT_PULL_REQUEST_ID: string;
-		VERCEL_GIT_REPO_ID: string;
-		VERCEL_GIT_REPO_OWNER: string;
-		VERCEL_GIT_REPO_SLUG: string;
-		VERCEL_URL: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
 		ChocolateyInstall: string;

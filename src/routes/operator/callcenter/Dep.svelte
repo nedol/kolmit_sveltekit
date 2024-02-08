@@ -15,8 +15,6 @@
 	let user_status = [];
 	let isAddOper = 'none';
 
-	import { server_path } from '$lib/js/stores.js';
-
 	import { signal } from '$lib/js/stores.js';
 	const signalch = $signal;
 
@@ -221,7 +219,7 @@
 		</div>
 	{/if}
 	{#if dep.admin}
-		<div>
+		<!-- <div>
 			<Oper
 				id={dep.admin.id}
 				bind:status={$call_but_status}
@@ -231,7 +229,7 @@
 				{update}
 				{readonly}
 			/>
-		</div>
+		</div> -->
 	{/if}
 </div>
 

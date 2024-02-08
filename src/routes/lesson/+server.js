@@ -24,10 +24,9 @@ export async function GET({ url, fetch, cookies }) {
 		const theme = url.searchParams.get('theme');
 		const title = url.searchParams.get('title');
 
-		let text = await GetText({ owner: abonent, level: level, theme: theme, title: title });
+		let obj = await GetText({ owner: abonent, level: level, theme: theme, title: title });
 		// let data = await resp.text();
 		// let items = text.split('\r\n');
-		let obj = { text: text };
 		let response = new Response(JSON.stringify({ obj }));
 		response.headers.append('Access-Control-Allow-Origin', `*`);
 		return response;
